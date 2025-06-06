@@ -1,0 +1,10 @@
+.card {
+  width: 254px;
+  height: 400px;
+  background-color: white;
+  display: flex;
+}
+
+.card-image {
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+}

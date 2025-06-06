@@ -1,32 +1,32 @@
 :root {
-    --background-primary-color: #23241f;
-    --button-primary-color: #aa682e;
-    --button-secondary-color: #2f6b75;
-    --button-text-color: #ebd3a4;
-    font-family: "Fredoka", sans-serif;
-  }
-  
-  h1 {
-    font-size: 3rem;
-  }
-  
-  h2 {
-    font-size: 2, 25rem;
-  }
-  
-  h3 {
-    font-size: 1, 5rem;
-  }
-  
-  h4 {
-    font-size: 1, 25rem;
-  }
-  
-  p {
-    font-size: 0, 875rem;
-  }
-  
-  .button-title {
-    width: 34, 25rem;
-    height: 7, 25rem;
-  }
+  --background-primary-color: #23241f;
+  --button-primary-color: #aa682e;
+  --button-secondary-color: #2f6b75;
+  --button-text-color: #ebd3a4;
+  font-family: "Fredoka", sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2, 25rem;
+}
+
+h3 {
+  font-size: 1, 5 rem;
+}
+
+h4 {
+  font-size: 1, 25rem;
+}
+
+p {
+  font-size: 0, 875rem;
+}
+
+.button-title {
+  width: 34, 25rem;
+  height: 7, 25rem;
+}

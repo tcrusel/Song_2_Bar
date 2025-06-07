@@ -1,3 +1,7 @@
+DROP DATABASE if exists song2bar;
+CREATE DATABASE song2bar;
+USE song2bar;
+
 CREATE TABLE bar (
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(100) NOT NULL,
@@ -5,43 +9,27 @@ CREATE TABLE bar (
    address VARCHAR(100) NOT NULL,
    postcode INT NOT NULL,
    city VARCHAR(100) NOT NULL,
-   monday_opening_hours VARCHAR(50) NOT NULL,
-   tuesday_opening_hours VARCHAR(50) NOT NULL,
-   wednesday_opening_hours VARCHAR(50) NOT NULL,
-   thursday_opening_hours VARCHAR(50) NOT NULL,
-   friday_opening_hours VARCHAR(50) NOT NULL,
-   saturday_opening_hours VARCHAR(50) NOT NULL,
-   sunday_opening_hours VARCHAR(50) NOT NULL,
-   happy_hours VARCHAR(50) NOT NULL,
    image1 VARCHAR(255) NOT NULL,
    image2 VARCHAR(255) NOT NULL,
    image3 VARCHAR(255) NOT NULL,
-   image4 VARCHAR(255) NOT NULL
+   image4 VARCHAR(255) NOT NULL,
+   hours_id INT
 );
 
 INSERT INTO bar (
-   id,
    name,
    music_style,
    address,
    postcode,
    city,
-   monday_opening_hours,
-   tuesday_opening_hours,
-   wednesday_opening_hours,
-   thursday_opening_hours,
-   friday_opening_hours,
-   saturday_opening_hours,
-   sunday_opening_hours,
-   happy_hours,
    image1,
    image2,
    image3,
    image4
 )
    VALUES
-      ('La Guinguette Chez Alriq', 'World', 'Quai de Queyries', 33100, 'Bordeaux', 'Non renseigné', 'https://www.laguinguettechezalriq.com/wp-content/uploads/2022/05/Cabanenuit.jpg', 'https://uploads.lebonbon.fr/source/2023/august/2048219/cover-r4x3w1200-595f5bc65957d-guinguette-chez-alri_1_2000.jpg', 'https://vivrebordeaux.fr/wp-content/uploads/2019/04/chez-alriq-1-960x600.jpg', 'https://www.visiter-bordeaux.eu/wp-content/uploads/2019/06/chez-alriq-guinguette-bordeaux.jpg'),
-      ('Iboat', 'Electro', 'Bassin a flot', 33300, 'Bordeaux', 'Fermé', 'Non renseigné', 'https://www.visiter-bordeaux.eu/wp-content/uploads/2019/07/iboat-bordeaux.jpg', 'https://imgproxy.ra.co/_/quality:66/aHR0cHM6Ly9zdGF0aWMucmEuY28vaW1hZ2VzL2NsdWJzL2xnL2lib2F0LmpwZz9kYXRlVXBkYXRlZD0xNzE0NTQ2NzU0NjAz', 'https://media.abcsalles.com/images/1/salles/900h/534618/i-boat-4.jpg', 'https://media.sudouest.fr/22420586/1200x-1/sudouest-photo-1-33114150.jpg'),
+      ('La Guinguette Chez Alriq', 'World', 'Quai de Queyries', 33100, 'Bordeaux', 'https://www.laguinguettechezalriq.com/wp-content/uploads/2022/05/Cabanenuit.jpg', 'https://uploads.lebonbon.fr/source/2023/august/2048219/cover-r4x3w1200-595f5bc65957d-guinguette-chez-alri_1_2000.jpg', 'https://vivrebordeaux.fr/wp-content/uploads/2019/04/chez-alriq-1-960x600.jpg', 'https://www.visiter-bordeaux.eu/wp-content/uploads/2019/06/chez-alriq-guinguette-bordeaux.jpg'),
+      ('Iboat', 'Electro', 'Bassin a flot', 33300, 'Bordeaux', 'https://www.visiter-bordeaux.eu/wp-content/uploads/2019/07/iboat-bordeaux.jpg', 'https://imgproxy.ra.co/_/quality:66/aHR0cHM6Ly9zdGF0aWMucmEuY28vaW1hZ2VzL2NsdWJzL2xnL2lib2F0LmpwZz9kYXRlVXBkYXRlZD0xNzE0NTQ2NzU0NjAz', 'https://media.abcsalles.com/images/1/salles/900h/534618/i-boat-4.jpg', 'https://media.sudouest.fr/22420586/1200x-1/sudouest-photo-1-33114150.jpg'),
       ('Blonde Venus', 'Electro', 'Bassin a flot', 33300, 'Bordeaux', 'https://www.iboat.eu/blonde/BV_header.webp', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWGoutPvaA85AyXClEU7dSJl0wdyJQNJpaEw&s', 'https://www.bougerabordeaux.com/wp-content/uploads/2021/08/207999767_981290272617891_6494423547000534989_n-1.jpg', 'https://www.muzzart.fr/wp-content/uploads/2020/10/addbc006e8e90a428c3209662384af88fa21fbe9d6ded22642d8bba33d0bd3f2-e1603186935419.jpg'),
       ('Pulp', 'World', '30 rue des vignes', 33000, 'Bordeaux', 'https://quoifaireabordeaux.com/wp-content/uploads/2025/04/pulp-64-1024x683.jpg', 'https://quoifaireabordeaux.com/wp-content/uploads/2025/04/pulp-42-1024x683.jpg', 'https://quoifaireabordeaux.com/wp-content/uploads/2025/04/pulp-41-1024x683.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiXq9YlxRTvs6ZkhNf3naq-cTNOC_l13drWw&s'),
       ('L''Avant-scene', 'rock', '42 cours de l''Yser', 33000, 'Bordeaux', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/2883/original/363480.jpg', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/2883/1500x750/839.jpg', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/2883/1500x750/363485.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJM2AuV--v-buUXsWtJmAyTG3MZl2pHUSU1I6POCPQCCQ43YPoyVZ06fi9vWncF88MAlo&usqp=CAU'),
@@ -65,10 +53,9 @@ INSERT INTO bar (
       ('The Grind House', 'Country', '12 Rue des Piliers de Tutelle', 33000, 'Bordeaux',  'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/2879/1500x750/800.jpg', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/2879/1500x750/363402.jpg', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/2879/1500x750/799.jpg', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/2879/1500x750/363401.jpg'),
       ('Le Bal du Coq', 'Folk', '15 Rue du Loup', 33000, 'Bordeaux',  'https://media.sudouest.fr/21364580/1200x-1/20240913145533-davt818.jpg', 'https://uploads.lebonbon.fr/source/2024/janvier/bordeaux/404907163_788440513122604_8532049008275042252_n.jpg', 'https://uploads.lebonbon.fr/source/2024/janvier/bordeaux/404928270_1052870925765122_2079437676413438067_n.jpg', 'https://uploads.lebonbon.fr/source/2024/january/2055494/404898183-326883319671097-664120557894279179-n_1_2000.jpg'),
       ('L''Arcadien', 'Métal', '5 Rue Duffour Dubergier', 33000, 'Bordeaux',  'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/49447/450x300/419182.jpg', 'https://www.mydarklifestyle.com/uploads/bar-metal-arcadien-steampunk-bordeaux-5KFr.webp', 'https://static.actu.fr/uploads/2022/08/297595154-1007234113285394-6950104936055308972-n-960x640.jpg', 'https://www.mydarklifestyle.com/uploads/arcadien-bordeaux-bar-metal-ERa6.webp'),
-      ('Thélonious Café Jazz Club', 'Blues et Jazz', '18 Rue Bourbon', 33000, 'Bordeaux', 'Fermé', '19:00-00:00', '19:00-00:00', '19:00-00:00', '19:00-01:00', '19:00-01:00', 'Fermé', 'Non renseigné', 'https://thelonious-jazz-club-bordeaux.com/wp-content/uploads/2024/07/398157806_2140562799629670_4640251316638234873_n-bis-1.jpg', 'https://www.bordeaux-tourisme.com/sites/bordeaux_tourisme/files/styles/sit_main_image/public/externals/71ca1a52f8de36415ffcbf521befc870.jpg.webp?itok=3cDIreWU', 'https://i2.wp.com/blog.lagazettebleuedactionjazz.fr/wp-content/uploads/2019/01/DSC02285.jpg?resize=1280%2C640&ssl=1', 'https://cdn.prod.website-files.com/64c584288dd599c8a2dcb4cf/66d835815fecfbad5a57df89_uc.webp'),
+      ('Thélonious Café Jazz Club', 'Blues et Jazz', '18 Rue Bourbon', 33000, 'Bordeaux', 'https://thelonious-jazz-club-bordeaux.com/wp-content/uploads/2024/07/398157806_2140562799629670_4640251316638234873_n-bis-1.jpg', 'https://www.bordeaux-tourisme.com/sites/bordeaux_tourisme/files/styles/sit_main_image/public/externals/71ca1a52f8de36415ffcbf521befc870.jpg.webp?itok=3cDIreWU', 'https://i2.wp.com/blog.lagazettebleuedactionjazz.fr/wp-content/uploads/2019/01/DSC02285.jpg?resize=1280%2C640&ssl=1', 'https://cdn.prod.website-files.com/64c584288dd599c8a2dcb4cf/66d835815fecfbad5a57df89_uc.webp'),
       ('Blackrock Pub', 'Pop-Rock', '25 Cours de l''Intendance', 33000, 'Bordeaux', 'https://uniiti.com/images/shops/slides/853fdd42f0699b3a41e9fb0998004fe6d69bf9d6.jpeg', 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/dd/e3/55/events-blackrock.jpg?w=900&h=500&s=1', 'https://uniiti.com/images/shops/slides/6d39c05f77505d5b5cd5d4ea899da0a7b563c09c.jpeg', 'https://uniiti.com/images/shops/slides/8660abc733703d41ef76fe98eae2a78067c31c03.jpeg'),
       ('Jungle Dreams Bar', 'Reggae', '8 Rue des Augustins', 33000, 'Bordeaux', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/49839/1500x750/403031.jpg', 'https://quoifaireabordeaux.com/wp-content/uploads/2023/03/322869988_534329795317765_975488210514206291_n-1-1024x788.jpeg', 'https://igoguide.com/publics/pro/uploads/image-4-1705910230.jpg', 'https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/49839/1500x750/403027.jpg');
-
 
 CREATE TABLE user (
    id INT PRIMARY KEY AUTO_INCREMENT,
@@ -81,47 +68,47 @@ CREATE TABLE user (
 
 INSERT INTO user (firstname, lastname, role, email, password) 
    VALUES
-      ('Léa', 'Benoit', 'customer', 'lea.benoit@example.com', 'azerty123'),
-      ('Thomas', 'Marchand', 'customer', 'thomas.marchand@example.com', 'azerty123'),
-      ('Emma', 'Robert', 'customer', 'emma.robert@example.com', 'azerty123'),
-      ('Lucas', 'Fernandez', 'customer', 'lucas.fernandez@example.com', 'azerty123'),
-      ('Chloé', 'Perrin', 'customer', 'chloe.perrin@example.com', 'azerty123'),
-      ('Nathan', 'Rousseau', 'customer', 'nathan.rousseau@example.com', 'azerty123'),
-      ('Camille', 'Lemoine', 'customer', 'camille.lemoine@example.com', 'azerty123'),
-      ('Enzo', 'Morel', 'customer', 'enzo.morel@example.com', 'azerty123'),
-      ('Manon', 'Lefevre', 'customer', 'manon.lefevre@example.com', 'azerty123'),
-      ('Hugo', 'Faure', 'customer', 'hugo.faure@example.com', 'azerty123'),
-      ('Sophie', 'Garnier', 'customer', 'sophie.garnier@example.com', 'azerty123'),
-      ('Julien', 'Lopez', 'customer', 'julien.lopez@example.com', 'azerty123'),
-      ('Clara', 'Noël', 'customer', 'clara.noel@example.com', 'azerty123'),
-      ('Antoine', 'Blanc', 'customer', 'antoine.blanc@example.com', 'azerty123'),
-      ('Laura', 'Mathieu', 'customer', 'laura.mathieu@example.com', 'azerty123'),
-      ('Mathis', 'Fontaine', 'customer', 'mathis.fontaine@example.com', 'azerty123'),
-      ('Anaïs', 'Meyer', 'customer', 'anais.meyer@example.com', 'azerty123'),
-      ('Hugo', 'Chevalier', 'customer', 'hugo.chevalier@example.com', 'azerty123'),
-      ('Élise', 'Lemoine', 'customer', 'elise.lemoine@example.com', 'azerty123'),
-      ('Axel', 'Barbier', 'customer', 'axel.barbier@example.com', 'azerty123'),
-      ('Jade', 'Guillot', 'customer', 'jade.guillot@example.com', 'azerty123'),
-      ('Noah', 'Giraud', 'customer', 'noah.giraud@example.com', 'azerty123'),
-      ('Louise', 'Gomez', 'customer', 'louise.gomez@example.com', 'azerty123'),
-      ('Victor', 'Clement', 'customer', 'victor.clement@example.com', 'azerty123'),
-      ('Emma', 'Fabre', 'customer', 'emma.fabre@example.com', 'azerty123'),
-      ('Léo', 'Lemoine', 'customer', 'leo.lemoine@example.com', 'azerty123'),
-      ('Zoé', 'Paris', 'customer', 'zoe.paris@example.com', 'azerty123'),
-      ('Gabriel', 'Rolland', 'customer', 'gabriel.rolland@example.com', 'azerty123'),
-      ('Clémentine', 'Adam', 'customer', 'clementine.adam@example.com', 'azerty123'),
-      ('Louis', 'Perrot', 'customer', 'louis.perrot@example.com', 'azerty123');
-
+      ('Léa', 'Benoit', 'user', 'lea.benoit@example.com', 'azerty123'),
+      ('Thomas', 'Marchand', 'user', 'thomas.marchand@example.com', 'azerty123'),
+      ('Emma', 'Robert', 'bartender', 'emma.robert@example.com', 'azerty123'),
+      ('Lucas', 'Fernandez', 'bartender', 'lucas.fernandez@example.com', 'azerty123'),
+      ('Chloé', 'Perrin', 'bartender', 'chloe.perrin@example.com', 'azerty123'),
+      ('Nathan', 'Rousseau', 'user', 'nathan.rousseau@example.com', 'azerty123'),
+      ('Camille', 'Lemoine', 'user', 'camille.lemoine@example.com', 'azerty123'),
+      ('Enzo', 'Morel', 'bartender', 'enzo.morel@example.com', 'azerty123'),
+      ('Manon', 'Lefevre', 'bartender', 'manon.lefevre@example.com', 'azerty123'),
+      ('Hugo', 'Faure', 'user', 'hugo.faure@example.com', 'azerty123'),
+      ('Sophie', 'Garnier', 'user', 'sophie.garnier@example.com', 'azerty123'),
+      ('Julien', 'Lopez', 'bartender', 'julien.lopez@example.com', 'azerty123'),
+      ('Clara', 'Noël', 'user', 'clara.noel@example.com', 'azerty123'),
+      ('Antoine', 'Blanc', 'bartender', 'antoine.blanc@example.com', 'azerty123'),
+      ('Laura', 'Mathieu', 'bartender', 'laura.mathieu@example.com', 'azerty123'),
+      ('Mathis', 'Fontaine', 'user', 'mathis.fontaine@example.com', 'azerty123'),
+      ('Anaïs', 'Meyer', 'bartender', 'anais.meyer@example.com', 'azerty123'),
+      ('Hugo', 'Chevalier', 'user', 'hugo.chevalier@example.com', 'azerty123'),
+      ('Élise', 'Lemoine', 'user', 'elise.lemoine@example.com', 'azerty123'),
+      ('Axel', 'Barbier', 'bartender', 'axel.barbier@example.com', 'azerty123'),
+      ('Jade', 'Guillot', 'bartender', 'jade.guillot@example.com', 'azerty123'),
+      ('Noah', 'Giraud', 'user', 'noah.giraud@example.com', 'azerty123'),
+      ('Louise', 'Gomez', 'bartender', 'louise.gomez@example.com', 'azerty123'),
+      ('Victor', 'Clement', 'user', 'victor.clement@example.com', 'azerty123'),
+      ('Emma', 'Fabre', 'user', 'emma.fabre@example.com', 'azerty123'),
+      ('Léo', 'Lemoine', 'user', 'leo.lemoine@example.com', 'azerty123'),
+      ('Zoé', 'Paris', 'bartender', 'zoe.paris@example.com', 'azerty123'),
+      ('Gabriel', 'Rolland', 'user', 'gabriel.rolland@example.com', 'azerty123'),
+      ('Clémentine', 'Adam', 'bartender', 'clementine.adam@example.com', 'azerty123'),
+      ('Louis', 'Perrot', 'user', 'louis.perrot@example.com', 'azerty123');
 
 CREATE TABLE event (
    id INT PRIMARY KEY AUTO_INCREMENT,
    title VARCHAR(100) NOT NULL,
    date DATE NOT NULL,
-   start_at DATETIME NOT NULL,
-   end_at DATETIME NOT NULL,
+   start_at TIME NOT NULL,
+   end_at TIME NOT NULL,
    description TEXT NOT NULL,
+   creator_id INT NOT NULL,
    bar_id INT NOT NULL,
-   group_id INT NOT NULL
+   music_group_id INT NOT NULL
 );
 
 CREATE TABLE music_group (
@@ -152,19 +139,16 @@ INSERT INTO music_group (name, style, description)
       ('Shaka Ponk', 'Rock','Groupe français multi-instrumentiste et visuel, Shaka Ponk fusionne riffs rock, beats électro, performances live déchaînées et personnages virtuels. Leur énergie sur scène est communicative, et leur engagement écologique se ressent jusque dans leurs textes.'),
       ('Clann na Ceol','Trad.Irlandaise','Formation originaire de Galway mêlant musique traditionnelle et modernité. Harpe celtique, uilleann pipes, bodhrán, chants en gaélique et harmonies vocales contemporaines s''unissent dans des ballades épiques, des reels entraînants et une ambiance chaleureuse, à mi-chemin entre pub et légende.');
       
-
-
 CREATE TABLE participate (
    user_id INT,
    event_id INT,
-   PRIMARY KEY (customer_id, event_id)
+   PRIMARY KEY (user_id, event_id)
 );
 
-
-CREATE TABLE favorite (
+CREATE TABLE favourite (
    user_id INT,
    event_id INT,
-   PRIMARY KEY (customer_id, event_id)
+   PRIMARY KEY (user_id, event_id)
 );
 
 CREATE TABLE hours (
@@ -176,6 +160,5 @@ CREATE TABLE hours (
 	friday_opening_hours VARCHAR(50) NOT NULL,
 	saturday_opening_hours VARCHAR(50) NOT NULL,
 	sunday_opening_hours VARCHAR(50) NOT NULL,
-	happy_hours VARCHAR(50) NOT NULL,
-    bar_id INT NOT NULL
+	happy_hours VARCHAR(50) NOT NULL
    );

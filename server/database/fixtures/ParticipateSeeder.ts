@@ -1,4 +1,5 @@
 import AbstractSeeder from "./AbstractSeeder";
+import EventSeeder from "./EventSeeder";
 
 interface ParticipateData {
   user_id: number;
@@ -7,11 +8,15 @@ interface ParticipateData {
 
 class ParticipateSeeder extends AbstractSeeder {
   constructor() {
-    super({ table: "participate", truncate: true });
+    super({
+      table: "participate",
+      truncate: true,
+      dependencies: [EventSeeder],
+    });
   }
 
   run() {
-    const seen = new Set();
+    const userInParticipate = new Set();
 
     for (let fakeEventRefId = 1; fakeEventRefId < 6; fakeEventRefId++) {
       for (let i = 0; i < 10; i++) {
@@ -21,8 +26,8 @@ class ParticipateSeeder extends AbstractSeeder {
         };
         const key = `${fakeParticipate.user_id}-${fakeParticipate.event_id}`;
 
-        if (!seen.has(key)) {
-          seen.add(key);
+        if (!userInParticipate.has(key)) {
+          userInParticipate.add(key);
 
           this.insert(fakeParticipate as ParticipateData);
         }

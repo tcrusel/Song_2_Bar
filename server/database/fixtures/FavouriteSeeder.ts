@@ -1,4 +1,5 @@
 import AbstractSeeder from "./AbstractSeeder";
+import EventSeeder from "./EventSeeder";
 
 interface FavouriteData {
   user_id: number;
@@ -7,11 +8,15 @@ interface FavouriteData {
 
 class FavouriteSeeder extends AbstractSeeder {
   constructor() {
-    super({ table: "favourite", truncate: true });
+    super({
+      table: "favourite",
+      truncate: true,
+      dependencies: [EventSeeder],
+    });
   }
 
   run() {
-    const seen = new Set();
+    const userInFavourite = new Set();
 
     for (let fakeEventRefId = 1; fakeEventRefId < 6; fakeEventRefId++) {
       for (let i = 0; i < 10; i++) {
@@ -21,8 +26,8 @@ class FavouriteSeeder extends AbstractSeeder {
         };
         const key = `${fakeFavourite.user_id}-${fakeFavourite.event_id}`;
 
-        if (!seen.has(key)) {
-          seen.add(key);
+        if (!userInFavourite.has(key)) {
+          userInFavourite.add(key);
 
           this.insert(fakeFavourite as FavouriteData);
         }

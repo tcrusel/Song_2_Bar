@@ -1,0 +1,17 @@
+.component-header {
+  width: 93rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.component-header .search-bar {
+  border-radius: 35px;
+  background-color: #ebd2a4;
+  font-size: 1rem;
+  margin-right: 4rem;
+}
+
+.component-header .logo-connexion {
+  margin-bottom: 8rem;
+}

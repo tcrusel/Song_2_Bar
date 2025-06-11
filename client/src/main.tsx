@@ -1,20 +1,7 @@
-import { createRoot } from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router";
-import App from "./App";
-import Group from "./pages/Group/Group";
 import "./reset.css";
-
-const router = createBrowserRouter([
-  {
-    element: <App />,
-    children: [
-      {
-        path: "/group",
-        element: <Group />,
-      },
-    ],
-  },
-]);
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router";
+import router from "./router";
 
 const rootElement = document.getElementById("root");
 if (rootElement == null) {

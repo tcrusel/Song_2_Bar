@@ -1,0 +1,38 @@
+body {
+  width: 93rem;
+  background-color: #23241f;
+}
+.main-guide {
+  display: flex;
+  flex-direction: column;
+}
+
+main .quand {
+  border-radius: 45px;
+  background-color: #aa682e;
+  font-size: 3rem;
+  display: block;
+  margin: auto;
+}
+
+.user-action {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6rem;
+  padding: 3rem;
+  margin-left: 30px;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.user-action p {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.7rem;
+}
+
+.user-action img {
+  width: 24px;
+  height: auto;
+}

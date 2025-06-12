@@ -4,6 +4,7 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  height: 16rem;
   padding: 10px;
 }
 .images-logo-sociaux {
@@ -32,6 +33,7 @@ footer section p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .abonnés {
@@ -66,7 +68,6 @@ footer section p {
 .footer-images {
   display: flex;
   flex-direction: row;
-  padding-right: 90px;
 }
 
 .commande-page {
@@ -91,7 +92,7 @@ footer section p {
   align-items: center;
 }
 .info-song2bar p {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .newletter-song2bar {

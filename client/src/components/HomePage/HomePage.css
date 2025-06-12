@@ -2,6 +2,10 @@ body {
   width: 93rem;
   background-color: #23241f;
 }
+.main-guide {
+  display: flex;
+  flex-direction: column;
+}
 
 main .quand {
   border-radius: 45px;
@@ -14,7 +18,7 @@ main .quand {
 .user-action {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 6rem;
   padding: 3rem;
   margin-left: 30px;
   color: white;

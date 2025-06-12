@@ -1,6 +1,10 @@
 import "./footer.css";
 
 function Footer() {
+  function useClic() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <footer>
       <section className="user-reseaux">
@@ -27,7 +31,7 @@ function Footer() {
       <section className="footer-images">
         <img src="./images/micro.png" alt="micro" />
         <article className="commande-page">
-          <button className="haut-page" type="button">
+          <button className="haut-page" type="button" onClick={useClic}>
             Haut de page
           </button>
           <p>Mentions légales, crédits et C.G.U.</p>

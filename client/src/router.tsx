@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App";
-import Group from "./pages/Group/Group";
+import MusicGroup from "./pages/MusicGroup/MusicGroup";
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-        path: "/group",
-        element: <Group />,
+        path: "/group/:id",
+        element: <MusicGroup />,
       },
     ],
   },

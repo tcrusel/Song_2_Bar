@@ -144,10 +144,22 @@ CREATE TABLE participate (
    PRIMARY KEY (user_id, event_id)
 );
 
-CREATE TABLE favourite (
+CREATE TABLE favourite_event (
    user_id INT,
    event_id INT,
    PRIMARY KEY (user_id, event_id)
+);
+
+CREATE TABLE favourite_bar (
+   user_id INT,
+   bar_id INT,
+   PRIMARY KEY (user_id, bar_id)
+);
+
+CREATE TABLE favourite_music_group (
+   user_id INT,
+   music_group_id INT,
+   PRIMARY KEY (user_id, music_group_id)
 );
 
 CREATE TABLE hours (

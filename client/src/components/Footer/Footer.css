@@ -3,13 +3,18 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-  height: 16rem;
+
+  height: 20rem;
   padding: 10px;
 }
+.rejoignez-nous p {
+  color: white;
+}
+
 .images-logo-sociaux {
   display: flex;
   gap: 1.5rem;
+  margin: 1rem;
 }
 .images-logo-sociaux img {
   width: 30px;
@@ -34,6 +39,7 @@ footer section p {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  height: 16rem;
 }
 
 .abonnés {
@@ -68,6 +74,7 @@ footer section p {
 .footer-images {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .commande-page {
@@ -82,7 +89,7 @@ footer section p {
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -90,6 +97,7 @@ footer section p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1rem;
 }
 .info-song2bar p {
   font-size: 11px;
@@ -115,4 +123,17 @@ footer section p {
 }
 .contact p {
   color: #2f6b75;
+}
+
+@media screen and (width <= 600px) {
+  footer {
+    flex-direction: column;
+    height: 40rem;
+  }
+  .footer-images {
+    justify-content: space-evenly;
+  }
+  .info-song2bar p {
+    font-size: 1rem;
+  }
 }

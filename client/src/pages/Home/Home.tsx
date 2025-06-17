@@ -1,6 +1,7 @@
-import "./HomePage.css";
+import Favorite from "../../components/Favorite";
+import "./Home.css";
 
-function HomePage() {
+function Home() {
   return (
     <>
       <main>
@@ -61,9 +62,10 @@ function HomePage() {
             </p>
           </article>
         </section>
+        <Favorite />
       </main>
     </>
   );
 }
 
-export default HomePage;
+export default Home;

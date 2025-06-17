@@ -16,7 +16,7 @@ function Header() {
         className="logo-song2bar"
         src="./images/logo-site.png"
         alt="logo du site"
-        style={{ width: "15%" }}
+        width="15%"
       />
 
       <input

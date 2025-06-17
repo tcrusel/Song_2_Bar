@@ -7,62 +7,72 @@ function Footer() {
 
   return (
     <footer>
-      <section className="user-reseaux">
-        <p>Rejoignez-nous sur les reseaux sociaux :</p>
-        <article className="images-logo-sociaux">
+      <div className="user-reseaux">
+        <div className="rejoignez-nous">
+          <p>Rejoignez-nous sur les reseaux sociaux :</p>
+        </div>
+        <div className="images-logo-sociaux">
           <img src="./images/mini-logo-flickr.png" alt="mini-logo-flickr" />
           <img src="./images/mini-logo-ico.png" alt="mini-logo-ico" />
           <img src="./images/mini-logo-rss.png" alt="mini-logo-rss" />
           <img src="./images/mini-logo-twitter.png" alt="mini-logo-twitter" />
           <img src="./images/mini-logo-vimeo.png" alt="mini-logo-vimeo" />
           <img src="./images/mini-logo-facebook.png" alt="mini-logo-facebook" />
-        </article>
-        <article className="abonnés">
+        </div>
+        <div className="abonnés">
           <p className="nombre-abonnés">
-            Déjas 150 000
+            Déjà 150 000
             <br />
             abonnés !
           </p>
-        </article>
+        </div>
         <button type="button" className="button-abonnés">
           S'ABONNER
         </button>
-      </section>
-      <section className="footer-images">
-        <img src="./images/micro.png" alt="micro" />
-        <article className="commande-page">
+      </div>
+      <div className="footer-images">
+        <img
+          src="./images/micro.png"
+          alt="micro"
+          style={{ width: "13rem", height: "13rem" }}
+        />
+        <div className="commande-page">
           <button className="haut-page" type="button" onClick={useClic}>
             Haut de page
           </button>
           <p>Mentions légales, crédits et C.G.U.</p>
-        </article>
-        <img src="./images/guitare-fleur.png" alt="guitare-fleur" />
-      </section>
-      <section className="info-song2bar">
-        <article className="paragraphe-song2bar">
+        </div>
+        <img
+          src="./images/guitare-fleur.png"
+          alt="guitare-fleur"
+          style={{ width: "13rem", height: "13rem" }}
+        />
+      </div>
+      <div className="info-song2bar">
+        <div className="paragraphe-song2bar">
           <p>Song2Bar 2025-</p>
           <p>
             Song2Bar.fr le guide de vos concert dans les meilleurs bar de
             Bordeaux
           </p>
-        </article>
-        <article className="newletter-song2bar">
-          <aside className="newletter">
+        </div>
+        <div className="newletter-song2bar">
+          <div className="newletter">
             <p>NewsLetter</p>
-          </aside>
-          <aside className="song2bar">
+          </div>
+          <div className="song2bar">
             <p>Song2Bar</p>
-          </aside>
-        </article>
-        <article className="apropos-contact">
-          <aside className="apropos">
+          </div>
+        </div>
+        <div className="apropos-contact">
+          <div className="apropos">
             <p>A propos</p>
-          </aside>
-          <aside className="contact">
+          </div>
+          <div className="contact">
             <p>Contact</p>
-          </aside>
-        </article>
-      </section>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

@@ -1,13 +1,7 @@
 import express from "express";
+import eventActions from "./modules/event/eventActions";
 
 const router = express.Router();
 
-/* ************************************************************************* */
-// Define Your API Routes Here
-/* ************************************************************************* */
-
-// Define item-related routes
-
-/* ************************************************************************* */
-
+router.get("/event/:id", eventActions.read);
 export default router;

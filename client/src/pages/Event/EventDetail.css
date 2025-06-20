@@ -1,0 +1,192 @@
+.event-details {
+  background-color: var(--background-secondary-color);
+  font-family: "Fredoka", sans-serif;
+}
+
+section {
+  padding: 40px;
+}
+
+section.event-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.event-header h1 {
+  color: var(--title-primary-color);
+  grid-column: 1 / 3;
+  grid-row: 2 / 4;
+  padding-left: 47px;
+  padding-top: 66px;
+}
+
+.poster-event {
+  grid-column: 3 / 4;
+  grid-row: 1 / 5;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.music-style {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
+  align-items: end;
+  transform: rotate(345deg);
+  font-size: 50px;
+  border: 2px solid white;
+  width: fit-content;
+  padding: 20px;
+  background-color: var(--button-text-color);
+}
+
+.header-style {
+  padding-left: 136px;
+}
+
+.date {
+  display: flex;
+  grid-column: 1 / 2;
+  justify-content: flex-start;
+  padding-left: 50px;
+  gap: 20px;
+  align-items: center;
+}
+
+.date-event {
+  align-items: end;
+  font-size: 2rem;
+}
+
+.date-icon {
+  width: 2rem;
+  height: auto;
+}
+
+.hour {
+  display: flex;
+  grid-column: 1 / 2;
+  justify-content: flex-start;
+  padding-left: 50px;
+  gap: 20px;
+  align-items: center;
+}
+
+.hour-event {
+  align-items: end;
+  font-size: 2rem;
+}
+
+.hour-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.bar {
+  display: flex;
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  gap: 20px;
+  align-items: center;
+}
+
+.localisation-icon {
+  width: 2rem;
+  height: auto;
+}
+
+.bar-name {
+  font-size: 2rem;
+}
+
+.bar-adress {
+  grid-column: 2 / 3;
+  grid-row: 5 / 6;
+  display: flex;
+  flex-direction: column;
+  padding-left: 3.2rem;
+}
+
+.description-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+}
+
+.description-container p {
+  align-content: center;
+}
+
+.about {
+  font-size: 2rem;
+  transform: rotate(-15deg);
+}
+
+.artist {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  font-size: 2rem;
+  transform: rotate(-15deg);
+}
+
+.groups-name {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  font-size: 2rem;
+}
+
+.participate {
+  font-size: 2rem;
+  grid-column: 3 / 4;
+  padding-top: 50px;
+}
+
+@media (max-width: 833px) {
+  section {
+    display: block;
+  }
+
+  section.event-header {
+    display: grid;
+    max-width: 100vw;
+    grid-template-rows: auto;
+    width: 100%;
+    padding: 0rem;
+    overflow: auto;
+  }
+
+  section .poster-event {
+    grid-column: 1 / -1;
+    border-radius: 0rem;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    grid-row: 1;
+  }
+
+  section .header-style {
+    padding-left: 0;
+  }
+
+  section .date-event {
+    font-size: 1rem;
+  }
+
+  section .hour-event {
+    font-size: 1rem;
+  }
+
+  section .bar-name {
+    font-size: 1rem;
+  }
+
+  section p {
+    font-size: 1rem;
+  }
+}

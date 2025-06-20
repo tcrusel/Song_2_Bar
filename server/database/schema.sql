@@ -108,7 +108,8 @@ CREATE TABLE event (
    description TEXT NOT NULL,
    creator_id INT NOT NULL,
    bar_id INT NOT NULL,
-   music_group_id INT NOT NULL
+   music_group_id INT NOT NULL,
+   image VARCHAR(255)
 );
 
 CREATE TABLE music_group (
@@ -127,8 +128,8 @@ INSERT INTO music_group (name, style, description)
       ('Les Arts Florissants', 'Classique', 'Sous la direction de William Christie, cet ensemble vocal et instrumental redonne vie à la musique baroque française, anglaise et italienne. Ils utilisent des instruments d''époque et s''attachent à recréer l''esthétique sonore du XVIIe siècle avec une précision et une émotion remarquables.'),
       ('Rone','Electro', 'Erwan Castex, alias Rone, est reconnu pour ses créations cinématographiques mêlant nappes ambient, beats subtils et textures organiques. Il a collaboré avec le Ballet de l''Opéra de Paris, écrivains (Alain Damasio) et réalisateurs. Ses concerts sont des immersions sensorielles dans un univers doux, mélancolique et poétique.'),
       ('Justice','Electro', 'Icône de la French Touch, le duo Gaspard Augé et Xavier de Rosnay offre un son saturé, énergique et dansant, mélangeant rock, disco et électro. Leurs lives sont des shows puissants avec jeux de lumières géométriques, croix géantes et énergie électrisante, à mi-chemin entre rave et concert de rock.'),
-      ('Vulfpeck', 'Groove/Funck', 'Ce groupe américain né sur YouTube a bâti sa notoriété sur un son épuré, une grande musicalité et une présence scénique décalée. Influencé par la soul des années 70, chaque musicien du collectif brille par sa virtuosité, notamment le bassiste Joe Dart.'),
-      ('Snarky Puppy', 'Groove/Funck', 'Véritable laboratoire musical fondé par Michael League, Snarky Puppy réunit une cinquantaine de musiciens (appelés « The Fam »). Leur jazz fusion est imprégné de musiques latines, funk, soul et afrobeat. Récompensés par plusieurs Grammy Awards, ils sont adulés autant par les musiciens que le grand public.'),
+      ('Vulfpeck', 'Groove/Funk', 'Ce groupe américain né sur YouTube a bâti sa notoriété sur un son épuré, une grande musicalité et une présence scénique décalée. Influencé par la soul des années 70, chaque musicien du collectif brille par sa virtuosité, notamment le bassiste Joe Dart.'),
+      ('Snarky Puppy', 'Groove/Funk', 'Véritable laboratoire musical fondé par Michael League, Snarky Puppy réunit une cinquantaine de musiciens (appelés « The Fam »). Leur jazz fusion est imprégné de musiques latines, funk, soul et afrobeat. Récompensés par plusieurs Grammy Awards, ils sont adulés autant par les musiciens que le grand public.'),
       ('L''Entourage', 'Hip-Hop', 'Collectif emblématique du rap indépendant français, il fédère des figures majeures comme Nekfeu, Alpha Wann, Jazzy Bazz ou Deen Burbigo. Ils incarnent une génération de lyricistes exigeants, porteurs d''un rap technique, souvent introspectif, qui a su séduire un large public.'),
       ('Run The Jewels', 'Hip-Hop', 'Duo américain composé de Killer Mike (Atlanta) et El-P (New York), ils offrent un hip-hop abrasif, militant et post-apocalyptique. Leurs paroles dénoncent le racisme, le capitalisme et les violences policières, sur des prods puissantes et sombres. Leur succès est autant critique que populaire.'),
       ('GoGo Penguin','Jazz', 'Trio instrumental de Manchester, GoGo Penguin brouille les frontières entre jazz, classique et électro. Le piano rythmique, la contrebasse et la batterie dialoguent dans des compositions ciselées, évoquant Philip Glass autant qu''Aphex Twin. Leur jazz est immersif, dynamique et très accessible.'),

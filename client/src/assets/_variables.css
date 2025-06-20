@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka&display=swap");
+@font-face {
+  font-family: "Fredoka";
+  src: url("./font/Fredoka-Variable.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   --background-primary-color: #23241f;
@@ -6,7 +11,14 @@
   --button-primary-color: #aa682e;
   --button-secondary-color: #2f6b75;
   --button-text-color: #ebd3a4;
-  --title-primary-color: #7a331b;
+  --text-color: white;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+body {
   font-family: "Fredoka", sans-serif;
 }
 
@@ -27,7 +39,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.5 rem;
 }
 
 h4 {
@@ -35,13 +47,23 @@ h4 {
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 0.875rem;
 }
 
 .button-title {
-  width: 34, 25rem;
-  height: 7, 25rem;
+  width: auto;
+  height: auto;
+  font-size: 3rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  background-color: #3f515a;
+  color: var(--button-text-color);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
 }
+
 .card {
   width: 254px;
   height: 400px;
@@ -51,4 +73,40 @@ p {
 
 .card-image {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1 rem;
+  }
+
+  h4 {
+    font-size: 0.8rem;
+  }
+
+  p {
+    font-size: 0.6rem;
+  }
+
+  .button-title {
+    width: auto;
+    height: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    background-color: #3f515a;
+    color: var(--button-text-color);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+  }
 }

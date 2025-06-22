@@ -1,5 +1,5 @@
 import "./reset.css";
-import "./assets/_variables.css";
+import "./App.css";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 import router from "./router";

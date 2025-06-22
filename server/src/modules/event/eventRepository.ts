@@ -14,7 +14,7 @@ type Event = {
 };
 
 class eventRepository {
-  async read(id: number) {
+  async readById(id: number) {
     const [rows] = await databaseClient.query<Rows[]>(
       `SELECT 
     event.id AS event_id,

@@ -7,7 +7,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/group/:id",
+        path: "/groups/:id",
         element: <MusicGroup />,
       },
     ],

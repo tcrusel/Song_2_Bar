@@ -1,19 +1,11 @@
 import databaseClient from "../../../database/client";
-
 import type { Result, Rows } from "../../../database/client";
-
-type MusicGroup = {
-  id: number;
-  name: string;
-  style: string;
-  description: string;
-  image: string;
-};
+import type { MusicGroup } from "../../types/musicGroup";
 
 class GroupRepository {
-  async read(id: number) {
+  async find(id: number) {
     const [rows] = await databaseClient.query<Rows>(
-      "select * from music_group where id = ?",
+      "SELECT * FROM music_group WHERE id = ?",
       [id],
     );
 

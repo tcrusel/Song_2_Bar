@@ -47,6 +47,18 @@ section .group-articles p {
   font-size: 1rem;
 }
 
+.fail h1 {
+  padding-bottom: 40px;
+  color: var(--button-primary-color);
+}
+
+.fail button {
+  padding: 1rem;
+  background-color: var(--button-secondary-color);
+  border-radius: 20px;
+  color: var(--text-color);
+}
+
 @media (max-width: 700px) {
   section {
     padding: 1rem;

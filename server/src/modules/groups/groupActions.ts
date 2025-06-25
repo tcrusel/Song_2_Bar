@@ -4,13 +4,13 @@ import groupRepository from "./groupRepository";
 
 const read: RequestHandler = async (req, res, next) => {
   try {
-    const groupId = Number(req.params.id);
-    const group = await groupRepository.read(groupId);
+    const musicGroupId = Number(req.params.id);
+    const musicGroup = await groupRepository.find(musicGroupId);
 
-    if (!group) {
+    if (!musicGroup) {
       res.status(StatusCodes.NOT_FOUND).send("Groupe introuvable");
     } else {
-      res.status(StatusCodes.OK).json(group);
+      res.status(StatusCodes.OK).json(musicGroup);
     }
   } catch (err) {
     next(err);

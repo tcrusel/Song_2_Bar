@@ -18,7 +18,7 @@ function Footer() {
           <img src="./images/mini-logo-facebook.png" alt="mini-logo-facebook" />
         </article>
         <article className="subscribers">
-          <p className="subscribers-number">
+          <p className="number-subscribers">
             Déjà 150 000
             <br />
             abonnés !

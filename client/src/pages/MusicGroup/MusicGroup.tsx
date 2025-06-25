@@ -2,36 +2,36 @@ import "./MusicGroup.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styleIcon from "../../../public/images/music-style-icon.svg";
-
-interface MusicGroupInterface {
-  name: string;
-  image: string;
-  style: string;
-  description: string;
-}
+import type { MusicGroupInterface } from "../../types/musicGroup";
 
 function MusicGroup() {
-  const [dataGroup, setDataGroup] = useState<MusicGroupInterface | null>(null);
+  const [musicGroup, setMusicGroup] = useState<MusicGroupInterface | null>(
+    null,
+  );
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3310/api/groups/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/groups/${id}`)
       .then((response) => response.json())
-      .then((data) => setDataGroup(data));
+      .then((musicGroup) => setMusicGroup(musicGroup));
   }, [id]);
 
-  if (!dataGroup)
+  if (!musicGroup)
     return (
       <>
-        <h1>Groupe introuvable</h1>
-        <button type="button">Revenir à l'accueil</button>
+        <section className="fail">
+          <h1>Groupe de musique introuvable</h1>
+          <button className="button-fail" type="button">
+            Revenir à l'accueil
+          </button>
+        </section>
       </>
     );
 
   return (
     <>
       <section className="group-information">
-        <h1 className="button-title">{dataGroup.name}</h1>
+        <h1 className="button-title">{musicGroup.name}</h1>
         <div className="group-title">
           <img
             src={styleIcon}
@@ -39,18 +39,18 @@ function MusicGroup() {
             width="40"
             height="auto"
           />
-          <h2>{dataGroup.style}</h2>
+          <h2>{musicGroup.style}</h2>
         </div>
         <div className="group-articles">
           <article>
             <img
               className="poster-group"
-              src={dataGroup.image}
+              src={musicGroup.image}
               alt="poster du groupe"
             />
           </article>
           <article>
-            <p className="description">{dataGroup.description}</p>
+            <p className="description">{musicGroup.description}</p>
           </article>
         </div>
       </section>

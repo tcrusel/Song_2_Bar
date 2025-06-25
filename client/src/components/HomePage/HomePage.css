@@ -2,7 +2,7 @@ body {
   width: 93rem;
   background-color: #23241f;
 }
-.main-guide {
+.guide {
   display: flex;
   flex-direction: column;
 }

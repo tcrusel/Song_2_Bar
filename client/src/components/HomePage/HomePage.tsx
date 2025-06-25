@@ -11,7 +11,7 @@ function HomePage() {
           width="cover"
           height="auto"
         />
-        <section className="main-guide">
+        <section className="guide">
           <button
             className="when-button"
             type="button"

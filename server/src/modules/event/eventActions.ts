@@ -5,7 +5,7 @@ const read: RequestHandler = async (req, res, next) => {
   try {
     const eventId = Number(req.params.id);
     const event = await eventRepository.readById(eventId);
-    if (!event || event.length === 0) {
+    if (!event) {
       res.status(404).json({ error: "Event not found" });
     } else {
       res.json(event);

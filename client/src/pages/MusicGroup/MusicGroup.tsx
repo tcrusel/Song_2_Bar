@@ -30,7 +30,7 @@ function MusicGroup() {
     <>
       <section className="group-information">
         <h1 className="button-title">{musicGroup.name}</h1>
-        <div className="group-title">
+        <article className="group-title">
           <img
             src={styleIcon}
             alt="icone style de musique"
@@ -38,19 +38,19 @@ function MusicGroup() {
             height="auto"
           />
           <h2>{musicGroup.style}</h2>
-        </div>
-        <div className="group-articles">
-          <article>
+        </article>
+        <article className="group-articles">
+          <aside>
             <img
               className="poster-group"
               src={musicGroup.image}
               alt="poster du groupe"
             />
-          </article>
-          <article>
+          </aside>
+          <aside>
             <p className="description">{musicGroup.description}</p>
-          </article>
-        </div>
+          </aside>
+        </article>
       </section>
       <section className="bar-caroussel">
         <p>Caroussel de bars à venir</p>

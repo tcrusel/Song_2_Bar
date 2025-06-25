@@ -17,7 +17,7 @@ type Detail = {
   longitude: number;
   description: string;
   date: number;
-  adress: string;
+  address: string;
   postcode: string;
   city: string;
 };
@@ -91,7 +91,7 @@ function EventDetail() {
           <p className={"bar-name bold white"}>{detail.bar_name}</p>
         </div>
         <div className={"bar-adress white"}>
-          <p>{detail.adress}</p>
+          <p>{detail.address}</p>
           <p>
             {detail.postcode} {detail.city}
           </p>

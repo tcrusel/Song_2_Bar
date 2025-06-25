@@ -1,4 +1,4 @@
-.component-header {
+.header {
   position: relative;
   width: 93rem;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: flex-end;
 }
 
-.component-header .search-bar {
+.header .search-bar {
   border-radius: 35px;
   background-color: #ebd2a4;
   font-size: 1rem;
@@ -20,7 +20,7 @@
   border: none;
   cursor: pointer;
 }
-.component-header .logo-connexion {
+.header .logo-connexion {
   margin-bottom: 8rem;
 }
 

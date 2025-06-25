@@ -7,7 +7,7 @@ function Footer() {
 
   return (
     <footer>
-      <section className="user-network">
+      <section className="networks">
         <p>Rejoignez-nous sur les reseaux sociaux :</p>
         <article className="image-social-logo">
           <img src="./images/mini-logo-flickr.png" alt="mini-logo-flickr" />
@@ -30,7 +30,7 @@ function Footer() {
       </section>
       <section className="footer-images">
         <img src="./images/micro.png" alt="micro" />
-        <article className="commande-page">
+        <article className="middle-container">
           <button className="top-page" type="button" onClick={useClic}>
             Haut de page
           </button>

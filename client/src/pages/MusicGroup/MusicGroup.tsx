@@ -11,7 +11,7 @@ function MusicGroup() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/groups/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/groups/${id}`)
       .then((response) => response.json())
       .then((musicGroup) => setMusicGroup(musicGroup));
   }, [id]);
@@ -21,9 +21,7 @@ function MusicGroup() {
       <>
         <section className="fail">
           <h1>Groupe de musique introuvable</h1>
-          <button className="button-fail" type="button">
-            Revenir à l'accueil
-          </button>
+          <button type="button">Revenir à l'accueil</button>
         </section>
       </>
     );

@@ -50,6 +50,7 @@ section .group-articles p {
 .fail h1 {
   padding-bottom: 40px;
   color: var(--button-primary-color);
+  text-align: center;
 }
 
 .fail button {
@@ -57,6 +58,7 @@ section .group-articles p {
   background-color: var(--button-secondary-color);
   border-radius: 40px;
   color: var(--text-color);
+  font-weight: bolder;
 }
 
 @media (max-width: 700px) {

@@ -13,26 +13,28 @@ const app = express();
 import cors from "cors";
 
 // In development, allow localhost:3000 (default Vite dev server)
-const allowedOrigins = process.env.CLIENT_URL 
-  ? [process.env.CLIENT_URL] 
+const allowedOrigins = process.env.CLIENT_URL
+  ? [process.env.CLIENT_URL]
   : ["http://localhost:3000"];
 
-app.use(cors({ 
-  origin: allowedOrigins,
-  credentials: true 
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 
 /* ************************************************************************* */
 
 // Request Parsing: Enable JSON parsing for API requests with UTF-8 encoding
 
-app.use(express.json({ type: 'application/json' }));
+app.use(express.json({ type: "application/json" }));
 app.use(express.urlencoded({ extended: true }));
 
 // Set default charset for responses
 app.use((req, res, next) => {
-  res.charset = 'utf-8';
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.charset = "utf-8";
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
   next();
 });
 

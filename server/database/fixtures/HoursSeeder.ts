@@ -16,6 +16,7 @@ class HoursSeeder extends AbstractSeeder {
         saturday_opening_hours: `${this.faker.date.anytime().toTimeString().slice(0, 5)}-${this.faker.date.anytime().toTimeString().slice(0, 5)}`,
         sunday_opening_hours: `${this.faker.date.anytime().toTimeString().slice(0, 5)}-${this.faker.date.anytime().toTimeString().slice(0, 5)}`,
         happy_hours: `${this.faker.date.anytime().toTimeString().slice(0, 5)}-${this.faker.date.anytime().toTimeString().slice(0, 5)}`,
+        refName: `hours_${i + 1}`,
       };
 
       this.insert(fakeHours);

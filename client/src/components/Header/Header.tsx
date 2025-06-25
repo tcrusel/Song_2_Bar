@@ -11,7 +11,7 @@ function Header() {
   };
 
   return (
-    <section className="component-header">
+    <section className="header">
       <img
         className="logo-song2bar"
         src="./images/logo-site.png"

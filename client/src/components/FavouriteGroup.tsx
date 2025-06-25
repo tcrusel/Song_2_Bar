@@ -6,6 +6,7 @@ import "./FavouriteGroup.css";
 function FavouriteGroup() {
   const [isfavourite, setIsFavourite] = useState(false);
   const [isPoPuped, setisPoPuped] = useState(false);
+  // const addFavouriteGroup = {};
 
   return (
     <>

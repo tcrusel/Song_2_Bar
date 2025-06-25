@@ -11,12 +11,12 @@ footer {
   color: white;
 }
 
-.images-logo-sociaux {
+.image-social-logo {
   display: flex;
   gap: 1.5rem;
   margin: 1rem;
 }
-.images-logo-sociaux img {
+.image-social-logo img {
   width: 30px;
   height: 30px;
 }
@@ -26,7 +26,7 @@ footer section p {
   font-size: 16px;
 }
 
-.abonnés {
+.subscribers {
   background-color: #d9d9d9;
   border-radius: 45px;
 }
@@ -34,28 +34,29 @@ footer section p {
   color: black;
 }
 
-.user-reseaux {
+.user-network {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  margin-top: 1.5rem;
   height: 16rem;
 }
 
-.abonnés {
+.subscribers {
   width: 12rem;
   height: 3rem;
   margin-top: 25px;
   margin-bottom: 25px;
 }
 
-.abonnés p {
+.subscribers p {
   text-align: center;
   padding: 5px;
   margin: auto;
 }
 
-.button-abonnés {
+.button-subscribers {
   background-color: #2f6b75;
   border-radius: 25px;
   width: 18rem;

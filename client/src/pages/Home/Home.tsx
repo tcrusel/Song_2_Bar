@@ -1,20 +1,21 @@
-import Favorite from "../../components/Favorite";
+import FavoriteGroup from "../../components/FavouriteGroup";
 import "./Home.css";
+import "./../../assets/_variables.css";
 
 function Home() {
   return (
     <>
       <main>
         <img
-          className="guitard-fleur"
+          className="flower-guitar"
           src="./images/micro-guitard.svg"
-          alt="representation de la guitare avec des fleurs"
+          alt="représentation de la guitare avec des fleurs"
           width="cover"
           height="auto"
         />
         <section className="main-guide">
           <button
-            className="quand"
+            className="when-button"
             type="button"
             style={{ width: "28rem", height: "6rem" }}
           >
@@ -40,7 +41,7 @@ function Home() {
             <p>
               3.
               <img src="./images/mini-icone-coeur.png" alt="mini-icone-coeur" />
-              Créez votre selection
+              Créez votre sélection
             </p>
             <p>
               4.
@@ -62,7 +63,7 @@ function Home() {
             </p>
           </article>
         </section>
-        <Favorite />
+        <FavoriteGroup />
       </main>
     </>
   );

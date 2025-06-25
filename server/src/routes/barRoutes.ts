@@ -16,12 +16,10 @@ const getAllBars: RequestHandler = async (req, res) => {
   }
 };
 
-// GET /api/bars/:id - Get specific bar with hours
 const getBarById: RequestHandler = async (req, res): Promise<void> => {
   try {
     const { id } = req.params;
 
-    // Get bar data
     const [barRows] = await database.query<Rows>(
       "SELECT * FROM bar WHERE id = ?",
       [id],
@@ -34,7 +32,6 @@ const getBarById: RequestHandler = async (req, res): Promise<void> => {
 
     const bar = barRows[0];
 
-    // Get hours data if hours_id exists
     if (bar.hours_id) {
       const [hoursRows] = await database.query<Rows>(
         "SELECT * FROM hours WHERE id = ?",
@@ -53,7 +50,6 @@ const getBarById: RequestHandler = async (req, res): Promise<void> => {
   }
 };
 
-// GET /api/bars/:id/events - Get events for a specific bar
 const getBarEvents: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
@@ -67,7 +63,6 @@ const getBarEvents: RequestHandler = async (req, res) => {
       [id],
     );
 
-    // Transform the data to match the expected format
     const events = rows.map((row) => ({
       id: row.id,
       title: row.title,
@@ -89,7 +84,6 @@ const getBarEvents: RequestHandler = async (req, res) => {
   }
 };
 
-// GET /api/events/upcoming - Get upcoming events
 const getUpcomingEvents: RequestHandler = async (req, res) => {
   try {
     const limit = Number.parseInt(req.query.limit as string) || 10;
@@ -104,7 +98,6 @@ const getUpcomingEvents: RequestHandler = async (req, res) => {
       [limit],
     );
 
-    // Transform the data to match the expected format
     const events = rows.map((row) => ({
       id: row.id,
       title: row.title,

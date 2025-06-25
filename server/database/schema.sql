@@ -98,6 +98,7 @@ INSERT INTO user (firstname, lastname, role, email, password)
 CREATE TABLE event (
    id INT PRIMARY KEY AUTO_INCREMENT,
    title VARCHAR(100) NOT NULL,
+   image VARCHAR(255) NOT NULL,
    date DATE NOT NULL,
    start_at TIME NOT NULL,
    end_at TIME NOT NULL,

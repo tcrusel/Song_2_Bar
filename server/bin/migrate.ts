@@ -25,7 +25,7 @@ const migrate = async () => {
       user: DB_USER,
       password: DB_PASSWORD,
       multipleStatements: true, // Allow multiple SQL statements
-      charset: 'utf8mb4',
+      charset: "utf8mb4",
     });
 
     // Drop the existing database if it exists

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Bar, Event } from '../types/bar';
-import { barService } from '../services/barService';
-import './BarDetails.css';
+import type React from "react";
+import { useCallback, useEffect, useState } from "react";
+import { barService } from "../services/barService";
+import type { Bar, Event } from "../types/bar";
+import "./BarDetails.css";
 
 interface BarDetailsProps {
   barId: number;
@@ -24,13 +25,13 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
         setLoading(true);
         const [barData, barEvents] = await Promise.all([
           barService.getBarById(barId),
-          barService.getBarEvents(barId)
+          barService.getBarEvents(barId),
         ]);
-        
+
         setBar(barData);
         setEvents(barEvents);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
+        setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
         setLoading(false);
       }
@@ -43,31 +44,31 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const formatHours = (hours: string) => {
-    if (hours === 'Fermé' || hours === 'Closed') return 'Fermé';
+    if (hours === "Fermé" || hours === "Closed") return "Fermé";
     return hours;
   };
 
   const getTodayHours = () => {
-    if (!bar?.hours) return 'Non spécifié';
-    
+    if (!bar?.hours) return "Non spécifié";
+
     const today = new Date().getDay();
     const daysOfWeek = [
-      'sunday_opening_hours',
-      'monday_opening_hours', 
-      'tuesday_opening_hours',
-      'wednesday_opening_hours',
-      'thursday_opening_hours',
-      'friday_opening_hours',
-      'saturday_opening_hours'
+      "sunday_opening_hours",
+      "monday_opening_hours",
+      "tuesday_opening_hours",
+      "wednesday_opening_hours",
+      "thursday_opening_hours",
+      "friday_opening_hours",
+      "saturday_opening_hours",
     ];
-    
+
     const todayHours = bar.hours[daysOfWeek[today] as keyof typeof bar.hours];
     return formatHours(todayHours as string);
   };
@@ -82,21 +83,23 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
   const prevImage = () => {
     if (bar) {
       const images = [bar.image1, bar.image2, bar.image3, bar.image4];
-      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+      setCurrentImageIndex(
+        (prev) => (prev - 1 + images.length) % images.length,
+      );
     }
   };
 
   const nextEvents = () => {
     const step = isMobile ? 1 : 5;
-    setCurrentEventIndex((prev) => 
-      prev + step >= events.length ? 0 : prev + step
+    setCurrentEventIndex((prev) =>
+      prev + step >= events.length ? 0 : prev + step,
     );
   };
 
   const prevEvents = () => {
     const step = isMobile ? 1 : 5;
-    setCurrentEventIndex((prev) => 
-      prev - step < 0 ? Math.max(0, events.length - step) : prev - step
+    setCurrentEventIndex((prev) =>
+      prev - step < 0 ? Math.max(0, events.length - step) : prev - step,
     );
   };
 
@@ -105,40 +108,40 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, []);
 
-  const nextModalImage = () => {
+  const nextModalImage = useCallback(() => {
     if (bar) {
       const images = [bar.image1, bar.image2, bar.image3, bar.image4];
       setModalImageIndex((prev) => (prev + 1) % images.length);
     }
-  };
+  }, [bar]);
 
-  const prevModalImage = () => {
+  const prevModalImage = useCallback(() => {
     if (bar) {
       const images = [bar.image1, bar.image2, bar.image3, bar.image4];
       setModalImageIndex((prev) => (prev - 1 + images.length) % images.length);
     }
-  };
+  }, [bar]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (isModalOpen) {
-        if (e.key === 'Escape') {
+        if (e.key === "Escape") {
           closeModal();
-        } else if (e.key === 'ArrowLeft') {
+        } else if (e.key === "ArrowLeft") {
           prevModalImage();
-        } else if (e.key === 'ArrowRight') {
+        } else if (e.key === "ArrowRight") {
           nextModalImage();
         }
       }
     };
 
-    document.addEventListener('keydown', handleKeyPress);
-    return () => document.removeEventListener('keydown', handleKeyPress);
-  }, [isModalOpen]);
+    document.addEventListener("keydown", handleKeyPress);
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  }, [isModalOpen, closeModal, prevModalImage, nextModalImage]);
 
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">Erreur: {error}</div>;
@@ -146,12 +149,15 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
 
   const images = [bar.image1, bar.image2, bar.image3, bar.image4];
   const cardsToShow = isMobile ? 1 : 5;
-  const visibleEvents = events.slice(currentEventIndex, currentEventIndex + cardsToShow);
+  const visibleEvents = events.slice(
+    currentEventIndex,
+    currentEventIndex + cardsToShow,
+  );
 
   return (
     <div className="bar-details">
       <div className="return-button-container">
-        <button className="return-button" onClick={() => {}}>
+        <button type="button" className="return-button" onClick={() => {}}>
           ← Retour
         </button>
       </div>
@@ -165,24 +171,40 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
         {/* Image Gallery - Left Side */}
         <div className="image-gallery">
           <div className="main-image">
-            <img 
-              src={images[currentImageIndex]} 
+            <img
+              src={images[currentImageIndex]}
               alt={bar.name}
               onClick={() => openModal(currentImageIndex)}
-              style={{ cursor: 'pointer' }}
+              onKeyDown={(e) =>
+                e.key === "Enter" && openModal(currentImageIndex)
+              }
+              style={{ cursor: "pointer" }}
             />
-            <button className="nav-button prev" onClick={prevImage}>‹</button>
-            <button className="nav-button next" onClick={nextImage}>›</button>
+            <button
+              type="button"
+              className="nav-button prev"
+              onClick={prevImage}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="nav-button next"
+              onClick={nextImage}
+            >
+              ›
+            </button>
           </div>
           <div className="thumbnail-grid">
             {images.slice(0, 3).map((img, index) => (
-              <img 
-                key={index}
-                src={img} 
+              <img
+                key={`${bar.name}-${index}`}
+                src={img}
                 alt={`${bar.name} ${index + 1}`}
-                className={index === currentImageIndex ? 'active' : ''}
+                className={index === currentImageIndex ? "active" : ""}
                 onClick={() => openModal(index)}
-                style={{ cursor: 'pointer' }}
+                onKeyDown={(e) => e.key === "Enter" && openModal(index)}
+                style={{ cursor: "pointer" }}
               />
             ))}
           </div>
@@ -194,29 +216,35 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
             <div className="location">
               📍 {bar.address}, {bar.postcode} {bar.city}
             </div>
-            <div className="music-style">
-              🎵 {bar.music_style}
-            </div>
-            <div className="hours">
-              🕐 {getTodayHours()}
-            </div>
+            <div className="music-style">🎵 {bar.music_style}</div>
+            <div className="hours">🕐 {getTodayHours()}</div>
             {bar.hours?.happy_hours && (
-              <div className="happy-hours">
-                🍻 {bar.hours.happy_hours}
-              </div>
+              <div className="happy-hours">🍻 {bar.hours.happy_hours}</div>
             )}
           </div>
         </div>
       </section>
-      
+
       <section className="events-carousel">
         {events.length > 0 ? (
           <>
             <div className="carousel-controls">
-              <button className="carousel-nav" onClick={prevEvents}>‹</button>
-              <button className="carousel-nav" onClick={nextEvents}>›</button>
+              <button
+                type="button"
+                className="carousel-nav"
+                onClick={prevEvents}
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="carousel-nav"
+                onClick={nextEvents}
+              >
+                ›
+              </button>
             </div>
-            
+
             <div className="events-grid">
               {visibleEvents.map((event) => (
                 <div key={event.id} className="event-card">
@@ -230,11 +258,9 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
                     <p className="event-style">{event.music_group?.style}</p>
                     <div className="event-meta">
                       <span className="event-date">
-                        {new Date(event.date).toLocaleDateString('fr-FR')}
+                        {new Date(event.date).toLocaleDateString("fr-FR")}
                       </span>
-                      <span className="event-time">
-                        {event.start_at}
-                      </span>
+                      <span className="event-time">{event.start_at}</span>
                     </div>
                   </div>
                 </div>
@@ -244,10 +270,13 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
             {/* Carousel Dots - only show if more than cardsToShow */}
             {events.length > cardsToShow && (
               <div className="carousel-dots">
-                {Array.from({ length: Math.ceil(events.length / cardsToShow) }).map((_, index) => (
+                {Array.from({
+                  length: Math.ceil(events.length / cardsToShow),
+                }).map((_, index) => (
                   <button
-                    key={index}
-                    className={`dot ${Math.floor(currentEventIndex / cardsToShow) === index ? 'active' : ''}`}
+                    key={`carousel-dot-${bar.id}-${index}`}
+                    type="button"
+                    className={`dot ${Math.floor(currentEventIndex / cardsToShow) === index ? "active" : ""}`}
                     onClick={() => setCurrentEventIndex(index * cardsToShow)}
                   />
                 ))}
@@ -264,16 +293,38 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
 
       {/* Image Modal */}
       {isModalOpen && (
-        <div className="image-modal-overlay" onClick={closeModal}>
-          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>×</button>
-            <img 
-              src={images[modalImageIndex]} 
+        <div
+          className="image-modal-overlay"
+          onClick={closeModal}
+          onKeyDown={(e) => e.key === "Escape" && closeModal()}
+        >
+          <div
+            className="image-modal-content"
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
+          >
+            <button type="button" className="modal-close" onClick={closeModal}>
+              ×
+            </button>
+            <img
+              src={images[modalImageIndex]}
               alt={bar.name}
               className="modal-image"
             />
-            <button className="modal-nav-button modal-prev" onClick={prevModalImage}>‹</button>
-            <button className="modal-nav-button modal-next" onClick={nextModalImage}>›</button>
+            <button
+              type="button"
+              className="modal-nav-button modal-prev"
+              onClick={prevModalImage}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="modal-nav-button modal-next"
+              onClick={nextModalImage}
+            >
+              ›
+            </button>
             <div className="modal-counter">
               {modalImageIndex + 1} / {images.length}
             </div>
@@ -284,4 +335,4 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
   );
 };
 
-export default BarDetails; 
+export default BarDetails;

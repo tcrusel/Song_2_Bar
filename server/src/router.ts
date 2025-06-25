@@ -1,5 +1,5 @@
 import express from "express";
-import barRoutes from './routes/barRoutes';
+import barRoutes from "./routes/barRoutes";
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Bar-related routes (mount under /api)
-router.use('/api', barRoutes);
+router.use("/api", barRoutes);
 
 /* ************************************************************************* */
 

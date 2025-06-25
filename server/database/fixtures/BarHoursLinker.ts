@@ -1,13 +1,13 @@
+import database from "../client";
 import AbstractSeeder from "./AbstractSeeder";
 import HoursSeeder from "./HoursSeeder";
-import database from "../client";
 
 class BarHoursLinker extends AbstractSeeder {
   constructor() {
-    super({ 
-      table: "bar", 
+    super({
+      table: "bar",
       truncate: false,
-      dependencies: [HoursSeeder]
+      dependencies: [HoursSeeder],
     });
   }
 
@@ -16,8 +16,8 @@ class BarHoursLinker extends AbstractSeeder {
       const hoursRef = this.getRef(`hours_${i}`);
       if (hoursRef) {
         const updatePromise = database.query(
-          'UPDATE bar SET hours_id = ? WHERE id = ?', 
-          [hoursRef.insertId, i]
+          "UPDATE bar SET hours_id = ? WHERE id = ?",
+          [hoursRef.insertId, i],
         );
         this.promises.push(updatePromise.then(() => {}));
       }
@@ -25,4 +25,4 @@ class BarHoursLinker extends AbstractSeeder {
   }
 }
 
-export default BarHoursLinker; 
+export default BarHoursLinker;

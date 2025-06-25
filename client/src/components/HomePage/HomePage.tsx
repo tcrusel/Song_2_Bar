@@ -5,15 +5,15 @@ function HomePage() {
     <>
       <main>
         <img
-          className="guitard-fleur"
+          className="flower-guitar"
           src="./images/micro-guitard.svg"
-          alt="representation de la guitare avec des fleurs"
+          alt="représentation de la guitare avec des fleurs"
           width="cover"
           height="auto"
         />
         <section className="main-guide">
           <button
-            className="quand"
+            className="when-button"
             type="button"
             style={{ width: "28rem", height: "6rem" }}
           >
@@ -39,7 +39,7 @@ function HomePage() {
             <p>
               3.
               <img src="./images/mini-icone-coeur.png" alt="mini-icone-coeur" />
-              Créez votre selection
+              Créez votre sélection
             </p>
             <p>
               4.

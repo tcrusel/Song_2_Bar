@@ -7,7 +7,7 @@ body {
   flex-direction: column;
 }
 
-main .quand {
+main .when-button {
   border-radius: 45px;
   background-color: #aa682e;
   font-size: 3rem;

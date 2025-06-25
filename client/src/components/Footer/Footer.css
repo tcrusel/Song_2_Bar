@@ -7,11 +7,12 @@ footer {
   height: 16rem;
   padding: 10px;
 }
-.images-logo-sociaux {
+.image-social-logo {
   display: flex;
   gap: 1.5rem;
+  margin-top: 1.3rem;
 }
-.images-logo-sociaux img {
+.image-social-logo img {
   width: 30px;
   height: 30px;
 }
@@ -21,35 +22,35 @@ footer section p {
   font-size: 16px;
 }
 
-.abonnés {
+.subscribers {
   background-color: #d9d9d9;
   border-radius: 45px;
 }
-.nombre-abonnés {
+.nombre-subscribers {
   color: black;
 }
 
-.user-reseaux {
+.user-network {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.abonnés {
+.subscribers {
   width: 12rem;
   height: 3rem;
   margin-top: 25px;
   margin-bottom: 25px;
 }
 
-.abonnés p {
+.subscribers p {
   text-align: center;
   padding: 5px;
   margin: auto;
 }
 
-.button-abonnés {
+.button-subscribers {
   background-color: #2f6b75;
   border-radius: 25px;
   width: 18rem;
@@ -57,7 +58,7 @@ footer section p {
   color: white;
 }
 
-.haut-page {
+.top-page {
   background-color: #e4c2a5;
   border-radius: 25px;
   width: 16rem;
@@ -86,7 +87,7 @@ footer section p {
   align-items: center;
 }
 
-.paragraphe-song2bar {
+.paragraph-song2bar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,12 +106,12 @@ footer section p {
 .song2bar p {
   color: #2f6b75;
 }
-.apropos-contact {
+.about-contact {
   display: flex;
   gap: 50px;
 }
 
-.apropos p {
+.about p {
   color: #aa682e;
 }
 .contact p {

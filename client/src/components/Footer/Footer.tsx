@@ -7,10 +7,8 @@ function Footer() {
 
   return (
     <footer>
-      <div className="user-network">
-        <div className="rejoignez-nous">
-          <p>Rejoignez-nous sur les reseaux sociaux :</p>
-        </div>
+      <div className="networks">
+        <p>Rejoignez-nous sur les reseaux sociaux :</p>
         <div className="image-social-logo">
           <img src="./images/mini-logo-flickr.png" alt="mini-logo-flickr" />
           <img src="./images/mini-logo-ico.png" alt="mini-logo-ico" />
@@ -20,40 +18,32 @@ function Footer() {
           <img src="./images/mini-logo-facebook.png" alt="mini-logo-facebook" />
         </div>
         <div className="subscribers">
-          <p className="nombre-abonnés">
+          <p className="number-subscribers">
             Déjà 150 000
             <br />
             abonnés !
           </p>
         </div>
-        <button type="button" className="button-abonnés">
+        <button type="button" className="button-subscribers">
           S'ABONNER
         </button>
       </div>
       <div className="footer-images">
-        <img
-          src="./images/micro.png"
-          alt="micro"
-          style={{ width: "13rem", height: "13rem" }}
-        />
-        <div className="commande-page">
-          <button className="haut-page" type="button" onClick={useClic}>
+        <img src="./images/micro.png" alt="micro" />
+        <div className="middle-container">
+          <button className="top-page" type="button" onClick={useClic}>
             Haut de page
           </button>
           <p>Mentions légales, crédits et C.G.U.</p>
         </div>
-        <img
-          src="./images/guitare-fleur.png"
-          alt="guitare-fleur"
-          style={{ width: "13rem", height: "13rem" }}
-        />
+        <img src="./images/guitare-fleur.png" alt="guitare-fleur" />
       </div>
       <div className="info-song2bar">
-        <div className="paragraphe-song2bar">
+        <div className="paragraph-song2bar">
           <p>Song2Bar 2025-</p>
           <p>
-            Song2Bar.fr le guide de vos concert dans les meilleurs bar de
-            Bordeaux
+            Song2Bar.fr le guide de vos concerts dans les meilleurs bars de
+            Bordeaux.
           </p>
         </div>
         <div className="newletter-song2bar">
@@ -64,8 +54,8 @@ function Footer() {
             <p>Song2Bar</p>
           </div>
         </div>
-        <div className="apropos-contact">
-          <div className="apropos">
+        <div className="about-contact">
+          <div className="about">
             <p>A propos</p>
           </div>
           <div className="contact">

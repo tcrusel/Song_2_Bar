@@ -1,5 +1,5 @@
 DROP DATABASE if exists song2bar;
-CREATE DATABASE song2bar;
+CREATE DATABASE song2bar CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE song2bar;
 
 CREATE TABLE bar (
@@ -14,7 +14,7 @@ CREATE TABLE bar (
    image3 VARCHAR(255) NOT NULL,
    image4 VARCHAR(255) NOT NULL,
    hours_id INT
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO bar (
    name,
@@ -64,7 +64,7 @@ CREATE TABLE user (
    role VARCHAR(50) NOT NULL,
    email VARCHAR(50) NOT NULL,
    password VARCHAR(30) NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO user (firstname, lastname, role, email, password) 
    VALUES
@@ -109,14 +109,14 @@ CREATE TABLE event (
    creator_id INT NOT NULL,
    bar_id INT NOT NULL,
    music_group_id INT NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE music_group (
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(50) NOT NULL,
    style VARCHAR(30) NOT NULL,
    description TEXT NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO music_group (name, style, description)
    VALUES
@@ -129,7 +129,7 @@ INSERT INTO music_group (name, style, description)
       ('Justice','Electro', 'Icône de la French Touch, le duo Gaspard Augé et Xavier de Rosnay offre un son saturé, énergique et dansant, mélangeant rock, disco et électro. Leurs lives sont des shows puissants avec jeux de lumières géométriques, croix géantes et énergie électrisante, à mi-chemin entre rave et concert de rock.'),
       ('Vulfpeck', 'Groove/Funck', 'Ce groupe américain né sur YouTube a bâti sa notoriété sur un son épuré, une grande musicalité et une présence scénique décalée. Influencé par la soul des années 70, chaque musicien du collectif brille par sa virtuosité, notamment le bassiste Joe Dart.'),
       ('Snarky Puppy', 'Groove/Funck', 'Véritable laboratoire musical fondé par Michael League, Snarky Puppy réunit une cinquantaine de musiciens (appelés « The Fam »). Leur jazz fusion est imprégné de musiques latines, funk, soul et afrobeat. Récompensés par plusieurs Grammy Awards, ils sont adulés autant par les musiciens que le grand public.'),
-      ('L''Entourage', 'Hip-Hop', 'Collectif emblématique du rap indépendant français, il fédère des figures majeures comme Nekfeu, Alpha Wann, Jazzy Bazz ou Deen Burbigo. Ils incarnent une génération de lyricistes exigeants, porteurs d''un rap technique, souvent introspectif, qui a su séduire un large public.'),
+      ('L''Entourage', 'Hip-Hop', 'Collectif emblématique du rap indépendant français, il fédère des figures majeures comme Nekfeu, Alpha Warn, Jazzy Bazz ou Deen Burbigo. Ils incarnent une génération de lyricistes exigeants, porteurs d''un rap technique, souvent introspectif, qui a su séduire un large public.'),
       ('Run The Jewels', 'Hip-Hop', 'Duo américain composé de Killer Mike (Atlanta) et El-P (New York), ils offrent un hip-hop abrasif, militant et post-apocalyptique. Leurs paroles dénoncent le racisme, le capitalisme et les violences policières, sur des prods puissantes et sombres. Leur succès est autant critique que populaire.'),
       ('GoGo Penguin','Jazz', 'Trio instrumental de Manchester, GoGo Penguin brouille les frontières entre jazz, classique et électro. Le piano rythmique, la contrebasse et la batterie dialoguent dans des compositions ciselées, évoquant Philip Glass autant qu''Aphex Twin. Leur jazz est immersif, dynamique et très accessible.'),
       ('Avishai Cohen Trio', 'Jazz', 'Ancien contrebassiste de Chick Corea, Avishai Cohen est une figure du jazz moderne. Entouré de musiciens jeunes et virtuoses, il mêle rythmes méditerranéens, musiques traditionnelles juives et jazz américain. Il propose un jazz chantant, ancré dans les émotions et la mélodie.'),
@@ -161,4 +161,4 @@ CREATE TABLE hours (
 	saturday_opening_hours VARCHAR(50) NOT NULL,
 	sunday_opening_hours VARCHAR(50) NOT NULL,
 	happy_hours VARCHAR(50) NOT NULL
-   );
+   ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

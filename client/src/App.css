@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: "Lato", sans-serif;
   font-size: 16px;
@@ -13,10 +17,9 @@ body {
 }
 
 #root {
-  height: 100vh;
-  background-image: url("./assets/images/background.webp");
-  background-size: cover;
-  background-position: top;
+  min-height: 100vh;
+  height: 100%;
+  background-color: #1a1a1a;
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: 1fr;

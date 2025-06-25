@@ -162,13 +162,11 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
         </button>
       </div>
 
-      {/* Bar Name Banner */}
       <div className="bar-name-banner">
         <h1 className="bar-name">{bar.name}</h1>
       </div>
 
       <section className="bar-info">
-        {/* Image Gallery - Left Side */}
         <div className="image-gallery">
           <div className="main-image">
             <img
@@ -210,7 +208,6 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
           </div>
         </div>
 
-        {/* Bar Details Content - Right Side */}
         <div className="bar-details-content">
           <div className="bar-meta">
             <div className="location">
@@ -267,7 +264,6 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
               ))}
             </div>
 
-            {/* Carousel Dots - only show if more than cardsToShow */}
             {events.length > cardsToShow && (
               <div className="carousel-dots">
                 {Array.from({
@@ -291,7 +287,6 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
         )}
       </section>
 
-      {/* Image Modal */}
       {isModalOpen && (
         <div
           className="image-modal-overlay"

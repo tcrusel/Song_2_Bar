@@ -7,11 +7,11 @@ function Footer() {
 
   return (
     <footer>
-      <div className="user-reseaux">
+      <div className="user-network">
         <div className="rejoignez-nous">
           <p>Rejoignez-nous sur les reseaux sociaux :</p>
         </div>
-        <div className="images-logo-sociaux">
+        <div className="image-social-logo">
           <img src="./images/mini-logo-flickr.png" alt="mini-logo-flickr" />
           <img src="./images/mini-logo-ico.png" alt="mini-logo-ico" />
           <img src="./images/mini-logo-rss.png" alt="mini-logo-rss" />
@@ -19,7 +19,7 @@ function Footer() {
           <img src="./images/mini-logo-vimeo.png" alt="mini-logo-vimeo" />
           <img src="./images/mini-logo-facebook.png" alt="mini-logo-facebook" />
         </div>
-        <div className="abonnés">
+        <div className="subscribers">
           <p className="nombre-abonnés">
             Déjà 150 000
             <br />

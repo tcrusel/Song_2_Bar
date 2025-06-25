@@ -8,6 +8,7 @@ type Event = {
   date: number;
   start_at: number;
   end_at: number;
+  image: string;
   description: string;
   creator_id: number;
   bar_id: number;
@@ -23,6 +24,7 @@ class EventRepository {
         event.date,
         event.start_at,
         event.end_at,
+        event.image,
         event.description,
         event.creator_id,
         event.bar_id,
@@ -44,6 +46,21 @@ class EventRepository {
 
   async readAll() {
     const [rows] = await databaseClient.query<Rows>("select * from event");
+    return rows;
+  }
+
+  async readAllWithBarName() {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT 
+      e.*, 
+      b.name AS bar_name,
+      g.name AS group_name,
+      g.style AS music_style
+    FROM event e
+    JOIN bar b ON e.bar_id = b.id
+    JOIN music_group g ON e.music_group_id = g.id`,
+    );
+
     return rows;
   }
 }

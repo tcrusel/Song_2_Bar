@@ -1,14 +1,18 @@
 import EventList from "../../components/EventList";
+import "./Event.css";
 
 import { useEffect, useState } from "react";
 
 export interface EventType {
   id: number;
   title: string;
-  date: string;
   start_at: string;
+  bar_id: number;
   bar_name: string;
   image: string;
+  music_group_id: number;
+  group_name: string;
+  music_style: string;
 }
 
 function Events() {
@@ -23,11 +27,11 @@ function Events() {
       });
   }, []);
   if (!events) {
-    return <h1>nope </h1>;
+    return <h1>Désolée il n'y a pas d'évènements </h1>;
   }
+
   return (
     <div>
-      <h1>Liste des events</h1>
       <section>
         <EventList events={events} />
       </section>

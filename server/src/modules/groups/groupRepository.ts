@@ -1,13 +1,6 @@
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
-
-type MusicGroup = {
-  id: number;
-  name: string;
-  style: string;
-  description: string;
-  image: string;
-};
+import type { MusicGroup } from "../../types/musicGroup";
 
 class GroupRepository {
   async read(id: number) {

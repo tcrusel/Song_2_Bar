@@ -1,17 +1,15 @@
 import { useState } from "react";
-
-interface ParticipateProps {
-  eventId: number;
-  userId: number;
-}
+import type { ParticipateProps } from "../types/Participate";
+import "./Participate.css";
 
 function Participate({ eventId, userId }: ParticipateProps) {
   const [isParticipated, setIsParticipated] = useState(false);
+  const [isPopuped, setIsPopuped] = useState(false);
 
   const addParticipate = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/participate`,
+        `${import.meta.env.VITE_API_URL}/api/participate`,
         {
           method: "POST",
           headers: {
@@ -37,15 +35,24 @@ function Participate({ eventId, userId }: ParticipateProps) {
   return (
     <>
       <button
+        className="participate-button"
         type="button"
         onClick={() => {
-          isParticipated ? "Je ne participe plus" : "Je participe";
-          !isParticipated && addParticipate;
           setIsParticipated(!isParticipated);
+          !isParticipated && addParticipate();
+          setIsPopuped(true);
+          setTimeout(() => setIsPopuped(false), 3000);
         }}
       >
-        Je participe
+        {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
+      {isPopuped && (
+        <div className="popup">
+          {isParticipated
+            ? "Vous participez à cet évènement"
+            : " Vous ne participez plus à cet évènement"}
+        </div>
+      )}
     </>
   );
 }

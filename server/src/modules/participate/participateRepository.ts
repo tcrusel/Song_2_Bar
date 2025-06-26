@@ -1,10 +1,6 @@
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
-
-type Participate = {
-  userId: number;
-  eventId: number;
-};
+import type { Participate } from "../../types/express/participate";
 
 class participateRepository {
   async create(participate: Partial<Participate>) {

@@ -1,0 +1,20 @@
+.participate-button {
+  background-color: var(--button-primary-color);
+  border-color: var(--text-color);
+  border-radius: 20px;
+  margin: 15px;
+  padding: 5px;
+  cursor: pointer;
+  width: 170px;
+}
+
+.popup {
+  background-color: #aa682e;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  z-index: 1000;
+  animation: fadein 0.3s ease;
+  white-space: nowrap;
+}

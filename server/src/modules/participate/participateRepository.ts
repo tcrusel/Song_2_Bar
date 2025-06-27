@@ -1,6 +1,6 @@
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
-import type { Participate } from "../../types/express/participate";
+import type { Participate } from "../../types/participate";
 
 class participateRepository {
   async create(participate: Partial<Participate>) {

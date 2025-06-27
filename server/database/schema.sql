@@ -115,8 +115,7 @@ CREATE TABLE music_group (
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(50) NOT NULL,
    style VARCHAR(30) NOT NULL,
-
-   description TEXT NOT NULL
+   description TEXT NOT NULL,
    image VARCHAR(255) NOT NULL
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

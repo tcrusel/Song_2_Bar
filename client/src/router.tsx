@@ -1,15 +1,22 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App";
-import BarPage from "./pages/BarPage";
+import HomePage from "./components/HomePage/HomePage";
+import BarPage from "./pages/BarPage/BarPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/bar/:id",
-    element: <BarPage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "bar/:id",
+        element: <BarPage />,
+      },
+    ],
   },
 ]);
 

@@ -84,44 +84,8 @@ const getBarEvents: RequestHandler = async (req, res) => {
   }
 };
 
-const getUpcomingEvents: RequestHandler = async (req, res) => {
-  try {
-    const limit = Number.parseInt(req.query.limit as string) || 10;
-
-    const [rows] = await database.query<Rows>(
-      `SELECT e.*, mg.name as music_group_name, mg.style as music_group_style 
-       FROM event e 
-       LEFT JOIN music_group mg ON e.music_group_id = mg.id 
-       WHERE e.date >= CURDATE()
-       ORDER BY e.date ASC
-       LIMIT ?`,
-      [limit],
-    );
-
-    const events = rows.map((row) => ({
-      id: row.id,
-      title: row.title,
-      date: row.date,
-      start_at: row.start_at,
-      end_at: row.end_at,
-      description: row.description,
-      music_group: {
-        id: row.music_group_id,
-        name: row.music_group_name,
-        style: row.music_group_style,
-      },
-    }));
-
-    res.json(events);
-  } catch (error) {
-    console.error("Error fetching upcoming events:", error);
-    res.status(500).json({ error: "Failed to fetch upcoming events" });
-  }
-};
-
 router.get("/bars", getAllBars);
 router.get("/bars/:id", getBarById);
 router.get("/bars/:id/events", getBarEvents);
-router.get("/events/upcoming", getUpcomingEvents);
 
 export default router;

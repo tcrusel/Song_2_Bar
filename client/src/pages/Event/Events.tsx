@@ -1,5 +1,5 @@
-import EventCard from "../../components/EventCard";
 import { useEffect, useState } from "react";
+import EventCard from "../../components/EventCard";
 
 export interface EventType {
   id: number;
@@ -24,7 +24,7 @@ function Events() {
         setEvents(data);
       });
   }, []);
-  
+
   if (!events) {
     return <h1>Désolée il n'y a pas d'évènements </h1>;
   }

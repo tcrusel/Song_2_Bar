@@ -1,4 +1,5 @@
 import express from "express";
+import groupActions from "./modules/groups/groupActions";
 import barRoutes from "./routes/barRoutes";
 
 const router = express.Router();

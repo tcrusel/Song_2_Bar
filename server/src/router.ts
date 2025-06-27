@@ -1,13 +1,8 @@
 import express from "express";
+import groupActions from "./modules/groups/groupActions";
 
 const router = express.Router();
 
-/* ************************************************************************* */
-// Define Your API Routes Here
-/* ************************************************************************* */
-
-// Define item-related routes
-
-/* ************************************************************************* */
+router.get("/api/groups/:id", groupActions.read);
 
 export default router;

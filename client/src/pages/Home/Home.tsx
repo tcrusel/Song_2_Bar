@@ -1,4 +1,4 @@
-import FavoriteGroup from "../../components/FavouriteGroup";
+import FavouriteGroup from "../../components/FavouriteGroup";
 import "./Home.css";
 import "./../../assets/_variables.css";
 
@@ -59,7 +59,7 @@ function Home() {
             </div>
           </article>
         </section>
-        <FavoriteGroup />
+        <FavouriteGroup />
       </main>
     </>
   );

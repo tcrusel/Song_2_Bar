@@ -7,12 +7,11 @@ type GeocodeResponse = {
 };
 
 type Bar = {
-    id: number;
-    address: string;
-    postcode: number;
-    city: string;
-}
-
+  id: number;
+  address: string;
+  postcode: number;
+  city: string;
+};
 
 async function main() {
   try {
@@ -26,18 +25,18 @@ async function main() {
     console.log("✅ Connexion réussie !");
 
     const [bars] = await db.query(
-        "SELECT id, address, postcode, city FROM bar"
+      "SELECT id, address, postcode, city FROM bar",
     );
     console.log("Bars récupérés :", bars);
 
     for (const bar of bars as Bar[]) {
       console.log(
-        `--> traitement bar id=${bar.id}, ${bar.address}, ${bar.postcode}, ${bar.city}`
-    );
+        `--> traitement bar id=${bar.id}, ${bar.address}, ${bar.postcode}, ${bar.city}`,
+      );
 
       const query = encodeURIComponent(
-        `${bar.address}, ${bar.postcode}, ${bar.city}, France`
-    );
+        `${bar.address}, ${bar.postcode}, ${bar.city}, France`,
+      );
       const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`;
 
       console.log(`URL appelée: ${url}`);
@@ -59,7 +58,7 @@ async function main() {
 
         await db.query(
           "UPDATE bar SET latitude = ?, longitude = ? WHERE id = ?",
-          [lat, lon, bar.id]
+          [lat, lon, bar.id],
         );
       } else {
         console.warn(`⚠️ Aucune coordonnée trouvée pour id=${bar.id}`);
@@ -68,7 +67,6 @@ async function main() {
 
     console.log("✅ Géocodage terminé !");
     process.exit(0);
-
   } catch (err) {
     console.error("❌ Erreur :", err);
     process.exit(1);

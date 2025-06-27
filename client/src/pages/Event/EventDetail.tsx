@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useParams } from "react-router";
-
+import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
 import { format, isToday } from "date-fns";
 import { fr } from "date-fns/locale";

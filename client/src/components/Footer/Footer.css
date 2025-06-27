@@ -1,0 +1,122 @@
+footer {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  height: 16rem;
+  padding: 10px;
+}
+.image-social-logo {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.3rem;
+}
+.image-social-logo img {
+  width: 30px;
+  height: 30px;
+}
+
+footer section p {
+  color: white;
+  font-size: 16px;
+}
+
+.subscribers {
+  background-color: #d9d9d9;
+  border-radius: 45px;
+}
+.number-subscribers {
+  color: black;
+}
+
+.networks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.subscribers {
+  width: 12rem;
+  height: 3rem;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.subscribers p {
+  text-align: center;
+  padding: 5px;
+  margin: auto;
+}
+
+.button-subscribers {
+  background-color: #2f6b75;
+  border-radius: 25px;
+  width: 18rem;
+  height: 4rem;
+  color: white;
+}
+
+.top-page {
+  background-color: #e4c2a5;
+  border-radius: 25px;
+  width: 16rem;
+  height: 4rem;
+  color: black;
+}
+
+.footer-images {
+  display: flex;
+  flex-direction: row;
+}
+
+.middle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 25px;
+}
+
+.info-song2bar {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.paragraph-song2bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.info-song2bar p {
+  font-size: 11px;
+}
+
+.newletter-song2bar {
+  display: flex;
+  gap: 10px;
+}
+.newletter p {
+  color: #aa682e;
+}
+.song2bar p {
+  color: #2f6b75;
+}
+.about-contact {
+  display: flex;
+  gap: 50px;
+}
+
+.about p {
+  color: #aa682e;
+}
+.contact p {
+  color: #2f6b75;
+}

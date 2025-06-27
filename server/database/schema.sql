@@ -109,8 +109,11 @@ CREATE TABLE event (
    creator_id INT NOT NULL,
    bar_id INT NOT NULL,
    music_group_id INT NOT NULL,
-   image VARCHAR(255)
+   image VARCHAR(255),
+   latitude FLOAT,
+   longitude FLOAT
 );
+exit;
 
 CREATE TABLE music_group (
    id INT PRIMARY KEY AUTO_INCREMENT,
@@ -174,3 +177,4 @@ CREATE TABLE hours (
 	sunday_opening_hours VARCHAR(50) NOT NULL,
 	happy_hours VARCHAR(50) NOT NULL
    );
+

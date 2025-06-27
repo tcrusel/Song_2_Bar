@@ -3,9 +3,9 @@ import type { Result, Rows } from "../../../database/client";
 import type { MusicGroup } from "../../types/musicGroup";
 
 class GroupRepository {
-  async read(id: number) {
+  async find(id: number) {
     const [rows] = await databaseClient.query<Rows>(
-      "select * from music_group where id = ?",
+      "SELECT * FROM music_group WHERE id = ?",
       [id],
     );
 

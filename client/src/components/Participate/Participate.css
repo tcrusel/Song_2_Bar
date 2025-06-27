@@ -1,6 +1,6 @@
 .participate-button {
   background-color: var(--button-primary-color);
-  border-color: var(--text-color);
+  border: none;
   color: var(--button-text-color);
   border-radius: 20px;
   margin: 15px;

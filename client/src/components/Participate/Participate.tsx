@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ParticipateProps } from "../types/Participate";
+import type { ParticipateProps } from "../../types/Participate";
 import "./Participate.css";
 
 function Participate({ eventId, userId }: ParticipateProps) {

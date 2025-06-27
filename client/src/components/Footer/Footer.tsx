@@ -1,14 +1,10 @@
 import "./footer.css";
 
 function Footer() {
-  function useClic() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
   return (
     <footer>
       <div className="networks">
-        <p>Rejoignez-nous sur les reseaux sociaux :</p>
+        <p className="follow-us">Rejoignez-nous sur les reseaux sociaux :</p>
         <div className="image-social-logo">
           <img src="./images/mini-logo-flickr.png" alt="mini-logo-flickr" />
           <img src="./images/mini-logo-ico.png" alt="mini-logo-ico" />
@@ -31,10 +27,14 @@ function Footer() {
       <div className="footer-images">
         <img src="./images/micro.png" alt="micro" />
         <div className="middle-container">
-          <button className="top-page" type="button" onClick={useClic}>
+          <button
+            className="top-page"
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             Haut de page
           </button>
-          <p>Mentions légales, crédits et C.G.U.</p>
+          <p className="legal-notices">Mentions légales, crédits et C.G.U.</p>
         </div>
         <img src="./images/guitare-fleur.png" alt="guitare-fleur" />
       </div>

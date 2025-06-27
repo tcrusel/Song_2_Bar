@@ -7,7 +7,11 @@ footer {
   height: 20rem;
   padding: 10px;
 }
-.rejoignez-nous p {
+.follow-us {
+  color: white;
+}
+
+.legal-notices {
   color: white;
 }
 .image-social-logo {
@@ -68,12 +72,14 @@ footer section p {
   width: 16rem;
   height: 4rem;
   color: black;
+  margin-bottom: 1rem;
 }
 
 .footer-images {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-left: 3rem;
 }
 
 .middle-container {
@@ -131,6 +137,7 @@ footer section p {
   }
   .footer-images {
     justify-content: space-evenly;
+    margin-left: 0rem;
   }
   .network {
     display: flex;

@@ -6,10 +6,6 @@ function Header() {
   const [search, setSearch] = useState("");
   const [showUserRole, setShowUserRole] = useState(false);
 
-  const toggleUserRole = () => {
-    setShowUserRole((prev) => !prev);
-  };
-
   return (
     <section className="header">
       <img
@@ -24,12 +20,6 @@ function Header() {
         type="text"
         value={search}
         onChange={(event) => setSearch(event.target.value)}
-        style={{
-          width: "38rem",
-          maxWidth: "600px",
-          height: "4.5rem",
-          padding: "20px",
-        }}
         placeholder="Recherche un bar ou un groupe de musique..."
       />
 
@@ -37,7 +27,7 @@ function Header() {
         <button
           className="logo-connexion-button"
           type="button"
-          onClick={toggleUserRole}
+          onClick={() => setShowUserRole((prev) => !prev)}
         >
           <img
             className="logo-connexion"

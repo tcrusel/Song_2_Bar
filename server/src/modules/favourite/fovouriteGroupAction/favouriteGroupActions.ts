@@ -1,7 +1,11 @@
-// import type { RequestHandler } from "express";
-// import favouriteGroupRepository from "./favouriteGroupRepository";
+import favouriteGroupRepository from "./favouriteGroupRepository";
 
-// const add: RequestHandler = async (req, res, next) => {};
-// export default {
-//   add,
-// };
+export const addFavouriteGroup = async (req, res, next) => {
+  try {
+    const { groupId } = req.body;
+    await favouriteGroupRepository.create(groupId);
+    res.status(201).send({ message: "Groupe ajouté aux favoris !" });
+  } catch (error) {
+    next(error);
+  }
+};

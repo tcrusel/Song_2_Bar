@@ -11,13 +11,17 @@
   background-color: #ebd2a4;
   font-size: 1rem;
   margin-right: 4rem;
+  width: 38rem;
+  max-width: 600px;
+  height: 4.5rem;
+  padding: 20px;
 }
 
 .logo-connexion-button {
   background-color: #23241f;
   margin-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 4rem;
+
+  margin-bottom: 6rem;
   border: none;
   cursor: pointer;
   width: 5rem;

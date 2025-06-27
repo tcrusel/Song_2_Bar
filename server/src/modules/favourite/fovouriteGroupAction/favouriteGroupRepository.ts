@@ -1,13 +1,14 @@
 import databaseClient from "../../../../database/client";
 
-type FavoriteMusicGroup = {
+type favoriteMusicGroup = {
   user_id: number;
   music_group_id: number;
 };
 
-class FavoriteGroupRepository {
-  async create(favorite: FavoriteMusicGroup) {
-    const sql = `INSERT INTO favourite_music_group (user_id, music_group_id) VALUES (?, ?)`;
+class favoriteGroupRepository {
+  async create(favorite: favoriteMusicGroup) {
+    const sql =
+      "INSERT INTO favourite_music_group (user_id, music_group_id) VALUES (?, ?)";
     const values = [favorite.user_id, favorite.music_group_id];
 
     const [result] = await databaseClient.query(sql, values);
@@ -15,4 +16,4 @@ class FavoriteGroupRepository {
   }
 }
 
-export default new FavoriteGroupRepository();
+export default new favoriteGroupRepository();

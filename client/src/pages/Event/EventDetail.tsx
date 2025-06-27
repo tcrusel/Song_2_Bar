@@ -39,7 +39,7 @@ function EventDetail() {
     : format(eventDate, "d MMMM yyyy", { locale: fr });
 
   const formattedHour = `${eventDetail.hour_only.toString().padStart(2, "0")}h00`;
-  
+
   return (
     <main className="event-details">
       <section className="event-header">

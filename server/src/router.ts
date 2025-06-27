@@ -1,8 +1,8 @@
 import express from "express";
+import groupActions from "./modules/groups/groupActions";
 
 const router = express.Router();
 
-// import favouriteGroupActions from "./modules/favourite/fovouriteGroupAction/favouriteGroupActions";
-// router.post("/api/favourite_music_group", favouriteGroupActions.add);
+router.get("/api/groups/:id", groupActions.read);
 
 export default router;

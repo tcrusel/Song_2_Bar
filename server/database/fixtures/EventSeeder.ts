@@ -17,8 +17,6 @@ class EventSeeder extends AbstractSeeder {
         title: `${this.faker.music.genre()} Show with ${this.faker.person.firstName()}`,
         creator_id: this.faker.number.int({ min: 1, max: 30 }),
         bar_id: this.faker.number.int({ min: 1, max: 28 }),
-        latitude: 44.8378 + (Math.random() - 0.5) * 0.02,
-        longitude: -0.5792 + (Math.random() - 0.5) * 0.02,
         music_group_id: this.faker.number.int({ min: 1, max: 19 }),
         refName: `event_${i}`,
       };

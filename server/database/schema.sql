@@ -178,3 +178,6 @@ CREATE TABLE hours (
 	happy_hours VARCHAR(50) NOT NULL
    );
 
+ALTER TABLE bar
+  ADD COLUMN latitude DECIMAL(10, 7),
+  ADD COLUMN longitude DECIMAL(10, 7);

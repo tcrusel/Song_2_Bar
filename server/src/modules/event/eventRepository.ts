@@ -26,11 +26,11 @@ class eventRepository {
     music_group.name AS music_group_name,
     music_group.style AS music_style,
     bar.name AS bar_name,
-    bar.address AS adress,
+    bar.address AS address,
     bar.postcode,
     bar.city,
-    event.latitude AS latitude,
-    event.longitude AS longitude,
+    bar.latitude AS latitude,
+    bar.longitude AS longitude,
     music_group.description
   FROM event
   LEFT JOIN music_group ON event.music_group_id = music_group.id

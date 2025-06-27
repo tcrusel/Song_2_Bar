@@ -1,7 +1,8 @@
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { barService } from "../services/barService";
-import type { Bar, Event } from "../types/bar";
+import { barService } from "../../services/barService";
+import type { Bar, Event } from "../../types/bar";
+import "../../assets/_variables.css";
 import "./BarDetails.css";
 
 interface BarDetailsProps {

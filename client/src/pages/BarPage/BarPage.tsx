@@ -1,6 +1,6 @@
 import type React from "react";
 import { useParams } from "react-router";
-import BarDetails from "../components/BarDetails";
+import BarDetails from "../../components/BarDetails/BarDetails";
 
 const BarPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

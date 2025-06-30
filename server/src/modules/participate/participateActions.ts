@@ -21,7 +21,9 @@ const add: RequestHandler = async (req, res, next) => {
     const affectedRows = await participateRepository.create(newParticipation);
 
     if (affectedRows === 0) {
-      res.status(StatusCodes.NOT_FOUND);
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "La création de la participation a échoué" });
     } else {
       res.status(StatusCodes.CREATED).json({ affectedRows });
     }

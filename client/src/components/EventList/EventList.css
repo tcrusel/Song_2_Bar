@@ -5,8 +5,8 @@
   margin-top: 100px;
   margin-left: 50px;
   padding: 32px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 32px;
-  box-sizing: border-box;
 }

@@ -1,3 +1,12 @@
 body {
-  background-color: #23241f;
+  background-color: var(--background-primary-color);
+}
+
+.events {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.filters {
+  white-space: nowrap;
 }

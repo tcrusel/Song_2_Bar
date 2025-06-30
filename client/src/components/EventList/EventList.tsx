@@ -1,5 +1,5 @@
-import type { EventType } from "../pages/event/Events";
-import EventCard from "./EventCard";
+import type { EventType } from "../../types/EventType";
+import EventCard from "../EventCard/EventCard";
 import "./EventList.css";
 
 type Props = {

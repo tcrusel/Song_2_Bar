@@ -1,41 +1,29 @@
-import EventList from "../../components/EventList";
+import EventList from "../../components/EventList/EventList";
 import "./Event.css";
-
 import { useEffect, useState } from "react";
-
-export interface EventType {
-  id: number;
-  title: string;
-  start_at: string;
-  bar_id: number;
-  bar_name: string;
-  image: string;
-  music_group_id: number;
-  group_name: string;
-  music_style: string;
-}
+import type { EventType } from "../../types/EventType";
 
 function Events() {
   const [events, setEvents] = useState<EventType[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3310/api/events")
+    fetch(`${import.meta.env.VITE_API_URL}/api/events`)
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setEvents(data);
+      .then((events) => {
+        setEvents(events); // gestion d'erreur
       });
   }, []);
-  if (!events) {
+  if (events.length === 0) {
     return <h1>Désolée il n'y a pas d'évènements </h1>;
   }
 
   return (
-    <div>
-      <section>
+    <>
+      <section className="events">
         <EventList events={events} />
+        <h1 className="filters">filtre à venir</h1>
       </section>
-    </div>
+    </>
   );
 }
 export default Events;

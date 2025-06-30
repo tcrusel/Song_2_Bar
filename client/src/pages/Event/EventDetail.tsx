@@ -7,6 +7,7 @@ import { format, isToday } from "date-fns";
 import { fr } from "date-fns/locale";
 import "./EventDetail.css";
 import type { EventInterface } from "../../types/Eventdetail";
+import { Link } from "react-router";
 
 function EventDetail() {
   const { id } = useParams();
@@ -46,7 +47,7 @@ function EventDetail() {
         <div className="header-style">
           <p className="music-style bold">{eventDetail.music_style}</p>
         </div>
-        <h1>{eventDetail.title}</h1>
+        <h1>{eventDetail.music_group_name}</h1>
 
         <img
           className="poster-event"
@@ -106,7 +107,12 @@ function EventDetail() {
         <p className="about white">A propos</p>
         <p className="event-description">{eventDetail.description}</p>
         <p className="artist white">Les artistes</p>
-        <p className="groups-name">{eventDetail.title}</p>
+        <Link
+          to={`/groups/${eventDetail.music_group_id ?? ""}`}
+          className="groups-name"
+        >
+          {eventDetail.music_group_name}
+        </Link>
       </section>
     </main>
   );

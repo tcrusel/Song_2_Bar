@@ -17,6 +17,7 @@ section.event-header {
   grid-row: 2 / 4;
   padding-left: 47px;
   padding-top: 66px;
+  padding-bottom: 50px;
 }
 
 .poster-event {
@@ -78,8 +79,8 @@ section.event-header {
 }
 
 .hour-icon {
-  width: 32px;
-  height: 32px;
+  width: 1.5rem;
+  height: auto;
 }
 
 .bar {
@@ -93,6 +94,7 @@ section.event-header {
 .localisation-icon {
   width: 2rem;
   height: auto;
+  color: white;
 }
 
 .bar-name {
@@ -105,6 +107,11 @@ section.event-header {
   display: flex;
   flex-direction: column;
   padding-left: 3.2rem;
+  padding-top: 1rem;
+}
+
+.bar-adress p {
+  font-size: 1.4rem;
 }
 
 .description-container {
@@ -116,6 +123,10 @@ section.event-header {
 
 .description-container p {
   align-content: center;
+}
+
+.event-description {
+  font-size: 1.5rem;
 }
 
 .about {

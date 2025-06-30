@@ -18,7 +18,7 @@ type Event = {
 class EventRepository {
   async create(event: Omit<Event, "id">) {
     const [result] = await databaseClient.query<Result>(
-      "insert into event (title, date, start_at, end_at, description, creator_id, bar_id, music_group_id) values (?, ?, ?, ?, ?, ?, ?, ?)",
+      "insert into event (title, date, start_at, end_at, image, description, creator_id, bar_id, music_group_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         event.title,
         event.date,
@@ -45,11 +45,6 @@ class EventRepository {
   }
 
   async readAll() {
-    const [rows] = await databaseClient.query<Rows>("select * from event");
-    return rows;
-  }
-
-  async readAllWithBarName() {
     const [rows] = await databaseClient.query<Rows>(
       `SELECT 
       e.*, 
@@ -57,8 +52,8 @@ class EventRepository {
       g.name AS group_name,
       g.style AS music_style
     FROM event e
-    JOIN bar b ON e.bar_id = b.id
-    JOIN music_group g ON e.music_group_id = g.id`,
+    LEFT JOIN bar b ON e.bar_id = b.id
+    LEFT JOIN music_group g ON e.music_group_id = g.id`,
     );
 
     return rows;

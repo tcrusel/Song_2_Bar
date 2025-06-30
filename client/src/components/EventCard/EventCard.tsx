@@ -1,4 +1,5 @@
 import "./EventCard.css";
+
 type EventCardProps = {
   title: string;
   start_at: string;
@@ -26,11 +27,11 @@ function EventCard({
           alt={`Illustration de ${title}`}
         />
       </div>
-      <div className="event-content">
+      <div className="card-content">
         <h2 className="event-title">{title}</h2>
         <p className="event-style">{style}</p>
       </div>
-      <div className="event-footer">
+      <div className="card-bottom">
         <p className="event-bar">
           <img
             src="/icon/location_icon.png"

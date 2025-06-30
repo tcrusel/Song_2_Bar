@@ -3,11 +3,15 @@ import eventRepository from "./eventRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
   try {
-    const events = await eventRepository.readAllWithBarName();
+    const events = await eventRepository.readAll();
 
     res.json(events);
   } catch (err) {
-    next(err);
+    console.error("Erreur lors de la récupération des événements :", err);
+    next({
+      status: 500,
+      message: "Impossible de récupérer les événements.",
+    });
   }
 };
 
@@ -22,7 +26,14 @@ const read: RequestHandler = async (req, res, next) => {
       res.json(event);
     }
   } catch (err) {
-    next(err);
+    console.error(
+      `Erreur lors de la récupération de l'événement ${req.params.id} :`,
+      err,
+    );
+    next({
+      status: 500,
+      message: "Impossible de récupérer l'événement.",
+    });
   }
 };
 
@@ -44,7 +55,11 @@ const add: RequestHandler = async (req, res, next) => {
 
     res.status(201).json({ insertId });
   } catch (err) {
-    next(err);
+    console.error("Erreur lors de la création d'un événement :", err);
+    next({
+      status: 500,
+      message: "Impossible de créer l'événement.",
+    });
   }
 };
 

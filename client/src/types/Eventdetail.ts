@@ -11,4 +11,7 @@ export type EventInterface = {
   address: string;
   postcode: string;
   city: string;
+  group_id: number;
+  music_group_name: string;
+  music_group_id: number;
 };

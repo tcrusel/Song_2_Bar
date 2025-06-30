@@ -1,18 +1,6 @@
 import databaseClient from "../../../database/client";
 import type { Rows } from "../../../database/client";
 
-type Event = {
-  id: number;
-  title: string;
-  date: number;
-  event_beginning: string;
-  event_ending: string;
-  description: string;
-  creator_id: number;
-  bar_id: number;
-  group_id: number;
-};
-
 class eventRepository {
   async readById(id: number) {
     const [rows] = await databaseClient.query<Rows[]>(
@@ -31,7 +19,8 @@ class eventRepository {
     bar.city,
     bar.latitude AS latitude,
     bar.longitude AS longitude,
-    music_group.description
+    music_group.description,
+    music_group.id AS music_group_id
   FROM event
   LEFT JOIN music_group ON event.music_group_id = music_group.id
   LEFT JOIN bar ON event.bar_id = bar.id

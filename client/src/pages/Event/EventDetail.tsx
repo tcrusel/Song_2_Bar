@@ -6,8 +6,8 @@ import "leaflet/dist/leaflet.css";
 import { format, isToday } from "date-fns";
 import { fr } from "date-fns/locale";
 import "./EventDetail.css";
-import type { EventInterface } from "../../types/Eventdetail";
 import { Link } from "react-router";
+import type { EventInterface } from "../../types/Eventdetail";
 
 function EventDetail() {
   const { id } = useParams();

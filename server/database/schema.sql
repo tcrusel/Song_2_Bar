@@ -28,23 +28,23 @@ INSERT INTO bar (
    image4
 )
    VALUES
-      ('La Guinguette Chez Alriq', 'World', 'Quai de Queyries', 33100, 'Bordeaux', '/bar_images/la_guinguette_chez_alriq/image_1.jpg', '/bar_images/la_guinguette_chez_alriq/image_2.webp', '/bar_images/la_guinguette_chez_alriq/image_3.jpg', '/bar_images/la_guinguette_chez_alriq/image_4.jpg'),
+      ('La Guinguette Chez Alriq', 'World', 'Quai des Queyries', 33100, 'Bordeaux', '/bar_images/la_guinguette_chez_alriq/image_1.jpg', '/bar_images/la_guinguette_chez_alriq/image_2.webp', '/bar_images/la_guinguette_chez_alriq/image_3.jpg', '/bar_images/la_guinguette_chez_alriq/image_4.jpg'),
       ('Iboat', 'Electro', 'Bassin a flot', 33300, 'Bordeaux', '/bar_images/iboat/image_1.jpg', '/bar_images/iboat/image_2.webp', '/bar_images/iboat/image_3.jpg', '/bar_images/iboat/image_4.jpg'),
       ('Blonde Venus', 'Electro', 'Bassin a flot', 33300, 'Bordeaux', '/bar_images/blonde_de_venus/image_1.webp', '/bar_images/blonde_de_venus/image_2.jpeg', '/bar_images/blonde_de_venus/image_3.jpg', '/bar_images/blonde_de_venus/image_4.jpg'),
       ('Pulp', 'World', '30 rue des vignes', 33000, 'Bordeaux', '/bar_images/pulp/image_1.jpg', '/bar_images/pulp/image_2.jpg', '/bar_images/pulp/image_3.jpg', '/bar_images/pulp/image_4.jpeg'),
       ('L''Avant-scene', 'rock', '42 cours de l''Yser', 33000, 'Bordeaux', '/bar_images/l_avant_scene/image_1.jpg', '/bar_images/l_avant_scene/image_2.jpg', '/bar_images/l_avant_scene/image_3.jpg', '/bar_images/l_avant_scene/image_4.jpeg'),
-      ('La Tencha', 'World', '22 quai de æla monnaie', 33000, 'Bordeaux','/bar_images/la_tencha/image_1.jpeg', 'c/bar_images/la_tencha/image_2.jpg', '/bar_images/la_tencha/image_3.jpg', '/bar_images/la_tencha/image_4.jpg'),
+      ('La Tencha', 'World', '22 quai de la monnaie', 33000, 'Bordeaux','/bar_images/la_tencha/image_1.jpeg', 'c/bar_images/la_tencha/image_2.jpg', '/bar_images/la_tencha/image_3.jpg', '/bar_images/la_tencha/image_4.jpg'),
       ('Danse Machine', 'Groove', '45 quai Lawton', 33300, 'Bordeaux', '/bar_images/dance_machine/image_1.jpg', 'bar_images/dance_machine/image_2.jpg', '/bar_images/dance_machine/image_3.jpg', '/bar_images/dance_machine/image_4.jpg'),
       ('L''Apollo', 'Groove et funk', '19 place Fernand Lafargue', 33000, 'Bordeaux', '/bar_images/l_appollo/image_1.jpg', '/bar_images/l_appollo/image_2.jpeg', '/bar_images/l_appollo/image_3.jpg', '/bar_images/l_appollo/image_4.jpg'),
       ('The House Of Parlement', 'pop', '11 rue du parlement', 33000, 'Bordeaux', '/bar_images/the_house_of_parliament/image_1.jpg', '/bar_images/the_house_of_parliament/image_2.jpeg', '/bar_images/the_house_of_parliament/image_3.jpg', '/bar_images/the_house_of_parliament/image_4.jpg'),
       ('Le Connemara Irish Pub', 'Rock', '14-18 Cours d''Albret', 33000, 'Bordeaux', '/bar_images/le_connemara/image_1.jpg', 'bar_images/le_connemara/image_2.jpg', '/bar_images/le_connemara/image_3.jpg', '/bar_images/le_connemara/image_4.webp'),
       ('Le Motel','Electro','12 Place Fernand Lafargue', 33000, 'Bordeaux', '/bar_images/la_motel/image_1.webp', '/bar_images/la_motel/image_2.webp', '/bar_images/la_motel/image_3.webp', '/bar_images/la_motel/image_4.jpg'),
-      ('Le Bistrot des Bouchons','Métal','18-4 Cr Gambetta', 33400,'Talence', '/bar_images/le_bistrot_des_bouchons/image_1.webp', '/bar_images/le_bistrot_des_bouchons/image_2.jpg', '/bar_images/le_bistrot_des_bouchons/image_3.jpeg', '/bar_images/le_bistrot_des_bouchons/image_4.jpg'),
-      ('The Garage Bar','Rock','40 Av. du Marechal de Lattre de Tassigny', 33610,'Cestas', '/bar_images/the_garage_bar/image_1.jpg', '/bar_images/the_garage_bar/image_2.jpg', '/bar_images/the_garage_bar/image_3.jpg', '/bar_images/the_garage_bar/image_4.jpg'),
+      ('Le Bistrot des Bouchons','Métal','6 Cours Gambetta', 33400,'Talence', '/bar_images/le_bistrot_des_bouchons/image_1.webp', '/bar_images/le_bistrot_des_bouchons/image_2.jpg', '/bar_images/le_bistrot_des_bouchons/image_3.jpeg', '/bar_images/le_bistrot_des_bouchons/image_4.jpg'),
+      ('The Garage Bar','Rock','40 Avenue du Maréchal de Lattre de Tassigny', 33610,'Cestas', '/bar_images/the_garage_bar/image_1.jpg', '/bar_images/the_garage_bar/image_2.jpg', '/bar_images/the_garage_bar/image_3.jpg', '/bar_images/the_garage_bar/image_4.jpg'),
       ('Echo - Bar à Vin & Cocktails','Jazz','8 Av. Roger Cohe', 33600,'Pessac','/bar_images/l_echo/image_1.jpg', '/bar_images/l_echo/image_2.jpg', '/bar_images/l_echo/image_3.jpg', '/bar_images/l_echo/image_4.webp'),
       ('Sortie 13','Pop-Rock','Rue Walter Scott', 33600,'Pessac', '/bar_images/sortie_13/image_1.jpg', '/bar_images/sortie_13/image_2.webp', '/bar_images/sortie_13/image_3.webp', '/bar_images/sortie_13/image_4.webp'),
-      ('The Black Cat Pub', 'Rock', '37 Cr Aristide Briand', 33000, 'Bordeaux', '/bar_images/the_black_cat_pub/image_1.jpg', '/bar_images/the_black_cat_pub/image_2.jpg', '/bar_images/the_black_cat_pub/image_3.jpeg', '/bar_images/the_black_cat_pub/image_4.jpg'),
-      ('Adiu','World','12 Cr Victor Hugo', 33000,'Bordeaux', '/bar_images/adiu/image_1.jpg', '/bar_images/adiu/image_2.webp', '/bar_images/adiu/image_3.jpg', '/bar_images/adiu/image_4.jpg'),
+      ('The Black Cat Pub', 'Rock', '37 Cours Aristide Briand', 33000, 'Bordeaux', '/bar_images/the_black_cat_pub/image_1.jpg', '/bar_images/the_black_cat_pub/image_2.jpg', '/bar_images/the_black_cat_pub/image_3.jpeg', '/bar_images/the_black_cat_pub/image_4.jpg'),
+      ('Adiu','World','12 Cours Victor Hugo', 33000,'Bordeaux', '/bar_images/adiu/image_1.jpg', '/bar_images/adiu/image_2.webp', '/bar_images/adiu/image_3.jpg', '/bar_images/adiu/image_4.jpg'),
       ('L''Athénée Libertaire','World','7 Rue du Muguet', 33000,'Bordeaux','/bar_images/l_athenee_libertaire/image_1.avif', '/bar_images/l_athenee_libertaire/image_2.jpg', '/bar_images/l_athenee_libertaire/image_3.jpg', '/bar_images/l_athenee_libertaire/image_4.png'),
       ('L''Antidote','punk','13BIS Rue Elie Gintrac', 33800,'Bordeaux','/bar_images/l_antidote/image_1.jpg', 'bar_images/l_antidote/image_2.jpeg', '/bar_images/l_antidote/image_3.jpg', '/bar_images/l_antidote/image_4.jpg'),
       ('La Bodega Del Theatro','Pop','24 Rue de la Faïencerie', 33000,'Bordeaux', '/bar_images/la_bodega_del-theatro/image_1.jpeg', '/bar_images/la_bodega_del-theatro/image_2.jpg', '/bar_images/la_bodega_del-theatro/image_3.jpg', '/bar_images/la_bodega_del-theatro/image_4.jpg'),
@@ -113,7 +113,6 @@ CREATE TABLE event (
    latitude FLOAT,
    longitude FLOAT
 );
-exit;
 
 CREATE TABLE music_group (
    id INT PRIMARY KEY AUTO_INCREMENT,

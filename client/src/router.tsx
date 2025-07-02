@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router";
-import Events from "./pages/event/Events";
 import App from "./App";
+import HomePage from "./components/HomePage/HomePage";
+import MusicGroup from "./pages/MusicGroup/MusicGroup";
+import Events from "./pages/event/Events";
 
 const router = createBrowserRouter([
   {
@@ -9,6 +11,14 @@ const router = createBrowserRouter([
       {
         path: "/events",
         element: <Events />,
+      },
+      {
+        path: "/groups/:id",
+        element: <MusicGroup />,
+      },
+      {
+        path: "/",
+        element: <HomePage />,
       },
     ],
   },

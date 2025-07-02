@@ -1,10 +1,11 @@
 import { useState } from "react";
 import type { ParticipateProps } from "../../types/Participate";
 import "./Participate.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Participate({ eventId, userId }: ParticipateProps) {
   const [isParticipated, setIsParticipated] = useState(false);
-  const [isPopuped, setIsPopuped] = useState(false);
 
   const addParticipate = async () => {
     try {
@@ -21,10 +22,7 @@ function Participate({ eventId, userId }: ParticipateProps) {
           }),
         },
       );
-
-      const result = await response.json();
-      console.log(result);
-
+      await response.json();
       setIsParticipated(true);
     } catch (error) {
       console.error("Erreur lors de la participation à cet évènement", error);
@@ -39,20 +37,22 @@ function Participate({ eventId, userId }: ParticipateProps) {
         type="button"
         onClick={() => {
           setIsParticipated(!isParticipated);
-          !isParticipated && addParticipate();
-          setIsPopuped(true);
-          setTimeout(() => setIsPopuped(false), 3000);
+          isParticipated
+            ? toast("Vous ne participez plus à cet évènement", {
+                type: "info",
+                theme: "colored",
+                autoClose: 2000,
+              })
+            : toast("Vous participez à cet évènement", {
+                type: "success",
+                theme: "colored",
+                autoClose: 2000,
+              }) && addParticipate();
         }}
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
-      {isPopuped && (
-        <div className="popup">
-          {isParticipated
-            ? "Vous participez à cet évènement"
-            : " Vous ne participez plus à cet évènement"}
-        </div>
-      )}
+      <ToastContainer />
     </>
   );
 }

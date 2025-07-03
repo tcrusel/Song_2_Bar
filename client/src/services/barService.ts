@@ -16,14 +16,7 @@ export const barService = {
       return response.json();
     } catch (error) {
       console.error("Error fetching bar:", error);
-
-      if (error instanceof Error && error.message === "Bar not found") {
-        throw error;
-      }
-
-      throw new Error(
-        "Failed to fetch bar details. Please make sure the server is running.",
-      );
+      throw new Error("Failed to fetch bar details");
     }
   },
 
@@ -36,9 +29,7 @@ export const barService = {
       return response.json();
     } catch (error) {
       console.error("Error fetching bars:", error);
-      throw new Error(
-        "Failed to fetch bars. Please make sure the server is running.",
-      );
+      throw new Error("Failed to fetch bars");
     }
   },
 
@@ -51,9 +42,7 @@ export const barService = {
       return response.json();
     } catch (error) {
       console.error("Error fetching bar events:", error);
-      throw new Error(
-        "Failed to fetch bar events. Please make sure the server is running.",
-      );
+      throw new Error("Failed to fetch bar events");
     }
   },
 
@@ -68,9 +57,7 @@ export const barService = {
       return response.json();
     } catch (error) {
       console.error("Error fetching upcoming events:", error);
-      throw new Error(
-        "Failed to fetch upcoming events. Please make sure the server is running.",
-      );
+      throw new Error("Failed to fetch upcoming events");
     }
   },
 };

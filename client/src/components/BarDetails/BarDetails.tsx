@@ -1,7 +1,7 @@
 import type React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { barService } from "../../services/barService";
-import type { Bar, Event } from "../../types/bar";
+import type { Bar } from "../../types/bar";
 import "../../assets/_variables.css";
 import "./BarDetails.css";
 
@@ -11,26 +11,18 @@ interface BarDetailsProps {
 
 const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
   const [bar, setBar] = useState<Bar | null>(null);
-  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const fetchBarData = async () => {
       try {
         setLoading(true);
-        const [barData, barEvents] = await Promise.all([
-          barService.getBarById(barId),
-          barService.getBarEvents(barId),
-        ]);
-
+        const barData = await barService.getBarById(barId);
         setBar(barData);
-        setEvents(barEvents);
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
@@ -41,67 +33,79 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
     fetchBarData();
   }, [barId]);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   const formatHours = (hours: string) => {
-    if (hours === "Fermé" || hours === "Closed") return "Fermé";
+    if (hours === "Fermé" || hours === "Closed") {
+      return "Fermé";
+    }
+
+    if (hours.includes("-")) {
+      const parts = hours.split("-");
+      if (parts.length === 2) {
+        const openTime = parts[0];
+        const closeTime = parts[1];
+        return `Ouvre à ${openTime}. Ferme à ${closeTime}.`;
+      }
+    }
+
     return hours;
   };
 
+  const formatHappyHours = (happyHours: string) => {
+    if (!happyHours || happyHours === "Aucune" || happyHours === "None") {
+      return null;
+    }
+
+    if (happyHours.includes("-")) {
+      const parts = happyHours.split("-");
+      if (parts.length === 2) {
+        const startTime = parts[0];
+        const endTime = parts[1];
+        return `Happy Hours commence à ${startTime}, fini à ${endTime}.`;
+      }
+    }
+
+    return `Happy Hours: ${happyHours}`;
+  };
+
   const getTodayHours = () => {
-    if (!bar?.hours) return "Non spécifié";
+    if (!bar || !bar.hours) {
+      return "Non spécifié";
+    }
 
     const today = new Date().getDay();
-    const daysOfWeek = [
-      "sunday_opening_hours",
-      "monday_opening_hours",
-      "tuesday_opening_hours",
-      "wednesday_opening_hours",
-      "thursday_opening_hours",
-      "friday_opening_hours",
-      "saturday_opening_hours",
-    ];
+    let todayHours = "";
 
-    const todayHours = bar.hours[daysOfWeek[today] as keyof typeof bar.hours];
-    return formatHours(todayHours as string);
+    if (today === 0) todayHours = bar.hours.sunday_opening_hours;
+    else if (today === 1) todayHours = bar.hours.monday_opening_hours;
+    else if (today === 2) todayHours = bar.hours.tuesday_opening_hours;
+    else if (today === 3) todayHours = bar.hours.wednesday_opening_hours;
+    else if (today === 4) todayHours = bar.hours.thursday_opening_hours;
+    else if (today === 5) todayHours = bar.hours.friday_opening_hours;
+    else if (today === 6) todayHours = bar.hours.saturday_opening_hours;
+
+    return formatHours(todayHours);
   };
 
   const nextImage = () => {
     if (bar) {
       const images = [bar.image1, bar.image2, bar.image3, bar.image4];
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      if (currentImageIndex < images.length - 1) {
+        setCurrentImageIndex(currentImageIndex + 1);
+      } else {
+        setCurrentImageIndex(0);
+      }
     }
   };
 
   const prevImage = () => {
     if (bar) {
       const images = [bar.image1, bar.image2, bar.image3, bar.image4];
-      setCurrentImageIndex(
-        (prev) => (prev - 1 + images.length) % images.length,
-      );
+      if (currentImageIndex > 0) {
+        setCurrentImageIndex(currentImageIndex - 1);
+      } else {
+        setCurrentImageIndex(images.length - 1);
+      }
     }
-  };
-
-  const nextEvents = () => {
-    const step = isMobile ? 1 : 5;
-    setCurrentEventIndex((prev) =>
-      prev + step >= events.length ? 0 : prev + step,
-    );
-  };
-
-  const prevEvents = () => {
-    const step = isMobile ? 1 : 5;
-    setCurrentEventIndex((prev) =>
-      prev - step < 0 ? Math.max(0, events.length - step) : prev - step,
-    );
   };
 
   const openModal = (imageIndex: number) => {
@@ -109,51 +113,68 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
     setIsModalOpen(true);
   };
 
-  const closeModal = useCallback(() => {
+  const closeModal = () => {
     setIsModalOpen(false);
-  }, []);
+  };
 
-  const nextModalImage = useCallback(() => {
+  const nextModalImage = () => {
     if (bar) {
       const images = [bar.image1, bar.image2, bar.image3, bar.image4];
-      setModalImageIndex((prev) => (prev + 1) % images.length);
+      if (modalImageIndex < images.length - 1) {
+        setModalImageIndex(modalImageIndex + 1);
+      } else {
+        setModalImageIndex(0);
+      }
     }
-  }, [bar]);
+  };
 
-  const prevModalImage = useCallback(() => {
+  const prevModalImage = () => {
     if (bar) {
       const images = [bar.image1, bar.image2, bar.image3, bar.image4];
-      setModalImageIndex((prev) => (prev - 1 + images.length) % images.length);
+      if (modalImageIndex > 0) {
+        setModalImageIndex(modalImageIndex - 1);
+      } else {
+        setModalImageIndex(images.length - 1);
+      }
     }
-  }, [bar]);
+  };
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (isModalOpen) {
         if (e.key === "Escape") {
-          closeModal();
+          setIsModalOpen(false);
         } else if (e.key === "ArrowLeft") {
-          prevModalImage();
+          if (bar) {
+            const images = [bar.image1, bar.image2, bar.image3, bar.image4];
+            if (modalImageIndex > 0) {
+              setModalImageIndex(modalImageIndex - 1);
+            } else {
+              setModalImageIndex(images.length - 1);
+            }
+          }
         } else if (e.key === "ArrowRight") {
-          nextModalImage();
+          if (bar) {
+            const images = [bar.image1, bar.image2, bar.image3, bar.image4];
+            if (modalImageIndex < images.length - 1) {
+              setModalImageIndex(modalImageIndex + 1);
+            } else {
+              setModalImageIndex(0);
+            }
+          }
         }
       }
     };
 
     document.addEventListener("keydown", handleKeyPress);
     return () => document.removeEventListener("keydown", handleKeyPress);
-  }, [isModalOpen, closeModal, prevModalImage, nextModalImage]);
+  }, [isModalOpen, modalImageIndex, bar]);
 
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">Erreur: {error}</div>;
   if (!bar) return <div className="error">Bar non trouvé</div>;
 
   const images = [bar.image1, bar.image2, bar.image3, bar.image4];
-  const cardsToShow = isMobile ? 1 : 5;
-  const visibleEvents = events.slice(
-    currentEventIndex,
-    currentEventIndex + cardsToShow,
-  );
 
   return (
     <div className="bar-details">
@@ -216,76 +237,21 @@ const BarDetails: React.FC<BarDetailsProps> = ({ barId }) => {
             </div>
             <div className="music-style">🎵 {bar.music_style}</div>
             <div className="hours">🕐 {getTodayHours()}</div>
-            {bar.hours?.happy_hours && (
-              <div className="happy-hours">🍻 {bar.hours.happy_hours}</div>
-            )}
+            {bar.hours?.happy_hours &&
+              formatHappyHours(bar.hours.happy_hours) && (
+                <div className="happy-hours">
+                  🍻 {formatHappyHours(bar.hours.happy_hours)}
+                </div>
+              )}
           </div>
         </div>
       </section>
 
       <section className="events-carousel">
-        {events.length > 0 ? (
-          <>
-            <div className="carousel-controls">
-              <button
-                type="button"
-                className="carousel-nav"
-                onClick={prevEvents}
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                className="carousel-nav"
-                onClick={nextEvents}
-              >
-                ›
-              </button>
-            </div>
-
-            <div className="events-grid">
-              {visibleEvents.map((event) => (
-                <div key={event.id} className="event-card">
-                  <div className="event-image">
-                    <div className="placeholder-image">🎵</div>
-                  </div>
-                  <div className="event-info">
-                    <h3 className="event-title">
-                      {event.music_group?.name || event.title}
-                    </h3>
-                    <p className="event-style">{event.music_group?.style}</p>
-                    <div className="event-meta">
-                      <span className="event-date">
-                        {new Date(event.date).toLocaleDateString("fr-FR")}
-                      </span>
-                      <span className="event-time">{event.start_at}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {events.length > cardsToShow && (
-              <div className="carousel-dots">
-                {Array.from({
-                  length: Math.ceil(events.length / cardsToShow),
-                }).map((_, index) => (
-                  <button
-                    key={`carousel-dot-${bar.id}-${index}`}
-                    type="button"
-                    className={`dot ${Math.floor(currentEventIndex / cardsToShow) === index ? "active" : ""}`}
-                    onClick={() => setCurrentEventIndex(index * cardsToShow)}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="no-events">
-            <h3>Aucun événement programmé</h3>
-            <p>Ce bar n'a pas d'événements prévus pour le moment.</p>
-          </div>
-        )}
+        <div className="no-events">
+          <h3>Événements</h3>
+          <p>Les événements seront bientôt disponibles.</p>
+        </div>
       </section>
 
       {isModalOpen && (

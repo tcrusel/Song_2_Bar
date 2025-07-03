@@ -28,7 +28,7 @@ section.event-header {
   border-radius: 20px;
 }
 
-.music-style {
+.event-header .music-style {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 

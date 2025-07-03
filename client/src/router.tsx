@@ -14,6 +14,8 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
         path: "events/:id",
         element: <EventDetail />,
       },

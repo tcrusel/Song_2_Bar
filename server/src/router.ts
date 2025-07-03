@@ -1,16 +1,12 @@
 import express from "express";
+import eventActions from "./modules/event/eventActions";
 import groupActions from "./modules/groups/groupActions";
 import barRoutes from "./routes/barRoutes";
 
 const router = express.Router();
 
-/* ************************************************************************* */
-// Define Your API Routes Here
-/* ************************************************************************* */
-
-// Bar-related routes (mount under /api)
+router.get("/event/:id", eventActions.read);
+router.get("/api/groups/:id", groupActions.read);
 router.use("/api", barRoutes);
-
-/* ************************************************************************* */
 
 export default router;

@@ -7,6 +7,7 @@
 
 :root {
   --background-primary-color: #23241f;
+  --background-secondary-color: #e1bd7b;
   --button-primary-color: #aa682e;
   --button-secondary-color: #2f6b75;
   --button-text-color: #ebd3a4;
@@ -19,6 +20,14 @@
 
 body {
   font-family: "Fredoka", sans-serif;
+}
+
+.white {
+  color: white;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 h1 {

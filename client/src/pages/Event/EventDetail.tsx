@@ -3,6 +3,8 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useParams } from "react-router";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
+import { format, isToday } from "date-fns";
+import { fr } from "date-fns/locale";
 import "./EventDetail.css";
 import { Link } from "react-router";
 import type { Event } from "../../types/Event";
@@ -32,6 +34,10 @@ function EventDetails() {
 
   if (error) return <p>Evènement introuvable</p>;
   if (!event) return <p>Chargement en cours...</p>;
+  const eventDate = new Date(event.date);
+  const formattedDateText = isToday(eventDate)
+    ? `Aujourd'hui le ${format(eventDate, "d MMMM yyyy", { locale: fr })}`
+    : format(eventDate, "d MMMM yyyy", { locale: fr });
 
   return (
     <>
@@ -57,7 +63,7 @@ function EventDetails() {
               <div className="date-icon">
                 <img src="/event_icon/calendar.png" alt="calendar-icon" />
               </div>
-              <p className={"date-event bold white"}>{event.start_time}</p>
+              <p className={"date-event bold white"}>{formattedDateText}</p>
             </div>
             <div className="hour">
               <img

@@ -52,7 +52,7 @@ function Participate({ eventId, userId }: ParticipateProps) {
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
-      <ToastContainer />
+      <ToastContainer limit={2} />
     </>
   );
 }

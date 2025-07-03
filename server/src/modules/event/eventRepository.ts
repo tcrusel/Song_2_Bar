@@ -2,14 +2,13 @@ import databaseClient from "../../../database/client";
 import type { Rows } from "../../../database/client";
 
 class eventRepository {
-  async readById(id: number) {
+  async find(id: number) {
     const [rows] = await databaseClient.query<Rows[]>(
       `SELECT 
     event.id AS event_id,
     event.title,
     event.date,
-    event.start_at,
-    HOUR(event.start_at) AS hour_only,
+    DATE_FORMAT(event.start_at, '%H:%i') AS start_time,
     event.image,
     music_group.name AS music_group_name,
     music_group.style AS music_style,

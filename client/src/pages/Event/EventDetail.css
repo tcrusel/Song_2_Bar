@@ -157,6 +157,12 @@ section.event-header {
   padding-top: 50px;
 }
 
+.map-container {
+  height: 400px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
 @media (max-width: 833px) {
   section {
     display: block;

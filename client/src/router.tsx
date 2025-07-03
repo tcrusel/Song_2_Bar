@@ -19,12 +19,6 @@ const router = createBrowserRouter([
       {
         path: "/groups/:id",
         element: <MusicGroup />,
-        children: [
-          {
-            path: "events/:eventId",
-            element: <EventDetail />,
-          },
-        ],
       },
     ],
   },

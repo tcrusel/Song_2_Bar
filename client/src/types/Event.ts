@@ -1,4 +1,4 @@
-export type EventInterface = {
+export type Event = {
   title: string;
   music_style: string;
   bar_name: string;
@@ -14,4 +14,5 @@ export type EventInterface = {
   group_id: number;
   music_group_name: string;
   music_group_id: number;
+  start_time: number;
 };

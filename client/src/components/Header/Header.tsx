@@ -1,14 +1,8 @@
 import { useState } from "react";
 import "./Header.css";
-import UserRole from "./UserRole/UserRole";
 
 function Header() {
   const [search, setSearch] = useState("");
-  const [showUserRole, setShowUserRole] = useState(false);
-
-  const toggleUserRole = () => {
-    setShowUserRole((prev) => !prev);
-  };
 
   return (
     <section className="header">
@@ -37,7 +31,7 @@ function Header() {
         <button
           className="logo-connexion-button"
           type="button"
-          onClick={toggleUserRole}
+          onClick={() => {}}
         >
           <img
             className="logo-connexion"
@@ -45,12 +39,6 @@ function Header() {
             alt="le logo de la connexion"
           />
         </button>
-
-        {showUserRole && (
-          <div className="user-role-container">
-            <UserRole />
-          </div>
-        )}
       </div>
     </section>
   );

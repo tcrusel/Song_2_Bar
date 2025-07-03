@@ -12,14 +12,17 @@ class BarHoursLinker extends AbstractSeeder {
   }
 
   async run() {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 28; i++) {
       const hoursRef = this.getRef(`hours_${i}`);
       if (hoursRef) {
-        const updatePromise = database.query(
-          "UPDATE bar SET hours_id = ? WHERE id = ?",
-          [hoursRef.insertId, i],
-        );
-        this.promises.push(updatePromise.then(() => {}));
+        try {
+          await database.query("UPDATE bar SET hours_id = ? WHERE id = ?", [
+            hoursRef.insertId,
+            i,
+          ]);
+        } catch (error) {
+          console.log(`Error updating bar ${i}:`, error);
+        }
       }
     }
   }

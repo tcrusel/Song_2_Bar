@@ -3,8 +3,7 @@
   border: none;
   color: var(--button-text-color);
   border-radius: 20px;
-  margin: 15px;
-  padding: 5px;
   cursor: pointer;
   width: 170px;
+  height: 35px;
 }

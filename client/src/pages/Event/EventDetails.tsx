@@ -53,13 +53,11 @@ function EventDetails() {
               <p className="music-style bold">{event.music_style}</p>
             </div>
             <h1>{event.music_group_name}</h1>
-
             <img
               className="poster-event"
               src={event.image}
               alt={event.bar_name}
             />
-
             <div className="date">
               <div className="date-icon">
                 <img src="/event_icon/calendar.png" alt="calendar-icon" />
@@ -72,12 +70,13 @@ function EventDetails() {
                 alt="clock-icon"
                 className="hour-icon"
               />
-
               <p className="hour-event white">
                 de {event.start_time} à {event.end_time}
               </p>
             </div>
-            <Participate userId={10} eventId={30} />
+            <div className="participate">
+              <Participate userId={10} eventId={30} />
+            </div>
             <div className="bar">
               <div className="localisation-icon">
                 <img

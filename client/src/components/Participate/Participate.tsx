@@ -48,7 +48,12 @@ function Participate({ eventId, userId }: ParticipateProps) {
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
-      <ToastContainer theme="colored" autoClose={2000} limit={2} />
+      <ToastContainer
+        position="top-center"
+        theme="colored"
+        autoClose={2000}
+        limit={2}
+      />
     </>
   );
 }

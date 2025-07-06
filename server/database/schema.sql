@@ -152,10 +152,10 @@ CREATE TABLE user (
    lastname VARCHAR(50) NOT NULL,
    role VARCHAR(50) NOT NULL,
    email VARCHAR(50) NOT NULL,
-   password VARCHAR(30) NOT NULL
+   hashed_password VARCHAR(100) NOT NULL
 );
 
-INSERT INTO user (firstname, lastname, role, email, password) 
+INSERT INTO user (firstname, lastname, role, email, hashed_password) 
    VALUES
       ('Léa', 'Benoit', 'user', 'lea.benoit@example.com', 'azerty123'),
       ('Thomas', 'Marchand', 'user', 'thomas.marchand@example.com', 'azerty123'),

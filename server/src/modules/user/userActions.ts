@@ -9,10 +9,10 @@ const add: RequestHandler = async (req, res, next) => {
       firstname: req.body.firstname,
       role: "user",
       email: req.body.email,
-      password: req.body.password,
+      hashed_password: req.body.hashed_password,
     };
 
-    const insertId = await userRepository.create(newUser);
+    await userRepository.create(newUser);
 
     res.sendStatus(StatusCodes.CREATED);
   } catch (err) {

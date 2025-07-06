@@ -23,7 +23,7 @@ function Register() {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit: FormEventHandler = async (event) => {
+  const noRefresh: FormEventHandler = async (event) => {
     event.preventDefault();
 
     try {
@@ -55,7 +55,7 @@ function Register() {
     <>
       <section className="auth">
         <h1>S'inscrire</h1>
-        <form className="register" onSubmit={handleSubmit}>
+        <form className="register" onSubmit={noRefresh}>
           <input
             className="input"
             type="text"

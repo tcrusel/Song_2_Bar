@@ -2,10 +2,6 @@
   background-color: var(--background-secondary-color);
 }
 
-section {
-  padding: 40px;
-}
-
 section.event-header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -111,7 +107,7 @@ section.event-header {
 }
 
 .bar-adress p {
-  font-size: 1.4rem;
+  font-size: 1rem;
 }
 
 .description-container {

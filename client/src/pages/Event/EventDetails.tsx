@@ -5,7 +5,7 @@ import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
 import { format, isToday } from "date-fns";
 import { fr } from "date-fns/locale";
-import "./EventDetail.css";
+import "./EventDetails.css";
 import { Link } from "react-router";
 import type { Event } from "../../types/Event";
 

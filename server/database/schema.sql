@@ -1,7 +1,3 @@
-DROP DATABASE if exists song2bar;
-CREATE DATABASE song2bar;
-USE song2bar;
-
 CREATE TABLE bar (
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(100) NOT NULL,
@@ -191,15 +187,16 @@ INSERT INTO user (firstname, lastname, role, email, password)
 CREATE TABLE event (
    id INT PRIMARY KEY AUTO_INCREMENT,
    title VARCHAR(100) NOT NULL,
+   image VARCHAR(255) NOT NULL,
    date DATE NOT NULL,
    start_at TIME NOT NULL,
    end_at TIME NOT NULL,
    description TEXT NOT NULL,
    creator_id INT NOT NULL,
    bar_id INT NOT NULL,
-   music_group_id INT NOT NULL,
-   image VARCHAR(255)
+   music_group_id INT NOT NULL
 );
+
 
 CREATE TABLE music_group (
    id INT PRIMARY KEY AUTO_INCREMENT,
@@ -263,4 +260,3 @@ CREATE TABLE hours (
 	sunday_opening_hours VARCHAR(50) NOT NULL,
 	happy_hours VARCHAR(50) NOT NULL
    );
-   

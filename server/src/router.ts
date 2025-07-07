@@ -5,7 +5,8 @@ import participateActions from "./modules/participate/participateActions";
 
 const router = express.Router();
 
-router.get("/event/:id", eventActions.read);
+router.get("/api/events", eventActions.browse);
+router.get("/api/events/:id", eventActions.read);
 
 router.get("/api/groups/:id", groupActions.read);
 

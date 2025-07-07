@@ -1,29 +1,45 @@
-import EventList from "../../components/EventList/EventList";
+import EventCard from "../../components/EventCard/EventCard";
 import "./Event.css";
 import { useEffect, useState } from "react";
-import type { EventType } from "../../types/EventType";
+import type { Event } from "../../types/Event";
 
 function Events() {
-  const [events, setEvents] = useState<EventType[]>([]);
-
+  const [events, setEvents] = useState<Event[]>([]);
+  const [error, setError] = useState(false);
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/events`)
-      .then((response) => response.json())
-      .then((events) => {
-        setEvents(events); // gestion d'erreur
-      });
+    async function fetchEvent() {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/events`);
+        if (!res.ok) {
+          setError(true);
+          return;
+        }
+        const events = await res.json();
+        setEvents(events);
+      } catch (error) {
+        console.error("Erreur lors du fetch", error);
+      }
+    }
+    fetchEvent();
   }, []);
-  if (events.length === 0) {
-    return <h1>Désolée il n'y a pas d'évènements </h1>;
-  }
+  if (error) return <h1>Désolé il n'y a pas d'évènements </h1>;
 
   return (
     <>
-      <section className="events">
-        <EventList events={events} />
-        <h1 className="filters">filtre à venir</h1>
-      </section>
+      {error ? (
+        <p>Désolé il n'y a pas d'évènements</p>
+      ) : !events ? (
+        <p>Chargement en cours...</p>
+      ) : (
+        <section className="event-list">
+          {events.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
+          <h1 className="filters">filtre à venir</h1>
+        </section>
+      )}
     </>
   );
 }
+
 export default Events;

@@ -13,5 +13,6 @@ import userActions from "./modules/user/userActions";
 
 router.post("/api/users", userActions.add);
 router.post("/api/participate", participateActions.add);
+router.delete("/api/participate/:userId/:eventId", participateActions.remove);
 
 export default router;

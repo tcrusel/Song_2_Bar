@@ -68,7 +68,7 @@ body {
   font-weight: bolder;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   .group-information,
   .bar-caroussel {
     padding: 1rem;

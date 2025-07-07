@@ -9,6 +9,7 @@ class eventRepository {
     event.title,
     event.date,
     DATE_FORMAT(event.start_at, '%H:%i') AS start_time,
+    DATE_FORMAT(event.end_at, '%H:%i') AS end_time,
     event.image,
     music_group.name AS music_group_name,
     music_group.style AS music_style,

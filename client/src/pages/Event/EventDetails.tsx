@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
+import Participate from "../../components/Participate/Participate";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
-import "./EventDetail.css";
-import { Link } from "react-router";
+import "./EventDetails.css";
+import { format, isToday } from "date-fns";
+import { fr } from "date-fns/locale";
 import type { Event } from "../../types/Event";
 
 function EventDetails() {
@@ -33,6 +35,11 @@ function EventDetails() {
   if (error) return <p>Evènement introuvable</p>;
   if (!event) return <p>Chargement en cours...</p>;
 
+  const eventDate = new Date(event.date);
+  const formattedDateText = isToday(eventDate)
+    ? `Aujourd'hui le ${format(eventDate, "d MMMM yyyy", { locale: fr })}`
+    : format(eventDate, "d MMMM yyyy", { locale: fr });
+
   return (
     <>
       {error ? (
@@ -41,23 +48,21 @@ function EventDetails() {
         <p>Chargement en cours...</p>
       ) : (
         <section className="event-details">
-          <section className="event-header">
+          <article className="event-header">
             <div className="header-style">
               <p className="music-style bold">{event.music_style}</p>
             </div>
             <h1>{event.music_group_name}</h1>
-
             <img
               className="poster-event"
               src={event.image}
               alt={event.bar_name}
             />
-
             <div className="date">
               <div className="date-icon">
                 <img src="/event_icon/calendar.png" alt="calendar-icon" />
               </div>
-              <p className={"date-event bold white"}>{event.start_time}</p>
+              <p className={"date-event bold white"}>{formattedDateText}</p>
             </div>
             <div className="hour">
               <img
@@ -65,10 +70,13 @@ function EventDetails() {
                 alt="clock-icon"
                 className="hour-icon"
               />
-
-              <p className="hour-event white"> à {event.start_time}</p>
+              <p className="hour-event white">
+                de {event.start_time} à {event.end_time}
+              </p>
             </div>
-            <p className="participate">Je participe !</p>
+            <div className="participate">
+              <Participate userId={10} eventId={30} />
+            </div>
             <div className="bar">
               <div className="localisation-icon">
                 <img
@@ -84,7 +92,7 @@ function EventDetails() {
                 {event.postcode} {event.city}
               </p>
             </div>
-          </section>
+          </article>
           <div className="googlemap">
             <MapContainer
               center={[event.latitude, event.longitude]}
@@ -104,7 +112,7 @@ function EventDetails() {
               </Marker>
             </MapContainer>
           </div>
-          <section className="description-container">
+          <article className="description-container">
             <p className="about white">A propos</p>
             <p className="event-description">{event.description}</p>
             <p className="artist white">Les artistes</p>
@@ -114,7 +122,7 @@ function EventDetails() {
             >
               {event.music_group_name}
             </Link>
-          </section>
+          </article>
         </section>
       )}
     </>

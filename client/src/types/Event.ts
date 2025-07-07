@@ -15,4 +15,5 @@ export type Event = {
   music_group_name: string;
   music_group_id: number;
   start_time: number;
+  end_time: number;
 };

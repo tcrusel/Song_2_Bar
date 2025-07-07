@@ -1,35 +1,27 @@
 import "./EventCard.css";
+import type { Event } from "../../types/Event";
 
 type EventCardProps = {
-  title: string;
-  start_at: string;
-  bar_name: string;
-  image: string;
-  style: string;
+  event: Event;
 };
 
-function EventCard({
-  title,
-  start_at,
-  image,
-  bar_name,
-  style,
-}: EventCardProps) {
+function EventCard({ event }: EventCardProps) {
+  console.log(event);
   const formatTime = (value: string) => {
     return `${value.slice(0, 2)}h`;
   };
   return (
-    <div className="card">
+    <article className="card">
       <div className="card-image">
         <img
           className="card-image"
-          src={image}
-          alt={`Illustration de ${title}`}
+          src={event.image}
+          alt={`Illustration de ${event.title}`}
         />
       </div>
       <div className="card-content">
-        <h2 className="event-title">{title}</h2>
-        <p className="event-style">{style}</p>
+        <h2 className="event-title">{event.title}</h2>
+        <p className="event-style">{event.music_style}</p>
       </div>
       <div className="card-bottom">
         <p className="event-bar">
@@ -38,15 +30,15 @@ function EventCard({
             alt="Localisation"
             className="location_icon"
           />
-          {bar_name}
+          {event.bar_name}
         </p>
 
         <p className="event-time">
           <img src="/icon/time_icon.png" alt="Heure" className="time_icon" />
-          {formatTime(start_at)}
+          {formatTime(event.start_at)}
         </p>
       </div>
-    </div>
+    </article>
   );
 }
 export default EventCard;

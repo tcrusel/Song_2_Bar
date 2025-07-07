@@ -24,11 +24,8 @@ const seed = async () => {
       const { default: SeederClass } = await import(
         `file://${path.join(fixturesPath, filePath)}`
       );
-      console.log("👉 Test import :", filePath);
-      console.log("SeederClass:", SeederClass);
 
       const seeder = new SeederClass() as AbstractSeeder;
-      console.log("👉 En train de charger :", filePath, SeederClass);
       dependencyMap[SeederClass.toString()] = seeder;
     }
 

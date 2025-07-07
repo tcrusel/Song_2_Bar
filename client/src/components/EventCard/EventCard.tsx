@@ -1,4 +1,5 @@
 import "./EventCard.css";
+import { useNavigate } from "react-router";
 import type { Event } from "../../types/Event";
 
 type EventCardProps = {
@@ -10,8 +11,18 @@ function EventCard({ event }: EventCardProps) {
   const formatTime = (value: string) => {
     return `${value.slice(0, 2)}h`;
   };
+  const navigate = useNavigate();
+
   return (
-    <article className="card">
+    <article
+      className="card"
+      onClick={() => navigate(`/events/${event.id}`)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          navigate(`/events/${event.id}`);
+        }
+      }}
+    >
       <div className="card-image">
         <img
           className="card-image"

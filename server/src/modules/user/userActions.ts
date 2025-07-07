@@ -4,17 +4,35 @@ import userRepository from "./userRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const newUser = {
-      lastname: req.body.lastname,
-      firstname: req.body.firstname,
-      role: "user",
-      email: req.body.email,
-      hashed_password: req.body.hashed_password,
-    };
+    const { lastname, firstname, email, hashed_password } = req.body;
 
-    await userRepository.create(newUser);
+    const role = "user";
 
-    res.sendStatus(StatusCodes.CREATED);
+    if (
+      !lastname ||
+      lastname === "" ||
+      typeof lastname !== "string" ||
+      !firstname ||
+      firstname === "" ||
+      typeof firstname !== "string" ||
+      !email ||
+      email === "" ||
+      typeof email !== "string" ||
+      !hashed_password ||
+      hashed_password === ""
+    ) {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+    } else {
+      await userRepository.create({
+        lastname,
+        firstname,
+        role,
+        email,
+        hashed_password,
+      });
+
+      res.sendStatus(StatusCodes.CREATED);
+    }
   } catch (err) {
     next(err);
   }

@@ -17,7 +17,9 @@ function EventDetails() {
   useEffect(() => {
     async function fetchEvent() {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/event/${id}`);
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/events/${id}`,
+        );
         if (!res.ok) {
           setError(true);
           return;

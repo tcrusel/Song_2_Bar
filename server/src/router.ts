@@ -7,14 +7,14 @@ import userActions from "./modules/user/userActions";
 
 const router = express.Router();
 
-router.get("/event/:id", eventActions.read);
+router.get("/api/events/:id", eventActions.read);
 
 router.get("/api/groups/:id", groupActions.read);
-
-router.post("/api/participate", participateActions.add);
 
 router.post("/api/users", authActions.hashPassword, userActions.add);
 
 router.post("/api/login", authActions.login);
+
+router.post("/api/participate", participateActions.add);
 
 export default router;

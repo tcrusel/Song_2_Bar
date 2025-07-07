@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import "./Register.css";
 import type { ChangeEventHandler, FormEventHandler } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 function Register() {
   const lastnameRef = useRef<HTMLInputElement>(null);
@@ -44,7 +45,7 @@ function Register() {
       if (response.status === 201) {
         navigate("/login");
       } else {
-        console.info(response);
+        toast("Création de compte invalide !", { type: "error" });
       }
     } catch (err) {
       console.error(err);
@@ -55,7 +56,7 @@ function Register() {
     <>
       <section className="auth">
         <h1>S'inscrire</h1>
-        <form className="register" onSubmit={noRefresh}>
+        <form className="register-form" onSubmit={noRefresh}>
           <input
             className="input"
             type="text"
@@ -95,6 +96,12 @@ function Register() {
         <h3>
           As-tu un compte ? <Link to={"/login"}>Se connecter</Link>
         </h3>
+        <ToastContainer
+          position="top-right"
+          theme="colored"
+          autoClose={2000}
+          limit={2}
+        />
       </section>
     </>
   );

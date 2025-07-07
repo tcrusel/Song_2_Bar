@@ -26,16 +26,13 @@ function Events() {
 
   return (
     <>
-      {error ? (
-        <p>Désolé il n'y a pas d'évènements</p>
-      ) : !events ? (
+      {!events ? (
         <p>Chargement en cours...</p>
       ) : (
         <section className="event-list">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
-          <h1 className="filters">filtre à venir</h1>
         </section>
       )}
     </>

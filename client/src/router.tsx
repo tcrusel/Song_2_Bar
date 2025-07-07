@@ -3,6 +3,7 @@ import App from "./App";
 import HomePage from "./components/HomePage/HomePage";
 import EventDetail from "./pages/Event/EventDetails";
 import MusicGroup from "./pages/MusicGroup/MusicGroup";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/groups/:id",
         element: <MusicGroup />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },

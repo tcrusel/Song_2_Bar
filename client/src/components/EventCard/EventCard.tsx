@@ -1,9 +1,9 @@
 import "./EventCard.css";
 import { useNavigate } from "react-router";
-import type { Event } from "../../types/Event";
+import type { EventsList } from "../../types/Event";
 
 type EventCardProps = {
-  event: Event;
+  event: EventsList;
 };
 
 function EventCard({ event }: EventCardProps) {

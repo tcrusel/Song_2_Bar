@@ -1,0 +1,9 @@
+.participate-button {
+  background-color: var(--button-primary-color);
+  border: none;
+  color: var(--button-text-color);
+  border-radius: 20px;
+  cursor: pointer;
+  width: 170px;
+  height: 35px;
+}

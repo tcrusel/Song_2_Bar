@@ -1,7 +1,8 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import HomePage from "./components/HomePage/HomePage";
+import Home from "./pages/Home/Home";
 import MusicGroup from "./pages/MusicGroup/MusicGroup";
+import EventDetails from "./pages/event/EventDetails";
 import Events from "./pages/event/Events";
 
 const router = createBrowserRouter([
@@ -18,7 +19,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        element: <HomePage />,
+        element: <Home />,
+      },
+      {
+        path: "/events/:id",
+        element: <EventDetails />,
+      },
+      {
+        path: "/groups/:id",
+        element: <MusicGroup />,
       },
     ],
   },

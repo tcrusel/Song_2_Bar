@@ -1,10 +1,10 @@
 import EventCard from "../../components/EventCard/EventCard";
 import "./Event.css";
 import { useEffect, useState } from "react";
-import type { Event } from "../../types/Event";
+import type { EventsList } from "../../types/Event";
 
 function Events() {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventsList[]>([]);
   const [error, setError] = useState(false);
   useEffect(() => {
     async function fetchEvent() {

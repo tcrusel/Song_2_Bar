@@ -19,7 +19,7 @@ const login: RequestHandler = async (req, res, next) => {
     if (verified) {
       const { hashed_password, ...userWithoutHashedPassword } = user;
 
-      res.json(userWithoutHashedPassword);
+      res.json({ userWithoutHashedPassword });
     } else {
       res.sendStatus(422);
     }

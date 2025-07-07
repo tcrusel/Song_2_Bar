@@ -1,15 +1,31 @@
 import databaseClient from "../../../database/client";
 import type { Rows } from "../../../database/client";
+import type { EventList } from "../../types/eventList";
 
 class eventRepository {
+  async readAll() {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT 
+    e.*, 
+    b.name AS bar_name,
+    g.name AS group_name,
+    g.style AS music_style
+   FROM event e
+   LEFT JOIN bar b ON e.bar_id = b.id
+   LEFT JOIN music_group g ON e.music_group_id = g.id`,
+    );
+
+    return rows as EventList[];
+  }
+
   async find(id: number) {
     const [rows] = await databaseClient.query<Rows[]>(
       `SELECT 
     event.id AS event_id,
     event.title,
     event.date,
-    DATE_FORMAT(event.start_at, '%H:%i') AS start_time,
-    DATE_FORMAT(event.end_at, '%H:%i') AS end_time,
+    DATE_FORMAT(event.start_at, '%H:%i') AS start_at,
+    DATE_FORMAT(event.end_at, '%H:%i') AS end_at,
     event.image,
     music_group.name AS music_group_name,
     music_group.style AS music_style,

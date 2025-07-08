@@ -78,7 +78,7 @@ function EventDetails() {
               </div>
               <p className={"bar-name bold white"}>{event.bar_name}</p>
             </div>
-            <div className={"bar-adress white"}>
+            <div className={"bar-address white"}>
               <p>{event.address}</p>
               <p>
                 {event.postcode} {event.city}

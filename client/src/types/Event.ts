@@ -3,6 +3,7 @@ export type EventType = {
   title: string;
   music_style: string;
   bar_name: string;
+  bar_id: number;
   image: string;
   hour_only: number;
   latitude: number;

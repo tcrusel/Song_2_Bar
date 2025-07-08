@@ -1,0 +1,11 @@
+.date-button {
+  color: AA682E;
+  border-radius: 50;
+  width: 450;
+  height: 90;
+}
+
+.date-button p {
+  font-family: "Fredoka_regular", sans-serif;
+  --button-text-color: #ebd3a4;
+}

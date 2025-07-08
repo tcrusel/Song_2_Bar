@@ -3,7 +3,9 @@ import App from "./App";
 import EventDetails from "./pages/Event/EventDetails";
 import Events from "./pages/Event/Events";
 import Home from "./pages/Home/Home";
+import Login from "./pages/Login";
 import MusicGroup from "./pages/MusicGroup/MusicGroup";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/events/:id",

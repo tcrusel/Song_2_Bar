@@ -53,15 +53,16 @@ function Participate({ eventId, userId }: ParticipateProps) {
       <button
         className="participate-button"
         type="button"
-        onClick={() => {
+        onClick={async () => {
+          if (isParticipated) {
+            await deleteParticipation();
+            toast("Vous ne participez plus à cet évènement", { type: "info" });
+          } else {
+            await addParticipate();
+            toast("Vous participez à cet évènement", { type: "success" });
+          }
+
           setIsParticipated(!isParticipated);
-          isParticipated
-            ? toast("Vous ne participez plus à cet évènement", {
-                type: "info",
-              }) && deleteParticipation()
-            : toast("Vous participez à cet évènement", {
-                type: "success",
-              }) && addParticipate();
         }}
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}

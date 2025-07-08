@@ -10,9 +10,6 @@ router.get("/api/events/:id", eventActions.read);
 
 router.get("/api/groups/:id", groupActions.read);
 
-import userActions from "./modules/user/userActions";
-
-router.post("/api/users", userActions.add);
 router.post("/api/participate", participateActions.add);
 router.delete("/api/participate/:userId/:eventId", participateActions.remove);
 

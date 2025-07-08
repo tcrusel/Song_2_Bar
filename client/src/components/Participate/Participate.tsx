@@ -53,12 +53,12 @@ function Participate({ eventId, userId }: ParticipateProps) {
       <button
         className="participate-button"
         type="button"
-        onClick={async () => {
+        onClick={() => {
           if (isParticipated) {
-            await deleteParticipation();
+            deleteParticipation();
             toast("Vous ne participez plus à cet évènement", { type: "info" });
           } else {
-            await addParticipate();
+            addParticipate();
             toast("Vous participez à cet évènement", { type: "success" });
           }
 
@@ -67,6 +67,7 @@ function Participate({ eventId, userId }: ParticipateProps) {
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
+
       <ToastContainer
         position="top-center"
         theme="colored"

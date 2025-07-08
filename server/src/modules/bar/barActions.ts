@@ -4,8 +4,7 @@ import barRepository from "./barRepository";
 
 const read: RequestHandler = async (req, res, next) => {
   try {
-    const barId = Number(req.params.id);
-    const bar = await barRepository.find(barId);
+    const bar = await barRepository.find(Number(req.params.id));
 
     if (!bar) {
       res.status(StatusCodes.NOT_FOUND).json({ error: "Bar not found" });

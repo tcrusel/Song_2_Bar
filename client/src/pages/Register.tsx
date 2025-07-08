@@ -82,6 +82,8 @@ function Register() {
             onChange={handlePasswordChange}
             placeholder="Mot de passe"
           />
+          {password.length >= 8 ? "✅" : "❌"}{" "}
+          {`length: ${password.length} >=8`}
           <input
             className="input"
             type="password"
@@ -89,6 +91,7 @@ function Register() {
             onChange={handleConfirmPasswordChange}
             placeholder="Confirmation mot de passe"
           />
+          {password === confirmPassword ? "✅" : "❌"}
           <button className="participate-button" type="submit">
             S'inscrire
           </button>

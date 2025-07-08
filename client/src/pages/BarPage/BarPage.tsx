@@ -30,26 +30,16 @@ const BarPage: React.FC = () => {
     fetchBarData();
   }, [barId]);
 
-  const formatHours = (hours: string) => {
-    if (hours === "Fermé") {
-      return "Fermé";
+  const formatTimeRange = (timeRange: string, isOpeningHours = false) => {
+    if (isOpeningHours && timeRange === "Fermé") {
+      return timeRange;
     }
 
-    const parts = hours.split("-");
-    const openTime = parts[0];
-    const closeTime = parts[1];
-    return `Ouvre à ${openTime}. Ferme à ${closeTime}.`;
-  };
-
-  const formatHappyHours = (happyHours: string) => {
-    if (!happyHours || happyHours === "Aucune") {
-      return null;
-    }
-
-    const parts = happyHours.split("-");
+    const parts = timeRange.split("-");
     const startTime = parts[0];
     const endTime = parts[1];
-    return `Happy Hours commence à ${startTime}, fini à ${endTime}.`;
+
+    return `${startTime} - ${endTime}`;
   };
 
   if (loading) return <div className="loading">Chargement...</div>;
@@ -77,7 +67,7 @@ const BarPage: React.FC = () => {
       `${days[today]}_opening_hours` as keyof typeof bar.hours;
     const todayHours = bar.hours[propertyName] as string;
 
-    return formatHours(todayHours);
+    return formatTimeRange(todayHours, true);
   };
 
   const nextImage = () => {
@@ -154,9 +144,9 @@ const BarPage: React.FC = () => {
             <div className="music-style">🎵 {bar.music_style}</div>
             <div className="hours">🕐 {getTodayHours()}</div>
             {bar.hours?.happy_hours &&
-              formatHappyHours(bar.hours.happy_hours) && (
+              formatTimeRange(bar.hours.happy_hours) && (
                 <div className="happy-hours">
-                  🍻 {formatHappyHours(bar.hours.happy_hours)}
+                  🍻 {formatTimeRange(bar.hours.happy_hours)}
                 </div>
               )}
           </div>

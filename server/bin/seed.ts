@@ -26,7 +26,6 @@ const seed = async () => {
       );
 
       const seeder = new SeederClass() as AbstractSeeder;
-
       dependencyMap[SeederClass.toString()] = seeder;
     }
 

@@ -1,5 +1,5 @@
 DROP DATABASE if exists song2bar;
-CREATE DATABASE song2bar CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE song2bar;
 USE song2bar;
 
 CREATE TABLE bar (
@@ -191,15 +191,16 @@ INSERT INTO user (firstname, lastname, role, email, password)
 CREATE TABLE event (
    id INT PRIMARY KEY AUTO_INCREMENT,
    title VARCHAR(100) NOT NULL,
+   image VARCHAR(255) NOT NULL,
    date DATE NOT NULL,
    start_at TIME NOT NULL,
    end_at TIME NOT NULL,
    description TEXT NOT NULL,
    creator_id INT NOT NULL,
    bar_id INT NOT NULL,
-   music_group_id INT NOT NULL,
-   image VARCHAR(255)
+   music_group_id INT NOT NULL
 );
+
 
 CREATE TABLE music_group (
    id INT PRIMARY KEY AUTO_INCREMENT,
@@ -212,7 +213,6 @@ CREATE TABLE music_group (
 
 INSERT INTO music_group (name, style, description, image)
    VALUES
-
       ('Tinariwen', 'World', 'Formé dans les années 1980 par des touaregs exilés, Tinariwen est aujourd''hui un porte-voix de la culture nomade saharienne. Leur blues électrique mêle chants traditionnels en tamasheq, rythmiques hypnotiques et guitares saturées. Ils chantent la résistance, l''amour du désert et l''errance de leur peuple avec une authenticité rare.', '/group_images/tinariwen.jpg'),
       ('Goran Bregović','World',  'Ancien guitariste du groupe rock Yougoslave Bijelo Dugme, Bregović s''est réinventé en compositeur de musiques de films et de concerts festifs. Il allie fanfare gitane, chœurs slaves, rythmes balkaniques et harmonies orientales. Ses performances sont aussi théâtrales que dansantes, une célébration débridée des cultures de l''Est.', '/group_images/goran-bregovic.jpg'),
       ('Ibeyi','World', 'Lisa-Kaindé et Naomi Diaz, filles du percussionniste d''Angá Díaz (Buena Vista Social Club), mêlent la culture yoruba (héritée de leur père cubain) à la soul, au hip-hop et à l''électro. Leurs chants multiculturels évoquent la spiritualité, le deuil et l''héritage féminin, toujours dans une mise en scène sobre et envoûtante.', '/group_images/ibeyi.jpg'),

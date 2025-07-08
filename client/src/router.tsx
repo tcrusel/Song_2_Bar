@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import HomePage from "./components/HomePage/HomePage";
-
 import BarPage from "./pages/BarPage/BarPage";
-import EventDetail from "./pages/Event/EventDetail";
+import EventDetails from "./pages/Event/EventDetails";
+import Home from "./pages/Home/Home";
 import MusicGroup from "./pages/MusicGroup/MusicGroup";
+import Events from "./pages/event/Events";
 
 const router = createBrowserRouter([
   {
@@ -12,20 +12,24 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        index: true,
-        element: <HomePage />,
+        path: "/",
+        element: <Home />,
       },
       {
-        path: "events/:id",
-        element: <EventDetail />,
+        path: "/events",
+        element: <Events />,
       },
       {
-        path: "bar/:id",
-        element: <BarPage />,
+        path: "/events/:id",
+        element: <EventDetails />,
       },
       {
         path: "/groups/:id",
         element: <MusicGroup />,
+      },
+      {
+        path: "/bar/:id",
+        element: <BarPage />,
       },
     ],
   },

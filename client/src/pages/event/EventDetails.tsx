@@ -19,7 +19,6 @@ function EventDetails() {
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}/api/events/${id}`,
         );
-
         const event = await res.json();
         setEvent(event);
       } catch (error) {

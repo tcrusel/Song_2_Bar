@@ -2,7 +2,8 @@
   font-family: "Fredoka_light";
   src: url("./fonts/Fredoka-Light.ttf");
   font-family: "Fredoka";
-  src: url("./font/Fredoka-Variable.ttf") format("truetype");
+  src: url("../assets/font/Fredoka-Variable.ttf") format("truetype");
+  font-weight: normal;
   font-style: normal;
   font-family: "Fredoka_SemiBold";
   src: url("./fonts/Fredoka-SemiBold.ttf");

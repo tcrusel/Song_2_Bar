@@ -1,13 +1,8 @@
 @font-face {
-  font-family: "Fredoka_light";
-  src: url("./fonts/Fredoka-Light.ttf");
   font-family: "Fredoka";
-  src: url("./font/Fredoka-Variable.ttf") format("truetype");
+  src: url("/fonts/Fredoka-Variable.ttf") format("truetype");
+  font-weight: 100 900;
   font-style: normal;
-  font-family: "Fredoka_SemiBold";
-  src: url("./fonts/Fredoka-SemiBold.ttf");
-  font-family: "Fredoka_regular";
-  src: url("./fonts/Fredoka-Regular.ttf");
 }
 
 :root {
@@ -19,12 +14,8 @@
   --text-color: white;
 }
 
-.bold {
-  font-weight: bolder;
-}
-
 body {
-  font-family: "Fredoka_regular", sans-serif;
+  font-family: "Fredoka", sans-serif;
 }
 
 .white {

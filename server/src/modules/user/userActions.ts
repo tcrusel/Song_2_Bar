@@ -10,16 +10,17 @@ const add: RequestHandler = async (req, res, next) => {
 
     if (
       !lastname ||
-      lastname === "" ||
+      lastname.length < 2 ||
       typeof lastname !== "string" ||
+      !/^[a-zA-ZÀ-ÿ\s\-']+$/.test(lastname) ||
       !firstname ||
-      firstname === "" ||
+      firstname.length < 2 ||
+      !/^[a-zA-ZÀ-ÿ\s\-']+$/.test(firstname) ||
       typeof firstname !== "string" ||
       !email ||
       email === "" ||
-      typeof email !== "string" ||
-      !hashed_password ||
-      hashed_password === ""
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+      typeof email !== "string"
     ) {
       res.sendStatus(StatusCodes.BAD_REQUEST);
     } else {

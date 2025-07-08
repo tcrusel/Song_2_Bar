@@ -1,4 +1,5 @@
-export type Event = {
+export type EventType = {
+  id: number;
   title: string;
   music_style: string;
   bar_name: string;
@@ -14,5 +15,6 @@ export type Event = {
   group_id: number;
   music_group_name: string;
   music_group_id: number;
-  start_time: number;
+  start_at: string;
+  end_at: string;
 };

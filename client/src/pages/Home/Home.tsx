@@ -1,6 +1,6 @@
-import "./HomePage.css";
+import "./Home.css";
 
-function HomePage() {
+function Home() {
   return (
     <>
       <main>
@@ -75,4 +75,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Home;

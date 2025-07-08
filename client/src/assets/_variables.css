@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Fredoka";
   src: url("/fonts/Fredoka-Variable.ttf") format("truetype");
-  font-weight: 100 900;
+  font-weight: 100 600;
   font-style: normal;
 }
 
@@ -18,8 +18,8 @@ body {
   font-family: "Fredoka", sans-serif;
 }
 
-.white {
-  color: white;
+.underline {
+  text-decoration: underline;
 }
 
 .bold {
@@ -35,7 +35,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.5 rem;
+  font-size: 1.7 rem;
 }
 
 h4 {

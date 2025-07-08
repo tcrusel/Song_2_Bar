@@ -1,4 +1,3 @@
-import { da } from "@faker-js/faker/.";
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 import type { Participate } from "../../types/participate";

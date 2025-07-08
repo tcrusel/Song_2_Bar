@@ -47,7 +47,7 @@ function Home() {
             <p>
               4.
               <img
-                src="/images/Home/images/mini-icone-guitare.png"
+                src="/images/Home/mini-icone-guitare.png"
                 alt="mini-icone-guitare"
               />
               Explorez les concerts du jour
@@ -55,7 +55,7 @@ function Home() {
             <p>
               5.
               <img
-                src="/images/Home/images/mini-icone-loupe.png"
+                src="/images/Home/mini-icone-loupe.png"
                 alt="mini-icone-loupe"
               />
               Utilisez les filtres
@@ -63,7 +63,7 @@ function Home() {
             <p>
               6.
               <img
-                src="/images/Home/images/mini-icone-carte.png"
+                src="/images/Home/mini-icone-carte.png"
                 alt="mini-icone-carte"
               />
               Trouvez votre chemin

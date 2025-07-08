@@ -101,7 +101,7 @@ section.event-header {
   font-size: 2rem;
 }
 
-.bar-adress {
+.bar-address {
   grid-column: 2 / 3;
   grid-row: 5 / 6;
   display: flex;
@@ -110,7 +110,7 @@ section.event-header {
   padding-top: 1rem;
 }
 
-.bar-adress p {
+.bar-address p {
   font-size: 1.4rem;
 }
 
@@ -129,7 +129,7 @@ section.event-header {
   font-size: 1.5rem;
 }
 
-.about {
+.description-container .about {
   font-size: 2rem;
   transform: rotate(-15deg);
 }

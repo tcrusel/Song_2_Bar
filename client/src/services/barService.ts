@@ -1,9 +1,9 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3310";
-
 export const barService = {
   async getBarById(id: number) {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/bars/${id}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/bars/${id}`,
+      );
 
       if (response.status === 404) {
         throw new Error("Bar not found");
@@ -17,47 +17,6 @@ export const barService = {
     } catch (error) {
       console.error("Error fetching bar:", error);
       throw new Error("Failed to fetch bar details");
-    }
-  },
-
-  async getAllBars() {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/bars`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error("Error fetching bars:", error);
-      throw new Error("Failed to fetch bars");
-    }
-  },
-
-  async getBarEvents(barId: number) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/bars/${barId}/events`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error("Error fetching bar events:", error);
-      throw new Error("Failed to fetch bar events");
-    }
-  },
-
-  async getUpcomingEvents(limit = 10) {
-    try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/events/upcoming?limit=${limit}`,
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error("Error fetching upcoming events:", error);
-      throw new Error("Failed to fetch upcoming events");
     }
   },
 };

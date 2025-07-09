@@ -1,3 +1,7 @@
+DROP DATABASE if exists song2bar;
+CREATE DATABASE song2bar;
+USE song2bar;
+
 CREATE TABLE bar (
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(100) NOT NULL,
@@ -149,7 +153,7 @@ CREATE TABLE user (
    role VARCHAR(50) NOT NULL,
    email VARCHAR(50) NOT NULL,
    hashed_password VARCHAR(100) NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO user (firstname, lastname, role, email, hashed_password) 
    VALUES
@@ -202,9 +206,10 @@ CREATE TABLE music_group (
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(50) NOT NULL,
    style VARCHAR(30) NOT NULL,
-   description TEXT NOT NULL, 
+   description TEXT NOT NULL,
    image VARCHAR(255) NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 
 INSERT INTO music_group (name, style, description, image)
    VALUES

@@ -21,7 +21,6 @@ function FavouriteGroup({ user_id, music_group_id }: FavouriteGroupInterface) {
       .then((response) => response.json())
       .then((data) => {
         setIsFavourite(data.isFavourite);
-        console.log("Fetched data:", data);
       })
       .catch((err) => console.error("Erreur fetch:", err));
   }, [user_id, music_group_id]);

@@ -1,6 +1,8 @@
 import argon2 from "argon2";
 import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
+import jwt from "jsonwebtoken";
+import type { MyPayload } from "../types/MyPayload";
 import userRepository from "./user/userRepository";
 
 const login: RequestHandler = async (req, res, next) => {
@@ -20,7 +22,23 @@ const login: RequestHandler = async (req, res, next) => {
     if (verified) {
       const { hashed_password, ...userWithoutHashedPassword } = user;
 
-      res.json({ userWithoutHashedPassword });
+      const myPayload: MyPayload = {
+        sub: user.id.toString(),
+        role: user.role,
+      };
+
+      const token = await jwt.sign(
+        myPayload,
+        process.env.APP_SECRET as string,
+        {
+          expiresIn: "3h",
+        },
+      );
+
+      res.json({
+        token,
+        user: userWithoutHashedPassword,
+      });
     } else {
       res.sendStatus(422);
     }

@@ -29,7 +29,7 @@ section {
   border-radius: 20px;
 }
 
-.music-style {
+.event-header .music-style {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 
@@ -98,11 +98,11 @@ section {
   color: white;
 }
 
-.bar-name {
+.bar-title {
   font-size: 2rem;
 }
 
-.bar-adress {
+.bar-address {
   grid-column: 2 / 3;
   grid-row: 5 / 6;
   display: flex;
@@ -111,8 +111,8 @@ section {
   padding-top: 1rem;
 }
 
-.bar-adress p {
-  font-size: 1rem;
+.bar-address p {
+  font-size: 1.4rem;
 }
 
 .description-container {
@@ -132,7 +132,7 @@ section {
   font-size: 1.5rem;
 }
 
-.about {
+.description-container .about {
   font-size: 2rem;
   transform: rotate(-15deg);
 }
@@ -166,7 +166,7 @@ section {
 
 .participate {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 @media (max-width: 833px) {
@@ -209,6 +209,9 @@ section {
   }
 
   section p {
+    font-size: 1rem;
+  }
+  .bar-address p {
     font-size: 1rem;
   }
 }

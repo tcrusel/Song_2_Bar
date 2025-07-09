@@ -30,6 +30,7 @@ class eventRepository {
     music_group.name AS music_group_name,
     music_group.style AS music_style,
     bar.name AS bar_name,
+    bar.id AS bar_id,
     bar.address AS address,
     bar.postcode,
     bar.city,

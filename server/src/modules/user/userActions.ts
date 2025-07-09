@@ -4,8 +4,15 @@ import userRepository from "./userRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const { lastname, firstname, email, hashed_password } = req.body;
+    const { email } = req.body;
+    const existingUser = await userRepository.findByEmail(email);
 
+    if (existingUser) {
+      res.sendStatus(StatusCodes.CONFLICT);
+      return;
+    }
+
+    const { lastname, firstname, hashed_password } = req.body;
     const role = "user";
 
     if (

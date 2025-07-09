@@ -5,7 +5,6 @@ body {
 .events {
   display: flex;
   justify-content: flex-start;
-  font-family: "Fredoka_regular", sans-serif;
 }
 
 .filters {

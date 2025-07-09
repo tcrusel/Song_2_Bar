@@ -8,7 +8,6 @@ function CalendarPopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   const clickValidate = () => {
-    console.log("Date validée :", selectedDate);
     setIsOpen(false);
   };
 

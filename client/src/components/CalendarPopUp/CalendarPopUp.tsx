@@ -7,12 +7,12 @@ function CalendarPopup() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleValidate = () => {
+  const clickValidate = () => {
     console.log("Date validée :", selectedDate);
     setIsOpen(false);
   };
 
-  const handleCancel = () => {
+  const clickCancel = () => {
     setSelectedDate(null);
     setIsOpen(false);
   };
@@ -29,7 +29,6 @@ function CalendarPopup() {
 
       {isOpen && (
         <div className="calendar-modal">
-          <h3 className="calendar-title">Pop up Calendar</h3>
           <DatePicker
             selected={selectedDate}
             onChange={(date: Date | null) => setSelectedDate(date)}
@@ -38,13 +37,13 @@ function CalendarPopup() {
             locale="fr"
           />
           <div className="calendar-actions">
-            <button type="button" className="btn-cancel" onClick={handleCancel}>
+            <button type="button" className="btn-cancel" onClick={clickCancel}>
               ANNULER
             </button>
             <button
               type="button"
               className="btn-validate"
-              onClick={handleValidate}
+              onClick={clickValidate}
             >
               VALIDER
             </button>

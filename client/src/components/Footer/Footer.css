@@ -3,10 +3,11 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  width: 100%;
   height: 20rem;
   padding: 10px;
 }
+
 .follow-us {
   color: white;
 }
@@ -14,11 +15,13 @@ footer {
 .legal-notices {
   color: white;
 }
+
 .image-social-logo {
   display: flex;
   gap: 1.5rem;
   margin: 1rem;
 }
+
 .image-social-logo img {
   width: 30px;
   height: 30px;
@@ -104,6 +107,7 @@ footer section p {
   align-items: center;
   margin-bottom: 1rem;
 }
+
 .info-song2bar p {
   font-size: 11px;
 }
@@ -112,12 +116,15 @@ footer section p {
   display: flex;
   gap: 10px;
 }
+
 .newletter p {
   color: #aa682e;
 }
+
 .song2bar p {
   color: #2f6b75;
 }
+
 .about-contact {
   display: flex;
   gap: 50px;
@@ -126,6 +133,7 @@ footer section p {
 .about p {
   color: #aa682e;
 }
+
 .contact p {
   color: #2f6b75;
 }
@@ -135,15 +143,18 @@ footer section p {
     flex-direction: column;
     height: 40rem;
   }
+
   .footer-images {
     justify-content: space-evenly;
     margin-left: 0rem;
   }
+
   .network {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   .info-song2bar p {
     font-size: 1rem;
   }

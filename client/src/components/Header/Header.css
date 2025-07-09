@@ -1,6 +1,6 @@
 .header {
   position: relative;
-  width: 93rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -10,11 +10,16 @@
   border-radius: 35px;
   background-color: #ebd2a4;
   font-size: 1rem;
-  margin-right: 4rem;
   width: 38rem;
   max-width: 600px;
   height: 4.5rem;
   padding: 20px;
+}
+
+.connexion-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 229px;
 }
 
 .logo-connexion-button {

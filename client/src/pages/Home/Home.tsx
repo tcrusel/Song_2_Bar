@@ -8,10 +8,8 @@ function Home() {
       <main>
         <img
           className="flower-guitar"
-          src="../../../images/micro-guitard.svg"
+          src="../../../images/micro-guitare.svg"
           alt="représentation de la guitare avec des fleurs"
-          width="cover"
-          height="auto"
         />
         <section className="guide">
           <button className="when-button" type="button">

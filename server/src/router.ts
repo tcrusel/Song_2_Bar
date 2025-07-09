@@ -1,6 +1,6 @@
 import express from "express";
-import groupActions from "./modules/groups/groupActions";
 import favouriteGroupActions from "./modules/favourite/favouriteGroupAction/favouriteGroupActions";
+import groupActions from "./modules/groups/groupActions";
 
 const router = express.Router();
 

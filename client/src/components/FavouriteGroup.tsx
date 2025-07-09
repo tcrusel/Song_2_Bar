@@ -1,43 +1,70 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dislikeIcon from "../../public/images/dislike.png";
 import likeIcon from "../../public/images/like.png";
 import "./FavouriteGroup.css";
 
-function FavouriteGroup() {
-  const [isfavourite, setIsFavourite] = useState(false);
-  const [isPoPuped, setisPoPuped] = useState(false);
+type FavouriteGroupInterface = {
+  user_id: number;
+  music_group_id: number;
+};
+
+function FavouriteGroup({ user_id, music_group_id }: FavouriteGroupInterface) {
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  useEffect(() => {
+    if (!user_id || !music_group_id) return;
+
+    fetch(
+      `${import.meta.env.VITE_API_URL}/api/favourite_music_group?user_id=${user_id}&music_group_id=${music_group_id}`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setIsFavourite(data.isFavourite);
+        console.log("Fetched data:", data);
+      })
+      .catch((err) => console.error("Erreur fetch:", err));
+  }, [user_id, music_group_id]);
+
+  const handleToggleFavourite = () => {
+    const newStatus = !isFavourite;
+    setIsFavourite(newStatus);
+    setIsPopupVisible(true);
+
+    fetch(`${import.meta.env.VITE_API_URL}/api/favourite_music_group`, {
+      method: newStatus ? "POST" : "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_id, music_group_id }),
+    }).catch((err) => console.error("Erreur lors du toggle:", err));
+
+    setTimeout(() => setIsPopupVisible(false), 3000);
+  };
 
   return (
-    <>
-      <div className="container-Favourite">
-        <button
-          type="button"
-          onClick={() => {
-            setIsFavourite(!isfavourite);
-            setisPoPuped(true);
-            setTimeout(() => setisPoPuped(false), 3000);
-          }}
-        >
-          <img
-            src={isfavourite ? likeIcon : dislikeIcon}
-            alt={
-              isfavourite
-                ? "icon quand c'est favorisé"
-                : "icon quand ce n'est pas favorisé"
-            }
-            width="30px"
-            height="auto"
-          />
-        </button>
-        {isPoPuped && (
-          <div className="popup">
-            {isfavourite
-              ? "Groupe ajouté aux favoris"
-              : " Groupe retiré des favoris"}
-          </div>
-        )}
-      </div>
-    </>
+    <div className="container-Favourite">
+      <button type="button" onClick={handleToggleFavourite}>
+        <img
+          src={isFavourite ? likeIcon : dislikeIcon}
+          alt={
+            isFavourite
+              ? "Icône de groupe favorisé"
+              : "Icône de groupe non favorisé"
+          }
+          width="30px"
+          height="auto"
+        />
+      </button>
+
+      {isPopupVisible && (
+        <div className="popup">
+          {isFavourite
+            ? "Groupe ajouté aux favoris"
+            : "Groupe retiré des favoris"}
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -1,21 +1,22 @@
 import express from "express";
+import cors from "cors";
+import fs from "node:fs";
+import path from "node:path";
+import type { ErrorRequestHandler } from "express";
 
 const app = express();
-
-import cors from "cors";
 
 if (process.env.CLIENT_URL != null) {
   app.use(cors({ origin: [process.env.CLIENT_URL] }));
 }
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.text());
+app.use(express.raw());
 
 import router from "./router";
-
 app.use(router);
-
-import fs from "node:fs";
-import path from "node:path";
 
 const publicFolderPath = path.join(__dirname, "../../server/public");
 
@@ -33,12 +34,9 @@ if (fs.existsSync(clientBuildPath)) {
   });
 }
 
-import type { ErrorRequestHandler } from "express";
-
 const logErrors: ErrorRequestHandler = (err, req, res, next) => {
   console.error(err);
   console.error("on req:", req.method, req.path);
-
   next(err);
 };
 

@@ -13,7 +13,10 @@ function MusicGroup() {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/groups/${id}`)
       .then((response) => response.json())
-      .then((musicGroup) => setMusicGroup(musicGroup));
+      .then((musicGroup) => {
+        setMusicGroup(musicGroup);
+        console.log(musicGroup);
+      });
   }, [id]);
 
   if (!musicGroup)

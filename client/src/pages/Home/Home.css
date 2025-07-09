@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
 }
-.flower-guitar img {
-  width: 100vw;
+.flower-guitar {
+  width: 100%;
   height: auto;
   display: block;
 }

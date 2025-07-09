@@ -18,16 +18,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/events",
-        element: <Events />,
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/login",
         element: <Login />,
       },
       {
-        path: "/register",
-        element: <Register />,
+        path: "/events",
+        element: <Events />,
       },
       {
         path: "/events/:id",
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         element: <MusicGroup />,
       },
       {
-        path: "/bar/:id",
+        path: "/bars/:id",
         element: <BarPage />,
       },
     ],

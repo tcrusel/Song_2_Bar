@@ -1,6 +1,8 @@
 import FavouriteGroup from "../../components/FavouriteGroup";
 import "./Home.css";
 import "./../../assets/_variables.css";
+const userId = 1;
+const groupId = 2;
 
 function Home() {
   return (
@@ -66,7 +68,7 @@ function Home() {
             </div>
           </article>
         </section>
-        <FavouriteGroup />
+        <FavouriteGroup user_id={userId} music_group_id={groupId} />
       </main>
     </>
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import dislikeIcon from "../../public/images/dislike.png";
 import likeIcon from "../../public/images/like.png";
 import "./FavouriteGroup.css";
@@ -28,11 +28,17 @@ function FavouriteGroup({ user_id, music_group_id }: FavouriteGroupInterface) {
 
   const handleToggleFavourite = () => {
     const newStatus = !isFavourite;
+
+    if (isFavourite && newStatus) {
+      console.log("Déjà dans les favoris, aucune action nécessaire.");
+      return;
+    }
+
     setIsFavourite(newStatus);
     setIsPopupVisible(true);
 
     fetch(`${import.meta.env.VITE_API_URL}/api/favourite_music_group`, {
-      method: newStatus ? "POST" : "DELETE",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -41,7 +47,6 @@ function FavouriteGroup({ user_id, music_group_id }: FavouriteGroupInterface) {
 
     setTimeout(() => setIsPopupVisible(false), 3000);
   };
-
   return (
     <div className="container-Favourite">
       <button type="button" onClick={handleToggleFavourite}>

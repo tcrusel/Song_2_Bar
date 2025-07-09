@@ -1,6 +1,5 @@
 import type { RequestHandler } from "express";
 import favouriteGroupRepository from "./favouriteGroupRepository";
-import { id_ID } from "@faker-js/faker/.";
 
 const add: RequestHandler = async (req, res, next) => {
   try {

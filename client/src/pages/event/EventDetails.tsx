@@ -72,9 +72,14 @@ function EventDetails() {
             <div className="localisation-icon">
               <img src="/event_icon/localisation.png" alt="localisation-icon" />
             </div>
-            <p className={"bar-name bold white"}>{event.bar_name}</p>
+            <Link
+              to={`/bar/${event.bar_id}`}
+              className={"bar-title bold white"}
+            >
+              {event.bar_name}
+            </Link>
           </div>
-          <div className={"bar-adress white"}>
+          <div className={"bar-address"}>
             <p>{event.address}</p>
             <p>
               {event.postcode} {event.city}

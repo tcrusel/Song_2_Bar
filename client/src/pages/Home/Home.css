@@ -1,3 +1,10 @@
+body {
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: #23241f;
+}
 .guide {
   display: flex;
   flex-direction: column;

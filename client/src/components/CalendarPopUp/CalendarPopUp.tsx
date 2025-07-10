@@ -41,7 +41,6 @@ function CalendarPopup() {
               type="button"
               className="btn-validate"
               onClick={() => {
-                console.log("Date validée :", selectedDate);
                 setIsOpen(false);
               }}
             >

@@ -4,16 +4,13 @@ import router from "./router";
 import "./reset.css";
 import "./assets/_variables.css";
 import { AuthProvider } from "./contexts/AuthContext";
-import { UserProvider } from "./contexts/UserContext";
 
 const rootElement = document.getElementById("root");
 
 if (rootElement) {
   createRoot(rootElement).render(
     <AuthProvider>
-      <UserProvider>
-        <RouterProvider router={router} />
-      </UserProvider>
+      <RouterProvider router={router} />
     </AuthProvider>,
   );
 } else {

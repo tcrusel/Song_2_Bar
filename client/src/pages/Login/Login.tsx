@@ -28,13 +28,10 @@ export default function Login() {
       );
 
       if (response.status === 200) {
-        const result = await response.json();
-        setAuth({
-          token: result.token,
-          user: result.user,
-        });
+        const user = await response.json();
+        setAuth(user);
 
-        navigate("/");
+        navigate("/events/10");
       } else {
         console.info(response);
         toast(

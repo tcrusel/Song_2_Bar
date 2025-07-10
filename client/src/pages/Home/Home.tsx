@@ -10,11 +10,7 @@ function Home() {
       <main>
         <img
           className="flower-guitar"
-<<<<<<< HEAD
           src="../../../images/micro-guitare.svg"
-=======
-          src="/images/home_images/micro-guitard.svg"
->>>>>>> dev
           alt="représentation de la guitare avec des fleurs"
         />
         <section className="guide">

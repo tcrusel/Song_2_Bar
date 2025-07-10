@@ -1,3 +1,4 @@
+import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
 import "./Home.css";
 
 function Home() {
@@ -12,13 +13,7 @@ function Home() {
           height="auto"
         />
         <section className="guide">
-          <button
-            className="when-button"
-            type="button"
-            style={{ width: "28rem", height: "6rem" }}
-          >
-            QUAND ?
-          </button>
+          <CalendarPopup />
           <article className="user-action">
             <p>
               1.

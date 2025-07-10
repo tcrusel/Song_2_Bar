@@ -27,6 +27,11 @@ function Register() {
   const noRefresh: FormEventHandler = async (event) => {
     event.preventDefault();
 
+    if (password.length < 8 || password !== confirmPassword) {
+      toast("Création de compte invalide !", { type: "error" });
+      return;
+    }
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/users`,
@@ -42,6 +47,13 @@ function Register() {
           }),
         },
       );
+
+      if (response.status === 409) {
+        toast("Cet e-mail est déjà lié à un compte existant", {
+          type: "error",
+        });
+        return;
+      }
 
       if (response.status === 201) {
         navigate("/login");
@@ -108,12 +120,7 @@ function Register() {
             Se connecter
           </Link>
         </h3>
-        <ToastContainer
-          position="top-right"
-          theme="colored"
-          autoClose={2000}
-          limit={2}
-        />
+        <ToastContainer position="top-right" theme="colored" autoClose={3000} />
       </section>
     </>
   );

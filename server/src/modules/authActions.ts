@@ -6,7 +6,7 @@ import userRepository from "./user/userRepository";
 
 const login: RequestHandler = async (req, res, next) => {
   try {
-    const user = await userRepository.readByEmail(req.body.email);
+    const user = await userRepository.findByEmail(req.body.email);
 
     if (user == null) {
       res.sendStatus(StatusCodes.UNPROCESSABLE_ENTITY);

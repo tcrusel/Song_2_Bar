@@ -8,3 +8,9 @@ main .date-button {
   display: block;
   margin: auto;
 }
+
+.calendar-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

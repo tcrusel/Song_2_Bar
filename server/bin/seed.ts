@@ -52,16 +52,16 @@ const seed = async () => {
       solveDependencies(seeder);
     }
 
-    // Truncate tables (starting from the depending ones)
-
+    // Truncate tables (starting from the depending ones) - ONLY if truncate is true
     for (const seeder of sortedSeeders.toReversed()) {
-      // Use delete instead of truncate to bypass foreign key constraint
-      // Wait for the delete promise to complete
-      await database.query(`delete from ${seeder.table}`);
+      if (seeder.truncate) {
+        // Use delete instead of truncate to bypass foreign key constraint
+        // Wait for the delete promise to complete
+        await database.query(`delete from ${seeder.table}`);
+      }
     }
 
     // Run each seeder
-
     for (const seeder of sortedSeeders) {
       await seeder.run();
 

@@ -12,7 +12,7 @@ function CalendarPopup() {
       <button
         type="button"
         className="date-button"
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpen(!isOpen)}
       >
         QUAND ?
       </button>
@@ -27,16 +27,6 @@ function CalendarPopup() {
             locale="fr"
           />
           <div className="calendar-actions">
-            <button
-              type="button"
-              className="btn-cancel"
-              onClick={() => {
-                setSelectedDate(null);
-                setIsOpen(false);
-              }}
-            >
-              ANNULER
-            </button>
             <button
               type="button"
               className="btn-validate"

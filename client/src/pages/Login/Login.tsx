@@ -1,15 +1,15 @@
 import { type FormEventHandler, useRef } from "react";
 import { useNavigate } from "react-router";
-import { useUser } from "../../contexts/UserContext";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import LogoSite from "/images/logo-site.png";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { setAuth } = useAuth();
 
   const noRefresh: FormEventHandler = async (event) => {
     event.preventDefault();
@@ -28,9 +28,11 @@ export default function Login() {
       );
 
       if (response.status === 200) {
-        const user = await response.json();
-
-        setUser(user);
+        const result = await response.json();
+        setAuth({
+          token: result.token,
+          user: result.user,
+        });
 
         navigate("/");
       } else {

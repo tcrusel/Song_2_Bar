@@ -98,7 +98,7 @@ section {
   color: white;
 }
 
-.bar-name {
+.bar-title {
   font-size: 2rem;
 }
 
@@ -166,7 +166,7 @@ section {
 
 .participate {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 @media (max-width: 833px) {

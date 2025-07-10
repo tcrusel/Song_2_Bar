@@ -2,7 +2,6 @@ import argon2 from "argon2";
 import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
-import type { MyPayload } from "../types/MyPayload";
 import userRepository from "./user/userRepository";
 
 const login: RequestHandler = async (req, res, next) => {
@@ -10,7 +9,7 @@ const login: RequestHandler = async (req, res, next) => {
     const user = await userRepository.readByEmail(req.body.email);
 
     if (user == null) {
-      res.sendStatus(422);
+      res.sendStatus(StatusCodes.UNPROCESSABLE_ENTITY);
       return;
     }
 
@@ -40,7 +39,7 @@ const login: RequestHandler = async (req, res, next) => {
         user: userWithoutHashedPassword,
       });
     } else {
-      res.sendStatus(422);
+      res.sendStatus(StatusCodes.UNPROCESSABLE_ENTITY);
     }
   } catch (err) {
     next(err);
@@ -49,25 +48,37 @@ const login: RequestHandler = async (req, res, next) => {
 
 const hashPassword: RequestHandler = async (req, res, next) => {
   try {
-    const { password, confirmPassword } = req.body;
+    const { password } = req.body;
+    const hashedPassword = await argon2.hash(password);
+    req.body.hashed_password = hashedPassword;
+    req.body.password = undefined;
 
-    if (
-      !password ||
-      password === "" ||
-      password.length < 8 ||
-      confirmPassword !== password
-    ) {
-      res.sendStatus(StatusCodes.BAD_REQUEST);
-    } else {
-      const hashedPassword = await argon2.hash(password);
-      req.body.hashed_password = hashedPassword;
-      req.body.password = undefined;
-
-      next();
-    }
+    next();
   } catch (err) {
     next(err);
   }
 };
 
-export default { login, hashPassword };
+const verifyToken: RequestHandler = (req, res, next) => {
+  try {
+    const authorizationHeader = req.get("Authorization");
+    if (authorizationHeader == null) {
+      throw new Error("Authorization header is missing");
+    }
+
+    const [type, token] = authorizationHeader.split(" ");
+
+    if (type !== "Bearer") {
+      throw new Error("Authorization header has not the 'Bearer' type");
+    }
+
+    req.auth = jwt.verify(token, process.env.APP_SECRET as string) as MyPayload;
+
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
+
+export default { login, hashPassword, verifyToken };

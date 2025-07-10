@@ -3,6 +3,11 @@ import { StatusCodes } from "http-status-codes";
 import participateRepository from "./participateRepository";
 
 const add: RequestHandler = async (req, res, next) => {
+  if (!req.auth.role) {
+    res.sendStatus(403);
+    return;
+  }
+
   try {
     if (
       !req.body.userId ||
@@ -14,7 +19,7 @@ const add: RequestHandler = async (req, res, next) => {
     }
 
     const newParticipation = {
-      userId: req.body.userId,
+      userId: Number.parseInt(req.auth.sub),
       eventId: req.body.eventId,
     };
 

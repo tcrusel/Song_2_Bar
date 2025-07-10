@@ -1,4 +1,4 @@
-import FavouriteGroup from "../../components/FavouriteGroup";
+import FavouriteGroup from "../../components/Music_group/FavouriteGroup";
 import "./Home.css";
 import "./../../assets/_variables.css";
 const userId = 1;

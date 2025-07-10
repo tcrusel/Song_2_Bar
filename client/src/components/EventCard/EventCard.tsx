@@ -23,32 +23,35 @@ function EventCard({ event }: EventCardProps) {
         }
       }}
     >
-      <div className="card-image">
+      <aside className="card-image">
         <img
           className="card-image"
           src={event.image}
           alt={`Illustration de ${event.title}`}
         />
-      </div>
-      <div className="card-content">
+      </aside>
+      <aside className="card-content">
         <h2 className="event-title">{event.title}</h2>
         <p className="event-style">{event.music_style}</p>
-      </div>
-      <div className="card-bottom">
-        <p className="event-bar">
+      </aside>
+      <aside className="card-bottom">
+        <div className="card-bottom-corner">
           <img
-            src="/icon/location_icon.png"
+            src="/images/event_images/location_icon.png"
             alt="Localisation"
             className="location_icon"
           />
-          {event.bar_name}
-        </p>
-
-        <p className="event-time">
-          <img src="/icon/time_icon.png" alt="Heure" className="time_icon" />
-          {formatTime(event.start_at)}
-        </p>
-      </div>
+          <p className="event-bar">{event.bar_name}</p>
+        </div>
+        <div className="card-bottom-corner">
+          <img
+            src="/images/event_images/time_icon.png"
+            alt="Heure"
+            className="time_icon"
+          />
+          <p className="event-time">{formatTime(event.start_at)}</p>
+        </div>
+      </aside>
     </article>
   );
 }

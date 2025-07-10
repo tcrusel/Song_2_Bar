@@ -2,12 +2,15 @@
 export type {};
 
 declare global {
+  export type MyPayload = JwtPayload & { sub: string; role: string };
+
   namespace Express {
     export interface Request {
       /* ************************************************************************* */
       // Add your custom properties here, for example:
       //
       // user?: { ... }
+      auth: MyPayload;
       /* ************************************************************************* */
     }
   }

@@ -2,7 +2,7 @@ import "./MusicGroup.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styleIcon from "/images/group_images/music-style-icon.svg";
-import Favourite from "../../components/Favourite/FavouriteTest";
+import Favourite from "../../components/Favourite/Favourite";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 
 function MusicGroup() {

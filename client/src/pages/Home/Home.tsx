@@ -1,7 +1,18 @@
+import { useState } from "react";
 import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
 import "./Home.css";
 
+import { useNavigate } from "react-router";
+
 function Home() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const navigate = useNavigate();
+  const DateChange = (date: Date | null) => {
+    setSelectedDate(date);
+    if (date) {
+      navigate("/events", { state: { selectedDate: date.toISOString() } });
+    }
+  };
   return (
     <>
       <main>
@@ -13,7 +24,8 @@ function Home() {
           height="auto"
         />
         <section className="guide">
-          <CalendarPopup />
+          <CalendarPopup value={selectedDate} onChange={DateChange} />
+
           <article className="user-action">
             <p>
               1.

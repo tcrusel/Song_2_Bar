@@ -1,10 +1,22 @@
 import EventCard from "../../components/EventCard/EventCard";
 import "./Event.css";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import type { EventType } from "../../types/Event";
 
+const formatDate = (dateInput: Date | string) => {
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 function Events() {
-  const [events, setEvents] = useState<EventType[]>([]);
+  const location = useLocation();
+  const selectedDate = location.state?.selectedDate || null;
+  const [allEvents, setAllEvents] = useState<EventType[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<EventType[]>([]);
   const [error, setError] = useState(false);
   useEffect(() => {
     async function fetchEvent() {
@@ -15,22 +27,44 @@ function Events() {
           return;
         }
         const events = await res.json();
-        setEvents(events);
+        setAllEvents(events);
+        setFilteredEvents(events);
       } catch (error) {
         console.error("Erreur lors du fetch", error);
       }
     }
     fetchEvent();
   }, []);
+
+  useEffect(() => {
+    if (selectedDate) {
+      const formatted = formatDate(selectedDate);
+      const filtered = allEvents.filter((event) => {
+        const eventDate = new Date(event.date);
+        const eventFormatted = formatDate(eventDate);
+        // 🧪 Log pour debug
+        console.log("Comparaison :", {
+          selected: formatted,
+          event: eventFormatted,
+          rawEventDate: event.date,
+        });
+        return eventFormatted === formatted;
+      });
+      setFilteredEvents(filtered);
+    } else {
+      setFilteredEvents(allEvents);
+    }
+  }, [selectedDate, allEvents]);
+
   if (error) return <h1>Désolé il n'y a pas d'évènements </h1>;
 
   return (
     <>
-      {!events ? (
-        <p>Chargement en cours...</p>
+      {filteredEvents.length === 0 ? (
+        <p>Aucun événement trouvé pour cette date</p>
       ) : (
         <section className="event-list">
-          {events.map((event) => (
+          {filteredEvents.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
         </section>

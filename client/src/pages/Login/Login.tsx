@@ -24,6 +24,13 @@ export default function Login() {
         },
       );
     }
+    if (!state?.islogged) {
+      toast("Veuillez vous connecter pour participer à un évènement", {
+        type: "error",
+        position: "top-right",
+        autoClose: 4000,
+      });
+    }
   }, [state]);
 
   const loginUser: FormEventHandler = async (event) => {

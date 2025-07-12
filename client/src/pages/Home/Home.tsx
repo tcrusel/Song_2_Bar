@@ -1,4 +1,4 @@
-import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
+import CalendarPopUp from "../../components/CalendarPopUp/CalendarPopUp";
 import "./Home.css";
 
 function Home() {
@@ -13,7 +13,7 @@ function Home() {
           height="auto"
         />
         <section className="guide">
-          <CalendarPopup />
+          <CalendarPopUp />
           <article className="user-action">
             <p>
               1.

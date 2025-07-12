@@ -15,7 +15,6 @@ function Participate() {
   const eventId = Number(id);
 
   const addParticipate = async () => {
-    console.log(auth);
     if (!auth) {
       toast("Veuillez vous connecter pour participer", { type: "warning" });
       navigate("/login");

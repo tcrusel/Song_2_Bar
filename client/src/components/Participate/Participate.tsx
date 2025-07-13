@@ -16,8 +16,7 @@ function Participate() {
 
   const addParticipate = async () => {
     if (!auth) {
-      toast("Veuillez vous connecter pour participer", { type: "warning" });
-      navigate("/login");
+      navigate("/login", { state: { islogged: false } });
       return;
     }
 

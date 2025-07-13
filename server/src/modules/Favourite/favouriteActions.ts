@@ -9,9 +9,6 @@ const add: RequestHandler = async (req, res, next) => {
   }
 
   try {
-    console.log(req.body.userId);
-    console.log(req.body.barId);
-
     if (
       !req.body.userId ||
       !req.body.barId ||
@@ -26,7 +23,8 @@ const add: RequestHandler = async (req, res, next) => {
       barId: req.body.barId,
     };
 
-    const affectedRows = await favouriteRepository.create(newFavouriteBar);
+    const affectedRows =
+      await favouriteRepository.favouriteBar(newFavouriteBar);
 
     if (affectedRows <= 0) {
       res
@@ -40,4 +38,40 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { add };
+const destroy: RequestHandler = async (req, res, next) => {
+  if (!req.auth.role) {
+    res.sendStatus(StatusCodes.FORBIDDEN);
+    return;
+  }
+
+  try {
+    const userId = Number(req.params.userId);
+    const barId = Number(req.params.barId);
+
+    if (
+      !userId ||
+      !barId ||
+      typeof userId !== "number" ||
+      typeof barId !== "number"
+    ) {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+    }
+
+    const affectedRows = await favouriteRepository.unfavouriteBar(
+      userId,
+      barId,
+    );
+
+    if (affectedRows <= 0) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Echec de la suppression" });
+    } else {
+      res.status(StatusCodes.NO_CONTENT).json({ affectedRows });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { add, destroy };

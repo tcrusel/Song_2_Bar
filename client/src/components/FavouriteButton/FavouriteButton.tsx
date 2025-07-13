@@ -5,9 +5,13 @@ import "./FavouriteButton.css";
 
 type FavouriteButtonProps = {
   favouriteBar: () => Promise<void>;
+  unfavouriteBar: () => Promise<void>;
 };
 
-function FavouriteButton({ favouriteBar }: FavouriteButtonProps) {
+function FavouriteButton({
+  favouriteBar,
+  unfavouriteBar,
+}: FavouriteButtonProps) {
   const [isFavourite, setIsFavourite] = useState(false);
 
   return (
@@ -19,6 +23,7 @@ function FavouriteButton({ favouriteBar }: FavouriteButtonProps) {
           favouriteBar();
           setIsFavourite(true);
         } else {
+          unfavouriteBar();
           setIsFavourite(false);
         }
       }}

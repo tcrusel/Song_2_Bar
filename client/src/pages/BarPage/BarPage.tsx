@@ -128,6 +128,39 @@ function BarPage() {
     }
   };
 
+  const unfavouriteBar = async () => {
+    if (!auth) {
+      navigate("/login", { state: { isloggedToFavouriteBar: false } });
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/favourite_bar/${userId}/${barId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          },
+        },
+      );
+      if (response) {
+        toast("Ce bar a été retiré de vos favoris", {
+          type: "info",
+        });
+      } else {
+        throw new Error("Erreur serveur");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la favorisation du bar", error);
+      toast("Impossible de retirer le bar de votre liste de favoris", {
+        type: "error",
+      });
+      throw error;
+    }
+  };
+
   return (
     <div className="bar-details">
       <div className="return-button-container">
@@ -138,7 +171,11 @@ function BarPage() {
 
       <div className="bar-name-banner">
         <h1 className="bar-name">
-          {bar.name} <FavouriteButton favouriteBar={favouriteBar} />
+          {bar.name}{" "}
+          <FavouriteButton
+            favouriteBar={favouriteBar}
+            unfavouriteBar={unfavouriteBar}
+          />
         </h1>
       </div>
 

@@ -42,12 +42,6 @@ function Events() {
       const filtered = allEvents.filter((event) => {
         const eventDate = new Date(event.date);
         const eventFormatted = formatDate(eventDate);
-        // 🧪 Log pour debug
-        console.log("Comparaison :", {
-          selected: formatted,
-          event: eventFormatted,
-          rawEventDate: event.date,
-        });
         return eventFormatted === formatted;
       });
       setFilteredEvents(filtered);

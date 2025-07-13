@@ -1,4 +1,5 @@
 import express from "express";
+import favouriteActions from "./modules/Favourite/favouriteActions";
 import authActions from "./modules/authActions";
 import barActions from "./modules/bar/barActions";
 import eventActions from "./modules/event/eventActions";
@@ -22,5 +23,7 @@ router.post("/api/login", authActions.login);
 router.use(authActions.verifyToken);
 
 router.post("/api/participate", participateActions.add);
+
+router.post("/api/favourite_bar", favouriteActions.add);
 
 export default router;

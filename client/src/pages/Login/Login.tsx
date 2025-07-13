@@ -31,7 +31,7 @@ export default function Login() {
         const user = await response.json();
         setAuth(user);
 
-        navigate("/events/10");
+        navigate("/bars/7");
       } else {
         console.info(response);
         toast(

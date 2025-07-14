@@ -36,11 +36,13 @@ function Participate() {
         },
       );
 
-      if (!response.ok) {
+      if (response) {
+        toast("Vous participez à cet évènement", {
+          type: "success",
+        });
+      } else {
         throw new Error("Erreur serveur");
       }
-
-      setIsParticipated(true);
     } catch (error) {
       console.error("Erreur lors de la participation à cet évènement", error);
       toast("Erreur lors de l'inscription à l'évènement", { type: "error" });
@@ -54,14 +56,12 @@ function Participate() {
         className="participate-button"
         type="button"
         onClick={() => {
-          setIsParticipated(!isParticipated);
-          isParticipated
-            ? toast("Vous ne participez plus à cet évènement", {
-                type: "info",
-              })
-            : toast("Vous participez à cet évènement", {
-                type: "success",
-              }) && addParticipate();
+          if (!isParticipated) {
+            addParticipate();
+            setIsParticipated(true);
+          } else {
+            setIsParticipated(false);
+          }
         }}
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}

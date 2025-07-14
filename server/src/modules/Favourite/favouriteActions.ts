@@ -2,7 +2,7 @@ import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import favouriteRepository from "./favouriteRepository";
 
-const add: RequestHandler = async (req, res, next) => {
+const addFavouriteBar: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);
     return;
@@ -38,7 +38,7 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-const destroy: RequestHandler = async (req, res, next) => {
+const destroyFavouriteBar: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);
     return;
@@ -74,4 +74,81 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { add, destroy };
+const addFavouriteEvent: RequestHandler = async (req, res, next) => {
+  if (!req.auth.role) {
+    res.sendStatus(StatusCodes.FORBIDDEN);
+    return;
+  }
+
+  try {
+    if (
+      !req.body.userId ||
+      !req.body.eventId ||
+      typeof req.body.userId !== "number" ||
+      typeof req.body.eventId !== "number"
+    ) {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+    }
+
+    const newFavouriteEvent = {
+      userId: Number.parseInt(req.auth.sub),
+      eventId: req.body.eventId,
+    };
+
+    const affectedRows =
+      await favouriteRepository.favouriteEvent(newFavouriteEvent);
+
+    if (affectedRows <= 0) {
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "La favorisation de l'évènement a échoué" });
+    } else {
+      res.status(StatusCodes.CREATED).json({ affectedRows });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const destroyFavouriteEvent: RequestHandler = async (req, res, next) => {
+  if (!req.auth.role) {
+    res.sendStatus(StatusCodes.FORBIDDEN);
+    return;
+  }
+
+  try {
+    const userId = Number(req.params.userId);
+    const eventId = Number(req.params.eventId);
+
+    if (
+      !userId ||
+      !eventId ||
+      typeof userId !== "number" ||
+      typeof eventId !== "number"
+    ) {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+    }
+
+    const affectedRows = await favouriteRepository.unfavouriteEvent(
+      userId,
+      eventId,
+    );
+
+    if (affectedRows <= 0) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Echec de la suppression" });
+    } else {
+      res.status(StatusCodes.NO_CONTENT).json({ affectedRows });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default {
+  addFavouriteBar,
+  destroyFavouriteBar,
+  addFavouriteEvent,
+  destroyFavouriteEvent,
+};

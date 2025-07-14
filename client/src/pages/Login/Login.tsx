@@ -38,6 +38,13 @@ export default function Login() {
         autoClose: 4000,
       });
     }
+    if (state?.isloggedToFavouriteEvent === false) {
+      toast("Veuillez vous connecter pour ajouter un évènement à vos favoris", {
+        type: "error",
+        position: "top-right",
+        autoClose: 4000,
+      });
+    }
   }, [state]);
 
   const loginUser: FormEventHandler = async (event) => {
@@ -60,7 +67,7 @@ export default function Login() {
         const user = await response.json();
         setAuth(user);
 
-        navigate("/");
+        navigate("/events/10");
       } else {
         console.info(response);
         toast(

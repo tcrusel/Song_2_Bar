@@ -2,7 +2,7 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
 class favouriteRepository {
-  async favouriteBar(favourite: Partial<Favourite>) {
+  async favouriteBar(favourite: Partial<FavouriteBar>) {
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO favourite_bar (user_id, bar_id) VALUES (?, ?)",
       [favourite.userId, favourite.barId],
@@ -15,6 +15,24 @@ class favouriteRepository {
     const [result] = await databaseClient.query<Result>(
       "DELETE FROM favourite_bar WHERE user_id = ? AND bar_id = ?",
       [userId, barId],
+    );
+
+    return result.affectedRows;
+  }
+
+  async favouriteEvent(favourite: Partial<FavouriteEvent>) {
+    const [result] = await databaseClient.query<Result>(
+      "INSERT INTO favourite_event (user_id, event_id) VALUES (?, ?)",
+      [favourite.userId, favourite.eventId],
+    );
+
+    return result.affectedRows;
+  }
+
+  async unfavouriteEvent(userId: number, eventId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM favourite_event WHERE user_id = ? AND event_id = ?",
+      [userId, eventId],
     );
 
     return result.affectedRows;

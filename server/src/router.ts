@@ -24,7 +24,16 @@ router.use(authActions.verifyToken);
 
 router.post("/api/participate", participateActions.add);
 
-router.post("/api/favourite_bar", favouriteActions.add);
-router.delete("/api/favourite_bar/:userId/:barId", favouriteActions.destroy);
+router.post("/api/favourite_bar", favouriteActions.addFavouriteBar);
+router.delete(
+  "/api/favourite_bar/:userId/:barId",
+  favouriteActions.destroyFavouriteBar,
+);
+
+router.post("/api/favourite_event", favouriteActions.addFavouriteEvent);
+router.delete(
+  "/api/favourite_event/:userId/:eventId",
+  favouriteActions.destroyFavouriteEvent,
+);
 
 export default router;

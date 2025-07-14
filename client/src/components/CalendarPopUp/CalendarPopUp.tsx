@@ -8,7 +8,7 @@ import type { CalendarPopupProps } from "../../types/calendar";
 
 registerLocale("fr", fr);
 
-function CalendarPopup({ value, onChange }: CalendarPopupProps) {
+function CalendarPopup({ value, onChangeDate }: CalendarPopupProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ function CalendarPopup({ value, onChange }: CalendarPopupProps) {
         <div className="calendar-modal">
           <DatePicker
             selected={value}
-            onChange={onChange}
+            onChange={onChangeDate}
             inline
             calendarStartDay={1}
             locale="fr"

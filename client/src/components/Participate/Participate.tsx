@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Participate({ eventId, userId }: ParticipateProps) {
   const [isParticipated, setIsParticipated] = useState(false);
 
-  const addParticipate = async () => {
+  const addParticipation = async () => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/participate`,
@@ -58,7 +58,7 @@ function Participate({ eventId, userId }: ParticipateProps) {
             deleteParticipation();
             toast("Vous ne participez plus à cet évènement", { type: "info" });
           } else {
-            addParticipate();
+            addParticipation();
             toast("Vous participez à cet évènement", { type: "success" });
           }
 

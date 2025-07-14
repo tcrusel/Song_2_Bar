@@ -24,7 +24,7 @@ function Home() {
           height="auto"
         />
         <section className="guide">
-          <CalendarPopup value={selectedDate} onChange={DateChange} />
+          <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
 
           <article className="user-action">
             <p>

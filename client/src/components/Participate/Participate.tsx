@@ -50,6 +50,25 @@ function Participate() {
     }
   };
 
+  const deleteParticipation = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/participate/${userId}/${eventId}`,
+        {
+          method: "DELETE",
+        },
+      );
+      if (response) {
+        toast("Vous ne participez plus à cet évènement", { type: "info" });
+      } else {
+        throw new Error("Erreur lors de la suppression de la participation");
+      }
+    } catch {
+      console.error("Erreur lors de la participation à cet évènement", Error);
+      throw Error;
+    }
+  };
+
   return (
     <>
       <button
@@ -60,12 +79,14 @@ function Participate() {
             addParticipate();
             setIsParticipated(true);
           } else {
+            deleteParticipation();
             setIsParticipated(false);
           }
         }}
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
+
       <ToastContainer
         position="top-center"
         theme="colored"

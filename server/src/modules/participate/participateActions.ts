@@ -37,4 +37,30 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { add };
+const remove: RequestHandler = async (req, res, next): Promise<void> => {
+  try {
+    const userId = Number(req.params.userId);
+    const eventId = Number(req.params.eventId);
+
+    if (!userId || !eventId || Number.isNaN(userId) || Number.isNaN(eventId)) {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+      return;
+    }
+
+    const affectedRows = await participateRepository.delete(userId, eventId);
+
+    if (affectedRows <= 0) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Echec de la suppression" });
+      return;
+    }
+
+    res.sendStatus(StatusCodes.NO_CONTENT);
+  } catch (err) {
+    next(err);
+    return;
+  }
+};
+
+export default { add, remove };

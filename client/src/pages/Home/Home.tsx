@@ -1,5 +1,5 @@
 import { ToastContainer, toast } from "react-toastify";
-import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
+import CalendarPopUp from "../../components/CalendarPopUp/CalendarPopUp";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 import { useEffect } from "react";
@@ -35,7 +35,7 @@ function Home() {
           height="auto"
         />
         <section className="guide">
-          <CalendarPopup />
+          <CalendarPopUp />
           <article className="user-action">
             <p>
               1.

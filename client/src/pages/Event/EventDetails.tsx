@@ -69,7 +69,7 @@ function EventDetails() {
             </p>
           </div>
           <div className="participate">
-            <Participate userId={10} eventId={30} />
+            <Participate />
           </div>
           <div className="bar">
             <div className="localisation-icon">
@@ -78,10 +78,7 @@ function EventDetails() {
                 alt="localisation-icon"
               />
             </div>
-            <Link
-              to={`/bars/${event.bar_id}`}
-              className={"bar-title bold white"}
-            >
+            <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
               {event.bar_name}
             </Link>
           </div>

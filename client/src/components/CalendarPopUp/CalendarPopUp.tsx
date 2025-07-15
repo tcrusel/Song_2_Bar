@@ -1,9 +1,9 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./CalendarPopup.css";
+import "./CalendarPopUp.css";
 
-function CalendarPopup() {
+function CalendarPopUp() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,4 +43,4 @@ function CalendarPopup() {
   );
 }
 
-export default CalendarPopup;
+export default CalendarPopUp;

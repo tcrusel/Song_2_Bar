@@ -14,7 +14,7 @@ function Participate() {
   const userId = auth?.user.id;
   const eventId = Number(id);
 
-  const addParticipate = async () => {
+  const addParticipation = async () => {
     if (!auth) {
       navigate("/login", { state: { islogged: false } });
       return;
@@ -75,11 +75,11 @@ function Participate() {
         className="participate-button"
         type="button"
         onClick={() => {
-          if (!isParticipated) {
-            addParticipate();
+          if (isParticipated) {
+            deleteParticipation();
             setIsParticipated(true);
           } else {
-            deleteParticipation();
+            addParticipation();
             setIsParticipated(false);
           }
         }}

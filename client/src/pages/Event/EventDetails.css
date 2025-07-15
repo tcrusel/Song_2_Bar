@@ -166,7 +166,7 @@ section {
 
 .participate {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 @media (max-width: 833px) {
@@ -209,6 +209,9 @@ section {
   }
 
   section p {
+    font-size: 1rem;
+  }
+  .bar-address p {
     font-size: 1rem;
   }
 }

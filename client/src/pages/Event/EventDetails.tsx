@@ -161,7 +161,7 @@ function EventDetails() {
                 alt="localisation-icon"
               />
             </div>
-            <Link to={`/bar/${event.bar_id}`} className={"bar-title bold"}>
+            <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
               {event.bar_name}
             </Link>
           </div>

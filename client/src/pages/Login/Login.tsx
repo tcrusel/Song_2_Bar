@@ -1,5 +1,5 @@
-import { type FormEventHandler, useRef } from "react";
-import { useNavigate } from "react-router";
+import { type FormEventHandler, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import LogoSite from "/images/logo-site.png";
@@ -10,8 +10,30 @@ export default function Login() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { setAuth } = useAuth();
+  const location = useLocation();
+  const { state } = location;
 
-  const noRefresh: FormEventHandler = async (event) => {
+  useEffect(() => {
+    if (state?.accountCreated) {
+      toast(
+        "Compte créé avec succès ! Vous pouvez maintenant vous connecter.",
+        {
+          type: "success",
+          position: "top-right",
+          autoClose: 4000,
+        },
+      );
+    }
+    if (!state?.islogged) {
+      toast("Veuillez vous connecter pour participer à un évènement", {
+        type: "error",
+        position: "top-right",
+        autoClose: 4000,
+      });
+    }
+  }, [state]);
+
+  const loginUser: FormEventHandler = async (event) => {
     event.preventDefault();
 
     try {
@@ -31,7 +53,7 @@ export default function Login() {
         const user = await response.json();
         setAuth(user);
 
-        navigate("/events/10");
+        navigate("/");
       } else {
         console.info(response);
         toast(
@@ -53,7 +75,7 @@ export default function Login() {
       <main className="login-page">
         <section id="login-section">
           <article className="login">
-            <form onSubmit={noRefresh} id="login-form">
+            <form onSubmit={loginUser} id="login-form">
               <aside className="input-login">
                 <label className="bold" htmlFor="email">
                   Email

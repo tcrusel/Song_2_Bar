@@ -213,4 +213,7 @@ section {
   section p {
     font-size: 1rem;
   }
+  .bar-address p {
+    font-size: 1rem;
+  }
 }

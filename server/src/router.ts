@@ -23,6 +23,7 @@ router.post("/api/login", authActions.login);
 router.use(authActions.verifyToken);
 
 router.post("/api/participate", participateActions.add);
+router.delete("/api/participate/:userId/:eventId", participateActions.remove);
 
 router.post("/api/favourite_bar", favouriteActions.addFavouriteBar);
 router.delete(

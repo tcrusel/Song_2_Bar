@@ -4,13 +4,13 @@ import { Link, useNavigate, useParams } from "react-router";
 import Participate from "../../components/Participate/Participate";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
-import "./EventDetails.css";
 import { format, isToday } from "date-fns";
 import { fr } from "date-fns/locale";
 import { ToastContainer, toast } from "react-toastify";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
+import "./EventDetails.css";
 
 function EventDetails() {
   const { id } = useParams();
@@ -37,7 +37,6 @@ function EventDetails() {
   }, [id]);
 
   if (!event) return <p>Chargement en cours...</p>;
-
   const eventDate = new Date(event.date);
   const formattedDateText = isToday(eventDate)
     ? `Aujourd'hui le ${format(eventDate, "d MMMM yyyy", { locale: fr })}`
@@ -139,6 +138,7 @@ function EventDetails() {
                 alt="calendar-icon"
               />
             </div>
+
             <p className={"date-event bold white"}>{formattedDateText}</p>
           </div>
           <div className="hour">

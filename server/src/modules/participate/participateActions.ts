@@ -4,7 +4,7 @@ import participateRepository from "./participateRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
-    res.sendStatus(403);
+    res.sendStatus(StatusCodes.FORBIDDEN);
     return;
   }
 

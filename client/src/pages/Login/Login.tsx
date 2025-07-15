@@ -14,7 +14,7 @@ export default function Login() {
   const { state } = location;
 
   useEffect(() => {
-    if (state?.accountCreated) {
+    if (state?.accountCreated === true) {
       toast(
         "Compte créé avec succès ! Vous pouvez maintenant vous connecter.",
         {
@@ -24,8 +24,15 @@ export default function Login() {
         },
       );
     }
-    if (!state?.islogged) {
+    if (state?.islogged === false) {
       toast("Veuillez vous connecter pour participer à un évènement", {
+        type: "error",
+        position: "top-right",
+        autoClose: 4000,
+      });
+    }
+    if (state?.isloggedToFavouriteBar === false) {
+      toast("Veuillez vous connecter pour ajouter un bar à vos favoris", {
         type: "error",
         position: "top-right",
         autoClose: 4000,

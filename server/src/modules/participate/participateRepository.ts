@@ -11,6 +11,15 @@ class participateRepository {
 
     return result.affectedRows;
   }
+
+  async delete(userId: number, eventId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM participate WHERE user_id = ? AND event_id = ?",
+      [userId, eventId],
+    );
+
+    return result.affectedRows;
+  }
 }
 
 export default new participateRepository();

@@ -23,9 +23,9 @@ section {
 
 .poster-event {
   grid-column: 3 / 4;
-  grid-row: 1 / 5;
+  grid-row: 1 / 4;
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 20px;
 }
 
@@ -98,7 +98,7 @@ section {
   color: white;
 }
 
-.bar-name {
+.bar-title {
   font-size: 2rem;
 }
 
@@ -166,7 +166,9 @@ section {
 
 .participate {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 @media (max-width: 833px) {
@@ -209,6 +211,9 @@ section {
   }
 
   section p {
+    font-size: 1rem;
+  }
+  .bar-address p {
     font-size: 1rem;
   }
 }

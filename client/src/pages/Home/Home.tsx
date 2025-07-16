@@ -1,10 +1,32 @@
-import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
+import { ToastContainer, toast } from "react-toastify";
+import CalendarPopUp from "../../components/CalendarPopUp/CalendarPopUp";
+import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
+import { useEffect } from "react";
 
 function Home() {
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    if (auth) {
+      toast(
+        `Salut ${auth.user.firstname} ${auth.user.lastname} bienvenu sur Song 2 Bar !`,
+        {
+          type: "success",
+        },
+      );
+    }
+  }, [auth]);
+
   return (
     <>
       <main>
+        <ToastContainer
+          position="top-center"
+          theme="colored"
+          autoClose={4000}
+          limit={1}
+        />
         <img
           className="flower-guitar"
           src="/images/home_images/micro-guitard.svg"
@@ -13,7 +35,7 @@ function Home() {
           height="auto"
         />
         <section className="guide">
-          <CalendarPopup />
+          <CalendarPopUp />
           <article className="user-action">
             <p>
               1.

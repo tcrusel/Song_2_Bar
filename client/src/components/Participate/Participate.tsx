@@ -1,13 +1,25 @@
 import { useState } from "react";
-import type { ParticipateProps } from "../../types/Participate";
 import "./Participate.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate, useParams } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 
-function Participate({ eventId, userId }: ParticipateProps) {
+function Participate() {
   const [isParticipated, setIsParticipated] = useState(false);
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const userId = auth?.user.id;
+  const eventId = Number(id);
 
   const addParticipation = async () => {
+    if (!auth) {
+      navigate("/login", { state: { islogged: false } });
+      return;
+    }
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/participate`,
@@ -15,6 +27,7 @@ function Participate({ eventId, userId }: ParticipateProps) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
           },
           body: JSON.stringify({
             eventId,
@@ -22,10 +35,17 @@ function Participate({ eventId, userId }: ParticipateProps) {
           }),
         },
       );
-      await response.json();
-      setIsParticipated(true);
+
+      if (response) {
+        toast("Vous participez à cet évènement", {
+          type: "success",
+        });
+      } else {
+        throw new Error("Erreur serveur");
+      }
     } catch (error) {
       console.error("Erreur lors de la participation à cet évènement", error);
+      toast("Erreur lors de l'inscription à l'évènement", { type: "error" });
       throw error;
     }
   };
@@ -38,10 +58,11 @@ function Participate({ eventId, userId }: ParticipateProps) {
           method: "DELETE",
         },
       );
-      if (!response.ok) {
+      if (response) {
+        toast("Vous ne participez plus à cet évènement", { type: "info" });
+      } else {
         throw new Error("Erreur lors de la suppression de la participation");
       }
-      setIsParticipated(false);
     } catch {
       console.error("Erreur lors de la participation à cet évènement", Error);
       throw Error;
@@ -56,13 +77,11 @@ function Participate({ eventId, userId }: ParticipateProps) {
         onClick={() => {
           if (isParticipated) {
             deleteParticipation();
-            toast("Vous ne participez plus à cet évènement", { type: "info" });
+            setIsParticipated(true);
           } else {
             addParticipation();
-            toast("Vous participez à cet évènement", { type: "success" });
+            setIsParticipated(false);
           }
-
-          setIsParticipated(!isParticipated);
         }}
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}

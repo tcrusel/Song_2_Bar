@@ -9,21 +9,14 @@ const add: RequestHandler = async (req, res, next) => {
   }
 
   try {
-    if (
-      !req.body.userId ||
-      !req.body.eventId ||
-      typeof req.body.userId !== "number" ||
-      typeof req.body.eventId !== "number"
-    ) {
+    const userId = Number.parseInt(req.auth.sub);
+    const eventId = Number(req.body.eventId);
+
+    if (!userId || !eventId || Number.isNaN(userId) || Number.isNaN(eventId)) {
       res.sendStatus(StatusCodes.BAD_REQUEST);
     }
 
-    const newParticipation = {
-      userId: Number.parseInt(req.auth.sub),
-      eventId: req.body.eventId,
-    };
-
-    const affectedRows = await participateRepository.create(newParticipation);
+    const affectedRows = await participateRepository.create(userId, eventId);
 
     if (affectedRows <= 0) {
       res

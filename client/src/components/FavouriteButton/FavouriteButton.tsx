@@ -4,13 +4,17 @@ import likeIcon from "/images/favourite_images/like.png";
 import "./FavouriteButton.css";
 
 type FavouriteButtonProps = {
-  favouriteBar: () => Promise<void>;
-  unfavouriteBar: () => Promise<void>;
+  favouriteBar?: () => Promise<void>;
+  unfavouriteBar?: () => Promise<void>;
+  favouriteEvent?: () => Promise<void>;
+  unfavouriteEvent?: () => Promise<void>;
 };
 
 function FavouriteButton({
   favouriteBar,
   unfavouriteBar,
+  favouriteEvent,
+  unfavouriteEvent,
 }: FavouriteButtonProps) {
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -18,13 +22,24 @@ function FavouriteButton({
     <button
       className="favourite-button"
       type="button"
-      onClick={async () => {
-        if (!isFavourite) {
-          favouriteBar();
-          setIsFavourite(true);
-        } else {
-          unfavouriteBar();
-          setIsFavourite(false);
+      onClick={() => {
+        if (favouriteBar && unfavouriteBar) {
+          if (!isFavourite) {
+            favouriteBar();
+            setIsFavourite(true);
+          } else {
+            unfavouriteBar();
+            setIsFavourite(false);
+          }
+        }
+        if (favouriteEvent && unfavouriteEvent) {
+          if (!isFavourite) {
+            favouriteEvent();
+            setIsFavourite(true);
+          } else {
+            unfavouriteEvent();
+            setIsFavourite(false);
+          }
         }
       }}
     >

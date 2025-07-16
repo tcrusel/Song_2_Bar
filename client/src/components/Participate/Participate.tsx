@@ -36,11 +36,13 @@ function Participate() {
         },
       );
 
-      if (!response.ok) {
+      if (response) {
+        toast("Vous participez à cet évènement", {
+          type: "success",
+        });
+      } else {
         throw new Error("Erreur serveur");
       }
-
-      setIsParticipated(true);
     } catch (error) {
       console.error("Erreur lors de la participation à cet évènement", error);
       toast("Erreur lors de l'inscription à l'évènement", { type: "error" });
@@ -56,10 +58,11 @@ function Participate() {
           method: "DELETE",
         },
       );
-      if (!response.ok) {
+      if (response) {
+        toast("Vous ne participez plus à cet évènement", { type: "info" });
+      } else {
         throw new Error("Erreur lors de la suppression de la participation");
       }
-      setIsParticipated(false);
     } catch {
       console.error("Erreur lors de la participation à cet évènement", Error);
       throw Error;
@@ -74,13 +77,11 @@ function Participate() {
         onClick={() => {
           if (isParticipated) {
             deleteParticipation();
-            toast("Vous ne participez plus à cet évènement", { type: "info" });
+            setIsParticipated(true);
           } else {
             addParticipation();
-            toast("Vous participez à cet évènement", { type: "success" });
+            setIsParticipated(false);
           }
-
-          setIsParticipated(!isParticipated);
         }}
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}

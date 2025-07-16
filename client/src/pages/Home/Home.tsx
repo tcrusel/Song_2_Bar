@@ -1,10 +1,22 @@
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import CalendarPopUp from "../../components/CalendarPopUp/CalendarPopUp";
+import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
+
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 import { useEffect } from "react";
 
+import { useNavigate } from "react-router";
+
 function Home() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const navigate = useNavigate();
+  const DateChange = (date: Date | null) => {
+    setSelectedDate(date);
+    if (date) {
+      navigate("/events", { state: { selectedDate: date.toISOString() } });
+    }
+  };
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -35,7 +47,7 @@ function Home() {
           height="auto"
         />
         <section className="guide">
-          <CalendarPopUp />
+          <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
           <article className="user-action">
             <p>
               1.

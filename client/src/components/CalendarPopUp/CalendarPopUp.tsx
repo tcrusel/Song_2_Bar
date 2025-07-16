@@ -1,10 +1,14 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./CalendarPopUp.css";
+import "./CalendarPopup.css";
+import { fr } from "date-fns/locale";
+import { registerLocale } from "react-datepicker";
+import type { CalendarPopupProps } from "../../types/calendar";
 
-function CalendarPopUp() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+registerLocale("fr", fr);
+
+function CalendarPopup({ value, onChangeDate }: CalendarPopupProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,8 +24,8 @@ function CalendarPopUp() {
       {isOpen && (
         <div className="calendar-modal">
           <DatePicker
-            selected={selectedDate}
-            onChange={(date: Date | null) => setSelectedDate(date)}
+            selected={value}
+            onChange={onChangeDate}
             inline
             calendarStartDay={1}
             locale="fr"
@@ -43,4 +47,4 @@ function CalendarPopUp() {
   );
 }
 
-export default CalendarPopUp;
+export default CalendarPopup;

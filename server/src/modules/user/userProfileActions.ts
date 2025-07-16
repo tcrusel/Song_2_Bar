@@ -13,8 +13,16 @@ const getUserProfile: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    const userProfile = await userProfileRepository.getUserProfile(userId);
-    res.status(StatusCodes.OK).json(userProfile);
+    const userInfo = await userProfileRepository.getUserProfile(userId);
+    
+    if (!userInfo) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: "User not found" });
+      return;
+    }
+
+    res.status(StatusCodes.OK).json(userInfo);
   } catch (err) {
     next(err);
   }

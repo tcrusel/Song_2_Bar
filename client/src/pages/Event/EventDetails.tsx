@@ -165,7 +165,7 @@ function EventDetails() {
               {event.bar_name}
             </Link>
           </div>
-          <div className={"bar-address"}>
+          <div className={"bar-address white"}>
             <p>{event.address}</p>
             <p>
               {event.postcode} {event.city}

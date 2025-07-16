@@ -1,5 +1,5 @@
 import EventCard from "../../components/EventCard/EventCard";
-import "./Event.css";
+import "./Events.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import type { EventType } from "../../types/Event";
@@ -18,6 +18,8 @@ function Events() {
   const [allEvents, setAllEvents] = useState<EventType[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<EventType[]>([]);
   const [error, setError] = useState(false);
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     async function fetchEvent() {
       try {
@@ -51,16 +53,39 @@ function Events() {
   }, [selectedDate, allEvents]);
 
   if (error) return <h1>Désolé il n'y a pas d'évènements </h1>;
+  if (!filteredEvents) {
+    <p>Chargement en cours...</p>;
+  }
 
   return (
     <>
+      <section className="filters-searchbar">
+        <input
+          className="search-bar"
+          type="text"
+          value={search}
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }}
+          placeholder="Trouver votre événement, votre bar ou votre groupe de musique"
+        />
+      </section>
+
       {filteredEvents.length === 0 ? (
         <p>Aucun événement trouvé pour cette date</p>
       ) : (
         <section className="event-list">
-          {filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
+          {filteredEvents
+            .filter((event) => {
+              return (
+                event.title.toLowerCase().includes(search.toLowerCase()) ||
+                event.bar_name.toLowerCase().includes(search.toLowerCase())
+                // tu peux aussi ajouter: event.music_style.toLowerCase().includes(search.toLowerCase())
+              );
+            })
+            .map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
         </section>
       )}
     </>

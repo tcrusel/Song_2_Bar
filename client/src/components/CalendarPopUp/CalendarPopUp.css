@@ -1,4 +1,4 @@
-main .date-button {
+.date-button {
   border-radius: 50px;
   background-color: #aa682e;
   color: #ebd3a4;
@@ -10,6 +10,7 @@ main .date-button {
 }
 
 .calendar-modal {
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;

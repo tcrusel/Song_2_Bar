@@ -12,4 +12,4 @@ export interface AuthType {
   token: string;
 }
 
-export type UserInfo = Pick<UserType, 'id' | 'firstname' | 'lastname'>;
+export type UserInfo = Pick<UserType, "id" | "firstname" | "lastname">;

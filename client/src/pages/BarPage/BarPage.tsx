@@ -46,17 +46,16 @@ function BarPage() {
 
     if (isOpeningHours) {
       return `Ouvre à ${startTime} - Ferme à ${endTime}`;
-    } else {
-      return `Commence à ${startTime} - Fini à ${endTime}`;
     }
+    return `Commence à ${startTime} - Fini à ${endTime}`;
   };
 
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">Erreur: {error}</div>;
   if (!bar) return <div className="error">Bar non trouvé</div>;
 
-  const images = [bar.image1, bar.image2, bar.image3, bar.image4].map(path => 
-    path.startsWith('/images/') ? path : `/images${path}`
+  const images = [bar.image1, bar.image2, bar.image3, bar.image4].map((path) =>
+    path.startsWith("/images/") ? path : `/images${path}`,
   );
 
   const getTodayHours = () => {

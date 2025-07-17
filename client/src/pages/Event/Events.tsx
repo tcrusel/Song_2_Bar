@@ -24,10 +24,27 @@ function Events() {
     }
     fetchEvent();
   }, []);
-  if (error) return <h1>Désolé il n'y a pas d'évènements </h1>;
-  if (!events) {
-    <p>Chargement en cours...</p>;
-  }
+  if (error || !events) return <h1>Désolé il n'y a pas d'évènements </h1>;
+
+  useEffect(() => {
+    const fetchEventsFiltered = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/events?search=${encodeURIComponent(search)}`,
+        );
+        if (!res.ok) {
+          setError(true);
+          return;
+        }
+        const events = await res.json();
+        setEvents(events);
+      } catch (error) {
+        console.error("Erreur lors du fetch", error);
+      }
+    };
+
+    fetchEventsFiltered();
+  }, [search]);
 
   return (
     <>
@@ -39,20 +56,13 @@ function Events() {
           onChange={(event) => {
             setSearch(event.target.value);
           }}
-          placeholder="Trouver votre évènement, vcotre bar ou votre groupe de musique"
+          placeholder="Trouver votre évènement, votre bar ou votre groupe de musique"
         />
       </section>
       <section className="event-list">
-        {events
-          .filter((event) => {
-            return (
-              event.title.toLowerCase().includes(search.toLowerCase()) ||
-              event.bar_name.toLowerCase().includes(search.toLowerCase())
-            );
-          })
-          .map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
+        {events.map((event) => (
+          <EventCard key={event.id} event={event} />
+        ))}
       </section>
     </>
   );

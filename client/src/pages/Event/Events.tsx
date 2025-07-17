@@ -19,6 +19,7 @@ function Events() {
   const [filteredEvents, setFilteredEvents] = useState<EventType[]>([]);
   const [error, setError] = useState(false);
   const [search, setSearch] = useState("");
+  const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchEvent() {
@@ -56,6 +57,9 @@ function Events() {
   if (!filteredEvents) {
     <p>Chargement en cours...</p>;
   }
+  const musicStyles = Array.from(
+    new Set(allEvents.map((event) => event.music_style)),
+  );
 
   return (
     <>
@@ -70,6 +74,26 @@ function Events() {
           placeholder="Trouver votre événement, votre bar ou votre groupe de musique"
         />
       </section>
+      <section className="filters-checkbox">
+        {musicStyles.map((style) => (
+          <label key={style}>
+            <input
+              type="checkbox"
+              value={style}
+              checked={selectedStyles.includes(style)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (selectedStyles.includes(value)) {
+                  setSelectedStyles(selectedStyles.filter((s) => s !== value));
+                } else {
+                  setSelectedStyles([...selectedStyles, value]);
+                }
+              }}
+            />
+            <span>{style}</span>
+          </label>
+        ))}
+      </section>
 
       {filteredEvents.length === 0 ? (
         <p>Aucun événement trouvé pour cette date</p>
@@ -78,9 +102,14 @@ function Events() {
           {filteredEvents
             .filter((event) => {
               return (
+                selectedStyles.length === 0 ||
+                selectedStyles.includes(event.music_style)
+              );
+            })
+            .filter((event) => {
+              return (
                 event.title.toLowerCase().includes(search.toLowerCase()) ||
                 event.bar_name.toLowerCase().includes(search.toLowerCase())
-                // tu peux aussi ajouter: event.music_style.toLowerCase().includes(search.toLowerCase())
               );
             })
             .map((event) => (

@@ -14,36 +14,37 @@
 .container {
   width: 175px;
   height: 175px;
-  background-color: #ABC4AA;
+  background-color: #abc4aa;
   border-radius: 10px;
   position: relative;
-  box-shadow: 5px 5px 0 0 #675D50;
+  box-shadow: 5px 5px 0 0 #675d50;
 }
 
 .plate {
-  width: fit-content;
-}
-
-.plate .black,
-.plate .white,
-.plate .center,
-.plate .border {
-  border-radius: 100%;
-}
-
-.container,
-.plate .black,
-.plate .white,
-.plate .border {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.plate .black {
+  position: absolute;
   width: 150px;
   height: 150px;
-  background-color: #675D50;
+  left: 12.5px;
+  top: 12.5px;
+  border-radius: 50%;
+}
+
+.plate::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: black;
+  border-radius: 50%;
+  top: 80px;
+  left: 40px;
+}
+
+.black {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-color: #675d50;
   animation: rotation 2s infinite linear;
 }
 
@@ -51,51 +52,56 @@
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(359deg);
   }
 }
 
-.plate .white {
+.white {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 70px;
   height: 70px;
-  background-color: #F3DEBA;
+  background-color: #f3deba;
 }
 
-.plate .center {
+.center {
   width: 20px;
   height: 20px;
-  background-color: #675D50;
+  background-color: #675d50;
 }
 
-.plate .border {
+.border {
   width: 111px;
   height: 111px;
-  border-top: 3px solid #F3DEBA;
-  border-bottom: 3px solid #F3DEBA;
-  border-left: 3px solid #675D50;
-  border-right: 3px solid #675D50;
+  border-top: 3px solid #f3deba;
+  border-bottom: 3px solid #f3deba;
+  border-left: 3px solid #675d50;
+  border-right: 3px solid #675d50;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.player {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: fit-content;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 8px;
-  margin-right: 8px;
-  rotate: -45deg;
+.black,
+.white,
+.center,
+.border {
+  border-radius: 50%;
 }
 
 .player .circ {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 25px;
   height: 25px;
-  background-color: #F3DEBA;
+  background-color: #f3deba;
   border-radius: 100%;
   z-index: 1;
 }
@@ -103,8 +109,10 @@
 .player .rect {
   width: 10px;
   height: 55px;
-  background-color: #F3DEBA;
+  background-color: #f3deba;
   position: absolute;
   bottom: 0;
   margin-bottom: 5px;
-} 
+  left: 50%;
+  transform: translateX(-50%);
+}

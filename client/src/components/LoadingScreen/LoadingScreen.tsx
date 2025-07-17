@@ -8,19 +8,19 @@ function LoadingScreen() {
           <div className="black">
             <div className="border">
               <div className="white">
-                <div className="center"></div>
+                <div className="center" />
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="player">
-          <div className="rect"></div>
-          <div className="circ"></div>
+          <div className="player">
+            <div className="rect" />
+            <div className="circ" />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default LoadingScreen; 
+export default LoadingScreen;

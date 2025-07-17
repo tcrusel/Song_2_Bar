@@ -1,19 +1,52 @@
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
+
+import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 import "./../../assets/_variables.css";
+import { useEffect } from "react";
+
+import { useNavigate } from "react-router";
 
 function Home() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const navigate = useNavigate();
+  const DateChange = (date: Date | null) => {
+    setSelectedDate(date);
+    if (date) {
+      navigate("/events", { state: { selectedDate: date.toISOString() } });
+    }
+  };
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    if (auth) {
+      toast(
+        `Salut ${auth.user.firstname} ${auth.user.lastname} bienvenu sur Song 2 Bar !`,
+        {
+          type: "success",
+        },
+      );
+    }
+  }, [auth]);
+
   return (
     <>
       <main>
+        <ToastContainer
+          position="top-center"
+          theme="colored"
+          autoClose={4000}
+          limit={1}
+        />
         <img
           className="flower-guitar"
           src="../../../images/micro-guitare.svg"
           alt="représentation de la guitare avec des fleurs"
         />
         <section className="guide">
-          <button className="when-button" type="button">
-            QUAND ?
-          </button>
+          <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
           <article className="user-action">
             <div>
               <p>1. </p>

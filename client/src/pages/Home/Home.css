@@ -25,6 +25,11 @@ main .when-button {
   height: 6rem;
 }
 
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .user-action {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

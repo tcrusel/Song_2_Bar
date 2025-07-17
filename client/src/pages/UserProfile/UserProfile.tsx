@@ -16,7 +16,9 @@ function UserProfile() {
         // For now, using direct assignment for development
         const userId = 12;
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${userId}`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch user profile");

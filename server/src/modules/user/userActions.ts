@@ -49,14 +49,14 @@ const add: RequestHandler = async (req, res, next) => {
 const read: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number(req.params.id);
-    
+
     if (Number.isNaN(userId)) {
       res.status(StatusCodes.BAD_REQUEST).json({ error: "Invalid user ID" });
       return;
     }
 
     const user = await userRepository.read(userId);
-    
+
     if (!user) {
       res.status(StatusCodes.NOT_FOUND).json({ error: "User not found" });
       return;

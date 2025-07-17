@@ -48,6 +48,12 @@ body {
   font-size: 1rem;
 }
 
+.bar-carroussel {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
 .fail {
   display: flex;
   flex-direction: column;

@@ -2,18 +2,39 @@ import "./MusicGroup.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styleIcon from "/images/group_images/music-style-icon.svg";
+import BarCard from "../../components/BarCard/BarCard";
+import type { Bar } from "../../types/bar";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 
 function MusicGroup() {
   const [musicGroup, setMusicGroup] = useState<MusicGroupInterface | null>(
     null,
   );
+  const [bars, setBars] = useState<Bar[]>([]);
   const { id } = useParams();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/groups/${id}`)
       .then((response) => response.json())
       .then((musicGroup) => setMusicGroup(musicGroup));
+  }, [id]);
+
+  useEffect(() => {
+    async function fetchBars() {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/groups/${id}/bars`,
+        );
+        if (!res.ok) {
+          throw new Error("Erreur lors de la récupération des bars");
+        }
+        const bars = await res.json();
+        setBars(bars);
+      } catch (error) {
+        console.error("Erreur lors du fetch", error);
+      }
+    }
+    fetchBars();
   }, [id]);
 
   if (!musicGroup)
@@ -52,8 +73,14 @@ function MusicGroup() {
           </aside>
         </article>
       </section>
-      <section className="bar-caroussel">
-        <p>Caroussel de bars à venir</p>
+      <section className="bar-carroussel">
+        {bars ? (
+          bars.map((bar) => <BarCard key={bar.id} bar={bar} />)
+        ) : (
+          <h1>
+            Ce groupe de musique n'a pas encore d'évènement prévu dans un bar
+          </h1>
+        )}
       </section>
     </>
   );

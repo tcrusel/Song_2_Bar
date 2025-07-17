@@ -56,4 +56,14 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
   }
 };
 
-export default { add, remove };
+const browse: RequestHandler = async (req, res, next) => {
+  try {
+    const participate = await participateRepository.readAll();
+
+    res.json(participate);
+  } catch (err) {
+    console.error("Erreur lors de la récupération des événements :", err);
+  }
+};
+
+export default { add, remove, browse };

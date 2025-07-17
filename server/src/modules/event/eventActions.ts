@@ -4,7 +4,11 @@ import eventRepository from "./eventRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
   try {
-    const events = await eventRepository.readAll();
+    const search = req.query.search as string;
+
+    const events = search
+      ? await eventRepository.readAllEventsFiltered(search)
+      : await eventRepository.readAll();
 
     res.json(events);
   } catch (err) {

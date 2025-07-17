@@ -6,6 +6,7 @@ declare global {
   type FavouriteBar = { userId: number; barId: number };
   type FavouriteEvent = { userId: number; eventId: number };
   type Participate = { userId: number; eventId: number };
+  type Search = string;
 
   namespace Express {
     export interface Request {
@@ -13,6 +14,7 @@ declare global {
       favouriteEvent: FavouriteEvent;
       participate: Participate;
       auth: MyPayload;
+      search: Search;
     }
   }
 }

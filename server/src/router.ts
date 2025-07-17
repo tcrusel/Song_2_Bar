@@ -20,6 +20,8 @@ router.post("/api/users", authActions.hashPassword, userActions.add);
 
 router.post("/api/login", authActions.login);
 
+router.get("/api/participate", participateActions.browse);
+
 router.use(authActions.verifyToken);
 
 router.post("/api/participate", participateActions.add);

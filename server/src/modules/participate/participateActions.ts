@@ -2,6 +2,15 @@ import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import participateRepository from "./participateRepository";
 
+const browse: RequestHandler = async (req, res, next) => {
+  try {
+    const events = await participateRepository.readAll();
+
+    res.json(events);
+  } catch (err) {
+    console.error("Erreur lors de la récupération des participations :", err);
+  }
+};
 const add: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);

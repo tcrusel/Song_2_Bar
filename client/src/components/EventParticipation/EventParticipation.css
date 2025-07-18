@@ -1,0 +1,22 @@
+.event-participation {
+  width: 100%;
+  padding: 2rem 1rem;
+  background-color: #1f1f1f;
+}
+
+.carousel-title {
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.event-swiper {
+  padding-bottom: 3rem;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}

@@ -30,14 +30,13 @@ function Participate() {
             Authorization: `Bearer ${auth.token}`,
           },
           body: JSON.stringify({
-            eventId,
             userId,
+            eventId,
           }),
         },
       );
 
       if (response.ok) {
-        setIsParticipated(true);
         toast("Vous participez à cet évènement", {
           type: "success",
         });
@@ -69,7 +68,6 @@ function Participate() {
       );
 
       if (response.ok) {
-        setIsParticipated(false);
         toast("Vous ne participez plus à cet évènement", { type: "info" });
       } else {
         throw new Error("Erreur lors de la suppression de la participation");
@@ -85,11 +83,13 @@ function Participate() {
       <button
         className="participate-button"
         type="button"
-        onClick={async () => {
+        onClick={() => {
           if (!isParticipated) {
-            await addParticipation();
+            addParticipation();
+            setIsParticipated(true);
           } else {
-            await deleteParticipation();
+            deleteParticipation();
+            setIsParticipated(false);
           }
         }}
       >

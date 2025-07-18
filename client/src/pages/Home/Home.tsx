@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
-
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 import { useEffect } from "react";
@@ -48,6 +47,7 @@ function Home() {
         />
         <section className="guide">
           <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
+
           <article className="user-action">
             <p>
               1.

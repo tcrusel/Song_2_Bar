@@ -65,4 +65,4 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
   }
 };
 
-export default { add, remove };
+export default { add, remove, browse };

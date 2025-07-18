@@ -135,6 +135,116 @@
   margin: 0.5rem 0;
 }
 
+.groups-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+}
+
+.groups-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-content:has(.groups-carousel) {
+  align-items: flex-start;
+  text-align: left;
+  overflow-x: visible;
+  width: 100%;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 0 60px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #8b4513;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  line-height: 1;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+  background-color: #a0522d;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.carousel-arrow.left {
+  left: 0;
+}
+
+.carousel-arrow.right {
+  right: 0;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-dot.active {
+  background-color: #8b4513;
+}
+
+.carousel-dot:hover {
+  background-color: #a0522d;
+}
+
+.groups-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  color: white;
+}
+
 @media (max-width: 768px) {
   .user-profile-content {
     padding: 1rem;
@@ -172,6 +282,11 @@
   .error-container {
     margin: 1rem;
     padding: 1.5rem;
+  }
+
+  .groups-carousel {
+    gap: 1rem;
+    padding: 0.5rem 0;
   }
 }
 

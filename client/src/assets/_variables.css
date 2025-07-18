@@ -69,11 +69,17 @@ p {
   border-top-right-radius: 20px;
   flex-direction: column;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(236, 208, 50, 0.664);
 }
 
 .card-image {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
-  min-height: 125px;
+  height: 125px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }

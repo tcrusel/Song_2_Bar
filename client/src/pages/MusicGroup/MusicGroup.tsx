@@ -5,6 +5,7 @@ import styleIcon from "/images/group_images/music-style-icon.svg";
 import BarCard from "../../components/BarCard/BarCard";
 import type { Bar } from "../../types/bar";
 import type { MusicGroupInterface } from "../../types/musicGroup";
+import EmblaCarousel from "../../components/EmblaCarousel/EmblaCarousel";
 
 function MusicGroup() {
   const [musicGroup, setMusicGroup] = useState<MusicGroupInterface | null>(
@@ -73,9 +74,15 @@ function MusicGroup() {
           </aside>
         </article>
       </section>
-      <section className="bar-carroussel">
-        {bars ? (
-          bars.map((bar) => <BarCard key={bar.id} bar={bar} />)
+      <section className="bar-carousel">
+        {bars && bars.length > 0 ? (
+          <EmblaCarousel
+            slides={bars.map((bar) => ({
+              id: bar.id,
+              content: <BarCard bar={bar} />,
+            }))}
+            options={{ loop: true, align: "start" }}
+          />
         ) : (
           <h1>
             Ce groupe de musique n'a pas encore d'évènement prévu dans un bar

@@ -63,7 +63,7 @@ function EventDetails() {
           }),
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Cet évènement est maintenant dans vos favoris", {
           type: "success",
         });
@@ -96,7 +96,7 @@ function EventDetails() {
           },
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Cet évènement a été retiré de vos favoris", {
           type: "info",
         });
@@ -200,7 +200,12 @@ function EventDetails() {
           </Link>
         </article>
       </section>
-      <ToastContainer theme="colored" position="top-center" limit={2} />
+      <ToastContainer
+        theme="colored"
+        position="top-center"
+        limit={2}
+        autoClose={3000}
+      />
     </>
   );
 }

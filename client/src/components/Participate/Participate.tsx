@@ -95,7 +95,12 @@ function Participate() {
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
-      <ToastContainer theme="colored" position="top-center" limit={2} />
+      <ToastContainer
+        theme="colored"
+        position="top-center"
+        limit={2}
+        autoClose={3000}
+      />
     </>
   );
 }

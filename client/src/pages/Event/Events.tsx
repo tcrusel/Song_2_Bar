@@ -3,6 +3,10 @@ import "./Events.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import type { EventType } from "../../types/Event";
+import "../../components/HorizontalCalendar/HorizontalCalendar";
+import HorizontalCalendar from "../../components/HorizontalCalendar/HorizontalCalendar";
+
+import DatePicker from "react-datepicker";
 
 const formatDate = (dateInput: Date | string) => {
   const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
@@ -20,6 +24,10 @@ function Events() {
   const [error, setError] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
+  const [date, setDate] = useState<Date | null>(
+    selectedDate ? new Date(selectedDate) : null,
+  );
+  const [showCalendar, setShowCalendar] = useState(false);
 
   useEffect(() => {
     async function fetchEvent() {
@@ -40,8 +48,8 @@ function Events() {
   }, []);
 
   useEffect(() => {
-    if (selectedDate) {
-      const formatted = formatDate(selectedDate);
+    if (date) {
+      const formatted = formatDate(date);
       const filtered = allEvents.filter((event) => {
         const eventDate = new Date(event.date);
         const eventFormatted = formatDate(eventDate);
@@ -51,7 +59,7 @@ function Events() {
     } else {
       setFilteredEvents(allEvents);
     }
-  }, [selectedDate, allEvents]);
+  }, [date, allEvents]);
 
   if (error) return <h1>Désolé il n'y a pas d'évènements </h1>;
   if (!filteredEvents) {
@@ -73,7 +81,16 @@ function Events() {
           }}
           placeholder="Trouver votre événement, votre bar ou votre groupe de musique"
         />
+        <button
+          type="button"
+          onClick={() => setShowCalendar(!showCalendar)}
+          className="calendar-icon-button"
+        />
       </section>
+      <div className="menu-button">
+        <p>Filtre l'agenda</p>
+      </div>
+
       <section className="filters-checkbox">
         {musicStyles.map((style) => (
           <label key={style}>
@@ -94,6 +111,24 @@ function Events() {
           </label>
         ))}
       </section>
+
+      <HorizontalCalendar
+        selectedDate={date}
+        onSelectDate={(newDate) => setDate(newDate)}
+        onToggleCalendar={() => setShowCalendar((prev) => !prev)}
+      />
+      {showCalendar && (
+        <DatePicker
+          selected={date}
+          onChange={(newDate) => {
+            setDate(newDate);
+            setShowCalendar(false);
+          }}
+          inline
+          calendarStartDay={1}
+          locale="fr"
+        />
+      )}
 
       {filteredEvents.length === 0 ? (
         <p>Aucun événement trouvé pour cette date</p>

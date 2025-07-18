@@ -6,7 +6,7 @@ import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
 import { format, isToday } from "date-fns";
 import { fr } from "date-fns/locale";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
@@ -200,12 +200,7 @@ function EventDetails() {
           </Link>
         </article>
       </section>
-      <ToastContainer
-        position="top-center"
-        theme="colored"
-        autoClose={3000}
-        limit={2}
-      />
+      <ToastContainer theme="colored" position="top-center" limit={2} />
     </>
   );
 }

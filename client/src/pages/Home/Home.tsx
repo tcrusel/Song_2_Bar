@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import CalendarPopUp from "../../components/CalendarPopUp/CalendarPopUp";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
@@ -13,6 +13,7 @@ function Home() {
         `Salut ${auth.user.firstname} ${auth.user.lastname} bienvenu sur Song 2 Bar !`,
         {
           type: "success",
+          autoClose: 4000,
         },
       );
     }
@@ -20,13 +21,8 @@ function Home() {
 
   return (
     <>
+      <ToastContainer theme="colored" position="top-center" limit={2} />
       <main>
-        <ToastContainer
-          position="top-center"
-          theme="colored"
-          autoClose={4000}
-          limit={1}
-        />
         <img
           className="flower-guitar"
           src="/images/home_images/micro-guitard.svg"

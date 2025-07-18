@@ -23,7 +23,7 @@ const add: RequestHandler = async (req, res, next) => {
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json({ message: "La création de la participation a échoué" });
     } else {
-      res.status(StatusCodes.CREATED);
+      res.status(StatusCodes.CREATED).json({ affectedRows });
     }
   } catch (err) {
     next(err);
@@ -41,6 +41,7 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
     }
 
     const affectedRows = await participateRepository.delete(userId, eventId);
+    console.log(affectedRows);
 
     if (affectedRows <= 0) {
       res
@@ -49,7 +50,7 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
       return;
     }
 
-    res.sendStatus(StatusCodes.NO_CONTENT);
+    res.sendStatus(StatusCodes.NO_CONTENT).json({ affectedRows });
   } catch (err) {
     next(err);
     return;

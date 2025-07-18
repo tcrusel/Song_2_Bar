@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import "./Register.css";
 import type { ChangeEventHandler, FormEventHandler } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 function Register() {
   const [lastname, setLastname] = useState("");
@@ -28,7 +28,10 @@ function Register() {
     event.preventDefault();
 
     if (password.length < 8 || password !== confirmPassword) {
-      toast("Création de compte invalide !", { type: "error" });
+      toast("Création de compte invalide !", {
+        type: "error",
+        autoClose: 3000,
+      });
       return;
     }
 
@@ -51,6 +54,7 @@ function Register() {
       if (response.status === 409) {
         toast("Cet e-mail est déjà lié à un compte existant", {
           type: "error",
+          autoClose: 3000,
         });
         return;
       }
@@ -60,7 +64,10 @@ function Register() {
           state: { accountCreated: true },
         });
       } else {
-        toast("Création de compte invalide !", { type: "error" });
+        toast("Création de compte invalide !", {
+          type: "error",
+          autoClose: 3000,
+        });
       }
     } catch (err) {
       console.error(err);
@@ -122,7 +129,7 @@ function Register() {
             Se connecter
           </Link>
         </h3>
-        <ToastContainer position="top-right" theme="colored" autoClose={3000} />
+        <ToastContainer theme="colored" position="top-right" limit={2} />
       </section>
     </>
   );

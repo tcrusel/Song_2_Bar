@@ -182,10 +182,41 @@ const addFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
   }
 };
 
+const destroyFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.userId);
+    const musicGroupId = Number(req.params.musicGroupId);
+
+    if (Number.isNaN(userId) || Number.isNaN(musicGroupId)) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: "Invalid user_id or music_group_id" });
+      return;
+    }
+
+    const affectedRows = await favouriteRepository.unfavouriteMusicGroup(
+      userId,
+      musicGroupId,
+    );
+
+    if (affectedRows <= 0) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Favourite group not found" });
+      return;
+    }
+
+    res.status(204).json({ message: "zizi" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   addFavouriteBar,
   destroyFavouriteBar,
   addFavouriteEvent,
   destroyFavouriteEvent,
   addFavouriteMusicGroup,
+  destroyFavouriteMusicGroup,
 };

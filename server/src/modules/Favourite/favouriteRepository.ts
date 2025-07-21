@@ -40,7 +40,7 @@ class favouriteRepository {
   }
   async favouriteMusicGroup(userId: number, musicGroupId: number) {
     const [result] = await databaseClient.query<Result>(
-      "insert into favourite_music_group (user_id, music_group_id) values (?, ?)",
+      "INSERT INTO favourite_music_group (user_id, music_group_id) VALUES (?, ?)",
       [userId, musicGroupId],
     );
     return result.affectedRows;

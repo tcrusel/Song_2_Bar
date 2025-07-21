@@ -1,10 +1,8 @@
-import { useState } from "react";
 import "./Header.css";
-import UserRole from "./UserRole/UserRole";
+import { useNavigate } from "react-router";
 
 function Header() {
-  const [search, setSearch] = useState("");
-  const [showUserRole, setShowUserRole] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -15,32 +13,18 @@ function Header() {
           alt="logo du site"
         />
 
-        <input
-          className="search-bar"
-          type="text"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Recherche un bar ou un groupe de musique..."
-        />
-
         <div className="connexion-wrapper">
           <button
             className="logo-connexion-button"
             type="button"
-            onClick={() => setShowUserRole((prev) => !prev)}
+            onClick={() => navigate("/login")}
           >
             <img
               className="logo-connexion"
-              src="/images/logo-connexion.png"
+              src="/icon/profile-icon.svg"
               alt="le logo de la connexion"
             />
           </button>
-
-          {showUserRole && (
-            <div className="user-role-container">
-              <UserRole />
-            </div>
-          )}
         </div>
       </section>
     </>

@@ -60,7 +60,7 @@ function MusicGroup() {
         },
       );
       if (response.ok) {
-        toast("Cet évènement est maintenant dans vos favoris", {
+        toast("Ce groupe de musique est maintenant dans vos favoris", {
           type: "success",
         });
       } else {
@@ -68,9 +68,12 @@ function MusicGroup() {
       }
     } catch (error) {
       console.error("Erreur lors de la favorisation de l'évènement", error);
-      toast("Impossible d'ajouter l'évènement dans votre liste de favoris", {
+      toast(
+        "Impossible d'ajouter le group de musique dans votre liste de favoris",
+        {
         type: "error",
-      });
+      },
+    );
       throw error;
     }
   };
@@ -87,8 +90,8 @@ function MusicGroup() {
           },
         },
       );
-      if (response) {
-        toast("Cet évènement a été retiré de vos favoris", {
+      if (response.ok) {
+        toast("Cet groupe de musique a été retiré de vos favoris", {
           type: "success",
         });
       } else {
@@ -96,10 +99,10 @@ function MusicGroup() {
       }
     } catch (error) {
       console.error("Erreur lors de la suppression du favori :", error);
-      toast("Impossible d'ajouter l'évènement dans votre liste de favoris", {
+      toast("Impossible d'ajouter ce groupe de musique dans votre liste de favoris", {
         type: "error",
       });
-      throw error;
+    throw error;
     }
   };
 

@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
-import favouriteRepository from "./favouriteRepository";
+import favouriteRepository from "../favourite/favouriteRepository";
 
 const addFavouriteBar: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
@@ -87,7 +87,7 @@ const addFavouriteEvent: RequestHandler = async (req, res, next) => {
       typeof req.body.userId !== "number" ||
       typeof req.body.eventId !== "number"
     ) {
-      res.sendStatus(StatusCodes.BAD_REQUEST);
+      res.sendStatus(StatusCodes.BAD_REQUEST).json({ message: "zizi" });
     }
 
     const newFavouriteEvent = {
@@ -117,7 +117,7 @@ const destroyFavouriteEvent: RequestHandler = async (req, res, next) => {
   }
 
   try {
-    const userId = Number(req.params.userId);
+    const userId = Number(req.auth.sub);
     const eventId = Number(req.params.eventId);
 
     if (
@@ -146,9 +146,45 @@ const destroyFavouriteEvent: RequestHandler = async (req, res, next) => {
   }
 };
 
+const addFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
+  try {
+    if (
+      !req.body.userId ||
+      !req.body.musicGroupId ||
+      typeof req.body.userId !== "number" ||
+      typeof req.body.musicGroupId !== "number"
+    ) {
+      res.sendStatus(StatusCodes.BAD_REQUEST).json({ message: "zizi" });
+    }
+
+    const userId = Number(req.auth.sub);
+    const musicGroupId = Number(req.body.musicGroupId);
+
+    console.log(userId);
+    console.log(musicGroupId);
+
+    const affectedRows = await favouriteRepository.favouriteMusicGroup(
+      userId,
+      musicGroupId,
+    );
+
+    if (affectedRows <= 0) {
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "La favorisation du groupe de musique a échoué !" });
+    } else {
+      res.status(StatusCodes.CREATED).json({
+        message: "Une ressource a été créée avec succès sur le serveur",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 export default {
   addFavouriteBar,
   destroyFavouriteBar,
   addFavouriteEvent,
   destroyFavouriteEvent,
+  addFavouriteMusicGroup,
 };

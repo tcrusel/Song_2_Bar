@@ -111,7 +111,6 @@ function EventDetails() {
       throw error;
     }
   };
-
   return (
     <>
       <section className="event-details">

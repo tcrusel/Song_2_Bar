@@ -1,8 +1,11 @@
 import "./MusicGroup.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify/unstyled";
 import styleIcon from "/images/group_images/music-style-icon.svg";
-import Favourite from "../../components/Favourite/Favourite";
+import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import { useAuth } from "../../contexts/AuthContext";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 
 function MusicGroup() {
@@ -10,57 +13,106 @@ function MusicGroup() {
     null,
   );
   const { id } = useParams();
-
-  // Ajout d'un user_id fictif, à remplacer par ta vraie source
-  const user_id = 1;
+  const musicGroupId = Number(id);
+  const navigate = useNavigate();
+  const { auth } = useAuth();
+  const userId = auth?.user.id;
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/groups/${id}`)
       .then((response) => response.json())
       .then((musicGroup) => {
         setMusicGroup(musicGroup);
-        console.log(musicGroup);
       });
   }, [id]);
-
-  // Déplacer toggleFavourite hors de useEffect et la définir normalement
-  const toggleFavourite = async () => {
-    if (!id) return;
-
-    fetch(`${import.meta.env.VITE_API_URL}/api/favourite_music_group`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user_id, music_group_id: Number(id) }),
-    }).catch((err) => console.error("Erreur lors du toggle:", err));
-  };
 
   if (!musicGroup)
     return (
       <>
         <section className="fail">
           <h1>Groupe de musique introuvable</h1>
-          <button type="button">Revenir à l'accueil</button>
+          <button type="button" onClick={() => navigate("/")}>
+            Revenir à l'accueil
+          </button>
         </section>
       </>
     );
+
+  const favouriteMusicGroup = async () => {
+    if (!auth) {
+      navigate("/login", { state: { isloggedToFavouriteMusicGroup: false } });
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/favourite_music_group`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth?.token}`,
+          },
+          body: JSON.stringify({
+            userId,
+            musicGroupId,
+          }),
+        },
+      );
+      if (response.ok) {
+        toast("Cet évènement est maintenant dans vos favoris", {
+          type: "success",
+        });
+      } else {
+        throw new Error("Erreur serveur");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la favorisation de l'évènement", error);
+      toast("Impossible d'ajouter l'évènement dans votre liste de favoris", {
+        type: "error",
+      });
+      throw error;
+    }
+  };
+
+  const unfavouriteMusicGroup = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/favourite_music_group/${musicGroupId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        },
+      );
+      if (response) {
+        toast("Cet évènement a été retiré de vos favoris", {
+          type: "success",
+        });
+      } else {
+        throw new Error("Erreur serveur");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la suppression du favori :", error);
+      toast("Impossible d'ajouter l'évènement dans votre liste de favoris", {
+        type: "error",
+      });
+      throw error;
+    }
+  };
 
   return (
     <>
       <section className="group-information">
         <h1 className="button-title">
-          {musicGroup.name} <Favourite />
-          {/* Déplacer onClick sur un élément valide, ici le bouton */}
-          <button
-            type="button"
-            onClick={toggleFavourite}
-            style={{ marginLeft: "1rem" }}
-          >
-            Toggle Favorite
-          </button>
+          {musicGroup.name}&nbsp;
+          <FavouriteButton
+            favouriteMusicGroup={favouriteMusicGroup}
+            unfavouriteMusicGroup={unfavouriteMusicGroup}
+          />
         </h1>
-
         <article className="group-title">
           <img
             src={styleIcon}
@@ -86,6 +138,12 @@ function MusicGroup() {
       <section className="bar-caroussel">
         <p>Caroussel de bars à venir</p>
       </section>
+      <ToastContainer
+        position="top-center"
+        theme="colored"
+        autoClose={3000}
+        limit={2}
+      />
     </>
   );
 }

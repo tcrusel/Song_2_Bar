@@ -7,13 +7,28 @@ function Footer() {
         <div className="networks">
           <p className="follow-us">Rejoignez-nous sur les reseaux sociaux :</p>
           <div className="image-social-logo">
-            <img src="/images/mini-logo-flickr.png" alt="mini-logo-flickr" />
-            <img src="/images/mini-logo-ico.png" alt="mini-logo-ico" />
-            <img src="/images/mini-logo-rss.png" alt="mini-logo-rss" />
-            <img src="/images/mini-logo-twitter.png" alt="mini-logo-twitter" />
-            <img src="/images/mini-logo-vimeo.png" alt="mini-logo-vimeo" />
             <img
-              src="/images/mini-logo-facebook.png"
+              src="/images/home_images/mini-logo-flickr.png"
+              alt="mini-logo-flickr"
+            />
+            <img
+              src="/images/home_images/mini-logo-ico.png"
+              alt="mini-logo-ico"
+            />
+            <img
+              src="/images/home_images/mini-logo-rss.png"
+              alt="mini-logo-rss"
+            />
+            <img
+              src="/images/home_images/mini-logo-twitter.png"
+              alt="mini-logo-twitter"
+            />
+            <img
+              src="/images/home_images/mini-logo-vimeo.png"
+              alt="mini-logo-vimeo"
+            />
+            <img
+              src="/images/home_images/mini-logo-facebook.png"
               alt="mini-logo-facebook"
             />
           </div>
@@ -29,7 +44,7 @@ function Footer() {
           </button>
         </div>
         <div className="footer-images">
-          <img src="/images/micro.png" alt="micro" />
+          <img src="/images/home_images/micro.png" alt="micro" />
           <div className="middle-container">
             <button
               className="top-page"
@@ -40,7 +55,10 @@ function Footer() {
             </button>
             <p className="legal-notices">Mentions légales, crédits et C.G.U.</p>
           </div>
-          <img src="/images/guitare-fleur.png" alt="guitare-fleur" />
+          <img
+            src="/images/home_images/guitare-fleur.png"
+            alt="guitare-fleur"
+          />
         </div>
         <div className="info-song2bar">
           <div className="paragraph-song2bar">

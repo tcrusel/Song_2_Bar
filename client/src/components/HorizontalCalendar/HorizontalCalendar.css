@@ -1,0 +1,36 @@
+.horizontal-calendar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: #ebd2a4;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.day-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 50px;
+  font-family: inherit;
+}
+
+.day-button:hover {
+  background-color: #ddd;
+}
+
+.day-button.active {
+  background-color: #333;
+  color: white;
+}
+
+.calendar-container {
+  max-width: 443px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: white;
+}

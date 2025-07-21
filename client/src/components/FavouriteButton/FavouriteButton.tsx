@@ -50,7 +50,7 @@ function FavouriteButton({
             ? "Icône de groupe favorisé"
             : "Icône de groupe non favorisé"
         }
-        width="35"
+        width="60"
         height="auto"
       />
     </button>

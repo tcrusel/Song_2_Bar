@@ -2,10 +2,10 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
 class favouriteRepository {
-  async favouriteBar(favourite: Partial<FavouriteBar>) {
+  async favouriteBar(userId: number, barId: number) {
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO favourite_bar (user_id, bar_id) VALUES (?, ?)",
-      [favourite.userId, favourite.barId],
+      [userId, barId],
     );
 
     return result.affectedRows;
@@ -20,10 +20,10 @@ class favouriteRepository {
     return result.affectedRows;
   }
 
-  async favouriteEvent(favourite: Partial<FavouriteEvent>) {
+  async favouriteEvent(userId: number, eventId: number) {
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO favourite_event (user_id, event_id) VALUES (?, ?)",
-      [favourite.userId, favourite.eventId],
+      [userId, eventId],
     );
 
     return result.affectedRows;

@@ -8,6 +8,8 @@
 }
 
 .return-button-container {
+  display: flex;
+  justify-content: space-between;
   padding: 1.5rem 2rem 0 2rem;
   background-color: var(--background-primary-color);
 }
@@ -40,13 +42,15 @@
 }
 
 .bar-name-banner {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   padding: 6rem 2rem;
   background-color: var(--background-primary-color);
 }
 
 .bar-name-banner .bar-name {
+  grid-column: 2/3;
   background: var(--button-primary-color);
   color: var(--button-text-color);
   padding: 1rem 3rem;
@@ -57,6 +61,7 @@
   text-align: center;
   box-shadow: 0 4px 15px rgba(210, 105, 30, 0.3);
   display: flex;
+  justify-content: center;
   align-items: center;
   min-width: 300px;
 }

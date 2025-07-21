@@ -15,6 +15,11 @@ router.get("/api/events/:id", eventActions.read);
 router.get("/api/groups/:id", groupActions.read);
 
 router.get("/api/bars/:id", barActions.read);
+router.get("/api/users/:id", userActions.read);
+router.get(
+  "/api/users/:userId/favourite_groups",
+  favouriteActions.getFavouriteGroups,
+);
 
 router.post("/api/users", authActions.hashPassword, userActions.add);
 
@@ -35,6 +40,12 @@ router.post("/api/favourite_event", favouriteActions.addFavouriteEvent);
 router.delete(
   "/api/favourite_event/:userId/:eventId",
   favouriteActions.destroyFavouriteEvent,
+);
+
+router.post("/api/favourite_group", favouriteActions.addFavouriteGroup);
+router.delete(
+  "/api/favourite_group/:userId/:groupId",
+  favouriteActions.destroyFavouriteGroup,
 );
 
 export default router;

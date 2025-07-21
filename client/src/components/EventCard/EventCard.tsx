@@ -30,8 +30,8 @@ function EventCard({ event }: EventCardProps) {
         />
       </aside>
       <aside className="card-content">
-        <h2 className="event-title">{event.title}</h2>
-        <p className="event-style">{event.music_style}</p>
+        <h2 className="card-title">{event.title}</h2>
+        <p className="card-style">{event.music_style}</p>
       </aside>
       <aside className="card-bottom">
         <div className="card-bottom-corner">

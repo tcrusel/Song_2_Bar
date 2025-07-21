@@ -12,6 +12,7 @@ import { useNavigate } from "react-router";
 function Home() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const navigate = useNavigate();
+
   const DateChange = (date: Date | null) => {
     setSelectedDate(date);
     if (date) {
@@ -40,11 +41,13 @@ function Home() {
           autoClose={4000}
           limit={1}
         />
+
         <img
           className="flower-guitar"
           src="../../../images/micro-guitare.svg"
           alt="représentation de la guitare avec des fleurs"
         />
+
         <section className="guide">
           <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
           <article className="user-action">

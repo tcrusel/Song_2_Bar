@@ -181,6 +181,7 @@ const addFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
 export default {
   addFavouriteBar,
   destroyFavouriteBar,

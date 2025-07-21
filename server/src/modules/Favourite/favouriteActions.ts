@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
-import favouriteRepository from "./favouriteRepository";
+import favouriteRepository from "../favourite/favouriteRepository";
 
 const addFavouriteBar: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
@@ -87,7 +87,7 @@ const addFavouriteEvent: RequestHandler = async (req, res, next) => {
       typeof req.body.userId !== "number" ||
       typeof req.body.eventId !== "number"
     ) {
-      res.sendStatus(StatusCodes.BAD_REQUEST);
+      res.sendStatus(StatusCodes.BAD_REQUEST).json({ message: "zizi" });
     }
 
     const newFavouriteEvent = {
@@ -117,7 +117,7 @@ const destroyFavouriteEvent: RequestHandler = async (req, res, next) => {
   }
 
   try {
-    const userId = Number(req.params.userId);
+    const userId = Number(req.auth.sub);
     const eventId = Number(req.params.eventId);
 
     if (
@@ -156,7 +156,7 @@ const getFavouriteGroups: RequestHandler = async (req, res, next) => {
     }
 
     const favouriteGroups =
-      await favouriteRepository.getFavouriteGroups(userId);
+      await favouriteRepository.getFavouriteGroupsByUserId(userId);
 
     res.status(StatusCodes.OK).json(favouriteGroups);
   } catch (err) {
@@ -164,7 +164,7 @@ const getFavouriteGroups: RequestHandler = async (req, res, next) => {
   }
 };
 
-const addFavouriteGroup: RequestHandler = async (req, res, next) => {
+const addFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);
     return;
@@ -183,7 +183,7 @@ const addFavouriteGroup: RequestHandler = async (req, res, next) => {
     const userId = Number.parseInt(req.auth.sub);
     const groupId = req.body.groupId;
 
-    const affectedRows = await favouriteRepository.favouriteGroup(
+    const affectedRows = await favouriteRepository.favouriteMusicGroup(
       userId,
       groupId,
     );
@@ -191,37 +191,32 @@ const addFavouriteGroup: RequestHandler = async (req, res, next) => {
     if (affectedRows <= 0) {
       res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "La favorisation du groupe a échoué" });
+        .json({ message: "La favorisation du groupe de musique a échoué !" });
     } else {
-      res.status(StatusCodes.CREATED).json({ affectedRows });
+      res.status(StatusCodes.CREATED).json({
+        message: "Une ressource a été créée avec succès sur le serveur",
+      });
     }
   } catch (err) {
     next(err);
   }
 };
 
-const destroyFavouriteGroup: RequestHandler = async (req, res, next) => {
-  if (!req.auth.role) {
-    res.sendStatus(StatusCodes.FORBIDDEN);
-    return;
-  }
-
+const destroyFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number(req.params.userId);
-    const groupId = Number(req.params.groupId);
+    const musicGroupId = Number(req.params.musicGroupId);
 
-    if (
-      !userId ||
-      !groupId ||
-      typeof userId !== "number" ||
-      typeof groupId !== "number"
-    ) {
-      res.sendStatus(StatusCodes.BAD_REQUEST);
+    if (Number.isNaN(userId) || Number.isNaN(musicGroupId)) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: "Invalid user_id or music_group_id" });
+      return;
     }
 
-    const affectedRows = await favouriteRepository.unfavouriteGroup(
+    const affectedRows = await favouriteRepository.unfavouriteMusicGroup(
       userId,
-      groupId,
+      musicGroupId,
     );
 
     if (affectedRows <= 0) {
@@ -242,6 +237,6 @@ export default {
   addFavouriteEvent,
   destroyFavouriteEvent,
   getFavouriteGroups,
-  addFavouriteGroup,
-  destroyFavouriteGroup,
+  addFavouriteMusicGroup,
+  destroyFavouriteMusicGroup,
 };

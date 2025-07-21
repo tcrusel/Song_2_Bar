@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <MusicGroup />,
       },
       {
-        path: "/bars/:id",
+        path: "/bar/:id",
         element: <BarPage />,
       },
       {

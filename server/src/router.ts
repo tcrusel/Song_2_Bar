@@ -1,8 +1,8 @@
 import express from "express";
-import favouriteActions from "./modules/Favourite/favouriteActions";
 import authActions from "./modules/authActions";
 import barActions from "./modules/bar/barActions";
 import eventActions from "./modules/event/eventActions";
+import favouriteActions from "./modules/favourite/favouriteActions";
 import groupActions from "./modules/groups/groupActions";
 import participateActions from "./modules/participate/participateActions";
 import userActions from "./modules/user/userActions";
@@ -38,14 +38,17 @@ router.delete(
 
 router.post("/api/favourite_event", favouriteActions.addFavouriteEvent);
 router.delete(
-  "/api/favourite_event/:userId/:eventId",
+  "/api/favourite_event/:eventId",
   favouriteActions.destroyFavouriteEvent,
 );
 
-router.post("/api/favourite_group", favouriteActions.addFavouriteGroup);
+router.post(
+  "/api/favourite_music_group",
+  favouriteActions.addFavouriteMusicGroup,
+);
 router.delete(
-  "/api/favourite_group/:userId/:groupId",
-  favouriteActions.destroyFavouriteGroup,
+  "/api/favourite_music_group/:userId/:musicGroupId",
+  favouriteActions.destroyFavouriteMusicGroup,
 );
 
 export default router;

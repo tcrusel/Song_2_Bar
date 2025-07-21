@@ -41,5 +41,9 @@ router.post(
   "/api/favourite_music_group",
   favouriteActions.addFavouriteMusicGroup,
 );
+router.delete(
+  "/api/favourite_music_group/:userId/:musicGroupId",
+  favouriteActions.destroyFavouriteMusicGroup,
+);
 
 export default router;

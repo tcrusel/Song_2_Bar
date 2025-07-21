@@ -74,7 +74,7 @@ p {
 
 .card:hover {
   transform: scale(1.1);
-  box-shadow: 0 10px 20px rgba(236, 208, 50, 0.664);
+  box-shadow: 0 10px 20px var(--button-primary-color);
 }
 
 .card-image {

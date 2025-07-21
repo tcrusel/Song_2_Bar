@@ -10,12 +10,13 @@ body {
   flex-direction: column;
 }
 
-main .when-button {
+.date-button {
   border-radius: 45px;
   background-color: #aa682e;
   font-size: 3rem;
   display: block;
   margin: auto;
+  border: none;
 }
 
 .calendar-wrapper {
@@ -23,6 +24,7 @@ main .when-button {
   flex-direction: column;
   align-items: center;
 }
+
 .user-action {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

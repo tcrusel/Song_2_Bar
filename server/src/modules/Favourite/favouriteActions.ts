@@ -18,13 +18,10 @@ const addFavouriteBar: RequestHandler = async (req, res, next) => {
       res.sendStatus(StatusCodes.BAD_REQUEST);
     }
 
-    const newFavouriteBar = {
-      userId: Number.parseInt(req.auth.sub),
-      barId: req.body.barId,
-    };
+    const userId = Number.parseInt(req.auth.sub);
+    const barId = Number(req.body.barId);
 
-    const affectedRows =
-      await favouriteRepository.favouriteBar(newFavouriteBar);
+    const affectedRows = await favouriteRepository.favouriteBar(userId, barId);
 
     if (affectedRows <= 0) {
       res
@@ -90,13 +87,13 @@ const addFavouriteEvent: RequestHandler = async (req, res, next) => {
       res.sendStatus(StatusCodes.BAD_REQUEST);
     }
 
-    const newFavouriteEvent = {
-      userId: Number.parseInt(req.auth.sub),
-      eventId: req.body.eventId,
-    };
+    const userId = Number.parseInt(req.auth.sub);
+    const eventId = Number(req.body.eventId);
 
-    const affectedRows =
-      await favouriteRepository.favouriteEvent(newFavouriteEvent);
+    const affectedRows = await favouriteRepository.favouriteEvent(
+      userId,
+      eventId,
+    );
 
     if (affectedRows <= 0) {
       res

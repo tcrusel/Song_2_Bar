@@ -98,7 +98,7 @@ function EventDetails() {
       );
       if (response.ok) {
         toast("Cet évènement a été retiré de vos favoris", {
-          type: "info",
+          type: "success",
         });
       } else {
         throw new Error("Erreur serveur");

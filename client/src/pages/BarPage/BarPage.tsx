@@ -112,7 +112,7 @@ function BarPage() {
           }),
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Ce bar est maintenant dans vos favoris", {
           type: "success",
           autoClose: 3000,
@@ -147,9 +147,9 @@ function BarPage() {
           },
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Ce bar a été retiré de vos favoris", {
-          type: "info",
+          type: "success",
           autoClose: 3000,
         });
       } else {
@@ -174,13 +174,11 @@ function BarPage() {
       </div>
 
       <div className="bar-name-banner">
-        <h1 className="bar-name">
-          {bar.name}{" "}
-          <FavouriteButton
-            favouriteBar={favouriteBar}
-            unfavouriteBar={unfavouriteBar}
-          />
-        </h1>
+        <h1 className="bar-name">{bar.name}</h1>
+        <FavouriteButton
+          favouriteBar={favouriteBar}
+          unfavouriteBar={unfavouriteBar}
+        />
       </div>
 
       <section className="bar-info">

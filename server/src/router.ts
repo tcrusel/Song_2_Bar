@@ -3,7 +3,6 @@ import authActions from "./modules/authActions";
 import barActions from "./modules/bar/barActions";
 import eventActions from "./modules/event/eventActions";
 import favouriteActions from "./modules/favourite/favouriteActions";
-import favouriteGroupActions from "./modules/favourite/favouriteGroupAction/favouriteGroupActions";
 import groupActions from "./modules/groups/groupActions";
 import participateActions from "./modules/participate/participateActions";
 import userActions from "./modules/user/userActions";
@@ -34,10 +33,13 @@ router.delete(
 
 router.post("/api/favourite_event", favouriteActions.addFavouriteEvent);
 router.delete(
-  "/api/favourite_event/:userId/:eventId",
+  "/api/favourite_event/:eventId",
   favouriteActions.destroyFavouriteEvent,
 );
 
-router.post("/api/favourite", favouriteGroupActions.add);
+router.post(
+  "/api/favourite_music_group",
+  favouriteActions.addFavouriteMusicGroup,
+);
 
 export default router;

@@ -25,8 +25,8 @@ function BarCard({ bar }: BarCardProps) {
           alt={`Illustration de ${bar.name}`}
         />
         <aside className="card-content">
-          <h2 className="event-title">{bar.name}</h2>
-          <p className="event-style">{bar.address}</p>
+          <h2 className="card-title">{bar.name}</h2>
+          <p className="card-style">{bar.address}</p>
         </aside>
       </article>
     </>

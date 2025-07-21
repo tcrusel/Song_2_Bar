@@ -1,10 +1,5 @@
 import AbstractSeeder from "./AbstractSeeder";
 
-interface FavouriteData {
-  user_id: number;
-  music_group_id: number;
-}
-
 class FavouriteMusicGroupSeeder extends AbstractSeeder {
   constructor() {
     super({
@@ -25,8 +20,7 @@ class FavouriteMusicGroupSeeder extends AbstractSeeder {
 
       if (!userInFavourite.has(key)) {
         userInFavourite.add(key);
-
-        this.insert(fakeFavourite as FavouriteData);
+        this.insert(fakeFavourite);
       }
     }
   }

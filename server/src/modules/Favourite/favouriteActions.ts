@@ -146,26 +146,46 @@ const destroyFavouriteEvent: RequestHandler = async (req, res, next) => {
   }
 };
 
+const getFavouriteGroups: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.userId);
+
+    if (!userId || typeof userId !== "number") {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+      return;
+    }
+
+    const favouriteGroups =
+      await favouriteRepository.getFavouriteGroupsByUserId(userId);
+
+    res.status(StatusCodes.OK).json(favouriteGroups);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const addFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
+  if (!req.auth.role) {
+    res.sendStatus(StatusCodes.FORBIDDEN);
+    return;
+  }
+
   try {
     if (
       !req.body.userId ||
-      !req.body.musicGroupId ||
+      !req.body.groupId ||
       typeof req.body.userId !== "number" ||
-      typeof req.body.musicGroupId !== "number"
+      typeof req.body.groupId !== "number"
     ) {
-      res.sendStatus(StatusCodes.BAD_REQUEST).json({ message: "zizi" });
+      res.sendStatus(StatusCodes.BAD_REQUEST);
     }
 
-    const userId = Number(req.auth.sub);
-    const musicGroupId = Number(req.body.musicGroupId);
-
-    console.log(userId);
-    console.log(musicGroupId);
+    const userId = Number.parseInt(req.auth.sub);
+    const groupId = req.body.groupId;
 
     const affectedRows = await favouriteRepository.favouriteMusicGroup(
       userId,
-      musicGroupId,
+      groupId,
     );
 
     if (affectedRows <= 0) {
@@ -202,11 +222,10 @@ const destroyFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
     if (affectedRows <= 0) {
       res
         .status(StatusCodes.NOT_FOUND)
-        .json({ message: "Favourite group not found" });
-      return;
+        .json({ message: "Echec de la suppression" });
+    } else {
+      res.status(StatusCodes.NO_CONTENT).json({ affectedRows });
     }
-
-    res.status(204).json({ message: "zizi" });
   } catch (err) {
     next(err);
   }
@@ -217,6 +236,7 @@ export default {
   destroyFavouriteBar,
   addFavouriteEvent,
   destroyFavouriteEvent,
+  getFavouriteGroups,
   addFavouriteMusicGroup,
   destroyFavouriteMusicGroup,
 };

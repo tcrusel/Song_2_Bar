@@ -15,7 +15,7 @@ router.get("/api/events/:id", eventActions.read);
 router.get("/api/groups/:id", groupActions.read);
 
 router.get("/api/bars/:id", barActions.read);
-router.get("/api/participate", participateActions.browse);
+router.get("/api/participate/:userId", participateActions.browseByUserId);
 router.get("/api/users/:id", userActions.read);
 router.get(
   "/api/users/:userId/favourite_groups",

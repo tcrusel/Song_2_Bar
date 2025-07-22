@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import EventParticipation from "../../components/EventParticipation/EventParticipation";
 import GroupCard from "../../components/GroupCard/GroupCard";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import type { UserInfo } from "../../types/User";
@@ -224,8 +225,7 @@ function UserProfile() {
         return (
           <div className="tab-content">
             <div>
-              <h2>Mes Événements</h2>
-              <p>Mes événements apparaîtront ici prochainement</p>
+              <EventParticipation />
             </div>
           </div>
         );

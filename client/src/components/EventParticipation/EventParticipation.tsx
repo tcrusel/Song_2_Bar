@@ -1,43 +1,42 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { EventType } from "../../types/Event";
 import EventCard from "../EventCard/EventCard";
 import "./EventParticipation.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 function EventParticipation() {
-  const { user_id } = useParams<{ user_id: string }>();
-  const [events, setEvents] = useState<EventType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [participations, setParticipations] = useState<EventType[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const { auth } = useAuth();
+  const userId = auth?.user.id;
 
   useEffect(() => {
     const fetchParticipations = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/participate/${user_id}`,
+          `${import.meta.env.VITE_API_URL}/api/participate/${userId}`,
         );
 
         if (!response.ok) {
           throw new Error("Erreur lors du chargement des participations");
         }
 
-        const data = await response.json();
-        setEvents(data);
+        const participations = await response.json();
+        console.log("Événements récupérés :", participations);
+        setParticipations(participations);
       } catch (error) {
         setError;
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchParticipations();
-  }, [user_id]);
+  }, [userId]);
 
-  if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur : {error}</p>;
-  if (events.length === 0) return <p>Vous ne participez à aucun événement.</p>;
+  if (participations.length === 0)
+    return <p>Vous ne participez à aucun événement.</p>;
 
   return (
     <div className="event-participation">
@@ -57,7 +56,7 @@ function EventParticipation() {
         }}
         className="event-swiper"
       >
-        {events.map((event) => (
+        {participations.map((event) => (
           <SwiperSlide key={event.id}>
             <EventCard event={event} />
           </SwiperSlide>

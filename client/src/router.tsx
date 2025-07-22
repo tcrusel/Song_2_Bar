@@ -9,6 +9,7 @@ import MusicGroup from "./pages/MusicGroup/MusicGroup";
 import Register from "./pages/Register/Register";
 import UserProfile from "./pages/UserProfile/UserProfile";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,13 +40,14 @@ const router = createBrowserRouter([
         element: <MusicGroup />,
       },
       {
-        path: "/bar/:id",
+        path: "/bars/:id",
         element: <BarPage />,
       },
       {
         path: "/profile",
         element: <UserProfile />,
       },
+     
     ],
   },
 ]);

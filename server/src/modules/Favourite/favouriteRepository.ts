@@ -1,5 +1,6 @@
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
+import type { MusicGroup } from "../../types/musicGroup";
 
 class FavouriteRepository {
   async favouriteBar(favourite: Partial<FavouriteBar>) {
@@ -37,8 +38,24 @@ class FavouriteRepository {
 
     return result.affectedRows;
   }
+  async favouriteMusicGroup(userId: number, musicGroupId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "INSERT INTO favourite_music_group (user_id, music_group_id) VALUES (?, ?)",
+      [userId, musicGroupId],
+    );
+    return result.affectedRows;
+  }
 
-  async getFavouriteGroups(userId: number) {
+  async unfavouriteMusicGroup(userId: number, musicGroupId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM favourite_music_group WHERE user_id = ? AND music_group_id = ?",
+      [userId, musicGroupId],
+    );
+
+    return result.affectedRows;
+  }
+
+  async getFavouriteGroupsByUserId(userId: number) {
     const [rows] = await databaseClient.query<Rows>(
       `SELECT mg.id, mg.name, mg.style, mg.image 
        FROM favourite_music_group fmg

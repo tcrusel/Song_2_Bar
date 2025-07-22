@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
+import "./../../assets/_variables.css";
 import { useEffect } from "react";
 
 import { useNavigate } from "react-router";
@@ -10,6 +11,7 @@ import { useNavigate } from "react-router";
 function Home() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const navigate = useNavigate();
+
   const DateChange = (date: Date | null) => {
     setSelectedDate(date);
     if (date) {
@@ -38,65 +40,65 @@ function Home() {
           autoClose={4000}
           limit={1}
         />
+
         <img
           className="flower-guitar"
-          src="/images/home_images/micro-guitard.svg"
+          src="../../../images/micro-guitare.svg"
           alt="représentation de la guitare avec des fleurs"
-          width="cover"
-          height="auto"
         />
+
         <section className="guide">
           <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
 
           <article className="user-action">
-            <p>
-              1.
+            <div>
+              <p>1. </p>
               <img
                 src="/images/home_images/mini-icone-calendrier.png"
                 alt="representation mini-icone-coeur"
               />
-              Choisissez une date
-            </p>
-            <p>
-              2.
+              <p>Choisissez une date</p>
+            </div>
+            <div>
+              <p>2. </p>
               <img
                 src="/images/home_images/mini-icone-epingle.png"
                 alt="mini-icone-coeur"
               />
-              Cliquez pour plus d'infos
-            </p>
-            <p>
-              3.
+              <p>Cliquez pour plus d'infos</p>
+            </div>
+            <div>
+              <p>3. </p>
               <img
                 src="/images/home_images/mini-icone-coeur.png"
                 alt="mini-icone-coeur"
               />
-              Créez votre sélection
-            </p>
-            <p>
-              4.
+              <p>Créez votre sélection</p>
+            </div>
+            <div>
+              <p>4. </p>
               <img
                 src="/images/home_images/mini-icone-guitare.png"
                 alt="mini-icone-guitare"
               />
-              Explorez les concerts du jour
-            </p>
-            <p>
-              5.
+              <p>Explorez les concerts du jour</p>
+            </div>
+            <div>
+              <p>5. </p>
               <img
                 src="/images/home_images/mini-icone-loupe.png"
                 alt="mini-icone-loupe"
               />
-              Utilisez les filtres
-            </p>
-            <p>
-              6.
+              <p>Utilisez les filtres</p>
+            </div>
+            <div>
+              <p>6. </p>
               <img
                 src="/images/home_images/mini-icone-carte.png"
                 alt="mini-icone-carte"
               />
-              Trouvez votre chemin
-            </p>
+              <p>Trouvez votre chemin</p>
+            </div>
           </article>
         </section>
       </main>

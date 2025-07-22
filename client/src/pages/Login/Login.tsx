@@ -111,7 +111,7 @@ export default function Login() {
             <h3 className="bold">Vous n'avez pas de compte Song2Bar ?</h3>
             <p>
               Créer un compte vous permet de retrouver toutes vos annonces et de
-              les modifer.
+              les modifier.
             </p>
             <button
               className="register-button"

@@ -69,13 +69,52 @@ p {
   border-top-right-radius: 20px;
   flex-direction: column;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px var(--button-primary-color);
 }
 
 .card-image {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
-  min-height: 125px;
+  height: 125px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
+
+/* Make images fill their containers completely */
+img.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.card-title {
+  font-weight: bolder;
+  color: #7a331b;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0;
+}
+
+.card-style {
+  font-size: 0.8rem;
+  text-align: center;
+  color: black;
+  margin-top: 0.4rem;
+  margin-bottom: 0;
 }
 
 @media (max-width: 700px) {

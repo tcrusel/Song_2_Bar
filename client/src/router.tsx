@@ -6,8 +6,8 @@ import Events from "./pages/Event/Events";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import MusicGroup from "./pages/MusicGroup/MusicGroup";
-
 import Register from "./pages/Register/Register";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -39,8 +39,12 @@ const router = createBrowserRouter([
         element: <MusicGroup />,
       },
       {
-        path: "/bars/:id",
+        path: "/bar/:id",
         element: <BarPage />,
+      },
+      {
+        path: "/profile",
+        element: <UserProfile />,
       },
     ],
   },

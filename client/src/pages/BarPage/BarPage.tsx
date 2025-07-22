@@ -44,14 +44,19 @@ function BarPage() {
     const startTime = parts[0];
     const endTime = parts[1];
 
-    return `${startTime} - ${endTime}`;
+    if (isOpeningHours) {
+      return `Ouvre à ${startTime} - Ferme à ${endTime}`;
+    }
+    return `Commence à ${startTime} - Fini à ${endTime}`;
   };
 
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">Erreur: {error}</div>;
   if (!bar) return <div className="error">Bar non trouvé</div>;
 
-  const images = [bar.image1, bar.image2, bar.image3, bar.image4];
+  const images = [bar.image1, bar.image2, bar.image3, bar.image4].map((path) =>
+    path.startsWith("/images/") ? path : `/images${path}`,
+  );
 
   const getTodayHours = () => {
     if (!bar || !bar.hours) {

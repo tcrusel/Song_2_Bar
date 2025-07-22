@@ -9,6 +9,11 @@ body {
   display: flex;
   flex-direction: column;
 }
+.flower-guitar {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 main .when-button {
   border-radius: 45px;
@@ -16,6 +21,8 @@ main .when-button {
   font-size: 3rem;
   display: block;
   margin: auto;
+  width: 28rem;
+  height: 6rem;
 }
 
 .calendar-wrapper {
@@ -30,17 +37,35 @@ main .when-button {
   padding: 3rem;
   margin-left: 30px;
   color: white;
-  font-size: 1.5rem;
+}
+
+.user-action div {
+  display: flex;
 }
 
 .user-action p {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
 }
 
 .user-action img {
   width: 24px;
   height: auto;
+  margin: 10px;
+}
+
+@media screen and (width <= 600px) {
+  .user-action {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6rem;
+    padding: 3rem;
+    padding-right: 7rem;
+    color: white;
+    font-size: 1.5rem;
+    place-items: center;
+    align-items: center;
+  }
 }

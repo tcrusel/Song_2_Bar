@@ -2,9 +2,11 @@ import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import participateRepository from "./participateRepository";
 
-const browse: RequestHandler = async (req, res, next) => {
+const browseByUserId: RequestHandler = async (req, res, next) => {
   try {
-    const events = await participateRepository.readAll();
+    const userId = Number(req.auth.userId);
+
+    const events = await participateRepository.readAllByEventId(userId);
 
     res.json(events);
   } catch (err) {
@@ -65,4 +67,4 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
   }
 };
 
-export default { add, remove, browse };
+export default { add, remove, browseByUserId };

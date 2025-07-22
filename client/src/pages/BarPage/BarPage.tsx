@@ -185,12 +185,14 @@ function BarPage() {
       </div>
       <article className="top-page-container">
         <div className="button-title-container">
-          <h1 className="button-title">{bar.name}</h1>
+          <h1 className="button-title">
+            {bar.name}{" "}
+            <FavouriteButton
+              favouriteBar={favouriteBar}
+              unfavouriteBar={unfavouriteBar}
+            />
+          </h1>
         </div>
-        <FavouriteButton
-          favouriteBar={favouriteBar}
-          unfavouriteBar={unfavouriteBar}
-        />
       </article>
 
       <article className="bar-info">

@@ -16,6 +16,11 @@
 
 body {
   font-family: "Fredoka", sans-serif;
+  background-color: var(--background-primary-color);
+}
+
+section {
+  padding: 2rem 3rem;
 }
 
 .underline {
@@ -102,22 +107,16 @@ input {
 }
 
 .top-page-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
   padding-bottom: 60px;
   gap: 20px;
 }
 
-.button-title-container {
-  grid-column: 2/3;
-  display: flex;
-  justify-content: center;
-}
-
 .button-title {
-  grid-column: 2/3;
+  display: flex;
   width: fit-content;
   height: auto;
   font-size: 3rem;
@@ -128,6 +127,7 @@ input {
   color: var(--button-text-color);
   padding: 1rem 2rem;
   align-items: center;
+  gap: 20px;
 }
 
 @media (max-width: 700px) {

@@ -147,12 +147,14 @@ function MusicGroup() {
         </div>
         <article className="top-page-container">
           <div className="button-title-container">
-            <h1 className="button-title">{musicGroup.name}</h1>
+            <h1 className="button-title">
+              {musicGroup.name}{" "}
+              <FavouriteButton
+                favouriteMusicGroup={favouriteMusicGroup}
+                unfavouriteMusicGroup={unfavouriteMusicGroup}
+              />
+            </h1>
           </div>
-          <FavouriteButton
-            favouriteMusicGroup={favouriteMusicGroup}
-            unfavouriteMusicGroup={unfavouriteMusicGroup}
-          />
         </article>
         <article className="group-title">
           <img
@@ -171,11 +173,14 @@ function MusicGroup() {
               alt="poster du groupe"
             />
           </aside>
-          <aside>
+          <aside className="description-content">
             <p className="description">{musicGroup.description}</p>
           </aside>
         </article>
       </section>
+      <h3 className="carousel-title">
+        Bars dans lesquels vous pourrez retrouver ce groupe de musique
+      </h3>
       <section className="bar-carousel">
         {bars && bars.length > 0 ? (
           <EmblaCarousel

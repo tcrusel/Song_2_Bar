@@ -18,4 +18,5 @@ export type EventType = {
   music_group_id: number;
   start_at: string;
   end_at: string;
+  event_name: string;
 };

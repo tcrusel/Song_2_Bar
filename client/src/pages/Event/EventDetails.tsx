@@ -4,9 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import Participate from "../../components/Participate/Participate";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
-import { format, isToday } from "date-fns";
-import { fr } from "date-fns/locale";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
@@ -37,10 +35,6 @@ function EventDetails() {
   }, [id]);
 
   if (!event) return <p>Chargement en cours...</p>;
-  const eventDate = new Date(event.date);
-  const formattedDateText = isToday(eventDate)
-    ? `Aujourd'hui le ${format(eventDate, "d MMMM yyyy", { locale: fr })}`
-    : format(eventDate, "d MMMM yyyy", { locale: fr });
 
   const favouriteEvent = async () => {
     if (!auth) {
@@ -111,67 +105,63 @@ function EventDetails() {
       throw error;
     }
   };
-
   return (
-    <>
-      <section className="event-details">
-        <article className="event-header">
-          <div className="header-style">
-            <p className="music-style bold">{event.music_style}</p>
-          </div>
-          <h1>
-            {event.title}{" "}
-            <FavouriteButton
-              favouriteEvent={favouriteEvent}
-              unfavouriteEvent={unfavouriteEvent}
-            />
-          </h1>
-          <img
-            className="poster-event"
-            src={event.image}
-            alt={event.bar_name}
-          />
-          <div className="date">
-            <div className="date-icon">
-              <img
-                src="/images/event_images/calendar.png"
-                alt="calendar-icon"
-              />
-            </div>
+    <div className="event-details">
+      <div className="return-button-container">
+        <button
+          type="button"
+          className="return-button"
+          onClick={() => navigate(-1)}
+        >
+          ← Retour
+        </button>
+      </div>
 
-            <p className={"date-event bold white"}>{formattedDateText}</p>
-          </div>
-          <div className="hour">
-            <img
-              src="/images/event_images/clock.png"
-              alt="clock-icon"
-              className="hour-icon"
-            />
-            <p className="hour-event white">
-              de {event.start_at} à {event.end_at}
-            </p>
-          </div>
-          <div className="participate">
-            <Participate />
-          </div>
-          <div className="bar">
-            <div className="localisation-icon">
-              <img
-                src="/images/event_images/localisation.png"
-                alt="localisation-icon"
-              />
-            </div>
+      <div className="event-name-banner">
+        <h1 className="event-name">{event.title}</h1>{" "}
+        <div className="favorite-button">
+          <FavouriteButton
+            favouriteEvent={favouriteEvent}
+            unfavouriteEvent={unfavouriteEvent}
+          />
+        </div>
+      </div>
+
+      <section className="event-info">
+        <div className="event-picture">
+          <img src={event.image} alt={event.bar_name} />
+        </div>
+        <div className="description-content">
+          <p>{event.description}</p>
+        </div>
+        <div className="event-meta">
+          <div className="bar-title">
+            🍺
             <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
-              {event.bar_name}
+                            {event.bar_name}           {" "}
             </Link>
           </div>
-          <div className={"bar-address"}>
-            <p>{event.address}</p>
-            <p>
-              {event.postcode} {event.city}
-            </p>
+          <div className="location">
+            📍 {event.address}, {event.postcode} {event.city}
           </div>
-        </article>
+          <div className="music-style">🎵 {event.music_style}</div>
+          <div className="groups-name">
+            🎤
+            <Link to={`/groups/${event.music_group_id}`}>
+              {" "}
+              {event.music_group_name}
+            </Link>
+          </div>
+
+          <div className="hour-event">
+                         🕐 de {event.start_at} à {event.end_at}           {" "}
+          </div>
+
+          <div className="participate-wrapper no-background">
+            <Participate />
+          </div>
+        </div>
+
         <div className="googlemap">
           <MapContainer
             center={[event.latitude, event.longitude]}
@@ -184,29 +174,15 @@ function EventDetails() {
             />
             <Marker position={[event.latitude, event.longitude]}>
               <Popup>
-                <strong>{event.bar_name}</strong>
+                <strong>{event.event_name}</strong>
                 <br />
                 {event.music_style}
               </Popup>
             </Marker>
           </MapContainer>
         </div>
-        <article className="description-container">
-          <p className="about white">A propos</p>
-          <p className="event-description">{event.description}</p>
-          <p className="artist white">Les artistes</p>
-          <Link to={`/groups/${event.music_group_id}`} className="groups-name">
-            {event.music_group_name}
-          </Link>
-        </article>
       </section>
-      <ToastContainer
-        position="top-center"
-        theme="colored"
-        autoClose={3000}
-        limit={2}
-      />
-    </>
+    </div>
   );
 }
 

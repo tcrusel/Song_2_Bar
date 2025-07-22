@@ -1,7 +1,7 @@
 .favourite-button {
+  grid-column: 3/4;
   background-color: transparent;
   border: none;
-  margin-left: 2.5rem;
   cursor: pointer;
   width: fit-content;
   height: fit-content;

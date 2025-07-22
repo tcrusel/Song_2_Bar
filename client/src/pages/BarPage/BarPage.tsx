@@ -44,14 +44,19 @@ function BarPage() {
     const startTime = parts[0];
     const endTime = parts[1];
 
-    return `${startTime} - ${endTime}`;
+    if (isOpeningHours) {
+      return `Ouvre à ${startTime} - Ferme à ${endTime}`;
+    }
+    return `Commence à ${startTime} - Fini à ${endTime}`;
   };
 
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">Erreur: {error}</div>;
   if (!bar) return <div className="error">Bar non trouvé</div>;
 
-  const images = [bar.image1, bar.image2, bar.image3, bar.image4];
+  const images = [bar.image1, bar.image2, bar.image3, bar.image4].map((path) =>
+    path.startsWith("/images/") ? path : `/images${path}`,
+  );
 
   const getTodayHours = () => {
     if (!bar || !bar.hours) {
@@ -166,22 +171,29 @@ function BarPage() {
   };
 
   return (
-    <div className="bar-details">
+    <section className="bar-details">
       <div className="return-button-container">
-        <button type="button" className="return-button" onClick={() => {}}>
+        <button
+          type="button"
+          className="return-button"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
           ← Retour
         </button>
       </div>
-
-      <div className="bar-name-banner">
-        <h1 className="bar-name">{bar.name}</h1>
+      <article className="top-page-container">
+        <div className="button-title-container">
+          <h1 className="button-title">{bar.name}</h1>
+        </div>
         <FavouriteButton
           favouriteBar={favouriteBar}
           unfavouriteBar={unfavouriteBar}
         />
-      </div>
+      </article>
 
-      <section className="bar-info">
+      <article className="bar-info">
         <div className="image-gallery">
           <div className="main-image">
             <img src={images[currentImageIndex]} alt={bar.name} />
@@ -234,16 +246,16 @@ function BarPage() {
               )}
           </div>
         </div>
-      </section>
+      </article>
 
-      <section className="events-carousel">
+      <article className="events-carousel">
         <div className="no-events">
           <h3>Événements</h3>
           <p>Les événements seront bientôt disponibles.</p>
         </div>
-      </section>
+      </article>
       <ToastContainer theme="colored" position="top-right" limit={2} />
-    </div>
+    </section>
   );
 }
 

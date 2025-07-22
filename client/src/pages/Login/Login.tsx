@@ -1,8 +1,8 @@
 import { type FormEventHandler, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import "./Login.css";
 import { toast, ToastContainer } from "react-toastify";
-import LogoSite from "/images/logo-site.png";
+import LogoSite2 from "/images/logo-site2.png";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
@@ -67,7 +67,7 @@ export default function Login() {
         const user = await response.json();
         setAuth(user);
 
-        navigate("/events/10");
+        navigate("/");
       } else {
         console.info(response);
         toast(
@@ -83,7 +83,9 @@ export default function Login() {
   return (
     <>
       <header id="header-login">
-        <img src={LogoSite} alt="logo du site" width="80" height="auto" />
+        <Link to={"/"}>
+          <img src={LogoSite2} alt="logo du site" width="80" height="auto" />
+        </Link>
         <h2>Connexion utilisateur</h2>
       </header>
       <main className="login-page">

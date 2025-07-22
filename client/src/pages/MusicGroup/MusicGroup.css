@@ -3,9 +3,8 @@ body {
   color: white;
 }
 
-.group-information,
-.bar-caroussel {
-  padding: 5rem;
+.group-information {
+  padding: 8rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,0 +1,99 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  padding: 1rem 2rem;
+}
+
+.header #logo-song2bar {
+  grid-column: 1/2;
+  grid-row: 1/3;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header #logo-home {
+  grid-column: 2/3;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo-connexion-button {
+  grid-column: 3/4;
+  background-color: #23241f;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.header h3 {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
+}
+
+.header nav {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.button-profile {
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button-secondary-color);
+  color: var(--button-text-color);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+}
+
+.button-events {
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button-primary-color);
+  color: var(--background-secondary-color);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+}
+
+@media screen and (width <= 600px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .logo-song2bar {
+    order: 1;
+    margin-bottom: 1rem;
+  }
+
+  .connexion-wrapper {
+    order: 2;
+    margin-bottom: 1rem;
+  }
+
+  .search-bar {
+    order: 3;
+    width: 90%;
+    max-width: 100%;
+  }
+  .logo-connexion-button {
+    background-color: #23241f;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border: none;
+    cursor: pointer;
+  }
+}

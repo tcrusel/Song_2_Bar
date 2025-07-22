@@ -20,8 +20,6 @@ function UserProfile() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        // TODO: Replace with actual user ID from authentication context
-        // For now, using direct assignment for development
         const userId = 12;
 
         const response = await fetch(
@@ -48,7 +46,6 @@ function UserProfile() {
   const fetchFavoriteGroups = useCallback(async () => {
     try {
       setGroupsLoading(true);
-      // TODO: Replace with actual user ID from authentication context
       const userId = 12;
 
       const response = await fetch(
@@ -68,21 +65,19 @@ function UserProfile() {
     }
   }, []);
 
-  // Fetch favorite groups when groups tab becomes active
   useEffect(() => {
     if (activeTab === "groups" && favoriteGroups.length === 0) {
       fetchFavoriteGroups();
     }
   }, [activeTab, favoriteGroups.length, fetchFavoriteGroups]);
 
-  // Calculate carousel pagination
-  const cardsPerPage = 5; // Show 5 cards per page
+  const cardsPerPage = 5;
   const totalPages = Math.ceil(favoriteGroups.length / cardsPerPage);
 
   const scrollToPage = (pageIndex: number) => {
     if (carouselRef.current) {
-      const cardWidth = 160; // Card width
-      const gap = 24; // 1.5rem gap = 24px
+      const cardWidth = 160;
+      const gap = 24;
       const scrollPosition = pageIndex * cardsPerPage * (cardWidth + gap);
 
       carouselRef.current.scrollTo({
@@ -106,7 +101,6 @@ function UserProfile() {
     }
   };
 
-  // Update current page based on scroll position
   const handleScroll = () => {
     if (carouselRef.current) {
       const cardWidth = 160;

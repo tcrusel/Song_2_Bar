@@ -90,10 +90,10 @@
 }
 
 .tab-content {
-  background-color: var(--color-neutral-white);
+  background-color: transparent;
   border-radius: 8px;
   padding: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   min-height: 400px;
   display: flex;
   align-items: center;
@@ -101,36 +101,46 @@
   text-align: center;
 }
 
-.tab-content h2 {
-  color: var(--color-neutral-dark);
+/* Only style direct h2 and p elements of tab-content, not cards */
+.tab-content > div > h2 {
+  color: var(--text-color);
   font-size: 1.25rem;
   margin: 0 0 1rem 0;
 }
 
-.tab-content p {
-  color: var(--color-neutral-medium);
+.tab-content > div > p {
+  color: #ccc;
   line-height: 1.6;
   max-width: 400px;
 }
 
+/* Special styling for groups tab - layout adjustments */
+.tab-content:has(.groups-carousel) {
+  align-items: flex-start;
+  text-align: left;
+  overflow-x: visible;
+  width: 100%;
+}
+
 .error-container {
-  background-color: var(--color-neutral-white);
+  background-color: rgba(42, 42, 42, 0.8);
   border-radius: 8px;
   padding: 2rem;
   margin: 2rem auto;
   max-width: 600px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .error-container h2 {
-  color: var(--color-neutral-dark);
+  color: var(--text-color);
   font-size: 1.5rem;
   margin: 0 0 1rem 0;
 }
 
 .error-container p {
-  color: var(--color-neutral-medium);
+  color: #ccc;
   line-height: 1.6;
   margin: 0.5rem 0;
 }
@@ -150,13 +160,6 @@
 
 .groups-carousel::-webkit-scrollbar {
   display: none;
-}
-
-.tab-content:has(.groups-carousel) {
-  align-items: flex-start;
-  text-align: left;
-  overflow-x: visible;
-  width: 100%;
 }
 
 .carousel-container {
@@ -238,11 +241,11 @@
   background-color: #a0522d;
 }
 
-.groups-section h2 {
+.groups-section > h2 {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 1.5rem;
-  color: white;
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
@@ -336,7 +339,7 @@
 }
 
 .loading-message {
-  color: var(--color-neutral-dark);
+  color: #333;
   font-size: 1.1rem;
   font-weight: 500;
   margin: 0;

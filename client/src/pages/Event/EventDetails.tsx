@@ -105,7 +105,6 @@ function EventDetails() {
       throw error;
     }
   };
-
   return (
     <div className="event-details">
       <div className="return-button-container">

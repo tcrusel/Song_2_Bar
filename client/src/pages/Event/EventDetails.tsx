@@ -109,19 +109,23 @@ function EventDetails() {
   return (
     <div className="event-details">
       <div className="return-button-container">
-        <button type="button" className="return-button" onClick={() => {}}>
+        <button
+          type="button"
+          className="return-button"
+          onClick={() => navigate(-1)}
+        >
           ← Retour
         </button>
       </div>
 
       <div className="event-name-banner">
-        <h1 className="event-name">
-          {event.title}{" "}
+        <h1 className="event-name">{event.title}</h1>{" "}
+        <div className="favorite-button">
           <FavouriteButton
             favouriteEvent={favouriteEvent}
             unfavouriteEvent={unfavouriteEvent}
           />
-        </h1>
+        </div>
       </div>
 
       <section className="event-info">
@@ -133,6 +137,7 @@ function EventDetails() {
         </div>
         <div className="event-meta">
           <div className="bar-title">
+            🍺
             <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
                             {event.bar_name}           {" "}
             </Link>
@@ -140,15 +145,15 @@ function EventDetails() {
           <div className="location">
             📍 {event.address}, {event.postcode} {event.city}
           </div>
-          <div className="music-style">
-            🎵 {event.music_style}
-            <Link
-              to={`/groups/${event.music_group_id}`}
-              className="groups-name"
-            >
-                          {event.music_group_name}         {" "}
+          <div className="music-style">🎵 {event.music_style}</div>
+          <div className="groups-name">
+            🎤
+            <Link to={`/groups/${event.music_group_id}`}>
+              {" "}
+              {event.music_group_name}
             </Link>
           </div>
+
           <div className="hour-event">
                          🕐 de {event.start_at} à {event.end_at}           {" "}
           </div>

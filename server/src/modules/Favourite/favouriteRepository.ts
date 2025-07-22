@@ -2,21 +2,6 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 import type { MusicGroup } from "../../types/musicGroup";
 
-interface FavouriteBar {
-  userId: number;
-  barId: number;
-}
-
-interface FavouriteEvent {
-  userId: number;
-  eventId: number;
-}
-
-interface FavouriteGroup {
-  userId: number;
-  groupId: number;
-}
-
 class FavouriteRepository {
   async favouriteBar(favourite: Partial<FavouriteBar>) {
     const [result] = await databaseClient.query<Result>(

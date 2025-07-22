@@ -5,6 +5,7 @@ declare global {
   type MyPayload = JwtPayload & { sub: string; role: string };
   type FavouriteBar = { userId: number; barId: number };
   type FavouriteEvent = { userId: number; eventId: number };
+  type FavouriteGroup = { userId: number; groupId: number };
   type Participate = { userId: number; eventId: number };
 
   namespace Express {

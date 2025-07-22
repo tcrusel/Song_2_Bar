@@ -1,0 +1,161 @@
+footer {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 20rem;
+  padding: 10px;
+}
+
+.follow-us {
+  color: white;
+}
+
+.legal-notices {
+  color: white;
+}
+
+.image-social-logo {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem;
+}
+
+.image-social-logo img {
+  width: 30px;
+  height: 30px;
+}
+
+footer section p {
+  color: white;
+  font-size: 16px;
+}
+
+.subscribers {
+  background-color: #d9d9d9;
+  border-radius: 45px;
+  width: 12rem;
+  height: 3rem;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.number-subscribers {
+  color: black;
+}
+
+.networks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 1.5rem;
+  height: 16rem;
+}
+
+.subscribers p {
+  text-align: center;
+  padding: 5px;
+  margin: auto;
+  margin-top: 0.5rem;
+}
+
+.button-subscribers {
+  background-color: #2f6b75;
+  border-radius: 25px;
+  width: 18rem;
+  height: 4rem;
+  color: white;
+}
+
+.top-page {
+  background-color: #e4c2a5;
+  border-radius: 25px;
+  width: 16rem;
+  height: 4rem;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.footer-images {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.middle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 25px;
+}
+
+.info-song2bar {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.paragraph-song2bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.info-song2bar p {
+  font-size: 11px;
+}
+
+.newletter-song2bar {
+  display: flex;
+  gap: 10px;
+}
+
+.newletter p {
+  color: #aa682e;
+}
+
+.song2bar p {
+  color: #2f6b75;
+}
+
+.about-contact {
+  display: flex;
+  gap: 50px;
+}
+
+.about p {
+  color: #aa682e;
+}
+
+.contact p {
+  color: #2f6b75;
+}
+
+@media screen and (width <= 600px) {
+  footer {
+    flex-direction: column;
+    height: 40rem;
+  }
+
+  .footer-images {
+    justify-content: space-evenly;
+    margin-left: 0rem;
+  }
+
+  .network {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-song2bar p {
+    font-size: 1rem;
+  }
+}

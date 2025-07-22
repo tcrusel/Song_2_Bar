@@ -1,8 +1,8 @@
 import express from "express";
-import favouriteActions from "./modules/favourite/favouriteActions";
 import authActions from "./modules/authActions";
 import barActions from "./modules/bar/barActions";
 import eventActions from "./modules/event/eventActions";
+import favouriteActions from "./modules/favourite/favouriteActions";
 import groupActions from "./modules/groups/groupActions";
 import participateActions from "./modules/participate/participateActions";
 import userActions from "./modules/user/userActions";
@@ -16,6 +16,11 @@ router.get("/api/groups/:id", groupActions.read);
 
 router.get("/api/bars/:id", barActions.read);
 router.get("/api/groups/:id/bars", barActions.browseBarsByMusicGroupId);
+router.get("/api/users/:id", userActions.read);
+router.get(
+  "/api/users/:userId/favourite_groups",
+  favouriteActions.getFavouriteGroups,
+);
 
 router.post("/api/users", authActions.hashPassword, userActions.add);
 
@@ -36,8 +41,17 @@ router.delete(
 
 router.post("/api/favourite_event", favouriteActions.addFavouriteEvent);
 router.delete(
-  "/api/favourite_event/:userId/:eventId",
+  "/api/favourite_event/:eventId",
   favouriteActions.destroyFavouriteEvent,
+);
+
+router.post(
+  "/api/favourite_music_group",
+  favouriteActions.addFavouriteMusicGroup,
+);
+router.delete(
+  "/api/favourite_music_group/:userId/:musicGroupId",
+  favouriteActions.destroyFavouriteMusicGroup,
 );
 
 export default router;

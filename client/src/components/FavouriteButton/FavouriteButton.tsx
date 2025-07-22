@@ -8,6 +8,8 @@ type FavouriteButtonProps = {
   unfavouriteBar?: () => Promise<void>;
   favouriteEvent?: () => Promise<void>;
   unfavouriteEvent?: () => Promise<void>;
+  favouriteMusicGroup?: () => Promise<void>;
+  unfavouriteMusicGroup?: () => Promise<void>;
 };
 
 function FavouriteButton({
@@ -15,6 +17,8 @@ function FavouriteButton({
   unfavouriteBar,
   favouriteEvent,
   unfavouriteEvent,
+  favouriteMusicGroup,
+  unfavouriteMusicGroup,
 }: FavouriteButtonProps) {
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -38,6 +42,15 @@ function FavouriteButton({
             setIsFavourite(true);
           } else {
             unfavouriteEvent();
+            setIsFavourite(false);
+          }
+        }
+        if (favouriteMusicGroup && unfavouriteMusicGroup) {
+          if (!isFavourite) {
+            favouriteMusicGroup();
+            setIsFavourite(true);
+          } else {
+            unfavouriteMusicGroup();
             setIsFavourite(false);
           }
         }

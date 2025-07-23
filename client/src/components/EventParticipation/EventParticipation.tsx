@@ -5,18 +5,30 @@ import type { EventType } from "../../types/Event";
 import EventCard from "../EventCard/EventCard";
 import "./EventParticipation.css";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router";
 
 function EventParticipation() {
   const [participations, setParticipations] = useState<EventType[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { auth } = useAuth();
   const userId = auth?.user.id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchParticipations = async () => {
+      if (!auth) {
+        navigate("/login", { state: { islogged: false } });
+        return;
+      }
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/participate/${userId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${auth.token}`,
+            },
+          },
         );
 
         if (!response.ok) {
@@ -32,7 +44,7 @@ function EventParticipation() {
     };
 
     fetchParticipations();
-  }, [userId]);
+  }, [userId, auth, navigate]);
 
   if (error) return <p>Erreur : {error}</p>;
   if (participations.length === 0)

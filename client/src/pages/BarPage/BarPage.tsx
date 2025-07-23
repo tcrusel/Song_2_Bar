@@ -4,7 +4,7 @@ import { barService } from "../../services/barService";
 import type { Bar } from "../../types/bar";
 import "../../assets/_variables.css";
 import "./BarPage.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -117,9 +117,10 @@ function BarPage() {
           }),
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Ce bar est maintenant dans vos favoris", {
           type: "success",
+          autoClose: 3000,
         });
       } else {
         throw new Error("Erreur serveur");
@@ -128,6 +129,7 @@ function BarPage() {
       console.error("Erreur lors de la favorisation du bar", error);
       toast("Impossible d'ajouter le bar dans votre liste de favoris", {
         type: "error",
+        autoClose: 3000,
       });
       throw error;
     }
@@ -150,9 +152,10 @@ function BarPage() {
           },
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Ce bar a été retiré de vos favoris", {
-          type: "info",
+          type: "success",
+          autoClose: 3000,
         });
       } else {
         throw new Error("Erreur serveur");
@@ -161,30 +164,38 @@ function BarPage() {
       console.error("Erreur lors de la favorisation du bar", error);
       toast("Impossible de retirer le bar de votre liste de favoris", {
         type: "error",
+        autoClose: 3000,
       });
       throw error;
     }
   };
 
   return (
-    <div className="bar-details">
+    <section className="bar-details">
       <div className="return-button-container">
-        <button type="button" className="return-button" onClick={() => {}}>
+        <button
+          type="button"
+          className="return-button"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
           ← Retour
         </button>
       </div>
+      <article className="top-page-container">
+        <div className="button-title-container">
+          <h1 className="button-title">
+            {bar.name}{" "}
+            <FavouriteButton
+              favouriteBar={favouriteBar}
+              unfavouriteBar={unfavouriteBar}
+            />
+          </h1>
+        </div>
+      </article>
 
-      <div className="bar-name-banner">
-        <h1 className="bar-name">
-          {bar.name}{" "}
-          <FavouriteButton
-            favouriteBar={favouriteBar}
-            unfavouriteBar={unfavouriteBar}
-          />
-        </h1>
-      </div>
-
-      <section className="bar-info">
+      <article className="bar-info">
         <div className="image-gallery">
           <div className="main-image">
             <img src={images[currentImageIndex]} alt={bar.name} />
@@ -237,21 +248,16 @@ function BarPage() {
               )}
           </div>
         </div>
-      </section>
+      </article>
 
-      <section className="events-carousel">
+      <article className="events-carousel">
         <div className="no-events">
           <h3>Événements</h3>
           <p>Les événements seront bientôt disponibles.</p>
         </div>
-      </section>
-      <ToastContainer
-        position="top-right"
-        theme="colored"
-        autoClose={3000}
-        limit={2}
-      />
-    </div>
+      </article>
+      <ToastContainer theme="colored" position="top-right" limit={2} />
+    </section>
   );
 }
 

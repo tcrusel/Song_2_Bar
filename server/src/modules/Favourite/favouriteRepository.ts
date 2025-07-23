@@ -2,26 +2,11 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 import type { MusicGroup } from "../../types/musicGroup";
 
-interface FavouriteBar {
-  userId: number;
-  barId: number;
-}
-
-interface FavouriteEvent {
-  userId: number;
-  eventId: number;
-}
-
-interface FavouriteGroup {
-  userId: number;
-  groupId: number;
-}
-
-class FavouriteRepository {
-  async favouriteBar(favourite: Partial<FavouriteBar>) {
+class favouriteRepository {
+  async favouriteBar(userId: number, barId: number) {
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO favourite_bar (user_id, bar_id) VALUES (?, ?)",
-      [favourite.userId, favourite.barId],
+      [userId, barId],
     );
 
     return result.affectedRows;
@@ -36,10 +21,10 @@ class FavouriteRepository {
     return result.affectedRows;
   }
 
-  async favouriteEvent(favourite: Partial<FavouriteEvent>) {
+  async favouriteEvent(userId: number, eventId: number) {
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO favourite_event (user_id, event_id) VALUES (?, ?)",
-      [favourite.userId, favourite.eventId],
+      [userId, eventId],
     );
 
     return result.affectedRows;
@@ -82,10 +67,10 @@ class FavouriteRepository {
     return rows;
   }
 
-  async favouriteGroup(userId: number, groupId: number) {
+  async favouriteGroup(userId: number, musicGroupId: number) {
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO favourite_music_group (user_id, music_group_id) VALUES (?, ?)",
-      [userId, groupId],
+      [userId, musicGroupId],
     );
 
     return result.affectedRows;
@@ -101,4 +86,4 @@ class FavouriteRepository {
   }
 }
 
-export default new FavouriteRepository();
+export default new favouriteRepository();

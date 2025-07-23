@@ -15,7 +15,7 @@ router.get("/api/events/:id", eventActions.read);
 router.get("/api/groups/:id", groupActions.read);
 
 router.get("/api/bars/:id", barActions.read);
-router.get("/api/participate/:userId", participateActions.browseByUserId);
+router.get("/api/groups/:id/bars", barActions.browseBarsByMusicGroupId);
 router.get("/api/users/:id", userActions.read);
 router.get(
   "/api/users/:userId/favourite_groups",
@@ -27,6 +27,8 @@ router.post("/api/users", authActions.hashPassword, userActions.add);
 router.post("/api/login", authActions.login);
 
 router.use(authActions.verifyToken);
+
+router.get("/api/participate", participateActions.browseByUserId);
 
 router.post("/api/participate", participateActions.add);
 router.delete("/api/participate/:userId/:eventId", participateActions.remove);

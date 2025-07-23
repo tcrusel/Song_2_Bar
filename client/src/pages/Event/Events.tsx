@@ -5,7 +5,6 @@ import { useLocation } from "react-router";
 import type { EventType } from "../../types/Event";
 import "../../components/HorizontalCalendar/HorizontalCalendar";
 import HorizontalCalendar from "../../components/HorizontalCalendar/HorizontalCalendar";
-
 import DatePicker from "react-datepicker";
 
 const formatDate = (dateInput: Date | string) => {
@@ -46,6 +45,26 @@ function Events() {
     }
     fetchEvent();
   }, []);
+
+  useEffect(() => {
+    const fetchEventsFiltered = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/events?search=${encodeURIComponent(search)}`,
+        );
+        if (!res.ok) {
+          setError(true);
+          return;
+        }
+        const events = await res.json();
+        setAllEvents(events);
+      } catch (error) {
+        console.error("Erreur lors du fetch", error);
+      }
+    };
+
+    fetchEventsFiltered();
+  }, [search]);
 
   useEffect(() => {
     if (date) {

@@ -21,21 +21,23 @@ class participateRepository {
     return result.affectedRows;
   }
 
-  async readAllByEventId(userId: number) {
+  async readAllByUserId(userId: number) {
     const [rows] = await databaseClient.query<Rows>(
       `SELECT 
-    p.*, 
+    p.*,
+    e.*, 
     b.name AS bar_name,
     g.name AS group_name,
     g.style AS music_style
    FROM participate p
+   LEFT JOIN event e ON p.event_id = e.id
    LEFT JOIN bar b ON e.bar_id = b.id
    LEFT JOIN music_group g ON e.music_group_id = g.id
-   WHERE user_id = ?`,
+   WHERE p.user_id = ?`,
       [userId],
     );
 
-    return rows as ParticipateList[];
+    return rows;
   }
 }
 

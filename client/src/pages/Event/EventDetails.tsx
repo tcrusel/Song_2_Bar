@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import Participate from "../../components/Participate/Participate";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
@@ -57,7 +57,7 @@ function EventDetails() {
           }),
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Cet évènement est maintenant dans vos favoris", {
           type: "success",
         });
@@ -90,9 +90,9 @@ function EventDetails() {
           },
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Cet évènement a été retiré de vos favoris", {
-          type: "info",
+          type: "success",
         });
       } else {
         throw new Error("Erreur serveur");
@@ -105,6 +105,7 @@ function EventDetails() {
       throw error;
     }
   };
+
   return (
     <div className="event-details">
       <div className="return-button-container">
@@ -138,7 +139,7 @@ function EventDetails() {
           <div className="bar-title">
             🍺
             <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
-                            {event.bar_name}           {" "}
+              {event.bar_name}{" "}
             </Link>
           </div>
           <div className="location">
@@ -154,7 +155,7 @@ function EventDetails() {
           </div>
 
           <div className="hour-event">
-                         🕐 de {event.start_at} à {event.end_at}           {" "}
+            🕐 de {event.start_at} à {event.end_at}{" "}
           </div>
 
           <div className="participate-wrapper no-background">
@@ -182,6 +183,12 @@ function EventDetails() {
           </MapContainer>
         </div>
       </section>
+      <ToastContainer
+        theme="colored"
+        position="top-center"
+        limit={2}
+        autoClose={3000}
+      />
     </div>
   );
 }

@@ -69,17 +69,6 @@
   border-bottom: 1px solid #333;
 }
 
-.participate-button {
-  background-color: var(--button-primary-color);
-  border: none;
-  color: var(--button-text-color);
-  border-radius: 20px;
-  cursor: pointer;
-  width: 230px;
-  height: 55px;
-  font-size: 2rem;
-}
-
 .logo img {
   height: 50px;
 }
@@ -161,6 +150,7 @@
 .groups-name {
   font-weight: bold;
 }
+
 .description-content {
   display: flex;
   flex-direction: column;
@@ -172,16 +162,14 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  height: 350px;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
 .description-content p {
   font-size: 1.2rem;
   line-height: 1.6;
-}
-.description-content {
-  max-height: 349px;
-  overflow-y: auto;
-  padding-right: 1rem;
 }
 
 .description-content::-webkit-scrollbar {

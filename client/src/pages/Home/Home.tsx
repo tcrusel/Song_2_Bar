@@ -1,11 +1,7 @@
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import CalendarPopup from "../../components/CalendarPopUp/CalendarPopUp";
-import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 import "./../../assets/_variables.css";
-import { useEffect } from "react";
-
 import { useNavigate } from "react-router";
 
 function Home() {
@@ -18,35 +14,15 @@ function Home() {
       navigate("/events", { state: { selectedDate: date.toISOString() } });
     }
   };
-  const { auth } = useAuth();
-
-  useEffect(() => {
-    if (auth) {
-      toast(
-        `Salut ${auth.user.firstname} ${auth.user.lastname} bienvenu sur Song 2 Bar !`,
-        {
-          type: "success",
-        },
-      );
-    }
-  }, [auth]);
 
   return (
     <>
       <main>
-        <ToastContainer
-          position="top-center"
-          theme="colored"
-          autoClose={4000}
-          limit={1}
-        />
-
         <img
           className="flower-guitar"
           src="../../../images/micro-guitare.svg"
           alt="représentation de la guitare avec des fleurs"
         />
-
         <section className="guide">
           <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
 

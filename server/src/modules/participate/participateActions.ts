@@ -4,15 +4,24 @@ import participateRepository from "./participateRepository";
 
 const browseByUserId: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.auth.userId);
+    const userId = Number(req.auth?.userId);
 
-    const events = await participateRepository.readAllByEventId(userId);
+    if (!userId) {
+      res.status(StatusCodes.UNAUTHORIZED);
+    }
 
-    res.json(events);
+    const participations = await participateRepository.readAllByUserId(userId);
+
+    if (!participations || participations.length === 0) {
+      res.status(StatusCodes.OK).json({ message: "Aucune participation" });
+    }
+
+    res.status(StatusCodes.OK).json(participations);
   } catch (err) {
     console.error("Erreur lors de la récupération des participations :", err);
   }
 };
+
 const add: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);
@@ -34,7 +43,7 @@ const add: RequestHandler = async (req, res, next) => {
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json({ message: "La création de la participation a échoué" });
     } else {
-      res.status(StatusCodes.CREATED);
+      res.status(StatusCodes.CREATED).json({ affectedRows });
     }
   } catch (err) {
     next(err);
@@ -52,6 +61,7 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
     }
 
     const affectedRows = await participateRepository.delete(userId, eventId);
+    console.log(affectedRows);
 
     if (affectedRows <= 0) {
       res
@@ -60,7 +70,7 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
       return;
     }
 
-    res.sendStatus(StatusCodes.NO_CONTENT);
+    res.sendStatus(StatusCodes.NO_CONTENT).json({ affectedRows });
   } catch (err) {
     next(err);
     return;

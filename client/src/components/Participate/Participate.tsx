@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Participate.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
@@ -30,13 +30,13 @@ function Participate() {
             Authorization: `Bearer ${auth.token}`,
           },
           body: JSON.stringify({
-            eventId,
             userId,
+            eventId,
           }),
         },
       );
 
-      if (response) {
+      if (response.ok) {
         toast("Vous participez à cet évènement", {
           type: "success",
         });
@@ -51,14 +51,23 @@ function Participate() {
   };
 
   const deleteParticipation = async () => {
+    if (!auth) {
+      navigate("/login", { state: { islogged: false } });
+      return;
+    }
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/participate/${userId}/${eventId}`,
         {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          },
         },
       );
-      if (response) {
+
+      if (response.ok) {
         toast("Vous ne participez plus à cet évènement", { type: "info" });
       } else {
         throw new Error("Erreur lors de la suppression de la participation");
@@ -75,23 +84,22 @@ function Participate() {
         className="participate-button"
         type="button"
         onClick={() => {
-          if (isParticipated) {
-            deleteParticipation();
+          if (!isParticipated) {
+            addParticipation();
             setIsParticipated(true);
           } else {
-            addParticipation();
+            deleteParticipation();
             setIsParticipated(false);
           }
         }}
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
-
       <ToastContainer
-        position="top-center"
         theme="colored"
-        autoClose={2000}
+        position="top-center"
         limit={2}
+        autoClose={3000}
       />
     </>
   );

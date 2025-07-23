@@ -69,11 +69,11 @@ function MusicGroup() {
     } catch (error) {
       console.error("Erreur lors de la favorisation de l'évènement", error);
       toast(
-        "Impossible d'ajouter le group de musique dans votre liste de favoris",
+        "Impossible d'ajouter le groupe de musique dans votre liste de favoris",
         {
-        type: "error",
-      },
-    );
+          type: "error",
+        },
+      );
       throw error;
     }
   };
@@ -99,10 +99,13 @@ function MusicGroup() {
       }
     } catch (error) {
       console.error("Erreur lors de la suppression du favori :", error);
-      toast("Impossible d'ajouter ce groupe de musique dans votre liste de favoris", {
-        type: "error",
-      });
-    throw error;
+      toast(
+        "Impossible d'ajouter ce groupe de musique dans votre liste de favoris",
+        {
+          type: "error",
+        },
+      );
+      throw error;
     }
   };
 

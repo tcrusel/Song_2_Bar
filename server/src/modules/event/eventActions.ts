@@ -16,6 +16,24 @@ const browse: RequestHandler = async (req, res, next) => {
   }
 };
 
+const browseEventsByBarId: RequestHandler = async (req, res, next) => {
+  try {
+    const events = await eventRepository.readAllEventsByBarId(
+      Number(req.params.id),
+    );
+
+    if (!events || events.length === 0) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: "No events found for this bar" });
+    } else {
+      res.status(StatusCodes.OK).json(events);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const read: RequestHandler = async (req, res, next) => {
   try {
     const eventId = Number(req.params.id);
@@ -31,4 +49,4 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read };
+export default { browse, browseEventsByBarId, read };

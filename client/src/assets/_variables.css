@@ -116,17 +116,18 @@ input {
 }
 
 .button-title {
-  display: flex;
-  width: fit-content;
-  height: auto;
-  font-size: 3rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 50px;
-  background-color: var(--button-secondary-color);
+  background: var(--button-secondary-color);
   color: var(--button-text-color);
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(157, 216, 243, 0.705);
+  display: flex;
   align-items: center;
+  min-width: 300px;
   gap: 20px;
 }
 

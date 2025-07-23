@@ -4,21 +4,7 @@
   padding: 6rem 2rem;
   background-color: var(--background-primary-color);
 }
-.event-name-banner .event-name {
-  background: var(--button-primary-color);
-  color: var(--button-text-color);
-  padding: 1rem 3rem;
-  border-radius: 50px;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(210, 105, 30, 0.3);
-  display: flex;
-  align-items: center;
-  min-width: 300px;
-  gap: 20px;
-}
+
 .event-details {
   background-color: var(--background-primary-color);
   color: var(--text-color);

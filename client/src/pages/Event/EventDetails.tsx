@@ -107,7 +107,7 @@ function EventDetails() {
   };
 
   return (
-    <div className="event-details">
+    <section className="event-details">
       <div className="return-button-container">
         <button
           type="button"
@@ -128,7 +128,7 @@ function EventDetails() {
         </h1>
       </div>
 
-      <section className="event-info">
+      <article className="event-info">
         <div className="event-picture">
           <img src={event.image} alt={event.bar_name} />
         </div>
@@ -182,14 +182,14 @@ function EventDetails() {
             </Marker>
           </MapContainer>
         </div>
-      </section>
+      </article>
       <ToastContainer
         theme="colored"
         position="top-center"
         limit={2}
         autoClose={3000}
       />
-    </div>
+    </section>
   );
 }
 

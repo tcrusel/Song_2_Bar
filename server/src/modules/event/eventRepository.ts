@@ -67,7 +67,7 @@ class eventRepository {
       `SELECT 
         e.*,
         b.id AS bar_id,
-        b.name AS name,
+        b.name AS bar_name,
         b.music_style AS music_style
       FROM event e
       LEFT JOIN bar b ON e.bar_id = b.id

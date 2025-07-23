@@ -1,7 +1,7 @@
 .event-name-banner {
   display: flex;
   justify-content: center;
-  padding: 6rem 2rem;
+  padding: 0rem 2rem 6rem 2rem;
   background-color: var(--background-primary-color);
 }
 
@@ -15,7 +15,7 @@
 }
 
 .return-button-container {
-  padding: 1.5rem 2rem 0 2rem;
+  padding: 1.5rem 0rem;
   background-color: var(--background-primary-color);
 }
 

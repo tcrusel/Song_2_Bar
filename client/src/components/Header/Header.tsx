@@ -21,24 +21,46 @@ function Header() {
         </div>
 
         {auth && <h3>Salut ! Bienvenue sur Song 2 Bar !</h3>}
-        <button
-          className="logo-connexion-button"
-          type="button"
-          onClick={() => {
-            navigate("/login");
-            setTimeout(() => {
-              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-            }, 0);
-          }}
-        >
-          <img
-            className="logo-connexion"
-            src="/icon/profile-icon.svg"
-            alt="le logo de la connexion"
-            width="40"
-            height="auto"
-          />
-        </button>
+        {!auth ? (
+          <button
+            className="logo-connexion-button"
+            type="button"
+            onClick={() => {
+              navigate("/login");
+              setTimeout(() => {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }, 0);
+            }}
+          >
+            <img
+              className="logo-connexion"
+              src="/icon/profile-icon.svg"
+              alt="le logo de la connexion"
+              width="40"
+              height="auto"
+            />
+          </button>
+        ) : (
+          <button
+            className="logo-connexion-button"
+            type="button"
+            onClick={() => {
+              navigate("/");
+              setTimeout(() => {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                window.location.reload();
+              }, 0);
+            }}
+          >
+            <img
+              className="logo-connexion"
+              src="/images/deconnexion.png"
+              alt="le logo de la déconnexion"
+              width="40"
+              height="auto"
+            />
+          </button>
+        )}
         <nav>
           <button
             className="button-events"

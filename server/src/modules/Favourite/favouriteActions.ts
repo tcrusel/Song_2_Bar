@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
-import favouriteRepository from "../favourite/favouriteRepository";
+import favouriteRepository from "./favouriteRepository";
 
 const addFavouriteBar: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {

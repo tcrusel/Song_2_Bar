@@ -119,13 +119,13 @@ function EventDetails() {
       </div>
 
       <div className="event-name-banner">
-        <h1 className="event-name">{event.title}</h1>{" "}
-        <div className="favorite-button">
+        <h1 className="button-title">
+          {event.title}{" "}
           <FavouriteButton
             favouriteEvent={favouriteEvent}
             unfavouriteEvent={unfavouriteEvent}
           />
-        </div>
+        </h1>
       </div>
 
       <section className="event-info">

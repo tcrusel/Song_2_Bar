@@ -7,11 +7,15 @@ import "./BarPage.css";
 import { toast, ToastContainer } from "react-toastify";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
 import { useAuth } from "../../contexts/AuthContext";
+import EventCard from "../../components/EventCard/EventCard";
+import EmblaCarousel from "../../components/EmblaCarousel/EmblaCarousel";
+import type { EventType } from "../../types/Event";
 
 function BarPage() {
   const { id } = useParams<{ id: string }>();
   const barId = Number(id);
   const [bar, setBar] = useState<Bar | null>(null);
+  const [events, setEvents] = useState<EventType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -33,6 +37,24 @@ function BarPage() {
     };
 
     fetchBarData();
+  }, [barId]);
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/bars/${barId}/events`,
+        );
+        if (!res.ok) {
+          throw new Error("Erreur lors de la récupération des bars");
+        }
+        const events = await res.json();
+        setEvents(events);
+      } catch (error) {
+        console.error("Erreur lors du fetch", error);
+      }
+    }
+    fetchEvents();
   }, [barId]);
 
   const formatTimeRange = (timeRange: string, isOpeningHours = false) => {
@@ -249,13 +271,22 @@ function BarPage() {
           </div>
         </div>
       </article>
-
-      <article className="events-carousel">
-        <div className="no-events">
-          <h3>Événements</h3>
-          <p>Les événements seront bientôt disponibles.</p>
-        </div>
-      </article>
+      <h3 className="carousel-title">
+        Évènements dans lesquels vous pourrez retrouver ce bar
+      </h3>
+      <section className="bar-carousel">
+        {events && events.length > 0 ? (
+          <EmblaCarousel
+            slides={events.map((event) => ({
+              id: event.id,
+              content: <EventCard event={event} />,
+            }))}
+            options={{ loop: true, align: "start" }}
+          />
+        ) : (
+          <h1>Ce bar n'a pas encore d'évènement prévu</h1>
+        )}
+      </section>
       <ToastContainer theme="colored" position="top-right" limit={2} />
     </section>
   );

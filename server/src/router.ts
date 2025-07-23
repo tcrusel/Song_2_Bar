@@ -16,6 +16,8 @@ router.get("/api/groups/:id", groupActions.read);
 
 router.get("/api/bars/:id", barActions.read);
 router.get("/api/groups/:id/bars", barActions.browseBarsByMusicGroupId);
+router.get("/api/bars/:id/events", eventActions.browseEventsByBarId);
+
 router.get("/api/users/:id", userActions.read);
 router.get(
   "/api/users/:userId/favourite_groups",

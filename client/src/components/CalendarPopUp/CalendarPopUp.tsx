@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./CalendarPopup.css";
+import "./CalendarPopUp.css";
 import { fr } from "date-fns/locale";
 import { registerLocale } from "react-datepicker";
 import type { CalendarPopupProps } from "../../types/calendar";

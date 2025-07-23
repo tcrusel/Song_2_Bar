@@ -6,6 +6,7 @@ import "../../assets/_variables.css";
 import "./BarPage.css";
 import { toast, ToastContainer } from "react-toastify";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useAuth } from "../../contexts/AuthContext";
 import EventCard from "../../components/EventCard/EventCard";
 import EmblaCarousel from "../../components/EmblaCarousel/EmblaCarousel";
@@ -72,7 +73,7 @@ function BarPage() {
     return `Commence à ${startTime} - Fini à ${endTime}`;
   };
 
-  if (loading) return <div className="loading">Chargement...</div>;
+  if (loading) return <LoadingScreen />;
   if (error) return <div className="error">Erreur: {error}</div>;
   if (!bar) return <div className="error">Bar non trouvé</div>;
 

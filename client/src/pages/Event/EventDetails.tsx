@@ -13,10 +13,12 @@ import "./EventDetails.css";
 function EventDetails() {
   const { id } = useParams();
   const [event, setEvent] = useState<EventType | null>(null);
+  const [fetchError, setFetchError] = useState(false); // 🆕 état d'erreur
   const { auth } = useAuth();
   const navigate = useNavigate();
   const userId = auth?.user.id;
   const eventId = Number(id);
+  const [participantsCount, setParticipantsCount] = useState<number>(0);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -28,12 +30,26 @@ function EventDetails() {
         setEvent(event);
       } catch (error) {
         console.error("Erreur lors du fetch", error);
-        if (error) return <p>Evènement introuvable</p>;
+        setFetchError(true); // ✅ on met l'erreur à true
       }
     };
     fetchEvent();
   }, [id]);
 
+  useEffect(() => {
+    const fetchParticipants = async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/${eventId}/participants/count`,
+      );
+
+      const data = await res.json();
+      setParticipantsCount(data.participantsCount || 0);
+    };
+
+    fetchParticipants();
+  }, [eventId]);
+
+  if (fetchError) return <p>Évènement introuvable</p>;
   if (!event) return <p>Chargement en cours...</p>;
 
   const favouriteEvent = async () => {
@@ -51,13 +67,10 @@ function EventDetails() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${auth.token}`,
           },
-          body: JSON.stringify({
-            userId,
-            eventId,
-          }),
+          body: JSON.stringify({ userId, eventId }),
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Cet évènement est maintenant dans vos favoris", {
           type: "success",
         });
@@ -66,10 +79,9 @@ function EventDetails() {
       }
     } catch (error) {
       console.error("Erreur lors de la favorisation de l'évènement", error);
-      toast("Impossible d'ajouter l'évènement dans votre liste de favoris", {
+      toast("Impossible d'ajouter l'évènement aux favoris", {
         type: "error",
       });
-      throw error;
     }
   };
 
@@ -90,21 +102,24 @@ function EventDetails() {
           },
         },
       );
-      if (response) {
-        toast("Cet évènement a été retiré de vos favoris", {
-          type: "info",
-        });
+      if (response.ok) {
+        toast("Cet évènement a été retiré de vos favoris", { type: "info" });
       } else {
         throw new Error("Erreur serveur");
       }
     } catch (error) {
-      console.error("Erreur lors de la favorisation de l'évènement", error);
-      toast("Impossible de retirer l'évènement' de votre liste de favoris", {
+      console.error("Erreur lors du retrait de l'évènement", error);
+      toast("Impossible de retirer l'évènement des favoris", {
         type: "error",
       });
-      throw error;
     }
   };
+  const formatTime = (time: string) => {
+    if (!time) return "";
+    const [hour, minute] = time.split(":");
+    return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+  };
+
   return (
     <div className="event-details">
       <div className="return-button-container">
@@ -118,7 +133,7 @@ function EventDetails() {
       </div>
 
       <div className="event-name-banner">
-        <h1 className="event-name">{event.title}</h1>{" "}
+        <h1 className="event-name">{event.title}</h1>
         <div className="favorite-button">
           <FavouriteButton
             favouriteEvent={favouriteEvent}
@@ -137,8 +152,8 @@ function EventDetails() {
         <div className="event-meta">
           <div className="bar-title">
             🍺
-            <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
-                            {event.bar_name}           {" "}
+            <Link to={`/bars/${event.bar_id}`} className="bar-title bold">
+              {event.bar_name}
             </Link>
           </div>
           <div className="location">
@@ -152,14 +167,20 @@ function EventDetails() {
               {event.music_group_name}
             </Link>
           </div>
-
           <div className="hour-event">
-                         🕐 de {event.start_at} à {event.end_at}           {" "}
+            🕐 de {formatTime(event.start_at)} à {formatTime(event.end_at)}
           </div>
-
-          <div className="participate-wrapper no-background">
-            <Participate />
+          <div className="participate-number">
+            👥​
+            <p>
+              {participantsCount === 0
+                ? "Aucun participant à cet évènement"
+                : `${participantsCount} personne${participantsCount > 1 ? "s" : ""} participe${participantsCount > 1 ? "nt" : ""} à cet évènement`}
+            </p>
           </div>
+        </div>
+        <div className="participate-wrapper">
+          <Participate />
         </div>
 
         <div className="googlemap">

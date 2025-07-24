@@ -6,8 +6,8 @@ import "../../assets/_variables.css";
 import "./BarPage.css";
 import { ToastContainer, toast } from "react-toastify";
 import LikeButton from "../../components/LikeButton/LikeButton";
-import { useAuth } from "../../contexts/AuthContext";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
+import { useAuth } from "../../contexts/AuthContext";
 
 function BarPage() {
   const { id } = useParams<{ id: string }>();

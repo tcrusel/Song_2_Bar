@@ -188,9 +188,12 @@ function MusicGroup() {
               options={{ loop: true, align: "start" }}
             />
           ) : (
-            <h1>
-              Ce groupe de musique n'a pas encore d'évènement prévu dans un bar
-            </h1>
+            <div className="carousel-empty">
+              <h3>
+                Ce groupe de musique n'a pas encore d'évènement prévu dans un
+                bar
+              </h3>
+            </div>
           )}
         </article>
       </section>

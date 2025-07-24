@@ -85,6 +85,10 @@
   padding-top: 8rem;
 }
 
+.carousel-section h2 {
+  text-align: center;
+}
+
 .carousel {
   padding-top: 20px;
 }

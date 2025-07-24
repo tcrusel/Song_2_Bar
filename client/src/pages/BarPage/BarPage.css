@@ -42,6 +42,8 @@
 .bar-name-banner {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
   padding: 6rem 2rem;
   background-color: var(--background-primary-color);
 }
@@ -49,7 +51,7 @@
 .bar-name-banner .bar-name {
   background: var(--button-primary-color);
   color: var(--button-text-color);
-  padding: 1rem 3rem;
+  padding: 1rem 1.5rem;
   border-radius: 50px;
   font-size: 2rem;
   font-weight: bold;
@@ -58,7 +60,6 @@
   box-shadow: 0 4px 15px rgba(210, 105, 30, 0.3);
   display: flex;
   align-items: center;
-  min-width: 300px;
 }
 
 .bar-header {

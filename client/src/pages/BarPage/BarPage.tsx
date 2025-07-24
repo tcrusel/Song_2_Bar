@@ -166,7 +166,7 @@ function BarPage() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_bar/${userId}/${barId}`,
+        `${import.meta.env.VITE_API_URL}/api/favourite_bar/${barId}`,
         {
           method: "DELETE",
           headers: {

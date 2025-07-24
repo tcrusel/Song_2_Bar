@@ -26,14 +26,23 @@ function FavouriteButton({
   const { auth } = useAuth();
   const { id } = useParams();
   const userId = auth?.user.id;
-  const barId = Number(id);
+
+  function getTypeOfFavourite() {
+    if (favouriteBar && unfavouriteBar) return "bar";
+    if (favouriteEvent && unfavouriteEvent) return "event";
+    if (favouriteMusicGroup && unfavouriteMusicGroup) return "music_group";
+    return null;
+  }
+
+  const typeOfFavourite = getTypeOfFavourite();
 
   useEffect(() => {
-    const checkFavorites = async () => {
-      if (!auth) return;
+    const checkFavourite = async () => {
+      if (!auth || !userId || !id || !typeOfFavourite) return;
+
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/favourite_bar/${barId}`,
+          `${import.meta.env.VITE_API_URL}/api/favourite_${typeOfFavourite}/${id}`,
           {
             headers: {
               Authorization: `Bearer ${auth.token}`,
@@ -42,19 +51,17 @@ function FavouriteButton({
         );
         if (response.ok) {
           const result = await response.json();
-          setIsFavourite(result.favorites);
+          setIsFavourite(result.favourite);
         } else {
-          console.error("Erreur lors de la récupération de la participation");
+          console.error("Erreur lors de la récupération des favoris");
         }
       } catch (error) {
         console.error("Erreur réseau :", error);
       }
     };
 
-    if (userId && barId) {
-      checkFavorites();
-    }
-  }, [userId, barId, auth]);
+    checkFavourite();
+  }, [userId, auth, id, typeOfFavourite]);
 
   return (
     <button

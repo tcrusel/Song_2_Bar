@@ -14,24 +14,6 @@
   display: block;
 }
 
-.date-button {
-  border-radius: 45px;
-  background-color: #aa682e;
-  font-size: 2rem;
-  margin: auto;
-  border: none;
-  width: fit-content;
-  height: fit-content;
-  padding: 1rem 4rem;
-}
-
-.calendar-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 40px;
-}
-
 .user-action {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

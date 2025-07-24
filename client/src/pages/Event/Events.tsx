@@ -81,77 +81,87 @@ function Events() {
           }}
           placeholder="Trouver votre événement, votre bar ou votre groupe de musique"
         />
-        <button
+        {/* <button
           type="button"
           onClick={() => setShowCalendar(!showCalendar)}
           className="calendar-icon-button"
+          /> */}
+        <HorizontalCalendar
+          selectedDate={date}
+          onSelectDate={(newDate) => setDate(newDate)}
+          onToggleCalendar={() => setShowCalendar((prev) => !prev)}
         />
-      </section>
-      <div className="menu-button">
-        <p>Filtre l'agenda</p>
-      </div>
-
-      <section className="filters-checkbox">
-        {musicStyles.map((style) => (
-          <label key={style}>
-            <input
-              type="checkbox"
-              value={style}
-              checked={selectedStyles.includes(style)}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (selectedStyles.includes(value)) {
-                  setSelectedStyles(selectedStyles.filter((s) => s !== value));
-                } else {
-                  setSelectedStyles([...selectedStyles, value]);
-                }
+        <div className="up-datepicker">
+          {showCalendar && (
+            <DatePicker
+              selected={date}
+              onChange={(newDate) => {
+                setDate(newDate);
+                setShowCalendar(false);
               }}
+              inline
+              calendarStartDay={1}
+              locale="fr"
             />
-            <span>{style}</span>
-          </label>
-        ))}
+          )}
+        </div>
       </section>
 
-      <HorizontalCalendar
-        selectedDate={date}
-        onSelectDate={(newDate) => setDate(newDate)}
-        onToggleCalendar={() => setShowCalendar((prev) => !prev)}
-      />
-      {showCalendar && (
-        <DatePicker
-          selected={date}
-          onChange={(newDate) => {
-            setDate(newDate);
-            setShowCalendar(false);
-          }}
-          inline
-          calendarStartDay={1}
-          locale="fr"
-        />
-      )}
+      <section className="event-left-bar">
+        <article className="left-bar">
+          <div className="menu-button">
+            <h1>Filtre par style</h1>
+          </div>
 
-      {filteredEvents.length === 0 ? (
-        <p>Aucun événement trouvé pour cette date</p>
-      ) : (
-        <section className="event-list">
-          {filteredEvents
-            .filter((event) => {
-              return (
-                selectedStyles.length === 0 ||
-                selectedStyles.includes(event.music_style)
-              );
-            })
-            .filter((event) => {
-              return (
-                event.title.toLowerCase().includes(search.toLowerCase()) ||
-                event.bar_name.toLowerCase().includes(search.toLowerCase())
-              );
-            })
-            .map((event) => (
-              <EventCard key={event.id} event={event} />
+          <div className="filters-checkbox">
+            {musicStyles.map((style) => (
+              <label key={style}>
+                <div className="marge-filters-checkbox">
+                  <input
+                    type="checkbox"
+                    value={style}
+                    checked={selectedStyles.includes(style)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (selectedStyles.includes(value)) {
+                        setSelectedStyles(
+                          selectedStyles.filter((s) => s !== value),
+                        );
+                      } else {
+                        setSelectedStyles([...selectedStyles, value]);
+                      }
+                    }}
+                  />
+                </div>
+                <span>{style}</span>
+              </label>
             ))}
-        </section>
-      )}
+          </div>
+        </article>
+
+        {filteredEvents.length === 0 ? (
+          <p>Aucun événement trouvé pour cette date</p>
+        ) : (
+          <section className="event-list">
+            {filteredEvents
+              .filter((event) => {
+                return (
+                  selectedStyles.length === 0 ||
+                  selectedStyles.includes(event.music_style)
+                );
+              })
+              .filter((event) => {
+                return (
+                  event.title.toLowerCase().includes(search.toLowerCase()) ||
+                  event.bar_name.toLowerCase().includes(search.toLowerCase())
+                );
+              })
+              .map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+          </section>
+        )}
+      </section>
     </>
   );
 }

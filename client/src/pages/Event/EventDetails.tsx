@@ -81,7 +81,7 @@ function EventDetails() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_event/${userId}/${eventId}`,
+        `${import.meta.env.VITE_API_URL}/api/favourite_event/${eventId}`,
         {
           method: "DELETE",
           headers: {

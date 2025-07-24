@@ -103,7 +103,7 @@ function MusicGroup() {
   const unfavouriteMusicGroup = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_music_group/${userId}/${musicGroupId}`,
+        `${import.meta.env.VITE_API_URL}/api/favourite_music_group/${musicGroupId}`,
         {
           method: "DELETE",
           headers: {

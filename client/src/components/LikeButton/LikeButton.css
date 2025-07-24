@@ -46,11 +46,11 @@
 }
 
 .con-like .like:checked ~ .checkmark .filled {
-  display: block
+  display: block;
 }
 
 .con-like .like:checked ~ .checkmark .celebrate {
-  display: block
+  display: block;
 }
 
 @keyframes kfr-filled {

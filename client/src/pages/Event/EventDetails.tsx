@@ -13,7 +13,7 @@ import "./EventDetails.css";
 function EventDetails() {
   const { id } = useParams();
   const [event, setEvent] = useState<EventType | null>(null);
-  const [fetchError, setFetchError] = useState(false); // 🆕 état d'erreur
+  const [fetchError, setFetchError] = useState(false);
   const { auth } = useAuth();
   const navigate = useNavigate();
   const userId = auth?.user.id;
@@ -30,7 +30,7 @@ function EventDetails() {
         setEvent(event);
       } catch (error) {
         console.error("Erreur lors du fetch", error);
-        setFetchError(true); // ✅ on met l'erreur à true
+        setFetchError(true);
       }
     };
     fetchEvent();

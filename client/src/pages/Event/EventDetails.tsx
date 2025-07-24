@@ -13,10 +13,12 @@ import "./EventDetails.css";
 function EventDetails() {
   const { id } = useParams();
   const [event, setEvent] = useState<EventType | null>(null);
+  const [fetchError, setFetchError] = useState(false);
   const { auth } = useAuth();
   const navigate = useNavigate();
   const userId = auth?.user.id;
   const eventId = Number(id);
+  const [participantsCount, setParticipantsCount] = useState<number>(0);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -28,12 +30,26 @@ function EventDetails() {
         setEvent(event);
       } catch (error) {
         console.error("Erreur lors du fetch", error);
-        if (error) return <p>Evènement introuvable</p>;
+        setFetchError(true);
       }
     };
     fetchEvent();
   }, [id]);
 
+  useEffect(() => {
+    const fetchParticipants = async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/${eventId}/participants/count`,
+      );
+
+      const data = await res.json();
+      setParticipantsCount(data.participantsCount || 0);
+    };
+
+    fetchParticipants();
+  }, [eventId]);
+
+  if (fetchError) return <p>Évènement introuvable</p>;
   if (!event) return <p>Chargement en cours...</p>;
 
   const favouriteEvent = async () => {
@@ -51,10 +67,7 @@ function EventDetails() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${auth.token}`,
           },
-          body: JSON.stringify({
-            userId,
-            eventId,
-          }),
+          body: JSON.stringify({ userId, eventId }),
         },
       );
       if (response.ok) {
@@ -66,10 +79,9 @@ function EventDetails() {
       }
     } catch (error) {
       console.error("Erreur lors de la favorisation de l'évènement", error);
-      toast("Impossible d'ajouter l'évènement dans votre liste de favoris", {
+      toast("Impossible d'ajouter l'évènement aux favoris", {
         type: "error",
       });
-      throw error;
     }
   };
 
@@ -98,12 +110,17 @@ function EventDetails() {
         throw new Error("Erreur serveur");
       }
     } catch (error) {
-      console.error("Erreur lors de la favorisation de l'évènement", error);
-      toast("Impossible de retirer l'évènement' de votre liste de favoris", {
+      console.error("Erreur lors du retrait de l'évènement", error);
+      toast("Impossible de retirer l'évènement des favoris", {
         type: "error",
       });
-      throw error;
     }
+  };
+
+  const formatTime = (time: string) => {
+    if (!time) return "";
+    const [hour, minute] = time.split(":");
+    return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
   };
 
   return (
@@ -155,14 +172,20 @@ function EventDetails() {
               {event.music_group_name}
             </Link>
           </div>
-
           <div className="hour-event">
-            🕐 de {event.start_at} à {event.end_at}{" "}
+            🕐 de {formatTime(event.start_at)} à {formatTime(event.end_at)}
           </div>
-
-          <div className="participate-wrapper no-background">
-            <Participate />
+          <div className="participate-number">
+            👥​
+            <p>
+              {participantsCount === 0
+                ? "Aucun participant à cet évènement"
+                : `${participantsCount} personne${participantsCount > 1 ? "s" : ""} participe${participantsCount > 1 ? "nt" : ""} à cet évènement`}
+            </p>
           </div>
+        </article>
+        <article className="participate-wrapper">
+          <Participate />
         </article>
 
         <article className="googlemap">

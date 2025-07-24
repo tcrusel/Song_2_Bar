@@ -83,7 +83,7 @@ function Participate() {
     }
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/participate/${userId}/${eventId}`,
+        `${import.meta.env.VITE_API_URL}/api/participate/${eventId}`,
         {
           method: "DELETE",
           headers: {
@@ -107,6 +107,12 @@ function Participate() {
 
   return (
     <>
+      <ToastContainer
+        theme="colored"
+        position="top-center"
+        limit={2}
+        autoClose={3000}
+      />
       <button
         className="participate-button"
         type="button"
@@ -123,12 +129,6 @@ function Participate() {
       >
         {isParticipated ? "Je ne participe plus" : "Je participe"}
       </button>
-      <ToastContainer
-        theme="colored"
-        position="top-center"
-        limit={2}
-        autoClose={3000}
-      />
     </>
   );
 }

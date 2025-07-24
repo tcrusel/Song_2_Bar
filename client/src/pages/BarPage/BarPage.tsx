@@ -290,7 +290,7 @@ function BarPage() {
               options={{ loop: true, align: "start" }}
             />
           ) : (
-            <div className="no-events">
+            <div className="carousel-empty">
               <h3>Ce bar n'a pas encore d'évènement prévu</h3>
             </div>
           )}

@@ -53,7 +53,7 @@ function Header() {
               </button>
             )}
           </nav>
-          {auth && <h3>Salut ! Bienvenue sur Song 2 Bar !</h3>}
+          <h3>Salut ! Bienvenue sur Song 2 Bar ! </h3>
         </article>
 
         <article className="logo-connexion-container">

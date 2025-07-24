@@ -17,6 +17,9 @@ function BarPage() {
   const barId = Number(id);
   const [bar, setBar] = useState<Bar | null>(null);
   const [events, setEvents] = useState<EventType[]>([]);
+  const [participantsCount, setParticipantsCount] = useState<
+    Record<number, number>
+  >({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -57,6 +60,36 @@ function BarPage() {
     }
     fetchEvents();
   }, [barId]);
+
+  useEffect(() => {
+    const fetchParticipantsCounts = async () => {
+      const counts: Record<number, number> = {};
+
+      await Promise.all(
+        events.map(async (event) => {
+          try {
+            const res = await fetch(
+              `${import.meta.env.VITE_API_URL}/api/${event.id}/participants/count`,
+            );
+            const data = await res.json();
+            counts[event.id] = data.participantsCount ?? 0;
+          } catch (error) {
+            console.error(
+              "Erreur lors du fetch participants pour l'événement",
+              event.id,
+            );
+            counts[event.id] = 0;
+          }
+        }),
+      );
+
+      setParticipantsCount(counts);
+    };
+
+    if (events.length > 0) {
+      fetchParticipantsCounts();
+    }
+  }, [events]);
 
   const formatTimeRange = (timeRange: string, isOpeningHours = false) => {
     if (isOpeningHours && timeRange === "Fermé") {
@@ -285,7 +318,12 @@ function BarPage() {
             <EmblaCarousel
               slides={events.map((event) => ({
                 id: event.id,
-                content: <EventCard event={event} />,
+                content: (
+                  <EventCard
+                    event={event}
+                    participantsCount={participantsCount[event.id] ?? 0}
+                  />
+                ),
               }))}
               options={{ loop: true, align: "start" }}
             />

@@ -55,6 +55,7 @@ function Events() {
     }
     fetchEvent();
   }, []);
+
   useEffect(() => {
     const fetchParticipantsCounts = async () => {
       const counts: Record<number, number> = {};

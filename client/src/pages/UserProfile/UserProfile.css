@@ -2,12 +2,10 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--background-primary-color);
   padding-top: 50px;
 }
 
 .user-profile-header {
-  background-color: var(--background-primary-color);
   padding: 2rem 1rem 1rem 1rem;
 }
 
@@ -43,7 +41,6 @@
 }
 
 .nav-tabs {
-  background-color: var(--background-primary-color);
   padding: 1rem 0 2rem 0;
 }
 

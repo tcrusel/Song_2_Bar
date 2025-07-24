@@ -194,102 +194,110 @@ function BarPage() {
   };
 
   return (
-    <section className="bar-details">
-      <div className="return-button-container">
-        <button
-          type="button"
-          className="return-button"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          ← Retour
-        </button>
-      </div>
-      <article className="top-page-container">
-        <div className="button-title-container">
-          <h1 className="button-title">
-            {bar.name}{" "}
-            <FavouriteButton
-              favouriteBar={favouriteBar}
-              unfavouriteBar={unfavouriteBar}
-            />
-          </h1>
-        </div>
-      </article>
+    <>
+      <section>
+        <article className="return-button-container">
+          <button
+            type="button"
+            className="return-button"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            ← Retour
+          </button>
+        </article>
 
-      <article className="bar-info">
-        <div className="image-gallery">
-          <div className="main-image">
-            <img src={images[currentImageIndex]} alt={bar.name} />
-            <button
-              type="button"
-              className="nav-button prev"
-              onClick={prevImage}
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              className="nav-button next"
-              onClick={nextImage}
-            >
-              ›
-            </button>
-          </div>
-          <div className="thumbnail-grid">
-            {images.slice(0, 3).map((img, index) => (
-              <img
-                key={`${bar.name}-${index}`}
-                src={img}
-                alt={`${bar.name} ${index + 1}`}
-                className={index === currentImageIndex ? "active" : ""}
-                onClick={() => setCurrentImageIndex(index)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    setCurrentImageIndex(index);
-                  }
-                }}
-                style={{ cursor: "pointer" }}
+        <article className="top-page-container">
+          <div className="button-title-container">
+            <h1 className="button-title">
+              {bar.name}{" "}
+              <FavouriteButton
+                favouriteBar={favouriteBar}
+                unfavouriteBar={unfavouriteBar}
               />
-            ))}
+            </h1>
           </div>
-        </div>
-
-        <div className="bar-details-content">
-          <div className="bar-meta">
-            <div className="location">
-              📍 {bar.address}, {bar.postcode} {bar.city}
-            </div>
-            <div className="music-style">🎵 {bar.music_style}</div>
-            <div className="hours">🕐 {getTodayHours()}</div>
-            {bar.hours?.happy_hours &&
-              formatTimeRange(bar.hours.happy_hours) && (
-                <div className="happy-hours">
-                  🍻 {formatTimeRange(bar.hours.happy_hours)}
-                </div>
-              )}
-          </div>
-        </div>
-      </article>
-      <h3 className="carousel-title">
-        Évènements dans lesquels vous pourrez retrouver ce bar
-      </h3>
-      <section className="bar-carousel">
-        {events && events.length > 0 ? (
-          <EmblaCarousel
-            slides={events.map((event) => ({
-              id: event.id,
-              content: <EventCard event={event} />,
-            }))}
-            options={{ loop: true, align: "start" }}
-          />
-        ) : (
-          <h1>Ce bar n'a pas encore d'évènement prévu</h1>
-        )}
+        </article>
       </section>
-      <ToastContainer theme="colored" position="top-right" limit={2} />
-    </section>
+
+      <section>
+        <article className="bar-info">
+          <div className="image-gallery">
+            <div className="main-image">
+              <img src={images[currentImageIndex]} alt={bar.name} />
+              <button
+                type="button"
+                className="nav-button prev"
+                onClick={prevImage}
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="nav-button next"
+                onClick={nextImage}
+              >
+                ›
+              </button>
+            </div>
+            <div className="thumbnail-grid">
+              {images.slice(0, 3).map((img, index) => (
+                <img
+                  key={`${bar.name}-${index}`}
+                  src={img}
+                  alt={`${bar.name} ${index + 1}`}
+                  className={index === currentImageIndex ? "active" : ""}
+                  onClick={() => setCurrentImageIndex(index)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      setCurrentImageIndex(index);
+                    }
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="bar-details-content">
+            <div className="bar-meta">
+              <div className="location">
+                📍 {bar.address}, {bar.postcode} {bar.city}
+              </div>
+              <div className="music-style">🎵 {bar.music_style}</div>
+              <div className="hours">🕐 {getTodayHours()}</div>
+              {bar.hours?.happy_hours &&
+                formatTimeRange(bar.hours.happy_hours) && (
+                  <div className="happy-hours">
+                    🍻 {formatTimeRange(bar.hours.happy_hours)}
+                  </div>
+                )}
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section className="carousel-section">
+        <h2>Évènements dans lesquels vous pourrez retrouver ce bar</h2>
+        <article className="carousel">
+          {events && events.length > 0 ? (
+            <EmblaCarousel
+              slides={events.map((event) => ({
+                id: event.id,
+                content: <EventCard event={event} />,
+              }))}
+              options={{ loop: true, align: "start" }}
+            />
+          ) : (
+            <div className="no-events">
+              <h3>Ce bar n'a pas encore d'évènement prévu</h3>
+            </div>
+          )}
+        </article>
+        <ToastContainer theme="colored" position="top-right" limit={2} />
+      </section>
+    </>
   );
 }
 

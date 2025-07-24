@@ -133,8 +133,8 @@ function MusicGroup() {
 
   return (
     <>
-      <section className="group-information">
-        <div className="return-button-container">
+      <section>
+        <article className="return-button-container">
           <button
             type="button"
             className="return-button"
@@ -144,18 +144,18 @@ function MusicGroup() {
           >
             ← Retour
           </button>
-        </div>
-        <article className="top-page-container">
-          <div className="button-title-container">
-            <h1 className="button-title">
-              {musicGroup.name}{" "}
-              <FavouriteButton
-                favouriteMusicGroup={favouriteMusicGroup}
-                unfavouriteMusicGroup={unfavouriteMusicGroup}
-              />
-            </h1>
-          </div>
         </article>
+        <article className="button-title-container">
+          <h1 className="button-title">
+            {musicGroup.name}{" "}
+            <FavouriteButton
+              favouriteMusicGroup={favouriteMusicGroup}
+              unfavouriteMusicGroup={unfavouriteMusicGroup}
+            />
+          </h1>
+        </article>
+      </section>
+      <section className="group-information">
         <article className="group-title">
           <img
             src={styleIcon}
@@ -166,35 +166,33 @@ function MusicGroup() {
           <h2>{musicGroup.style}</h2>
         </article>
         <article className="group-articles">
-          <aside>
-            <img
-              className="poster-group"
-              src={musicGroup.image}
-              alt="poster du groupe"
-            />
-          </aside>
-          <aside className="description-content">
+          <img
+            className="poster-group"
+            src={musicGroup.image}
+            alt="poster du groupe"
+          />
+          <aside className="description-content-group">
             <p className="description">{musicGroup.description}</p>
           </aside>
         </article>
       </section>
-      <h3 className="carousel-title">
-        Bars dans lesquels vous pourrez retrouver ce groupe de musique
-      </h3>
-      <section className="bar-carousel">
-        {bars && bars.length > 0 ? (
-          <EmblaCarousel
-            slides={bars.map((bar) => ({
-              id: bar.id,
-              content: <BarCard bar={bar} />,
-            }))}
-            options={{ loop: true, align: "start" }}
-          />
-        ) : (
-          <h1>
-            Ce groupe de musique n'a pas encore d'évènement prévu dans un bar
-          </h1>
-        )}
+      <section className="carousel-section">
+        <h2>Bars dans lesquels vous pourrez retrouver ce groupe de musique</h2>
+        <article className="carousel">
+          {bars && bars.length > 0 ? (
+            <EmblaCarousel
+              slides={bars.map((bar) => ({
+                id: bar.id,
+                content: <BarCard bar={bar} />,
+              }))}
+              options={{ loop: true, align: "start" }}
+            />
+          ) : (
+            <h1>
+              Ce groupe de musique n'a pas encore d'évènement prévu dans un bar
+            </h1>
+          )}
+        </article>
       </section>
       <ToastContainer
         position="top-center"

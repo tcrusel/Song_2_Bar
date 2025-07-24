@@ -112,7 +112,15 @@ function Register() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <div className="password">
-              <p className={password.length >= 8 ? "green" : "red"}>
+              <p
+                className={
+                  password.length === 0
+                    ? "text-black"
+                    : password.length > 0 && password.length < 8
+                      ? "text-red"
+                      : "text-green"
+                }
+              >
                 Votre mot de passe doit contenir au moins 8 caractères
               </p>
               <input
@@ -130,7 +138,7 @@ function Register() {
               onChange={handleConfirmPasswordChange}
               placeholder="Confirmation mot de passe"
             />
-            <button className="participate-button" type="submit">
+            <button id="register-button" type="submit">
               S'inscrire
             </button>
           </form>
@@ -149,8 +157,8 @@ function Register() {
             </Link>
           </h3>
         </article>
+        <ToastContainer theme="colored" position="top-right" limit={2} />
       </section>
-      <ToastContainer theme="colored" position="top-right" limit={2} />
     </>
   );
 }

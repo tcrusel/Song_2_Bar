@@ -107,35 +107,37 @@ function EventDetails() {
   };
 
   return (
-    <section className="event-details">
-      <div className="return-button-container">
-        <button
-          type="button"
-          className="return-button"
-          onClick={() => navigate(-1)}
-        >
-          ← Retour
-        </button>
-      </div>
+    <>
+      <section>
+        <article className="return-button-container">
+          <button
+            type="button"
+            className="return-button"
+            onClick={() => navigate(-1)}
+          >
+            ← Retour
+          </button>
+        </article>
 
-      <div className="event-name-banner">
-        <h1 className="button-title">
-          {event.title}{" "}
-          <FavouriteButton
-            favouriteEvent={favouriteEvent}
-            unfavouriteEvent={unfavouriteEvent}
-          />
-        </h1>
-      </div>
+        <article className="button-title-container">
+          <h1 className="button-title">
+            {event.title}{" "}
+            <FavouriteButton
+              favouriteEvent={favouriteEvent}
+              unfavouriteEvent={unfavouriteEvent}
+            />
+          </h1>
+        </article>
+      </section>
 
-      <article className="event-info">
-        <div className="event-picture">
+      <section className="event-info">
+        <article className="event-picture">
           <img src={event.image} alt={event.bar_name} />
-        </div>
-        <div className="description-content">
+        </article>
+        <article className="description-content">
           <p>{event.description}</p>
-        </div>
-        <div className="event-meta">
+        </article>
+        <article className="event-meta">
           <div className="bar-title">
             🍺
             <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
@@ -161,9 +163,9 @@ function EventDetails() {
           <div className="participate-wrapper no-background">
             <Participate />
           </div>
-        </div>
+        </article>
 
-        <div className="googlemap">
+        <article className="googlemap">
           <MapContainer
             center={[event.latitude, event.longitude]}
             zoom={16}
@@ -181,15 +183,15 @@ function EventDetails() {
               </Popup>
             </Marker>
           </MapContainer>
-        </div>
-      </article>
+        </article>
+      </section>
       <ToastContainer
         theme="colored"
         position="top-center"
         limit={2}
         autoClose={3000}
       />
-    </section>
+    </>
   );
 }
 

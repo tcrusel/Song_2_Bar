@@ -1,16 +1,26 @@
 .header {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
   gap: 20px;
-  padding: 1rem 2rem;
+  padding: 2rem;
+  background-color: var(--background-primary-color);
 }
 
-.header #logo-song2bar {
+.header .logo-site {
   grid-column: 1/2;
-  grid-row: 1/3;
   display: flex;
   justify-content: flex-start;
+  transition: 500ms ease;
+}
+
+.header .logo-site #logo-song2bar {
+  background-color: transparent;
+  transition: 500ms ease;
+  cursor: pointer;
+}
+
+.header .logo-site #logo-song2bar:hover {
+  transform: scale(130%);
 }
 
 .header #logo-home {
@@ -20,14 +30,15 @@
   width: 100%;
 }
 
-.logo-connexion-button {
+.logo-connexion-container {
   grid-column: 3/4;
-  background-color: #23241f;
-  border: none;
-  cursor: pointer;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+}
+
+.logo-connexion-button {
+  background-color: transparent;
 }
 
 .header h3 {
@@ -39,12 +50,18 @@
   text-align: center;
 }
 
-.header nav {
+.header .navigation-container {
   grid-column: 2/3;
   grid-row: 1/2;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.header nav {
+  display: flex;
   gap: 20px;
 }
 

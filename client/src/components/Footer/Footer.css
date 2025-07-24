@@ -1,8 +1,8 @@
 footer {
-  background-color: black;
+  background-color: var(--background-primary-color);
   display: grid;
-  grid-column: 1fr 1fr 1fr;
-  padding: 10px;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  padding: 20px 10px;
   gap: 20px;
 }
 
@@ -12,8 +12,6 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 1.5rem;
-  height: 16rem;
 }
 
 .follow-us {
@@ -84,19 +82,22 @@ footer section p {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .top-page-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 25px;
+  text-align: center;
 }
 
 .footer-images {
   display: flex;
-  gap: 20px;
+  gap: 60px;
+  padding-left: 25px;
+  padding-top: 10px;
 }
 
 .info-song2bar {

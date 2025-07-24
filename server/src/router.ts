@@ -28,9 +28,9 @@ router.post("/api/users", authActions.hashPassword, userActions.add);
 
 router.post("/api/login", authActions.login);
 
-router.get("/api/participate", participateActions.browse);
-
 router.use(authActions.verifyToken);
+
+router.get("/api/participate/:eventId", participateActions.findByEventId);
 
 router.post("/api/participate", participateActions.add);
 router.delete("/api/participate/:userId/:eventId", participateActions.remove);

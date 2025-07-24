@@ -56,16 +56,16 @@ function Footer() {
           </div>
           <div className="footer-images">
             <img
-              src="/images/home_images/micro.png"
-              alt="micro"
-              width="130"
-              height="auto"
-            />
-            <img
               src="/images/home_images/guitare-fleur.png"
               alt="guitare-fleur"
-              width="130"
-              height="auto"
+              width="auto"
+              height="110"
+            />
+            <img
+              src="/images/home_images/micro.png"
+              alt="micro"
+              width="auto"
+              height="120"
             />
           </div>
         </div>

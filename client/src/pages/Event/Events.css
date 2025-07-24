@@ -1,7 +1,3 @@
-body {
-  background-color: var(--background-primary-color);
-}
-
 .events {
   display: flex;
   justify-content: flex-start;

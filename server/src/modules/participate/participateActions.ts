@@ -2,6 +2,27 @@ import type { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import participateRepository from "./participateRepository";
 
+const findByEventId: RequestHandler = async (req, res, next): Promise<void> => {
+  try {
+    const userId = Number(req.auth?.sub);
+    const eventId = Number(req.params.eventId);
+
+    if (!userId || !eventId || Number.isNaN(userId) || Number.isNaN(eventId)) {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+      return;
+    }
+    const participation = await participateRepository.findParticipation(
+      userId,
+      eventId,
+    );
+
+    res.status(StatusCodes.OK).json({ participates: !!participation });
+  } catch (err) {
+    next(err);
+    return;
+  }
+};
+
 const add: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);
@@ -57,14 +78,4 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
   }
 };
 
-const browse: RequestHandler = async (req, res, next) => {
-  try {
-    const participate = await participateRepository.readAll();
-
-    res.json(participate);
-  } catch (err) {
-    console.error("Erreur lors de la récupération des événements :", err);
-  }
-};
-
-export default { add, remove, browse };
+export default { add, remove, findByEventId };

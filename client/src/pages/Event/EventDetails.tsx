@@ -207,7 +207,7 @@ function EventDetails() {
       </section>
       <ToastContainer
         theme="colored"
-        position="top-center"
+        position="top-right"
         limit={2}
         autoClose={3000}
       />

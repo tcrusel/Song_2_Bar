@@ -198,7 +198,7 @@ function MusicGroup() {
         </article>
       </section>
       <ToastContainer
-        position="top-center"
+        position="top-right"
         theme="colored"
         autoClose={3000}
         limit={2}

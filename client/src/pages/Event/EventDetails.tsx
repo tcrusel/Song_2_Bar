@@ -13,7 +13,7 @@ import "./EventDetails.css";
 function EventDetails() {
   const { id } = useParams();
   const [event, setEvent] = useState<EventType | null>(null);
-  const [fetchError, setFetchError] = useState(false); // 🆕 état d'erreur
+  const [fetchError, setFetchError] = useState(false);
   const { auth } = useAuth();
   const navigate = useNavigate();
   const userId = auth?.user.id;
@@ -30,7 +30,7 @@ function EventDetails() {
         setEvent(event);
       } catch (error) {
         console.error("Erreur lors du fetch", error);
-        setFetchError(true); // ✅ on met l'erreur à true
+        setFetchError(true);
       }
     };
     fetchEvent();
@@ -151,9 +151,8 @@ function EventDetails() {
         </div>
         <div className="event-meta">
           <div className="bar-title">
-            🍺
             <Link to={`/bars/${event.bar_id}`} className="bar-title bold">
-              {event.bar_name}
+              🍺 {event.bar_name}
             </Link>
           </div>
           <div className="location">
@@ -161,18 +160,16 @@ function EventDetails() {
           </div>
           <div className="music-style">🎵 {event.music_style}</div>
           <div className="groups-name">
-            🎤
             <Link to={`/groups/${event.music_group_id}`}>
-              {" "}
-              {event.music_group_name}
+              🎤 {event.music_group_name}
             </Link>
           </div>
           <div className="hour-event">
-            🕐 de {formatTime(event.start_at)} à {formatTime(event.end_at)}
+            🕐 {formatTime(event.start_at)} à {formatTime(event.end_at)}
           </div>
           <div className="participate-number">
-            👥​
             <p>
+              👥​ ​{" "}
               {participantsCount === 0
                 ? "Aucun participant à cet évènement"
                 : `${participantsCount} personne${participantsCount > 1 ? "s" : ""} participe${participantsCount > 1 ? "nt" : ""} à cet évènement`}

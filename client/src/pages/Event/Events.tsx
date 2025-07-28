@@ -81,11 +81,7 @@ function Events() {
           }}
           placeholder="Trouver votre événement, votre bar ou votre groupe de musique"
         />
-        {/* <button
-          type="button"
-          onClick={() => setShowCalendar(!showCalendar)}
-          className="calendar-icon-button"
-          /> */}
+
         <HorizontalCalendar
           selectedDate={date}
           onSelectDate={(newDate) => setDate(newDate)}

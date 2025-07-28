@@ -80,6 +80,14 @@ function EventParticipationCarousel() {
   return (
     <div className="carousel-container">
       <h2 className="carousel-title">Mes Événements</h2>
+      <button
+        type="button"
+        className="carousel-arrow left"
+        onClick={goToPreviousPage}
+        disabled={currentPage === 0}
+      >
+        ‹
+      </button>
       <div className="carousel-wrapper">
         <div
           className="groups-carousel"
@@ -92,28 +100,17 @@ function EventParticipationCarousel() {
               <EventCard key={event.id} event={event} />
             ))}
         </div>
-
-        <button
-          type="button"
-          className="carousel-arrow left"
-          onClick={goToPreviousPage}
-          disabled={currentPage === 0}
-        >
-          ‹
-        </button>
-
-        <button
-          type="button"
-          className="carousel-arrow right"
-          onClick={goToNextPage}
-          disabled={currentPage === totalPages - 1}
-        >
-          ›
-        </button>
       </div>
+      <button
+        type="button"
+        className="carousel-arrow right"
+        onClick={goToNextPage}
+        disabled={currentPage === totalPages - 1}
+      >
+        ›
+      </button>
       {totalPages > 1 && (
         <div className="carousel-dots">
-         
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               type="button"

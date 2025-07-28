@@ -40,7 +40,7 @@
   margin: 10px;
 }
 
-@media screen and (width <= 600px) {
+@media screen and (width <= 1024px) {
   .user-action {
     display: grid;
     grid-template-columns: 1fr;

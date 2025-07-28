@@ -17,6 +17,7 @@ function EventCard({
     return `${value.slice(0, 2)}h`;
   };
   const navigate = useNavigate();
+  
 
   return (
     <article

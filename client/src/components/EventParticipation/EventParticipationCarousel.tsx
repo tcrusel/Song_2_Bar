@@ -113,7 +113,7 @@ function EventParticipationCarousel() {
       </div>
       {totalPages > 1 && (
         <div className="carousel-dots">
-          {/* eslint-disable-next-line react/no-array-index-key */}
+         
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               type="button"

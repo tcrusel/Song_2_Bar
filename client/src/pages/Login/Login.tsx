@@ -1,8 +1,8 @@
 import { type FormEventHandler, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import "./Login.css";
 import { toast, ToastContainer } from "react-toastify";
-import LogoSite2 from "/images/logo-site2.png";
+import LogoSite from "/images/logo-site.png";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
@@ -19,31 +19,31 @@ export default function Login() {
         "Compte créé avec succès ! Vous pouvez maintenant vous connecter.",
         {
           type: "success",
-          position: "top-right",
-          autoClose: 4000,
         },
       );
     }
     if (state?.islogged === false) {
       toast("Veuillez vous connecter pour participer à un évènement", {
         type: "error",
-        position: "top-right",
-        autoClose: 4000,
       });
     }
     if (state?.isloggedToFavouriteBar === false) {
       toast("Veuillez vous connecter pour ajouter un bar à vos favoris", {
         type: "error",
-        position: "top-right",
-        autoClose: 4000,
       });
     }
     if (state?.isloggedToFavouriteEvent === false) {
       toast("Veuillez vous connecter pour ajouter un évènement à vos favoris", {
         type: "error",
-        position: "top-right",
-        autoClose: 4000,
       });
+    }
+    if (state?.isloggedToFavouriteMusicGroup === false) {
+      toast(
+        "Veuillez vous connecter pour ajouter un groupe de musique à vos favoris",
+        {
+          type: "error",
+        },
+      );
     }
   }, [state]);
 
@@ -72,7 +72,7 @@ export default function Login() {
         console.info(response);
         toast(
           "Connexion impossible ! Votre identifiant ou mot de passe est invalide",
-          { type: "error", position: "bottom-left", autoClose: 3000 },
+          { type: "error", autoClose: 3000 },
         );
       }
     } catch (err) {
@@ -83,9 +83,15 @@ export default function Login() {
   return (
     <>
       <header id="header-login">
-        <Link to={"/"}>
-          <img src={LogoSite2} alt="logo du site" width="80" height="auto" />
-        </Link>
+        <article>
+          <button
+            id="home-navigation"
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            <img src={LogoSite} alt="logo du site" width="80" height="auto" />
+          </button>
+        </article>
         <h2>Connexion utilisateur</h2>
       </header>
       <main className="login-page">
@@ -124,7 +130,12 @@ export default function Login() {
             </button>
           </article>
         </section>
-        <ToastContainer theme="colored" limit={2} />
+        <ToastContainer
+          theme="colored"
+          position="top-right"
+          limit={1}
+          autoClose={4000}
+        />
       </main>
     </>
   );

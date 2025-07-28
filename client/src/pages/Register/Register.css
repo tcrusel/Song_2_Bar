@@ -14,11 +14,17 @@
   background-color: var(--background-secondary-color);
   border-radius: 30px;
   padding: 30px 80px;
+  width: 50%;
 }
 
 .auth article #logo-site {
   border-radius: 50%;
   margin-bottom: 50px;
+  transition: 500ms ease;
+}
+
+.auth article #logo-site:hover {
+  transform: scale(120%);
 }
 
 .auth article h1 {
@@ -59,18 +65,34 @@
   text-align: center;
 }
 
+#register-button {
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button-primary-color);
+  color: var(--text-color);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
 .auth article h3 {
   display: flex;
   justify-content: center;
   padding-top: 50px;
 }
 
-.green {
+.text-green {
   color: green;
 }
 
-.red {
+.text-red {
   color: red;
+}
+
+.text-black {
+  color: black;
 }
 
 @media (max-width: 500px) {

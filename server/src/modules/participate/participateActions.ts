@@ -22,6 +22,28 @@ const browseByUserId: RequestHandler = async (req, res, next) => {
   }
 };
 
+const readByEventId: RequestHandler = async (req, res, next): Promise<void> => {
+  try {
+    const userId = Number(req.auth?.sub);
+    const eventId = Number(req.params.eventId);
+
+    if (!userId || !eventId || Number.isNaN(userId) || Number.isNaN(eventId)) {
+      res.sendStatus(StatusCodes.BAD_REQUEST);
+      return;
+    }
+
+    const participation = await participateRepository.findParticipation(
+      userId,
+      eventId,
+    );
+
+    res.status(StatusCodes.OK).json({ participates: !!participation });
+  } catch (err) {
+    next(err);
+    return;
+  }
+};
+
 const add: RequestHandler = async (req, res, next) => {
   if (!req.auth.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);
@@ -51,8 +73,13 @@ const add: RequestHandler = async (req, res, next) => {
 };
 
 const remove: RequestHandler = async (req, res, next): Promise<void> => {
+  if (!req.auth.role) {
+    res.sendStatus(StatusCodes.FORBIDDEN);
+    return;
+  }
+
   try {
-    const userId = Number(req.params.userId);
+    const userId = Number(req.auth.sub);
     const eventId = Number(req.params.eventId);
 
     if (!userId || !eventId || Number.isNaN(userId) || Number.isNaN(eventId)) {
@@ -61,7 +88,6 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
     }
 
     const affectedRows = await participateRepository.delete(userId, eventId);
-    console.log(affectedRows);
 
     if (affectedRows <= 0) {
       res
@@ -70,11 +96,11 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
       return;
     }
 
-    res.sendStatus(StatusCodes.NO_CONTENT).json({ affectedRows });
+    res.status(StatusCodes.OK).json({ affectedRows });
   } catch (err) {
     next(err);
     return;
   }
 };
 
-export default { add, remove, browseByUserId };
+export default { add, remove, browseByUserId, readByEventId };

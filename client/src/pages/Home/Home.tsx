@@ -17,7 +17,7 @@ function Home() {
 
   return (
     <>
-      <main>
+      <main id="home-page">
         <img
           className="flower-guitar"
           src="../../../images/micro-guitare.svg"

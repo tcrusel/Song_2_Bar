@@ -9,7 +9,6 @@ import MusicGroup from "./pages/MusicGroup/MusicGroup";
 import Register from "./pages/Register/Register";
 import UserProfile from "./pages/UserProfile/UserProfile";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,7 +38,6 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <UserProfile />,
       },
-     
     ],
   },
   {

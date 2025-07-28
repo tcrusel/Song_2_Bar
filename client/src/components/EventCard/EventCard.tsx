@@ -18,7 +18,6 @@ function EventCard({
   };
   const navigate = useNavigate();
   
-
   return (
     <article
       className={`card ${className}`}

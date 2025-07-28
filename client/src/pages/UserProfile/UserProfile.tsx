@@ -4,8 +4,8 @@ import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import type { UserInfo } from "../../types/User";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 import "./UserProfile.css";
-import { useAuth } from "../../contexts/AuthContext";
 import EventParticipationCarousel from "../../components/EventParticipation/EventParticipationCarousel";
+import { useAuth } from "../../contexts/AuthContext";
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("bars");

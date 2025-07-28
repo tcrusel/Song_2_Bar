@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify/unstyled";
 import styleIcon from "/images/group_images/music-style-icon.svg";
-import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 
@@ -69,11 +69,11 @@ function MusicGroup() {
     } catch (error) {
       console.error("Erreur lors de la favorisation de l'évènement", error);
       toast(
-        "Impossible d'ajouter le group de musique dans votre liste de favoris",
+        "Impossible d'ajouter le groupe de musique dans votre liste de favoris",
         {
-        type: "error",
-      },
-    );
+          type: "error",
+        },
+      );
       throw error;
     }
   };
@@ -99,23 +99,28 @@ function MusicGroup() {
       }
     } catch (error) {
       console.error("Erreur lors de la suppression du favori :", error);
-      toast("Impossible d'ajouter ce groupe de musique dans votre liste de favoris", {
-        type: "error",
-      });
-    throw error;
+      toast(
+        "Impossible d'ajouter ce groupe de musique dans votre liste de favoris",
+        {
+          type: "error",
+        },
+      );
+      throw error;
     }
   };
 
   return (
     <>
       <section className="group-information">
-        <h1 className="button-title">
-          {musicGroup.name}&nbsp;
-          <FavouriteButton
-            favouriteMusicGroup={favouriteMusicGroup}
-            unfavouriteMusicGroup={unfavouriteMusicGroup}
-          />
-        </h1>
+        <div className="group-title-banner">
+          <h1 className="button-title">{musicGroup.name}</h1>
+          <div className="favorite-button">
+            <LikeButton
+              favouriteMusicGroup={favouriteMusicGroup}
+              unfavouriteMusicGroup={unfavouriteMusicGroup}
+            />
+          </div>
+        </div>
         <article className="group-title">
           <img
             src={styleIcon}

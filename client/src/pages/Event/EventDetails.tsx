@@ -4,10 +4,8 @@ import { Link, useNavigate, useParams } from "react-router";
 import Participate from "../../components/Participate/Participate";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
-import { format, isToday } from "date-fns";
-import { fr } from "date-fns/locale";
-import { ToastContainer, toast } from "react-toastify";
-import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import { toast } from "react-toastify";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
 import "./EventDetails.css";
@@ -15,10 +13,12 @@ import "./EventDetails.css";
 function EventDetails() {
   const { id } = useParams();
   const [event, setEvent] = useState<EventType | null>(null);
+  const [fetchError, setFetchError] = useState(false);
   const { auth } = useAuth();
   const navigate = useNavigate();
   const userId = auth?.user.id;
   const eventId = Number(id);
+  const [participantsCount, setParticipantsCount] = useState<number>(0);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -30,17 +30,27 @@ function EventDetails() {
         setEvent(event);
       } catch (error) {
         console.error("Erreur lors du fetch", error);
-        if (error) return <p>Evènement introuvable</p>;
+        setFetchError(true);
       }
     };
     fetchEvent();
   }, [id]);
 
+  useEffect(() => {
+    const fetchParticipants = async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/${eventId}/participants/count`,
+      );
+
+      const data = await res.json();
+      setParticipantsCount(data.participantsCount || 0);
+    };
+
+    fetchParticipants();
+  }, [eventId]);
+
+  if (fetchError) return <p>Évènement introuvable</p>;
   if (!event) return <p>Chargement en cours...</p>;
-  const eventDate = new Date(event.date);
-  const formattedDateText = isToday(eventDate)
-    ? `Aujourd'hui le ${format(eventDate, "d MMMM yyyy", { locale: fr })}`
-    : format(eventDate, "d MMMM yyyy", { locale: fr });
 
   const favouriteEvent = async () => {
     if (!auth) {
@@ -57,13 +67,10 @@ function EventDetails() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${auth.token}`,
           },
-          body: JSON.stringify({
-            userId,
-            eventId,
-          }),
+          body: JSON.stringify({ userId, eventId }),
         },
       );
-      if (response) {
+      if (response.ok) {
         toast("Cet évènement est maintenant dans vos favoris", {
           type: "success",
         });
@@ -72,10 +79,9 @@ function EventDetails() {
       }
     } catch (error) {
       console.error("Erreur lors de la favorisation de l'évènement", error);
-      toast("Impossible d'ajouter l'évènement dans votre liste de favoris", {
+      toast("Impossible d'ajouter l'évènement aux favoris", {
         type: "error",
       });
-      throw error;
     }
   };
 
@@ -96,81 +102,84 @@ function EventDetails() {
           },
         },
       );
-      if (response) {
-        toast("Cet évènement a été retiré de vos favoris", {
-          type: "info",
-        });
+      if (response.ok) {
+        toast("Cet évènement a été retiré de vos favoris", { type: "info" });
       } else {
         throw new Error("Erreur serveur");
       }
     } catch (error) {
-      console.error("Erreur lors de la favorisation de l'évènement", error);
-      toast("Impossible de retirer l'évènement' de votre liste de favoris", {
+      console.error("Erreur lors du retrait de l'évènement", error);
+      toast("Impossible de retirer l'évènement des favoris", {
         type: "error",
       });
-      throw error;
     }
   };
-  return (
-    <>
-      <section className="event-details">
-        <article className="event-header">
-          <div className="header-style">
-            <p className="music-style bold">{event.music_style}</p>
-          </div>
-          <h1>
-            {event.title}{" "}
-            <FavouriteButton
-              favouriteEvent={favouriteEvent}
-              unfavouriteEvent={unfavouriteEvent}
-            />
-          </h1>
-          <img
-            className="poster-event"
-            src={event.image}
-            alt={event.bar_name}
-          />
-          <div className="date">
-            <div className="date-icon">
-              <img
-                src="/images/event_images/calendar.png"
-                alt="calendar-icon"
-              />
-            </div>
+  const formatTime = (time: string) => {
+    if (!time) return "";
+    const [hour, minute] = time.split(":");
+    return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+  };
 
-            <p className={"date-event bold white"}>{formattedDateText}</p>
-          </div>
-          <div className="hour">
-            <img
-              src="/images/event_images/clock.png"
-              alt="clock-icon"
-              className="hour-icon"
-            />
-            <p className="hour-event white">
-              de {event.start_at} à {event.end_at}
-            </p>
-          </div>
-          <div className="participate">
-            <Participate />
-          </div>
-          <div className="bar">
-            <div className="localisation-icon">
-              <img
-                src="/images/event_images/localisation.png"
-                alt="localisation-icon"
-              />
-            </div>
-            <Link to={`/bars/${event.bar_id}`} className={"bar-title bold"}>
-              {event.bar_name}
+  return (
+    <div className="event-details">
+      <div className="return-button-container">
+        <button
+          type="button"
+          className="return-button"
+          onClick={() => navigate(-1)}
+        >
+          ← Retour
+        </button>
+      </div>
+
+      <div className="event-name-banner">
+        <h1 className="event-name">{event.title}</h1>
+        <div className="favorite-button">
+          <LikeButton
+            favouriteEvent={favouriteEvent}
+            unfavouriteEvent={unfavouriteEvent}
+          />
+        </div>
+      </div>
+
+      <section className="event-info">
+        <div className="event-picture">
+          <img src={event.image} alt={event.bar_name} />
+        </div>
+        <div className="description-content">
+          <p>{event.description}</p>
+        </div>
+        <div className="event-meta">
+          <div className="bar-title">
+            <Link to={`/bars/${event.bar_id}`} className="bar-title bold">
+              🍺 {event.bar_name}
             </Link>
           </div>
-          <div className={"bar-address"}>
-            <p>{event.address}</p>
+          <div className="location">
+            📍 {event.address}, {event.postcode} {event.city}
+          </div>
+          <div className="music-style">🎵 {event.music_style}</div>
+          <div className="groups-name">
+            <Link to={`/groups/${event.music_group_id}`}>
+              🎤 {event.music_group_name}
+            </Link>
+          </div>
+          <div className="hour-event">
+            🕐 {formatTime(event.start_at)} à {formatTime(event.end_at)}
+          </div>
+          <div className="participate-number">
             <p>
-              {event.postcode} {event.city}
+              👥​ ​{" "}
+              {participantsCount === 0
+                ? "Aucun participant à cet évènement"
+                : `${participantsCount} personne${participantsCount > 1 ? "s" : ""} participe${participantsCount > 1 ? "nt" : ""} à cet évènement`}
             </p>
           </div>
-        </article>
+        </div>
+        <div className="participate-wrapper">
+          <Participate />
+        </div>
+
         <div className="googlemap">
           <MapContainer
             center={[event.latitude, event.longitude]}
@@ -183,29 +192,15 @@ function EventDetails() {
             />
             <Marker position={[event.latitude, event.longitude]}>
               <Popup>
-                <strong>{event.bar_name}</strong>
+                <strong>{event.event_name}</strong>
                 <br />
                 {event.music_style}
               </Popup>
             </Marker>
           </MapContainer>
         </div>
-        <article className="description-container">
-          <p className="about white">A propos</p>
-          <p className="event-description">{event.description}</p>
-          <p className="artist white">Les artistes</p>
-          <Link to={`/groups/${event.music_group_id}`} className="groups-name">
-            {event.music_group_name}
-          </Link>
-        </article>
       </section>
-      <ToastContainer
-        position="top-center"
-        theme="colored"
-        autoClose={3000}
-        limit={2}
-      />
-    </>
+    </div>
   );
 }
 

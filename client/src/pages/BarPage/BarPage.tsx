@@ -5,7 +5,8 @@ import type { Bar } from "../../types/bar";
 import "../../assets/_variables.css";
 import "./BarPage.css";
 import { ToastContainer, toast } from "react-toastify";
-import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import LikeButton from "../../components/LikeButton/LikeButton";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useAuth } from "../../contexts/AuthContext";
 
 function BarPage() {
@@ -50,7 +51,7 @@ function BarPage() {
     return `Commence à ${startTime} - Fini à ${endTime}`;
   };
 
-  if (loading) return <div className="loading">Chargement...</div>;
+  if (loading) return <LoadingScreen />;
   if (error) return <div className="error">Erreur: {error}</div>;
   if (!bar) return <div className="error">Bar non trouvé</div>;
 
@@ -175,13 +176,13 @@ function BarPage() {
       </div>
 
       <div className="bar-name-banner">
-        <h1 className="bar-name">
-          {bar.name}{" "}
-          <FavouriteButton
+        <h1 className="bar-name">{bar.name}</h1>
+        <div className="favorite-button">
+          <LikeButton
             favouriteBar={favouriteBar}
             unfavouriteBar={unfavouriteBar}
           />
-        </h1>
+        </div>
       </div>
 
       <section className="bar-info">

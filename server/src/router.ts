@@ -1,8 +1,8 @@
 import express from "express";
+import favouriteActions from "./modules/Favourite/favouriteActions";
 import authActions from "./modules/authActions";
 import barActions from "./modules/bar/barActions";
 import eventActions from "./modules/event/eventActions";
-import favouriteActions from "./modules/favourite/favouriteActions";
 import groupActions from "./modules/groups/groupActions";
 import participateActions from "./modules/participate/participateActions";
 import userActions from "./modules/user/userActions";
@@ -19,6 +19,10 @@ router.get("/api/users/:id", userActions.read);
 router.get(
   "/api/users/:userId/favourite_groups",
   favouriteActions.getFavouriteGroups,
+);
+router.get(
+  "/api/:eventId/participants/count",
+  favouriteActions.displayParticipation,
 );
 
 router.post("/api/users", authActions.hashPassword, userActions.add);

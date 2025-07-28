@@ -85,7 +85,7 @@
   cursor: pointer;
 }
 
-@media screen and (width <= 600px) {
+@media screen and (width <= 1024px) {
   .header {
     flex-direction: column;
     align-items: center;
@@ -97,14 +97,9 @@
 
   .connexion-wrapper {
     order: 2;
-    margin-bottom: 1rem;
+    margin-left: 1rem;
   }
 
-  .search-bar {
-    order: 3;
-    width: 90%;
-    max-width: 100%;
-  }
   .logo-connexion-button {
     background-color: #23241f;
     margin-right: 1rem;

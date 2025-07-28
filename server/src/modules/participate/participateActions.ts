@@ -4,7 +4,7 @@ import participateRepository from "./participateRepository";
 
 const browseByUserId: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.auth?.userId);
+    const userId = Number(req.auth?.sub);
 
     if (!userId) {
       res.status(StatusCodes.UNAUTHORIZED);

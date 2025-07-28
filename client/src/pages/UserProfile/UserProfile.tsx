@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import EventParticipation from "../../components/EventParticipation/EventParticipation";
 import GroupCard from "../../components/GroupCard/GroupCard";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import type { UserInfo } from "../../types/User";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 import "./UserProfile.css";
 import { useAuth } from "../../contexts/AuthContext";
+import EventParticipationCarousel from "../../components/EventParticipation/EventParticipationCarousel";
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("bars");
@@ -16,6 +16,7 @@ function UserProfile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [groupsLoading, setGroupsLoading] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const { auth } = useAuth();
@@ -218,12 +219,11 @@ function UserProfile() {
         );
       case "events":
         return (
-          <div className="tab-content">
-            <div>
-              <EventParticipation />
-            </div>
+          <div className="event-section">
+            <EventParticipationCarousel />
           </div>
         );
+
       default:
         return null;
     }

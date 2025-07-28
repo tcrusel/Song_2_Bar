@@ -1,4 +1,4 @@
-import EventParticipation from "../components/EventParticipation/EventParticipation";
+import EventParticipation from "../components/EventParticipation/EventParticipationCarousel";
 
 function TestEventParticipation() {
   // Simule un user_id (ex: 12) en ajoutant le paramètre dans l'URL de test

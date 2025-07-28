@@ -5,7 +5,7 @@ import Participate from "../../components/Participate/Participate";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
 import { toast, ToastContainer } from "react-toastify";
-import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
 import "./EventDetails.css";
@@ -139,7 +139,7 @@ function EventDetails() {
         <article className="button-title-container">
           <h1 className="button-title">
             {event.title}{" "}
-            <FavouriteButton
+            <LikeButton
               favouriteEvent={favouriteEvent}
               unfavouriteEvent={unfavouriteEvent}
             />
@@ -147,42 +147,44 @@ function EventDetails() {
         </article>
       </section>
 
-      <section className="event-info">
+      <section className="event-container">
         <article className="event-picture">
           <img src={event.image} alt={event.bar_name} />
         </article>
+        <article className="event-infos">
+          <div className="event-meta">
+            <div className="bar-title">
+              <Link to={`/bars/${event.bar_id}`} className="bar-title bold">
+                🍺 {event.bar_name}
+              </Link>
+            </div>
+            <div className="location">
+              📍 {event.address}, {event.postcode} {event.city}
+            </div>
+            <div className="music-style">🎵 {event.music_style}</div>
+            <div className="groups-name">
+              <Link to={`/groups/${event.music_group_id}`}>
+                🎤 {event.music_group_name}
+              </Link>
+            </div>
+            <div className="hour-event">
+              🕐 {formatTime(event.start_at)} à {formatTime(event.end_at)}
+            </div>
+            <div className="participate-number">
+              <p>
+                👥​ ​{" "}
+                {participantsCount === 0
+                  ? "Aucun participant à cet évènement"
+                  : `${participantsCount} personne${participantsCount > 1 ? "s" : ""} participe${participantsCount > 1 ? "nt" : ""} à cet évènement`}
+              </p>
+            </div>
+          </div>
+          <div className="participate-wrapper">
+            <Participate />
+          </div>
+        </article>
         <article className="description-content">
           <p>{event.description}</p>
-        </article>
-        <article className="event-meta">
-          <div className="bar-title">
-            <Link to={`/bars/${event.bar_id}`} className="bar-title bold">
-              🍺 {event.bar_name}
-            </Link>
-          </div>
-          <div className="location">
-            📍 {event.address}, {event.postcode} {event.city}
-          </div>
-          <div className="music-style">🎵 {event.music_style}</div>
-          <div className="groups-name">
-            <Link to={`/groups/${event.music_group_id}`}>
-              🎤 {event.music_group_name}
-            </Link>
-          </div>
-          <div className="hour-event">
-            🕐 {formatTime(event.start_at)} à {formatTime(event.end_at)}
-          </div>
-          <div className="participate-number">
-            <p>
-              👥​ ​{" "}
-              {participantsCount === 0
-                ? "Aucun participant à cet évènement"
-                : `${participantsCount} personne${participantsCount > 1 ? "s" : ""} participe${participantsCount > 1 ? "nt" : ""} à cet évènement`}
-            </p>
-          </div>
-        </article>
-        <article className="participate-wrapper">
-          <Participate />
         </article>
 
         <article className="googlemap">

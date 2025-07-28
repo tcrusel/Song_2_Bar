@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify/unstyled";
 import styleIcon from "/images/group_images/music-style-icon.svg";
 import BarCard from "../../components/BarCard/BarCard";
 import type { Bar } from "../../types/bar";
-import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 import EmblaCarousel from "../../components/EmblaCarousel/EmblaCarousel";
@@ -148,7 +148,7 @@ function MusicGroup() {
         <article className="button-title-container">
           <h1 className="button-title">
             {musicGroup.name}{" "}
-            <FavouriteButton
+            <LikeButton
               favouriteMusicGroup={favouriteMusicGroup}
               unfavouriteMusicGroup={unfavouriteMusicGroup}
             />

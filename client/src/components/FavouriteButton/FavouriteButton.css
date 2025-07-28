@@ -1,8 +1,0 @@
-.favourite-button {
-  grid-column: 3/4;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: fit-content;
-  height: fit-content;
-}

@@ -5,6 +5,15 @@
   align-items: center;
 }
 
+.group-title-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
 .group-title {
   display: flex;
   justify-content: flex-start;

@@ -4,8 +4,8 @@ import { barService } from "../../services/barService";
 import type { Bar } from "../../types/bar";
 import "../../assets/_variables.css";
 import "./BarPage.css";
-import { toast, ToastContainer } from "react-toastify";
-import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import { ToastContainer, toast } from "react-toastify";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useAuth } from "../../contexts/AuthContext";
 import EventCard from "../../components/EventCard/EventCard";
@@ -245,7 +245,7 @@ function BarPage() {
           <div className="button-title-container">
             <h1 className="button-title">
               {bar.name}{" "}
-              <FavouriteButton
+              <LikeButton
                 favouriteBar={favouriteBar}
                 unfavouriteBar={unfavouriteBar}
               />

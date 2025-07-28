@@ -77,7 +77,7 @@ function EventParticipationCarousel() {
 
   return (
     <div className="carousel-container">
-      <h2 className="carousel-title">Mes Événements</h2>
+      <h2 className="carousel-title">Mes Participations</h2>
 
       <button
         type="button"

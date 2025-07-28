@@ -1,5 +1,5 @@
 import express from "express";
-import favouriteActions from "./modules/favourite/favouriteActions";
+import favouriteActions from "./modules/favouritetest/favouriteActions";
 import authActions from "./modules/authActions";
 import barActions from "./modules/bar/barActions";
 import eventActions from "./modules/event/eventActions";

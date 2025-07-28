@@ -12,6 +12,9 @@ function EventParticipationCarousel() {
   const cardsPerPage = 5;
   const cardWidth = 160;
   const gap = 24;
+  const [participantsCount, setParticipantsCount] = useState<
+    Record<number, number>
+  >({});
 
   const totalPages = Math.ceil(participations.length / cardsPerPage);
 
@@ -30,12 +33,32 @@ function EventParticipationCarousel() {
           },
         );
 
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error("Erreur lors du chargement des participations");
-        }
 
         const data = await response.json();
         setParticipations(data);
+
+        
+        const counts: Record<number, number> = {};
+        await Promise.all(
+          data.map(async (event: EventType) => {
+            try {
+              const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/${event.id}/participants/count`,
+              );
+              const countData = await res.json();
+              counts[event.id] = countData.participantsCount ?? 0;
+            } catch (error) {
+              console.error(
+                "Erreur lors du fetch participants pour l'événement",
+                event.id,
+              );
+              counts[event.id] = 0;
+            }
+          }),
+        );
+        setParticipantsCount(counts);
       } catch (err) {
         console.error(err);
       }
@@ -97,7 +120,7 @@ function EventParticipationCarousel() {
           {participations
             .slice(currentPage * cardsPerPage, (currentPage + 1) * cardsPerPage)
             .map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={event} participantsCount={participantsCount[event.id] ?? 0} />
             ))}
         </div>
       </div>

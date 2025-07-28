@@ -4,6 +4,7 @@ import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import type { UserInfo } from "../../types/User";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 import "./UserProfile.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("bars");
@@ -16,12 +17,12 @@ function UserProfile() {
   const [groupsLoading, setGroupsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const { auth } = useAuth();
+  const userId = auth?.user.id;
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const userId = 12;
-
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
         );
@@ -41,7 +42,7 @@ function UserProfile() {
     };
 
     fetchUserProfile();
-  }, []);
+  }, [userId]);
 
   const fetchFavoriteGroups = useCallback(async () => {
     try {

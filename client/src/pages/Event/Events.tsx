@@ -34,9 +34,6 @@ function Events() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const clearDateFilter = () => {
-    setDate(null);
-  };
 
   useEffect(() => {
     async function fetchEvent() {
@@ -168,8 +165,76 @@ function Events() {
           )}
         </div>
       </section>
+      <section className="event-left-bar">
+        <article className="left-bar">
+          <div className="menu-button">
+            <h1>Filtre par style</h1>
+          </div>
 
+          <div className="filters-checkbox">
+            {musicStyles.map((style) => (
+              <label key={style}>
+                <div className="marge-filters-checkbox">
+                  <input
+                    type="checkbox"
+                    value={style}
+                    checked={selectedStyles.includes(style)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (selectedStyles.includes(value)) {
+                        setSelectedStyles(
+                          selectedStyles.filter((s) => s !== value),
+                        );
+                      } else {
+                        setSelectedStyles([...selectedStyles, value]);
+                      }
+                    }}
+                  />
+                </div>
+                <span>{style}</span>
+              </label>
+            ))}
+          </div>
+        </article>
+        {filteredAndSearchedEvents.length === 0 ? (
+          <p>Aucun événement trouvé pour cette date</p>
+        ) : (
+          <>
+            <section className="event-list">
+              {paginatedEvents.map((event) => (
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  participantsCount={participantsCount[event.id] ?? 0}
+                />
+              ))}
+            </section>
+          </>
+        )}
+      </section>
+      <div className="pagination-controls">
+        <button
+          type="button"
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          ←
+        </button>
 
+        <span>
+          {currentPage} ... {totalPages}
+        </span>
+
+        <button
+          type="button"
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          disabled={currentPage === totalPages}
+        >
+          →
+        </button>
+      </div>
     </>
   );
 }

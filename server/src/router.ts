@@ -2,7 +2,7 @@ import express from "express";
 import authActions from "./modules/authActions";
 import barActions from "./modules/bar/barActions";
 import eventActions from "./modules/event/eventActions";
-import favouriteActions from "./modules/favourite/favouriteActions";
+import favouriteActions from "./modules/Favourite/favouriteActions";
 import groupActions from "./modules/groups/groupActions";
 import participateActions from "./modules/participate/participateActions";
 import userActions from "./modules/user/userActions";

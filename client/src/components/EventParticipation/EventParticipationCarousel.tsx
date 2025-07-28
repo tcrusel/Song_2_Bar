@@ -9,8 +9,6 @@ function EventParticipationCarousel() {
   const [currentPage, setCurrentPage] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const { auth } = useAuth();
-  const userId = auth?.user.id;
-
   const cardsPerPage = 5;
   const cardWidth = 160;
   const gap = 24;
@@ -44,7 +42,7 @@ function EventParticipationCarousel() {
     };
 
     fetchParticipations();
-  }, [auth, userId]);
+  }, [auth]);
 
   const scrollToPage = (pageIndex: number) => {
     if (carouselRef.current) {
@@ -82,7 +80,6 @@ function EventParticipationCarousel() {
   return (
     <div className="carousel-container">
       <h2 className="carousel-title">Mes Événements</h2>
-
       <div className="carousel-wrapper">
         <div
           className="groups-carousel"
@@ -114,19 +111,20 @@ function EventParticipationCarousel() {
           ›
         </button>
       </div>
-
       {totalPages > 1 && (
         <div className="carousel-dots">
+          {/* eslint-disable-next-line react/no-array-index-key */}
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               type="button"
-              key={index}
+              key={`dot-${index}`}
               className={`carousel-dot ${index === currentPage ? "active" : ""}`}
               onClick={() => scrollToPage(index)}
             />
           ))}
         </div>
       )}
+      ’
     </div>
   );
 }

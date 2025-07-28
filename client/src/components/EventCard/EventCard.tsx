@@ -5,9 +5,14 @@ import type { EventType } from "../../types/Event";
 type EventCardProps = {
   event: EventType;
   className?: string;
+  participantsCount?: number;
 };
 
-function EventCard({ event, className = "" }: EventCardProps) {
+function EventCard({
+  event,
+  className = "",
+  participantsCount,
+}: EventCardProps) {
   const formatTime = (value: string) => {
     return `${value.slice(0, 2)}h`;
   };
@@ -34,6 +39,8 @@ function EventCard({ event, className = "" }: EventCardProps) {
         <h2 className="card-title">{event.title}</h2>
         <p className="card-style">{event.music_style}</p>
       </aside>
+      <p className="participant-nb">👥 {participantsCount}</p>
+
       <aside className="card-bottom">
         <div className="card-bottom-corner">
           <img
@@ -41,6 +48,7 @@ function EventCard({ event, className = "" }: EventCardProps) {
             alt="Localisation"
             className="location_icon"
           />
+
           <p className="event-bar">{event.bar_name}</p>
         </div>
         <div className="card-bottom-corner">

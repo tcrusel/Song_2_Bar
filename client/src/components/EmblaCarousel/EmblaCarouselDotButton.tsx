@@ -13,7 +13,7 @@ type UseDotButtonType = {
 };
 
 export const useDotButton = (
-  emblaApi: EmblaCarouselType | undefined,
+  emblaApi: EmblaCarouselType | null | undefined,
 ): UseDotButtonType => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);

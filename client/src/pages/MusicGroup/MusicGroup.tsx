@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify/unstyled";
 import styleIcon from "/images/group_images/music-style-icon.svg";
 import BarCard from "../../components/BarCard/BarCard";
 import type { Bar } from "../../types/bar";
-import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 import EmblaCarousel from "../../components/EmblaCarousel/EmblaCarousel";
@@ -91,7 +91,7 @@ function MusicGroup() {
     } catch (error) {
       console.error("Erreur lors de la favorisation de l'évènement", error);
       toast(
-        "Impossible d'ajouter le group de musique dans votre liste de favoris",
+        "Impossible d'ajouter le groupe de musique dans votre liste de favoris",
         {
           type: "error",
         },
@@ -103,7 +103,7 @@ function MusicGroup() {
   const unfavouriteMusicGroup = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_music_group/${userId}/${musicGroupId}`,
+        `${import.meta.env.VITE_API_URL}/api/favourite_music_group/${musicGroupId}`,
         {
           method: "DELETE",
           headers: {
@@ -133,8 +133,8 @@ function MusicGroup() {
 
   return (
     <>
-      <section className="group-information">
-        <div className="return-button-container">
+      <section>
+        <article className="return-button-container">
           <button
             type="button"
             className="return-button"
@@ -144,18 +144,18 @@ function MusicGroup() {
           >
             ← Retour
           </button>
-        </div>
-        <article className="top-page-container">
-          <div className="button-title-container">
-            <h1 className="button-title">
-              {musicGroup.name}{" "}
-              <FavouriteButton
-                favouriteMusicGroup={favouriteMusicGroup}
-                unfavouriteMusicGroup={unfavouriteMusicGroup}
-              />
-            </h1>
-          </div>
         </article>
+        <article className="button-title-container">
+          <h1 className="button-title">
+            {musicGroup.name}{" "}
+            <LikeButton
+              favouriteMusicGroup={favouriteMusicGroup}
+              unfavouriteMusicGroup={unfavouriteMusicGroup}
+            />
+          </h1>
+        </article>
+      </section>
+      <section className="group-information">
         <article className="group-title">
           <img
             src={styleIcon}
@@ -166,38 +166,39 @@ function MusicGroup() {
           <h2>{musicGroup.style}</h2>
         </article>
         <article className="group-articles">
-          <aside>
-            <img
-              className="poster-group"
-              src={musicGroup.image}
-              alt="poster du groupe"
-            />
-          </aside>
-          <aside className="description-content">
+          <img
+            className="poster-group"
+            src={musicGroup.image}
+            alt="poster du groupe"
+          />
+          <aside className="description-content-group">
             <p className="description">{musicGroup.description}</p>
           </aside>
         </article>
       </section>
-      <h3 className="carousel-title">
-        Bars dans lesquels vous pourrez retrouver ce groupe de musique
-      </h3>
-      <section className="bar-carousel">
-        {bars && bars.length > 0 ? (
-          <EmblaCarousel
-            slides={bars.map((bar) => ({
-              id: bar.id,
-              content: <BarCard bar={bar} />,
-            }))}
-            options={{ loop: true, align: "start" }}
-          />
-        ) : (
-          <h1>
-            Ce groupe de musique n'a pas encore d'évènement prévu dans un bar
-          </h1>
-        )}
+      <section className="carousel-section">
+        <h2>Bars dans lesquels vous pourrez retrouver ce groupe de musique</h2>
+        <article className="carousel">
+          {bars && bars.length > 0 ? (
+            <EmblaCarousel
+              slides={bars.map((bar) => ({
+                id: bar.id,
+                content: <BarCard bar={bar} />,
+              }))}
+              options={{ loop: true, align: "start" }}
+            />
+          ) : (
+            <div className="carousel-empty">
+              <h3>
+                Ce groupe de musique n'a pas encore d'évènement prévu dans un
+                bar
+              </h3>
+            </div>
+          )}
+        </article>
       </section>
       <ToastContainer
-        position="top-center"
+        position="top-right"
         theme="colored"
         autoClose={3000}
         limit={2}

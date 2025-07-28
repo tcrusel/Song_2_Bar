@@ -8,7 +8,7 @@
   --slide-spacing-sm: 0rem;
   --slide-size-sm: 20%;
   --slide-spacing-lg: 0rem;
-  --slide-size-lg: calc(100% / 5);
+  --slide-size-lg: calc(100% / 4.5);
 }
 
 .embla-wrapper {
@@ -25,12 +25,15 @@
   backface-visibility: hidden;
   display: flex;
   touch-action: pan-y pinch-zoom;
+  justify-content: space-between;
   gap: 20px;
+  padding: 0 1rem;
+  margin-left: 0;
 }
 
 .embla__slide {
-  flex: 0 0 100%;
-  padding: 1rem;
+  flex: 0 0 var(--slide-size);
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -44,6 +47,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .embla__slide {
+    flex: 0 0 var(--slide-size-sm);
   }
 }
 

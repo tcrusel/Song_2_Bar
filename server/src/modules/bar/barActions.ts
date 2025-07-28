@@ -4,7 +4,7 @@ import barRepository from "./barRepository";
 
 const browseBarsByMusicGroupId: RequestHandler = async (req, res, next) => {
   try {
-    const bars = await barRepository.readAllBarsByMusicGroupID(
+    const bars = await barRepository.readAllBarsByMusicGroupId(
       Number(req.params.id),
     );
 

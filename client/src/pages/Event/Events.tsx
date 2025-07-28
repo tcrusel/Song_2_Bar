@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import type { EventType } from "../../types/Event";
 import "../../components/HorizontalCalendar/HorizontalCalendar";
-import HorizontalCalendar from "../../components/HorizontalCalendar/HorizontalCalendar";
-
 import DatePicker from "react-datepicker";
+import HorizontalCalendar from "../../components/HorizontalCalendar/HorizontalCalendar";
 
 const formatDate = (dateInput: Date | string) => {
   const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
@@ -19,6 +18,7 @@ const formatDate = (dateInput: Date | string) => {
 function Events() {
   const location = useLocation();
   const selectedDate = location.state?.selectedDate || null;
+
   const [allEvents, setAllEvents] = useState<EventType[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<EventType[]>([]);
   const [error, setError] = useState(false);
@@ -28,6 +28,15 @@ function Events() {
     selectedDate ? new Date(selectedDate) : null,
   );
   const [showCalendar, setShowCalendar] = useState(false);
+  const [participantsCount, setParticipantsCount] = useState<
+    Record<number, number>
+  >({});
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const clearDateFilter = () => {
+    setDate(null);
+  };
 
   useEffect(() => {
     async function fetchEvent() {
@@ -46,6 +55,35 @@ function Events() {
     }
     fetchEvent();
   }, []);
+  useEffect(() => {
+    const fetchParticipantsCounts = async () => {
+      const counts: Record<number, number> = {};
+
+      await Promise.all(
+        allEvents.map(async (event) => {
+          try {
+            const res = await fetch(
+              `${import.meta.env.VITE_API_URL}/api/${event.id}/participants/count`,
+            );
+            const data = await res.json();
+            counts[event.id] = data.participantsCount ?? 0;
+          } catch (error) {
+            console.error(
+              "Erreur lors du fetch participants pour l'événement",
+              event.id,
+            );
+            counts[event.id] = 0;
+          }
+        }),
+      );
+
+      setParticipantsCount(counts);
+    };
+
+    if (allEvents.length > 0) {
+      fetchParticipantsCounts();
+    }
+  }, [allEvents]);
 
   useEffect(() => {
     if (date) {
@@ -61,12 +99,40 @@ function Events() {
     }
   }, [date, allEvents]);
 
+  useEffect(() => {
+    const doResetPage = () => {
+      if (search || selectedStyles.length > 0 || date) {
+        setCurrentPage(1);
+      }
+    };
+
+    doResetPage();
+  }, [search, selectedStyles, date]);
+
   if (error) return <h1>Désolé il n'y a pas d'évènements </h1>;
-  if (!filteredEvents) {
-    <p>Chargement en cours...</p>;
-  }
+
   const musicStyles = Array.from(
     new Set(allEvents.map((event) => event.music_style)),
+  );
+
+  const filteredAndSearchedEvents = filteredEvents
+    .filter((event) => {
+      return (
+        selectedStyles.length === 0 ||
+        selectedStyles.includes(event.music_style)
+      );
+    })
+    .filter((event) => {
+      return (
+        event.title.toLowerCase().includes(search.toLowerCase()) ||
+        event.bar_name.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+
+  const totalPages = Math.ceil(filteredAndSearchedEvents.length / itemsPerPage);
+  const paginatedEvents = filteredAndSearchedEvents.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
   );
 
   return (
@@ -87,6 +153,7 @@ function Events() {
           className="calendar-icon-button"
         />
       </section>
+
       <div className="menu-button">
         <p>Filtre l'agenda</p>
       </div>
@@ -117,6 +184,7 @@ function Events() {
         onSelectDate={(newDate) => setDate(newDate)}
         onToggleCalendar={() => setShowCalendar((prev) => !prev)}
       />
+
       {showCalendar && (
         <DatePicker
           selected={date}
@@ -129,28 +197,54 @@ function Events() {
           locale="fr"
         />
       )}
+      {date && (
+        <button
+          type="button"
+          className="reset-date-button"
+          onClick={clearDateFilter}
+        >
+          Réinitialiser la date
+        </button>
+      )}
 
-      {filteredEvents.length === 0 ? (
+      {filteredAndSearchedEvents.length === 0 ? (
         <p>Aucun événement trouvé pour cette date</p>
       ) : (
-        <section className="event-list">
-          {filteredEvents
-            .filter((event) => {
-              return (
-                selectedStyles.length === 0 ||
-                selectedStyles.includes(event.music_style)
-              );
-            })
-            .filter((event) => {
-              return (
-                event.title.toLowerCase().includes(search.toLowerCase()) ||
-                event.bar_name.toLowerCase().includes(search.toLowerCase())
-              );
-            })
-            .map((event) => (
-              <EventCard key={event.id} event={event} />
+        <>
+          <section className="event-list">
+            {paginatedEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                participantsCount={participantsCount[event.id] ?? 0}
+              />
             ))}
-        </section>
+          </section>
+
+          <div className="pagination-controls">
+            <button
+              type="button"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              ←
+            </button>
+
+            <span>
+              {currentPage} ... {totalPages}
+            </span>
+
+            <button
+              type="button"
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+            >
+              →
+            </button>
+          </div>
+        </>
       )}
     </>
   );

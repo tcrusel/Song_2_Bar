@@ -4,6 +4,7 @@ import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import type { UserInfo } from "../../types/User";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 import "./UserProfile.css";
+import EventParticipationCarousel from "../../components/EventParticipation/EventParticipationCarousel";
 import { useAuth } from "../../contexts/AuthContext";
 
 function UserProfile() {
@@ -15,6 +16,7 @@ function UserProfile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [groupsLoading, setGroupsLoading] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const { auth } = useAuth();
@@ -217,13 +219,11 @@ function UserProfile() {
         );
       case "events":
         return (
-          <div className="tab-content">
-            <div>
-              <h2>Mes Événements</h2>
-              <p>Mes événements apparaîtront ici prochainement</p>
-            </div>
+          <div className="event-section">
+            <EventParticipationCarousel />
           </div>
         );
+
       default:
         return null;
     }

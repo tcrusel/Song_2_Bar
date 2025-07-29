@@ -19,13 +19,11 @@ function GroupCard({ group }: GroupCardProps) {
         }
       }}
     >
-      <aside className="card-image">
-        <img
-          className="card-image"
-          src={group.image}
-          alt={`Groupe ${group.name}`}
-        />
-      </aside>
+      <img
+        className="card-image"
+        src={group.image}
+        alt={`Groupe ${group.name}`}
+      />
       <aside className="card-content">
         <h2 className="card-title">{group.name}</h2>
         <p className="card-style">{group.style}</p>

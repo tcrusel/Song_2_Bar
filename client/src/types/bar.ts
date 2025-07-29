@@ -1,4 +1,3 @@
-// Bar types based on database schema
 export interface Bar {
   id: number;
   name: string;

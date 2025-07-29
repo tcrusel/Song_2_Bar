@@ -3,6 +3,88 @@ import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import favouriteRepository from "./favouriteRepository";
 
+const browseEventsByUserId: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.auth?.sub);
+
+    if (!userId) {
+      res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: "Utilisateur non autorisé" });
+      return;
+    }
+
+    const favourites =
+      await favouriteRepository.readEventsFavouritedByUserId(userId);
+
+    if (!favourites || favourites.length === 0) {
+      res
+        .status(StatusCodes.OK)
+        .json({ message: "Aucun évènement en favoris" });
+      return;
+    }
+
+    res.status(StatusCodes.OK).json(favourites);
+  } catch (err) {
+    next(err);
+    return;
+  }
+};
+
+const browseBarsByUserId: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.auth?.sub);
+
+    if (!userId) {
+      res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: "Utilisateur non autorisé" });
+      return;
+    }
+
+    const favourites =
+      await favouriteRepository.readBarsFavouritedByUserId(userId);
+
+    if (!favourites || favourites.length === 0) {
+      res.status(StatusCodes.OK).json({ message: "Aucun bar en favoris" });
+      return;
+    }
+
+    res.status(StatusCodes.OK).json(favourites);
+  } catch (err) {
+    next(err);
+    return;
+  }
+};
+
+const browseMusicGroupsByUserId: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.auth?.sub);
+
+    if (!userId) {
+      res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: "Utilisateur non autorisé" });
+      return;
+    }
+
+    const favourites =
+      await favouriteRepository.readMusicGroupsFavouritedByUserId(userId);
+
+    if (!favourites || favourites.length === 0) {
+      res
+        .status(StatusCodes.OK)
+        .json({ message: "Aucun groupe de musique en favoris" });
+      return;
+    }
+
+    res.status(StatusCodes.OK).json(favourites);
+  } catch (err) {
+    next(err);
+    return;
+  }
+};
+
 const readByBarId: RequestHandler = async (req, res, next): Promise<void> => {
   if (!req.auth?.role) {
     res.sendStatus(StatusCodes.FORBIDDEN);
@@ -359,4 +441,7 @@ export default {
   readByEventId,
   readByMusicGroupId,
   displayParticipation,
+  browseEventsByUserId,
+  browseBarsByUserId,
+  browseMusicGroupsByUserId,
 };

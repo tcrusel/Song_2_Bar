@@ -47,7 +47,7 @@ function BarsFavourited() {
     }
   };
 
-  if (barsFavourited.length === 0) {
+  if (!Array.isArray(barsFavourited) || barsFavourited.length === 0) {
     return <h3>Vous n'avez pas encore de bar dans vos favoris</h3>;
   }
 

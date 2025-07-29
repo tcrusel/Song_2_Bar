@@ -31,6 +31,53 @@ class favouriteRepository {
     return result.affectedRows;
   }
 
+  async readEventsFavouritedByUserId(userId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT 
+        fe.*,
+        e.*, 
+        b.name AS bar_name,
+        g.name AS group_name,
+        g.style AS music_style
+      FROM favourite_event fe
+      LEFT JOIN event e ON fe.event_id = e.id
+      LEFT JOIN bar b ON e.bar_id = b.id
+      LEFT JOIN music_group g ON e.music_group_id = g.id
+      WHERE fe.user_id = ?`,
+      [userId],
+    );
+
+    return rows;
+  }
+
+  async readBarsFavouritedByUserId(userId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT 
+        fb.*,
+        b.*
+      FROM favourite_bar fb
+      LEFT JOIN bar b ON fb.bar_id = b.id
+      WHERE fb.user_id = ?`,
+      [userId],
+    );
+
+    return rows;
+  }
+
+  async readMusicGroupsFavouritedByUserId(userId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT 
+        fmg.*,
+        mg.*
+      FROM favourite_music_group fmg
+      LEFT JOIN music_group mg ON fmg.music_group_id = mg.id
+      WHERE fmg.user_id = ?`,
+      [userId],
+    );
+
+    return rows;
+  }
+
   async findEventFavourited(userId: number, eventId: number) {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT * FROM favourite_event WHERE user_id = ? AND event_id = ?",

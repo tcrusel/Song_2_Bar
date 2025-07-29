@@ -43,6 +43,7 @@ router.delete("/api/participate/:userId/:eventId", participateActions.remove);
 router.post("/api/participate", participateActions.add);
 router.delete("/api/participate/:eventId", participateActions.remove);
 
+router.get("/api/favourite_bar", favouriteActions.browseBarsByUserId);
 router.get("/api/favourite_bar/:barId", favouriteActions.readByBarId);
 router.post("/api/favourite_bar", favouriteActions.addFavouriteBar);
 router.delete(
@@ -50,6 +51,7 @@ router.delete(
   favouriteActions.destroyFavouriteBar,
 );
 
+router.get("/api/favourite_event", favouriteActions.browseEventsByUserId);
 router.get("/api/favourite_event/:eventId", favouriteActions.readByEventId);
 router.post("/api/favourite_event", favouriteActions.addFavouriteEvent);
 router.delete(
@@ -57,6 +59,10 @@ router.delete(
   favouriteActions.destroyFavouriteEvent,
 );
 
+router.get(
+  "/api/favourite_music_group",
+  favouriteActions.browseMusicGroupsByUserId,
+);
 router.get(
   "/api/favourite_music_group/:musicGroupId",
   favouriteActions.readByMusicGroupId,

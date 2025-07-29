@@ -95,6 +95,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 50px;
+  padding-top: 80px;
 }
 
 .pagination-controls {

@@ -3,8 +3,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
 import EventCard from "../EventCard/EventCard";
 
-function EventParticipationCarousel() {
-  const [participations, setParticipations] = useState<EventType[]>([]);
+function EventsFavourited() {
+  const [events, setEvents] = useState<EventType[]>([]);
   const [participantsCount, setParticipantsCount] = useState<
     Record<number, number>
   >({});
@@ -12,12 +12,12 @@ function EventParticipationCarousel() {
   const { auth } = useAuth();
 
   useEffect(() => {
-    const fetchParticipations = async () => {
+    const fetchEventsFavourited = async () => {
       if (!auth) return;
 
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/participate`,
+          `${import.meta.env.VITE_API_URL}/api/favourite_event`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -27,15 +27,17 @@ function EventParticipationCarousel() {
         );
 
         if (!response.ok) {
-          throw new Error("Erreur lors du chargement des participations");
+          throw new Error(
+            "Erreur lors du chargement des évènements en favoris",
+          );
         }
 
-        const data = await response.json();
-        setParticipations(data);
+        const events = await response.json();
+        setEvents(events);
 
         const counts: Record<number, number> = {};
         await Promise.all(
-          data.map(async (event: EventType) => {
+          events.map(async (event: EventType) => {
             try {
               const res = await fetch(
                 `${import.meta.env.VITE_API_URL}/api/${event.id}/participants/count`,
@@ -57,7 +59,7 @@ function EventParticipationCarousel() {
       }
     };
 
-    fetchParticipations();
+    fetchEventsFavourited();
   }, [auth]);
 
   const scrollByAmount = (direction: "left" | "right") => {
@@ -70,13 +72,13 @@ function EventParticipationCarousel() {
     }
   };
 
-  if (participations.length === 0) {
-    return <p>Vous ne participez à aucun événement.</p>;
+  if (events.length === 0) {
+    return <h3>Vous n'avez pas encore d'évènement dans vos favoris</h3>;
   }
 
   return (
     <div className="carousel-container">
-      <h2 className="carousel-title">Mes participations</h2>
+      <h2 className="carousel-title">Mes évènements favoris</h2>
 
       <button
         type="button"
@@ -88,7 +90,7 @@ function EventParticipationCarousel() {
 
       <div className="carousel-wrapper">
         <div className="groups-carousel" ref={carouselRef}>
-          {participations.map((event) => (
+          {events.map((event) => (
             <div key={event.id} className="carousel-card">
               <EventCard
                 event={event}
@@ -110,4 +112,4 @@ function EventParticipationCarousel() {
   );
 }
 
-export default EventParticipationCarousel;
+export default EventsFavourited;

@@ -70,8 +70,8 @@ function EventParticipationCarousel() {
     }
   };
 
-  if (participations.length === 0) {
-    return <p>Vous ne participez à aucun événement.</p>;
+  if (!Array.isArray(participations) || participations.length === 0) {
+    return <h3>Vous ne participez à aucun événement</h3>;
   }
 
   return (

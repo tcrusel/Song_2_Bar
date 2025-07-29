@@ -51,7 +51,10 @@ function MusicGroupsFavourited() {
     }
   };
 
-  if (musicGroupsFavorited.length === 0) {
+  if (
+    !Array.isArray(musicGroupsFavorited) ||
+    musicGroupsFavorited.length === 0
+  ) {
     return (
       <h3>Vous n'avez pas encore de groupe de musique dans vos favoris</h3>
     );

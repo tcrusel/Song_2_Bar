@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import BarCard from "../BarCard/BarCard";
 import type { Bar } from "../../types/bar";
+import BarCard from "../BarCard/BarCard";
 
 function BarsFavourited() {
   const [barsFavourited, setBarsFavourited] = useState<Bar[]>([]);

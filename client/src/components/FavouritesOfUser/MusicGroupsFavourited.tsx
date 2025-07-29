@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import GroupCard from "../GroupCard/GroupCard";
 import type { MusicGroupInterface } from "../../types/musicGroup";
+import GroupCard from "../GroupCard/GroupCard";
 
 function MusicGroupsFavourited() {
   const [musicGroupsFavorited, setMusicGroupsFavourited] = useState<

@@ -72,7 +72,7 @@ function EventsFavourited() {
     }
   };
 
-  if (events.length === 0) {
+  if (!Array.isArray(events) || events.length === 0) {
     return <h3>Vous n'avez pas encore d'évènement dans vos favoris</h3>;
   }
 

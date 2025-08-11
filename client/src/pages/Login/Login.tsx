@@ -67,7 +67,7 @@ export default function Login() {
         const user = await response.json();
         setAuth(user);
 
-        navigate("/");
+        navigate(-1);
       } else {
         console.info(response);
         toast(

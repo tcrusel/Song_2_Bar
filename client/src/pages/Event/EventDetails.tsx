@@ -123,6 +123,14 @@ function EventDetails() {
     return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
   };
 
+  const formatDate = (isoDate: number) => {
+    const date = new Date(isoDate);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = String(date.getFullYear()).slice(-2);
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       <section>
@@ -168,7 +176,8 @@ function EventDetails() {
               </Link>
             </div>
             <div className="hour-event">
-              🕐 {formatTime(event.start_at)} à {formatTime(event.end_at)}
+              🕐 {formatTime(event.start_at)} à {formatTime(event.end_at)} le{" "}
+              {""} {formatDate(event.date)}
             </div>
             <div className="participate-number">
               <p>

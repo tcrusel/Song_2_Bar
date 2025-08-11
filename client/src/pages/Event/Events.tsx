@@ -18,7 +18,6 @@ const formatDate = (dateInput: Date | string) => {
 function Events() {
   const location = useLocation();
   const selectedDate = location.state?.selectedDate || null;
-
   const [allEvents, setAllEvents] = useState<EventType[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<EventType[]>([]);
   const [error, setError] = useState(false);
@@ -147,7 +146,9 @@ function Events() {
 
         <HorizontalCalendar
           selectedDate={date}
-          onSelectDate={(newDate) => setDate(newDate)}
+          onSelectDate={(newDate) => {
+            setDate(newDate);
+          }}
           onToggleCalendar={() => setShowCalendar((prev) => !prev)}
         />
         <div className="up-datepicker">
@@ -212,43 +213,45 @@ function Events() {
                   />
                 ))}
               </div>
-              <div className="pagination-controls">
-                <button
-                  className="pagination-buttons"
-                  type="button"
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.max(prev - 1, 1))
-                  }
-                  disabled={currentPage === 1}
-                >
-                  <img
-                    src="/icon/fleche-gauche.png"
-                    alt="Page précédente"
-                    className="fleche-icon"
-                    width="10"
-                  />
-                </button>
+              {totalPages > 1 && (
+                <div className="pagination-controls">
+                  <button
+                    className="pagination-buttons"
+                    type="button"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(prev - 1, 1))
+                    }
+                    disabled={currentPage === 1}
+                  >
+                    <img
+                      src="/icon/fleche-gauche.png"
+                      alt="Page précédente"
+                      className="fleche-icon"
+                      width="10"
+                    />
+                  </button>
 
-                <span>
-                  {currentPage} ... {totalPages}
-                </span>
+                  <span>
+                    {currentPage} ... {totalPages}
+                  </span>
 
-                <button
-                  className="pagination-buttons"
-                  type="button"
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                  }
-                  disabled={currentPage === totalPages}
-                >
-                  <img
-                    src="/icon/fleche-droite.png"
-                    alt="page suivante"
-                    className="fleche-icon"
-                    width="10"
-                  />
-                </button>
-              </div>
+                  <button
+                    className="pagination-buttons"
+                    type="button"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                    }
+                    disabled={currentPage === totalPages}
+                  >
+                    <img
+                      src="/icon/fleche-droite.png"
+                      alt="page suivante"
+                      className="fleche-icon"
+                      width="10"
+                    />
+                  </button>
+                </div>
+              )}
             </article>
           </>
         )}

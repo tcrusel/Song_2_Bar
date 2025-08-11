@@ -312,7 +312,7 @@ function BarPage() {
       </section>
 
       <section className="carousel-section">
-        <h2>Évènements dans lesquels vous pourrez retrouver ce bar</h2>
+        <h2>Évènements organisés dans ce bar</h2>
         <article className="carousel">
           {events && events.length > 0 ? (
             <EmblaCarousel

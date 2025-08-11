@@ -28,7 +28,7 @@ class EventSeeder extends AbstractSeeder {
 
     const musicGroupToBars = new Map<number, Set<number>>();
     const barGroupCombos = new Set<string>();
-    const totalEvents = 120;
+    const totalEvents = 180;
 
     let count = 0;
     let attempts = 0;

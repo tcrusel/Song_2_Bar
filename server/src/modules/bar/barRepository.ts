@@ -41,7 +41,6 @@ class BarRepository {
       }
     }
 
-    // Get upcoming events for this bar, sorted by date
     const [eventRows] = await databaseClient.query<Rows>(
       `SELECT 
         event.id,

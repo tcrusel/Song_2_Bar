@@ -14,42 +14,40 @@
   display: block;
 }
 
-.user-action {
+.user-actions {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6rem;
   padding: 3rem;
-  margin-left: 30px;
   color: white;
 }
 
-.user-action div {
+.user-actions .action {
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.user-action p {
+.user-actions .action p {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  font-size: 1.6rem;
 }
 
-.user-action img {
-  width: 40px;
-  height: auto;
+.user-actions .action img {
+  width: auto;
+  height: 2.5rem;
   margin: 10px;
 }
 
-@media screen and (width <= 1024px) {
-  .user-action {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6rem;
-    padding: 3rem;
-    padding-right: 7rem;
+@media screen and (width <= 700px) {
+  .user-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0.5rem;
     color: white;
     font-size: 1.5rem;
-    place-items: center;
-    align-items: center;
+    align-items: flex-start;
   }
 }

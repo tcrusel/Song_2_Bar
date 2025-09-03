@@ -7,7 +7,7 @@ footer {
 }
 
 .networks {
-  grid-column: 1/2;
+  grid-column: 1 / 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +77,7 @@ footer section p {
 }
 
 .footer-middle-container {
-  grid-column: 2/3;
+  grid-column: 2 / 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,7 +86,7 @@ footer section p {
 }
 
 .info-song2bar {
-  grid-column: 3/4;
+  grid-column: 3 / 4;
   color: white;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,6 @@ footer section p {
   footer {
     display: flex;
     flex-direction: column;
-    height: 40rem;
   }
 
   .footer-images {
@@ -149,7 +148,7 @@ footer section p {
     align-items: center;
   }
 
-  .info-song2bar p {
-    font-size: 1rem;
+  .info-song2bar {
+    display: none;
   }
 }

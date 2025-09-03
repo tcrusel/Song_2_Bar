@@ -19,7 +19,7 @@ function Header() {
               src="/images/logo-site.png"
               alt="logo du site"
               width="100"
-              height="100"
+              height="auto"
             />
           </button>
         </article>

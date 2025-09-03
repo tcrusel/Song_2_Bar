@@ -28,6 +28,7 @@ section {
 .underline {
   text-decoration: underline;
 }
+
 .bold {
   font-weight: bold;
 }
@@ -41,7 +42,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.7 rem;
+  font-size: 1.7rem;
 }
 
 h4 {
@@ -181,7 +182,7 @@ input {
   }
 
   h3 {
-    font-size: 1 rem;
+    font-size: 1rem;
   }
 
   h4 {
@@ -192,14 +193,23 @@ input {
     font-size: 0.6rem;
   }
 
+  section {
+    padding: 1rem 1.5rem;
+  }
+
   .return-button-container {
     padding: 0.8rem;
+    padding-bottom: 2rem;
   }
 
   .return-button {
     padding: 0.6rem 1rem;
     font-size: 0.85rem;
     border-radius: 20px;
+  }
+
+  .button-title-container {
+    padding: 0.5rem 0;
   }
 
   .button-title {

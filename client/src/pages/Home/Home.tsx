@@ -26,54 +26,54 @@ function Home() {
         <section className="guide">
           <CalendarPopup value={selectedDate} onChangeDate={DateChange} />
 
-          <article className="user-action">
-            <div>
-              <p>1. </p>
+          <article className="user-actions">
+            <div className="action">
+              <h3>1. </h3>
               <img
                 src="/images/home_images/mini-icone-calendrier.png"
                 alt="representation mini-icone-coeur"
               />
-              <p>Choisissez une date</p>
+              <h3>Choisissez une date</h3>
             </div>
-            <div>
-              <p>2. </p>
+            <div className="action">
+              <h3>2. </h3>
               <img
                 src="/images/home_images/mini-icone-epingle.png"
                 alt="mini-icone-coeur"
               />
-              <p>Cliquez pour plus d'infos</p>
+              <h3>Cliquez pour plus d'infos</h3>
             </div>
-            <div>
-              <p>3. </p>
+            <div className="action">
+              <h3>3. </h3>
               <img
                 src="/images/home_images/mini-icone-coeur.png"
                 alt="mini-icone-coeur"
               />
-              <p>Créez votre sélection</p>
+              <h3>Créez votre sélection</h3>
             </div>
-            <div>
-              <p>4. </p>
+            <div className="action">
+              <h3>4. </h3>
               <img
                 src="/images/home_images/mini-icone-guitare.png"
                 alt="mini-icone-guitare"
               />
-              <p>Explorez les concerts du jour</p>
+              <h3>Explorez les concerts du jour</h3>
             </div>
-            <div>
-              <p>5. </p>
+            <div className="action">
+              <h3>5. </h3>
               <img
                 src="/images/home_images/mini-icone-loupe.png"
                 alt="mini-icone-loupe"
               />
-              <p>Utilisez les filtres</p>
+              <h3>Utilisez les filtres</h3>
             </div>
-            <div>
-              <p>6. </p>
+            <div className="action">
+              <h3>6. </h3>
               <img
                 src="/images/home_images/mini-icone-carte.png"
                 alt="mini-icone-carte"
               />
-              <p>Trouvez votre chemin</p>
+              <h3>Trouvez votre chemin</h3>
             </div>
           </article>
         </section>

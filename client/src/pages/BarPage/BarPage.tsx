@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { barService } from "../../services/barService";
 import type { Bar } from "../../types/bar";
 import "../../assets/_variables.css";
 import "./BarPage.css";
 import { ToastContainer, toast } from "react-toastify";
+import EventCard from "../../components/EventCard/EventCard";
 import LikeButton from "../../components/LikeButton/LikeButton";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useAuth } from "../../contexts/AuthContext";
-import EventCard from "../../components/EventCard/EventCard";
-import EmblaCarousel from "../../components/EmblaCarousel/EmblaCarousel";
 import type { EventType } from "../../types/Event";
 
 function BarPage() {
+  const carouselRef = useRef<HTMLDivElement>(null);
   const { id } = useParams<{ id: string }>();
   const barId = Number(id);
   const [bar, setBar] = useState<Bar | null>(null);
@@ -226,6 +226,16 @@ function BarPage() {
     }
   };
 
+  const scrollByAmount = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.offsetWidth * 0.5;
+      carouselRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
       <section>
@@ -315,18 +325,34 @@ function BarPage() {
         <h2>Évènements organisés dans ce bar</h2>
         <article className="carousel">
           {events && events.length > 0 ? (
-            <EmblaCarousel
-              slides={events.map((event) => ({
-                id: event.id,
-                content: (
-                  <EventCard
-                    event={event}
-                    participantsCount={participantsCount[event.id] ?? 0}
-                  />
-                ),
-              }))}
-              options={{ loop: true, align: "start" }}
-            />
+            <article className="carousel-container">
+              <button
+                type="button"
+                className="carousel-arrow left"
+                onClick={() => scrollByAmount("left")}
+              >
+                ‹
+              </button>
+              <div className="carousel-wrapper">
+                <div className="groups-carousel" ref={carouselRef}>
+                  {events.map((event) => (
+                    <div key={event.id} className="carousel-card">
+                      <EventCard
+                        event={event}
+                        participantsCount={participantsCount[event.id] ?? 0}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <button
+                type="button"
+                className="carousel-arrow right"
+                onClick={() => scrollByAmount("right")}
+              >
+                ›
+              </button>
+            </article>
           ) : (
             <div className="carousel-empty">
               <h3>Ce bar n'a pas encore d'évènement prévu</h3>

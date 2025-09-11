@@ -32,7 +32,13 @@ function Events() {
   >({});
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  let itemsPerPage: number;
+
+  if (typeof window !== "undefined" && window.innerWidth < 768) {
+    itemsPerPage = 6;
+  } else {
+    itemsPerPage = 12;
+  }
 
   useEffect(() => {
     async function fetchEvent() {
@@ -51,6 +57,7 @@ function Events() {
     }
     fetchEvent();
   }, []);
+
   useEffect(() => {
     const fetchParticipantsCounts = async () => {
       const counts: Record<number, number> = {};
@@ -133,17 +140,7 @@ function Events() {
 
   return (
     <>
-      <section className="filters-searchbar">
-        <input
-          className="search-bar"
-          type="text"
-          value={search}
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
-          placeholder="Trouver votre événement, votre bar ou votre groupe de musique"
-        />
-
+      <section className="events-page">
         <HorizontalCalendar
           selectedDate={date}
           onSelectDate={(newDate) => {
@@ -165,96 +162,104 @@ function Events() {
             />
           )}
         </div>
-      </section>
-      <section className="event-left-bar">
-        <article className="left-bar">
-          <div className="menu-button">
-            <h1>Filtre par style</h1>
-          </div>
+        <input
+          className="search-bar"
+          type="text"
+          value={search}
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }}
+          placeholder="Trouver votre événement, votre bar ou votre groupe de musique"
+        />
 
-          <div className="filters-checkbox">
-            {musicStyles.map((style) => (
-              <label key={style}>
-                <div className="marge-filters-checkbox">
-                  <input
-                    type="checkbox"
-                    value={style}
-                    checked={selectedStyles.includes(style)}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      if (selectedStyles.includes(value)) {
-                        setSelectedStyles(
-                          selectedStyles.filter((s) => s !== value),
-                        );
-                      } else {
-                        setSelectedStyles([...selectedStyles, value]);
+        <article className="event-left-bar">
+          <div className="checkbox-styles-container">
+            <h3 className="style-filters-title">Filtre par style</h3>
+
+            <div className="filters-checkbox">
+              {musicStyles.map((style) => (
+                <label key={style}>
+                  <div className="marge-filters-checkbox">
+                    <input
+                      type="checkbox"
+                      value={style}
+                      checked={selectedStyles.includes(style)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (selectedStyles.includes(value)) {
+                          setSelectedStyles(
+                            selectedStyles.filter((s) => s !== value),
+                          );
+                        } else {
+                          setSelectedStyles([...selectedStyles, value]);
+                        }
+                      }}
+                    />
+                  </div>
+                  <span>{style}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          {filteredAndSearchedEvents.length === 0 ? (
+            <div className="events-container">
+              <h3>Aucun événement trouvé pour cette date</h3>
+            </div>
+          ) : (
+            <>
+              <div className="events-container">
+                <div className="events-list">
+                  {paginatedEvents.map((event) => (
+                    <EventCard
+                      key={event.id}
+                      event={event}
+                      participantsCount={participantsCount[event.id] ?? 0}
+                    />
+                  ))}
+                </div>
+                {totalPages > 1 && (
+                  <div className="pagination-controls">
+                    <button
+                      className="pagination-buttons"
+                      type="button"
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.max(prev - 1, 1))
                       }
-                    }}
-                  />
-                </div>
-                <span>{style}</span>
-              </label>
-            ))}
-          </div>
-        </article>
-        {filteredAndSearchedEvents.length === 0 ? (
-          <article className="events-container">
-            <h3>Aucun événement trouvé pour cette date</h3>
-          </article>
-        ) : (
-          <>
-            <article className="events-container">
-              <div className="events-list">
-                {paginatedEvents.map((event) => (
-                  <EventCard
-                    key={event.id}
-                    event={event}
-                    participantsCount={participantsCount[event.id] ?? 0}
-                  />
-                ))}
+                      disabled={currentPage === 1}
+                    >
+                      <img
+                        src="/icon/fleche-gauche.png"
+                        alt="Page précédente"
+                        className="fleche-icon"
+                        width="10"
+                      />
+                    </button>
+
+                    <span>
+                      {currentPage} ... {totalPages}
+                    </span>
+
+                    <button
+                      className="pagination-buttons"
+                      type="button"
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                      }
+                      disabled={currentPage === totalPages}
+                    >
+                      <img
+                        src="/icon/fleche-droite.png"
+                        alt="page suivante"
+                        className="fleche-icon"
+                        width="10"
+                      />
+                    </button>
+                  </div>
+                )}
               </div>
-              {totalPages > 1 && (
-                <div className="pagination-controls">
-                  <button
-                    className="pagination-buttons"
-                    type="button"
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.max(prev - 1, 1))
-                    }
-                    disabled={currentPage === 1}
-                  >
-                    <img
-                      src="/icon/fleche-gauche.png"
-                      alt="Page précédente"
-                      className="fleche-icon"
-                      width="10"
-                    />
-                  </button>
-
-                  <span>
-                    {currentPage} ... {totalPages}
-                  </span>
-
-                  <button
-                    className="pagination-buttons"
-                    type="button"
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                    }
-                    disabled={currentPage === totalPages}
-                  >
-                    <img
-                      src="/icon/fleche-droite.png"
-                      alt="page suivante"
-                      className="fleche-icon"
-                      width="10"
-                    />
-                  </button>
-                </div>
-              )}
-            </article>
-          </>
-        )}
+            </>
+          )}
+        </article>
       </section>
     </>
   );

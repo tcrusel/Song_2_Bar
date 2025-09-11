@@ -63,7 +63,7 @@
   background: none;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 790px) {
   .calendar-container {
     flex-direction: column;
     margin: 1rem 0rem;

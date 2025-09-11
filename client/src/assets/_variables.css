@@ -215,14 +215,22 @@ input {
   .button-title {
     width: auto;
     height: auto;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     border: none;
     border-radius: 50px;
     background-color: #3f515a;
     color: var(--button-text-color);
-    padding: 1rem 2rem;
+    padding: 1rem 1.2rem;
     display: flex;
     align-items: center;
+  }
+
+  .card {
+    transform: scale(0.75);
+  }
+
+  .card:hover {
+    transform: scale(0.9);
   }
 }

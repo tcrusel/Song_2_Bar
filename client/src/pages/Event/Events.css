@@ -1,16 +1,7 @@
-.events {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.filters {
-  white-space: nowrap;
-}
-
-.filters-searchbar {
+.events-page {
   display: flex;
   justify-content: center;
-  flex-direction: column-reverse;
+  flex-direction: column;
   position: relative;
 }
 
@@ -26,22 +17,26 @@
   padding: 20px;
 }
 
-.left-bar {
-  display: flex;
-  justify-content: end;
-  flex-direction: column;
-  align-items: flex-end;
+.up-datepicker {
+  position: absolute;
+  right: 49.5%;
+  top: 17vh;
+  z-index: 10;
+  transform: translate(170%, 0%);
 }
 
-.menu-button h1 {
+.checkbox-styles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.style-filters-title {
   background-color: #aa682e;
   width: 21vw;
-  height: 3rem;
   text-align: center;
   border-radius: 25px;
-  font-size: 1.5rem;
-  padding-top: 9px;
-  margin-bottom: 5px;
+  padding: 0.4rem 0rem;
 }
 
 .filters-checkbox {
@@ -51,7 +46,7 @@
   background-color: white;
   padding: 1rem;
   border-radius: 8px;
-  border: 2rem solid #e4c2a5;
+  border: 1.5rem solid #e4c2a5;
   gap: 0.5rem;
 }
 
@@ -63,13 +58,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.up-datepicker {
-  position: absolute;
-  right: 15%;
-  top: 50%;
-  z-index: 10;
 }
 
 .events-container {
@@ -109,28 +97,59 @@
   background-color: transparent;
 }
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 700px) {
+  .search-bar {
+    margin: 1rem 0.5rem;
+    font-size: 0.7rem;
+    width: auto;
+    max-width: 600px;
+    height: 3.5rem;
+    padding: 20px;
+  }
+
+  .up-datepicker {
+    right: 50%;
+    top: 5vh;
+    transform: translate(50%, 50%);
+  }
+
   .event-left-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+    padding-top: 20px;
   }
-  .up-datepicker {
-    position: absolute;
-    right: 38vw;
-    z-index: 10;
+
+  .checkbox-styles-container {
+    align-items: center;
+    order: 1;
+  }
+
+  .style-filters-title {
+    background-color: #aa682e;
+    text-align: center;
+    border-radius: 25px;
+    width: 100%;
+    padding: 1rem;
   }
 
   .filters-checkbox {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    width: 90%;
+    gap: 1.2rem;
+    width: 100%;
     margin: auto;
+    border: 1rem solid #e4c2a5;
   }
-  .left-bar {
-    align-items: center;
+
+  .events-container {
+    width: 95vw;
+  }
+
+  .events-list {
+    padding: 0;
+    gap: 0;
   }
 }

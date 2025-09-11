@@ -77,38 +77,39 @@ function EventsFavourited() {
   }
 
   return (
-    <div className="carousel-container">
+    <section className="user-favorites">
       <h2 className="carousel-title">Mes évènements favoris</h2>
+      <article className="carousel-container">
+        <button
+          type="button"
+          className="carousel-arrow left"
+          onClick={() => scrollByAmount("left")}
+        >
+          ‹
+        </button>
 
-      <button
-        type="button"
-        className="carousel-arrow left"
-        onClick={() => scrollByAmount("left")}
-      >
-        ‹
-      </button>
-
-      <div className="carousel-wrapper">
-        <div className="groups-carousel" ref={carouselRef}>
-          {events.map((event) => (
-            <div key={event.id} className="carousel-card">
-              <EventCard
-                event={event}
-                participantsCount={participantsCount[event.id] ?? 0}
-              />
-            </div>
-          ))}
+        <div className="carousel-wrapper">
+          <div className="groups-carousel" ref={carouselRef}>
+            {events.map((event) => (
+              <div key={event.id} className="carousel-card">
+                <EventCard
+                  event={event}
+                  participantsCount={participantsCount[event.id] ?? 0}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <button
-        type="button"
-        className="carousel-arrow right"
-        onClick={() => scrollByAmount("right")}
-      >
-        ›
-      </button>
-    </div>
+        <button
+          type="button"
+          className="carousel-arrow right"
+          onClick={() => scrollByAmount("right")}
+        >
+          ›
+        </button>
+      </article>
+    </section>
   );
 }
 

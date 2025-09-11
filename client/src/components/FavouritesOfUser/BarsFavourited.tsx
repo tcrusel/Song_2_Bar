@@ -52,35 +52,36 @@ function BarsFavourited() {
   }
 
   return (
-    <div className="carousel-container">
+    <section className="user-favorites">
       <h2 className="carousel-title">Mes bars favoris</h2>
+      <article className="carousel-container">
+        <button
+          type="button"
+          className="carousel-arrow left"
+          onClick={() => scrollByAmount("left")}
+        >
+          ‹
+        </button>
 
-      <button
-        type="button"
-        className="carousel-arrow left"
-        onClick={() => scrollByAmount("left")}
-      >
-        ‹
-      </button>
-
-      <div className="carousel-wrapper">
-        <div className="groups-carousel" ref={carouselRef}>
-          {barsFavourited.map((bar) => (
-            <div key={bar.id} className="carousel-card">
-              <BarCard bar={bar} />
-            </div>
-          ))}
+        <div className="carousel-wrapper">
+          <div className="groups-carousel" ref={carouselRef}>
+            {barsFavourited.map((bar) => (
+              <div key={bar.id} className="carousel-card">
+                <BarCard bar={bar} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <button
-        type="button"
-        className="carousel-arrow right"
-        onClick={() => scrollByAmount("right")}
-      >
-        ›
-      </button>
-    </div>
+        <button
+          type="button"
+          className="carousel-arrow right"
+          onClick={() => scrollByAmount("right")}
+        >
+          ›
+        </button>
+      </article>
+    </section>
   );
 }
 

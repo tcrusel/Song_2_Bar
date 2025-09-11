@@ -1,17 +1,17 @@
 import "./MusicGroup.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify/unstyled";
 import styleIcon from "/images/group_images/music-style-icon.svg";
 import BarCard from "../../components/BarCard/BarCard";
-import type { Bar } from "../../types/bar";
 import LikeButton from "../../components/LikeButton/LikeButton";
 import { useAuth } from "../../contexts/AuthContext";
+import type { Bar } from "../../types/bar";
 import type { MusicGroupInterface } from "../../types/musicGroup";
-import EmblaCarousel from "../../components/EmblaCarousel/EmblaCarousel";
 
 function MusicGroup() {
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [musicGroup, setMusicGroup] = useState<MusicGroupInterface | null>(
     null,
   );
@@ -131,6 +131,16 @@ function MusicGroup() {
     }
   };
 
+  const scrollByAmount = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.offsetWidth * 0.5;
+      carouselRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
       <section>
@@ -176,17 +186,36 @@ function MusicGroup() {
           </aside>
         </article>
       </section>
+
       <section className="carousel-section">
         <h2>Bars dans lesquels vous pourrez retrouver ce groupe de musique</h2>
         <article className="carousel">
           {bars && bars.length > 0 ? (
-            <EmblaCarousel
-              slides={bars.map((bar) => ({
-                id: bar.id,
-                content: <BarCard bar={bar} />,
-              }))}
-              options={{ loop: true, align: "start" }}
-            />
+            <article className="carousel-container">
+              <button
+                type="button"
+                className="carousel-arrow left"
+                onClick={() => scrollByAmount("left")}
+              >
+                ‹
+              </button>
+              <div className="carousel-wrapper">
+                <div className="groups-carousel" ref={carouselRef}>
+                  {bars.map((bar) => (
+                    <div key={bar.id} className="carousel-card">
+                      <BarCard bar={bar} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <button
+                type="button"
+                className="carousel-arrow right"
+                onClick={() => scrollByAmount("right")}
+              >
+                ›
+              </button>
+            </article>
           ) : (
             <div className="carousel-empty">
               <h3>

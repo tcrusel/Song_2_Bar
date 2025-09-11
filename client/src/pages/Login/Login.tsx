@@ -1,7 +1,7 @@
 import { type FormEventHandler, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router";
 import "./Login.css";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import LogoSite from "/images/logo-site.png";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -92,22 +92,18 @@ export default function Login() {
             <img src={LogoSite} alt="logo du site" width="80" height="auto" />
           </button>
         </article>
-        <h2>Connexion utilisateur</h2>
+        <h3>Connexion utilisateur</h3>
       </header>
       <main className="login-page">
         <section id="login-section">
           <article className="login">
             <form onSubmit={loginUser} id="login-form">
               <aside className="input-login">
-                <label className="bold" htmlFor="email">
-                  Email
-                </label>
+                <label htmlFor="email">Email</label>
                 <input ref={emailRef} type="email" id="email" />
               </aside>
               <aside className="input-login">
-                <label className="bold" htmlFor="password">
-                  Mot de passe
-                </label>
+                <label htmlFor="password">Mot de passe</label>
                 <input type="password" ref={passwordRef} id="password" />
               </aside>
               <button className="button-login" type="submit">

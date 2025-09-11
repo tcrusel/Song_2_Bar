@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import "./Register.css";
 import type { ChangeEventHandler, FormEventHandler } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import LogoSite2 from "/images/logo-site2.png";
 
 function Register() {
@@ -88,7 +88,7 @@ function Register() {
               height="100"
             />
           </Link>
-          <h1>S'inscrire</h1>
+          <h1>Inscription</h1>
           <form className="register-form" onSubmit={noRefresh}>
             <input
               className={`input ${lastname.length >= 2 && /^[a-zA-ZÀ-ÿ\s\-']+$/.test(lastname) ? "green" : ""}`}

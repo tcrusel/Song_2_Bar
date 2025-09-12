@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 .user-profile-header {
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 2rem 1rem 4rem 1rem;
 }
 
 .user-info {
@@ -148,15 +148,17 @@
 
 .groups-carousel {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-evenly;
+  width: 100%;
   gap: 1.6rem;
+  padding: 2rem 2rem 3rem 2rem;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 2rem 2rem 3rem 2rem;
-  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  width: 100%;
-  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+  scroll-snap-align: start;
   scrollbar-width: none;
 }
 
@@ -231,78 +233,11 @@
 .event-section {
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
-@media (max-width: 768px) {
-  .user-profile-content {
-    padding: 1rem;
-  }
-
-  .user-profile-header {
-    padding: 1.5rem 1rem 0.5rem 1rem;
-  }
-
-  .user-info h1 {
-    font-size: 1.5rem;
-  }
-
-  .user-icon {
-    width: 70px;
-    height: 70px;
-  }
-
-  .nav-tabs-container {
-    gap: 0.8rem;
-    padding: 0 1rem;
-  }
-
-  .nav-tab {
-    min-width: 70px;
-    padding: 0.6rem 0.8rem;
-    font-size: 0.9rem;
-    border-radius: 20px;
-  }
-
-  .tab-content {
-    padding: 1.5rem;
-  }
-
-  .error-container {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .groups-carousel {
-    gap: 1rem;
-    padding: 0.5rem 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .user-profile-header {
-    padding: 1rem 0.5rem 0.5rem 0.5rem;
-  }
-
-  .user-info h1 {
-    font-size: 1.25rem;
-  }
-
-  .user-icon {
-    width: 60px;
-    height: 60px;
-  }
-
-  .nav-tabs-container {
-    gap: 0.5rem;
-    padding: 0 0.5rem;
-  }
-
-  .nav-tab {
-    min-width: 60px;
-    padding: 0.5rem 0.6rem;
-    font-size: 0.8rem;
-    border-radius: 15px;
-  }
+.event-section h3 {
+  text-align: center;
 }
 
 .loading-overlay {
@@ -328,4 +263,53 @@
   font-size: 1.1rem;
   font-weight: 500;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .user-profile-content {
+    padding: 1rem;
+  }
+
+  .user-profile-header {
+    padding: 0rem 0.5rem 1.5rem 0.5rem;
+  }
+
+  .user-info h1 {
+    font-size: 1.25rem;
+  }
+
+  .user-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .nav-tabs-container {
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .nav-tab {
+    min-width: 60px;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 15px;
+  }
+
+  .tab-content {
+    padding: 1.5rem;
+  }
+
+  .error-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .groups-carousel {
+    gap: 1rem;
+    padding: 0.5rem 0.5rem;
+  }
+
+  .carousel-title {
+    margin-bottom: 0;
+  }
 }

@@ -30,17 +30,6 @@ function CalendarPopup({ value, onChangeDate }: CalendarPopupProps) {
             calendarStartDay={1}
             locale="fr"
           />
-          <div className="calendar-actions">
-            <button
-              type="button"
-              className="btn-validate"
-              onClick={() => {
-                setIsOpen(false);
-              }}
-            >
-              VALIDER
-            </button>
-          </div>
         </div>
       )}
     </div>

@@ -305,15 +305,25 @@ function BarPage() {
 
           <div className="bar-details-content">
             <div className="bar-meta">
-              <div className="location">
-                📍 {bar.address}, {bar.postcode} {bar.city}
+              <div>
+                <h3>📍</h3>
+                <p>
+                  {bar.address}, {bar.postcode} {bar.city}
+                </p>
               </div>
-              <div className="music-style">🎵 {bar.music_style}</div>
-              <div className="hours">🕐 {getTodayHours()}</div>
+              <div>
+                <h3>🎵</h3>
+                <p>{bar.music_style}</p>
+              </div>
+              <div>
+                <h3>🕐</h3>
+                <p>{getTodayHours()}</p>
+              </div>
               {bar.hours?.happy_hours &&
                 formatTimeRange(bar.hours.happy_hours) && (
-                  <div className="happy-hours">
-                    🍻 {formatTimeRange(bar.hours.happy_hours)}
+                  <div>
+                    <h3>🍻</h3>
+                    <p>{formatTimeRange(bar.hours.happy_hours)}</p>
                   </div>
                 )}
             </div>

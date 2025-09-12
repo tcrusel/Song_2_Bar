@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   gap: 20px;
   padding: 1rem;
   background-color: var(--background-primary-color);
@@ -87,12 +87,26 @@
 
 @media screen and (width <= 1024px) {
   .header {
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    gap: 0px;
   }
-  .logo-song2bar {
-    order: 1;
-    margin-bottom: 1rem;
+
+  .header .logo-site #logo-song2bar img {
+    width: 50px;
+  }
+
+  .button-profile {
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .button-events {
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .header .navigation-container h3 {
+    font-size: 0.7rem;
   }
 
   .connexion-wrapper {
@@ -100,11 +114,7 @@
     margin-left: 1rem;
   }
 
-  .logo-connexion-button {
-    background-color: #23241f;
-    margin-right: 1rem;
-    margin-bottom: 2rem;
-    border: none;
-    cursor: pointer;
+  .logo-connexion {
+    width: 30px;
   }
 }

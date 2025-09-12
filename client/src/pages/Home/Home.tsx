@@ -28,52 +28,52 @@ function Home() {
 
           <article className="user-actions">
             <div className="action">
-              <h3>1. </h3>
+              <h4>1. </h4>
               <img
                 src="/images/home_images/mini-icone-calendrier.png"
                 alt="representation mini-icone-coeur"
               />
-              <h3>Choisissez une date</h3>
+              <h4>Choisissez une date</h4>
             </div>
             <div className="action">
-              <h3>2. </h3>
+              <h4>2. </h4>
               <img
                 src="/images/home_images/mini-icone-epingle.png"
                 alt="mini-icone-coeur"
               />
-              <h3>Cliquez pour plus d'infos</h3>
+              <h4>Cliquez pour plus d'infos</h4>
             </div>
             <div className="action">
-              <h3>3. </h3>
+              <h4>3. </h4>
               <img
                 src="/images/home_images/mini-icone-coeur.png"
                 alt="mini-icone-coeur"
               />
-              <h3>Créez votre sélection</h3>
+              <h4>Créez votre sélection</h4>
             </div>
             <div className="action">
-              <h3>4. </h3>
+              <h4>4. </h4>
               <img
                 src="/images/home_images/mini-icone-guitare.png"
                 alt="mini-icone-guitare"
               />
-              <h3>Explorez les concerts du jour</h3>
+              <h4>Explorez les concerts du jour</h4>
             </div>
             <div className="action">
-              <h3>5. </h3>
+              <h4>5. </h4>
               <img
                 src="/images/home_images/mini-icone-loupe.png"
                 alt="mini-icone-loupe"
               />
-              <h3>Utilisez les filtres</h3>
+              <h4>Utilisez les filtres</h4>
             </div>
             <div className="action">
-              <h3>6. </h3>
+              <h4>6. </h4>
               <img
                 src="/images/home_images/mini-icone-carte.png"
                 alt="mini-icone-carte"
               />
-              <h3>Trouvez votre chemin</h3>
+              <h4>Trouvez votre chemin</h4>
             </div>
           </article>
         </section>

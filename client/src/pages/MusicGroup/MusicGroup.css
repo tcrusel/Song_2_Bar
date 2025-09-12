@@ -153,4 +153,8 @@
   .carousel-section {
     padding-top: 4rem;
   }
+
+  .carousel-section h2 {
+    font-size: 1.15rem;
+  }
 }

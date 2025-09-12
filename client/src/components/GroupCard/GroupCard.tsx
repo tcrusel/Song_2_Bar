@@ -1,4 +1,3 @@
-import "./GroupCard.css";
 import { useNavigate } from "react-router";
 import type { MusicGroupInterface } from "../../types/musicGroup";
 

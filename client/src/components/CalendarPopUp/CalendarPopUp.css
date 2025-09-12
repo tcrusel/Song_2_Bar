@@ -43,6 +43,6 @@
 @media (max-width: 700px) {
   .date-button {
     font-size: 1rem;
-    padding: 1rem 2.5rem;
+    padding: 0.8rem 2rem;
   }
 }

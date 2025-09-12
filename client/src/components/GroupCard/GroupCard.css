@@ -1,9 +1,0 @@
-.groups-carousel .card {
-  flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-  .groups-carousel .card {
-    flex-shrink: 0;
-  }
-}

@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import Participate from "../../components/Participate/Participate";
 import "../../assets/_variables.css";
 import "leaflet/dist/leaflet.css";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import LikeButton from "../../components/LikeButton/LikeButton";
 import { useAuth } from "../../contexts/AuthContext";
 import type { EventType } from "../../types/Event";
@@ -161,27 +161,38 @@ function EventDetails() {
         </article>
         <article className="event-infos">
           <div className="event-meta">
-            <div className="bar-title">
-              <Link to={`/bars/${event.bar_id}`} className="bar-title bold">
-                🍺 {event.bar_name}
+            <div>
+              <h3>🍺</h3>
+              <Link to={`/bars/${event.bar_id}`} className="bold link">
+                {event.bar_name}
               </Link>
             </div>
-            <div className="location">
-              📍 {event.address}, {event.postcode} {event.city}
-            </div>
-            <div className="music-style">🎵 {event.music_style}</div>
-            <div className="groups-name">
-              <Link to={`/groups/${event.music_group_id}`}>
-                🎤 {event.music_group_name}
-              </Link>
-            </div>
-            <div className="hour-event">
-              🕐 {formatTime(event.start_at)} à {formatTime(event.end_at)} le{" "}
-              {""} {formatDate(event.date)}
-            </div>
-            <div className="participate-number">
+            <div>
+              <h3>📍</h3>
               <p>
-                👥​ ​{" "}
+                {event.address}, {event.postcode} {event.city}
+              </p>
+            </div>
+            <div>
+              <h3>🎵</h3>
+              <p>{event.music_style}</p>
+            </div>
+            <div>
+              <h3>🎤</h3>
+              <Link to={`/groups/${event.music_group_id}`} className="bold">
+                {event.music_group_name}
+              </Link>
+            </div>
+            <div>
+              <h3>🕐</h3>
+              <p>
+                {formatTime(event.start_at)} à {formatTime(event.end_at)} le{" "}
+                {""} {formatDate(event.date)}
+              </p>
+            </div>
+            <div>
+              <h3>👥</h3>
+              <p>
                 {participantsCount === 0
                   ? "Aucun participant à cet évènement"
                   : `${participantsCount} personne${participantsCount > 1 ? "s" : ""} participe${participantsCount > 1 ? "nt" : ""} à cet évènement`}

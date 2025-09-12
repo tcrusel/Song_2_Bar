@@ -82,6 +82,11 @@
   border-left: 4px solid var(--button-primary-color);
 }
 
+.bar-meta > div > p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
 .image-gallery {
   position: relative;
 }
@@ -224,6 +229,10 @@
 
   .bar-meta > div {
     padding: 0.6rem 0.8rem;
+  }
+
+  .bar-meta > div > p {
+    font-size: 0.8rem;
   }
 
   .carousel-controls {

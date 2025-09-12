@@ -62,7 +62,7 @@ function Register() {
 
       if (response.status === 201) {
         navigate("/login", {
-          state: { accountCreated: true },
+          state: { accountCreated: true, from: "/register" },
         });
       } else {
         toast("Création de compte invalide !", {
@@ -144,17 +144,20 @@ function Register() {
           </form>
           <h3>
             As-tu un compte ? &nbsp;
-            <Link
-              className="underline"
-              to={"/login"}
+            <button
+              type="button"
+              className="underline login-button"
               onClick={() => {
+                navigate("/login", {
+                  state: { from: "/register" },
+                });
                 setTimeout(() => {
                   window.scrollTo(0, 0);
                 }, 0);
               }}
             >
               Se connecter
-            </Link>
+            </button>
           </h3>
         </article>
         <ToastContainer theme="colored" position="top-right" limit={2} />

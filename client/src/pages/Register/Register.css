@@ -83,6 +83,11 @@
   padding-top: 50px;
 }
 
+.auth article h3 .login-button {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
 .text-green {
   color: green;
 }

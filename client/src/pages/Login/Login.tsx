@@ -66,8 +66,11 @@ export default function Login() {
       if (response.status === 200) {
         const user = await response.json();
         setAuth(user);
-
-        navigate(-1);
+        if (state?.from === "/register") {
+          navigate("/");
+        } else {
+          navigate(-1);
+        }
       } else {
         console.info(response);
         toast(

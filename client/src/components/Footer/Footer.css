@@ -81,8 +81,11 @@ footer section p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 10px;
+  justify-content: space-between;
+}
+
+.footer-middle-container > p {
+  text-align: center;
 }
 
 .info-song2bar {
@@ -170,7 +173,7 @@ footer section p {
 
   .footer-middle-container img {
     grid-column: 1 / 2;
-    grid-row: 1 / 2;
+    grid-row: 1 / 3;
     height: 80px;
   }
 

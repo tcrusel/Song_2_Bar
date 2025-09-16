@@ -4,7 +4,7 @@ function Footer() {
   return (
     <>
       <footer>
-        <div className="networks">
+        <article className="networks">
           <p className="follow-us">Rejoignez-nous sur les reseaux sociaux :</p>
           <div className="image-social-logo">
             <img
@@ -36,17 +36,18 @@ function Footer() {
           <button type="button" className="button-subscribers">
             S'ABONNER <br /> (Déjà 150 000 abonnés !)
           </button>
-        </div>
-        <div className="footer-middle-container">
+        </article>
+        <article className="footer-middle-container">
           <p className="legal-notices">Mentions légales, crédits et C.G.U.</p>
           <img
             src="/images/home_images/micro.png"
             alt="micro"
             width="auto"
-            height="120"
+            height="100"
           />
-        </div>
-        <div className="info-song2bar">
+          <p>⚠️ Site de démonstration – données fictives</p>
+        </article>
+        <article className="info-song2bar">
           <div className="paragraph-song2bar">
             <p>Song2Bar 2025-</p>
             <p>
@@ -70,7 +71,7 @@ function Footer() {
               <p>Contact</p>
             </div>
           </div>
-        </div>
+        </article>
       </footer>
     </>
   );

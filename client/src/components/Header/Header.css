@@ -1,0 +1,120 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 20px;
+  padding: 1rem;
+  background-color: var(--background-primary-color);
+}
+
+.header .logo-site {
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: flex-start;
+  transition: 500ms ease;
+}
+
+.header .logo-site #logo-song2bar {
+  background-color: transparent;
+  transition: 500ms ease;
+  cursor: pointer;
+}
+
+.header .logo-site #logo-song2bar:hover {
+  transform: scale(130%);
+}
+
+.header #logo-home {
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo-connexion-container {
+  grid-column: 3 / 4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.logo-connexion-button {
+  background-color: transparent;
+}
+
+.header h3 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
+}
+
+.header .navigation-container {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.button-profile {
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button-secondary-color);
+  color: var(--button-text-color);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+}
+
+.button-events {
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button-primary-color);
+  color: var(--background-secondary-color);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+}
+
+@media screen and (width <= 1024px) {
+  .header {
+    align-items: flex-start;
+    gap: 0px;
+  }
+
+  .header .logo-site #logo-song2bar img {
+    width: 50px;
+  }
+
+  .button-profile {
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .button-events {
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .header .navigation-container h3 {
+    font-size: 0.7rem;
+  }
+
+  .connexion-wrapper {
+    order: 2;
+    margin-left: 1rem;
+  }
+
+  .logo-connexion {
+    width: 30px;
+  }
+}

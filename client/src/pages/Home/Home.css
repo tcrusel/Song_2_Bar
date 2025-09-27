@@ -1,0 +1,51 @@
+#home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guide {
+  display: flex;
+  flex-direction: column;
+}
+.flower-guitar {
+  width: 90%;
+  height: auto;
+  display: block;
+}
+
+.user-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6rem;
+  padding: 3rem;
+  color: white;
+}
+
+.user-actions .action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-actions .action img {
+  width: auto;
+  height: 2.5rem;
+  margin: 10px;
+}
+
+@media screen and (width <= 700px) {
+  .user-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    color: white;
+    align-items: flex-start;
+  }
+
+  .user-actions .action img {
+    width: auto;
+    height: 2rem;
+  }
+}

@@ -1,0 +1,122 @@
+.auth {
+  background-color: var(--background-primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.auth article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-secondary-color);
+  border-radius: 30px;
+  padding: 30px 80px;
+  width: 50%;
+}
+
+.auth article #logo-site {
+  border-radius: 50%;
+  margin-bottom: 50px;
+  transition: 500ms ease;
+}
+
+.auth article #logo-site:hover {
+  transform: scale(120%);
+}
+
+.auth article h1 {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 80px;
+  color: var(--text-color);
+}
+
+.auth article .register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.auth article .register-form .input {
+  width: 350px;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+}
+
+.auth article .register-form .input:focus {
+  border: 2px solid red;
+}
+
+.auth article .register-form .input.green {
+  border: 2px solid green;
+}
+
+.auth article .register-form .password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+#register-button {
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button-primary-color);
+  color: var(--text-color);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.auth article h3 {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.auth article h3 .login-button {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.text-green {
+  color: green;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-black {
+  color: black;
+}
+
+@media (max-width: 500px) {
+  .auth article {
+    width: 100%;
+    padding: 30px 0px;
+  }
+
+  .auth article h1 {
+    font-size: 2rem;
+    padding-bottom: 60px;
+  }
+
+  .password p {
+    font-size: 0.7rem;
+  }
+
+  .auth article .register-form .input {
+    width: 100%;
+    height: 40px;
+  }
+}

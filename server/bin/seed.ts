@@ -22,11 +22,10 @@ const seed = async () => {
 
     for (const filePath of filePaths) {
       const { default: SeederClass } = await import(
-	`file://${path.join(fixturesPath, filePath)}`
+        `file://${path.join(fixturesPath, filePath)}`
       );
 
       const seeder = new SeederClass() as AbstractSeeder;
-
       dependencyMap[SeederClass.toString()] = seeder;
     }
 
@@ -53,16 +52,16 @@ const seed = async () => {
       solveDependencies(seeder);
     }
 
-    // Truncate tables (starting from the depending ones)
-
+    // Truncate tables (starting from the depending ones) - ONLY if truncate is true
     for (const seeder of sortedSeeders.toReversed()) {
-      // Use delete instead of truncate to bypass foreign key constraint
-      // Wait for the delete promise to complete
-      await database.query(`delete from ${seeder.table}`);
+      if (seeder.truncate) {
+        // Use delete instead of truncate to bypass foreign key constraint
+        // Wait for the delete promise to complete
+        await database.query(`delete from ${seeder.table}`);
+      }
     }
 
     // Run each seeder
-
     for (const seeder of sortedSeeders) {
       await seeder.run();
 

@@ -1,0 +1,164 @@
+.group-information {
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.group-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  padding-bottom: 1.5rem;
+}
+
+.icon-favourite {
+  background-color: transparent;
+  border: 0px;
+  padding-left: 20px;
+}
+
+.heart {
+  width: 2.8rem;
+  height: auto;
+}
+
+.group-articles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  padding: 0.6rem;
+  align-items: stretch;
+}
+
+.poster-group {
+  grid-column: 1 / 2;
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.description-content-group {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: rgba(42, 42, 42, 0.8);
+  padding-right: 2rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+  padding-right: 1rem;
+  height: auto;
+}
+
+.description-content-group p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.description-content-group::-webkit-scrollbar {
+  width: 8px;
+}
+
+.description-content-group::-webkit-scrollbar-thumb {
+  background-color: #cd853f;
+  border-radius: 10px;
+}
+
+.description-content-group::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.description {
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.carousel-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8rem;
+}
+
+.carousel-section h2 {
+  text-align: center;
+}
+
+.carousel {
+  padding-top: 20px;
+}
+
+.fail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fail h1 {
+  padding-bottom: 40px;
+  color: var(--button-primary-color);
+  text-align: center;
+}
+
+.fail button {
+  padding: 1rem;
+  background-color: var(--button-secondary-color);
+  border-radius: 40px;
+  color: var(--text-color);
+  font-weight: bolder;
+}
+
+@media (max-width: 700px) {
+  .group-information,
+  .bar-caroussel {
+    padding: 1rem;
+  }
+
+  .group-title {
+    justify-content: center;
+    padding-bottom: 0.625rem;
+  }
+
+  .heart {
+    width: 1.5rem;
+    height: auto;
+  }
+
+  .group-articles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .poster-group {
+    width: 400px;
+    height: auto;
+  }
+
+  .description-content-group {
+    height: 20rem;
+  }
+
+  .description-content-group p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .carousel {
+    padding-top: 0px;
+  }
+
+  .carousel-section {
+    padding-top: 4rem;
+  }
+
+  .carousel-section h2 {
+    font-size: 1.15rem;
+  }
+}

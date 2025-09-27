@@ -1,0 +1,48 @@
+.react-datepicker__header {
+  background-color: var(--button-secondary-color);
+}
+
+.date-button {
+  border-radius: 45px;
+  background-color: var(--button-primary-color);
+  color: var(--button-text-color);
+  font-size: 2rem;
+  margin: auto;
+  border: none;
+  width: fit-content;
+  height: fit-content;
+  padding: 1rem 4rem;
+}
+
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+.calendar-modal {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-actions {
+  padding-top: 20px;
+}
+
+.btn-validate {
+  border-radius: 20px;
+  padding: 0.5rem 2rem;
+  border: none;
+  background-color: var(--button-secondary-color);
+  color: var(--text-color);
+}
+
+@media (max-width: 700px) {
+  .date-button {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+  }
+}

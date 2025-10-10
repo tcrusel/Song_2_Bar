@@ -1,4 +1,4 @@
-name: CD-traefik
+name: CD
 
 on:
   push:

@@ -18,7 +18,18 @@ services:
       DB_PASSWORD: password
       DB_NAME: js_template_fullstack
       VITE_API_URL: "http://localhost:3310"
-    command: sh -c "npm run dev"
+      SEED_DB: "true"
+    command: >
+      sh -c '
+        npm run db:migrate || echo "pas de script migrate (ok)";
+        if [ "$SEED_DB" = "true" ] && [ ! -f .seeded ]; then
+          echo "Seeding initial...";
+          npm run db:seed && touch .seeded;
+        else
+          echo "Seed ignoré (déjà fait ou SEED_DB!=true)";
+        fi;
+        npm run dev
+      '
     depends_on:
       database:
         condition: service_healthy

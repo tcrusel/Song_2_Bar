@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import type { MusicGroupInterface } from "../../types/musicGroup";
+import { useAuth } from "@/contexts/AuthContext";
+import type { MusicGroupInterface } from "@/types/musicGroup";
 import GroupCard from "../GroupCard/GroupCard";
+import { URL } from "@/config/api";
 
 function MusicGroupsFavourited() {
   const [musicGroupsFavorited, setMusicGroupsFavourited] = useState<
@@ -15,15 +16,12 @@ function MusicGroupsFavourited() {
       if (!auth) return;
 
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/favourite_music_group`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${auth.token}`,
-            },
+        const response = await fetch(`${URL}/api/favourite_music_group`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
           },
-        );
+        });
 
         if (!response.ok) {
           throw new Error(

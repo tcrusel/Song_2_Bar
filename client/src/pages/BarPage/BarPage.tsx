@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { barService } from "../../services/barService";
-import type { Bar } from "../../types/bar";
-import "../../assets/_variables.css";
+import { barService } from "@/services/barService";
+import type { Bar } from "@/types/bar";
+import "@/assets/_variables.css";
 import "./BarPage.css";
 import { ToastContainer, toast } from "react-toastify";
-import EventCard from "../../components/EventCard/EventCard";
-import LikeButton from "../../components/LikeButton/LikeButton";
-import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import { useAuth } from "../../contexts/AuthContext";
-import type { EventType } from "../../types/Event";
+import EventCard from "@/components/EventCard/EventCard";
+import LikeButton from "@/components/LikeButton/LikeButton";
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
+import { useAuth } from "@/contexts/AuthContext";
+import type { EventType } from "@/types/Event";
+import { URL } from "@/config/api";
 
 function BarPage() {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -46,9 +47,7 @@ function BarPage() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/bars/${barId}/events`,
-        );
+        const res = await fetch(`${URL}/api/bars/${barId}/events`);
         if (!res.ok) {
           throw new Error("Erreur lors de la récupération des bars");
         }
@@ -69,7 +68,7 @@ function BarPage() {
         events.map(async (event) => {
           try {
             const res = await fetch(
-              `${import.meta.env.VITE_API_URL}/api/${event.id}/participants/count`,
+              `${URL}/api/${event.id}/participants/count`,
             );
             const data = await res.json();
             counts[event.id] = data.participantsCount ?? 0;
@@ -159,20 +158,17 @@ function BarPage() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_bar`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
-          body: JSON.stringify({
-            barId,
-            userId,
-          }),
+      const response = await fetch(`${URL}/api/favourite_bar`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
-      );
+        body: JSON.stringify({
+          barId,
+          userId,
+        }),
+      });
       if (response.ok) {
         toast("Ce bar est maintenant dans vos favoris", {
           type: "success",
@@ -198,16 +194,13 @@ function BarPage() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_bar/${barId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
+      const response = await fetch(`${URL}/api/favourite_bar/${barId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
-      );
+      });
       if (response.ok) {
         toast("Ce bar a été retiré de vos favoris", {
           type: "success",

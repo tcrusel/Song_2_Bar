@@ -3,7 +3,8 @@ import "./Participate.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { URL } from "@/config/api";
 
 function Participate() {
   const [isParticipated, setIsParticipated] = useState(false);
@@ -17,14 +18,11 @@ function Participate() {
     const checkParticipation = async () => {
       if (!auth) return;
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/participate/${eventId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
+        const response = await fetch(`${URL}/api/participate/${eventId}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
           },
-        );
+        });
         if (response.ok) {
           const result = await response.json();
           setIsParticipated(result.participates);
@@ -48,20 +46,17 @@ function Participate() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/participate`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
-          body: JSON.stringify({
-            userId,
-            eventId,
-          }),
+      const response = await fetch(`${URL}/api/participate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
-      );
+        body: JSON.stringify({
+          userId,
+          eventId,
+        }),
+      });
 
       if (response.ok) {
         toast.success("Vous participez à cet évènement", {
@@ -82,16 +77,13 @@ function Participate() {
       return;
     }
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/participate/${eventId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
+      const response = await fetch(`${URL}/api/participate/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
-      );
+      });
 
       if (response.ok) {
         toast("Vous ne participez plus à cet évènement", {

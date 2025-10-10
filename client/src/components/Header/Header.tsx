@@ -1,6 +1,9 @@
 import "./Header.css";
 import { useNavigate } from "react-router";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
+import song2barLogo from "/images/logo-site.png";
+import connectionLogo from "/icon/profile-icon.svg";
+import disconnectionLogo from "/images/deconnexion.png";
 
 function Header() {
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ function Header() {
             onClick={() => navigate("/")}
           >
             <img
-              src="/images/logo-site.png"
+              src={song2barLogo}
               alt="logo du site"
               width="100"
               height="auto"
@@ -70,7 +73,7 @@ function Header() {
             >
               <img
                 className="logo-connexion"
-                src="/icon/profile-icon.svg"
+                src={connectionLogo}
                 alt="le logo de la connexion"
                 width="40"
                 height="auto"
@@ -90,7 +93,7 @@ function Header() {
             >
               <img
                 className="logo-connexion"
-                src="/images/deconnexion.png"
+                src={disconnectionLogo}
                 alt="le logo de la déconnexion"
                 width="40"
                 height="auto"

@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify/unstyled";
 import styleIcon from "/images/group_images/music-style-icon.svg";
-import BarCard from "../../components/BarCard/BarCard";
-import LikeButton from "../../components/LikeButton/LikeButton";
-import { useAuth } from "../../contexts/AuthContext";
-import type { Bar } from "../../types/bar";
-import type { MusicGroupInterface } from "../../types/musicGroup";
+import BarCard from "@/components/BarCard/BarCard";
+import LikeButton from "@/components/LikeButton/LikeButton";
+import { useAuth } from "@/contexts/AuthContext";
+import type { Bar } from "@/types/bar";
+import type { MusicGroupInterface } from "@/types/musicGroup";
+import { URL } from "@/config/api";
 
 function MusicGroup() {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,7 @@ function MusicGroup() {
   const userId = auth?.user.id;
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/groups/${id}`)
+    fetch(`${URL}/api/groups/${id}`)
       .then((response) => response.json())
       .then((musicGroup) => {
         setMusicGroup(musicGroup);
@@ -33,9 +34,7 @@ function MusicGroup() {
   useEffect(() => {
     async function fetchBars() {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/groups/${id}/bars`,
-        );
+        const res = await fetch(`${URL}/api/groups/${id}/bars`);
         if (!res.ok) {
           throw new Error("Erreur lors de la récupération des bars");
         }
@@ -67,20 +66,17 @@ function MusicGroup() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_music_group`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth?.token}`,
-          },
-          body: JSON.stringify({
-            userId,
-            musicGroupId,
-          }),
+      const response = await fetch(`${URL}/api/favourite_music_group`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth?.token}`,
         },
-      );
+        body: JSON.stringify({
+          userId,
+          musicGroupId,
+        }),
+      });
       if (response.ok) {
         toast("Ce groupe de musique est maintenant dans vos favoris", {
           type: "success",
@@ -103,7 +99,7 @@ function MusicGroup() {
   const unfavouriteMusicGroup = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_music_group/${musicGroupId}`,
+        `${URL}/api/favourite_music_group/${musicGroupId}`,
         {
           method: "DELETE",
           headers: {

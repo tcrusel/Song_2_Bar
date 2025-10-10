@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./LikeButton.css";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useParams } from "react-router";
+import { URL } from "@/config/api";
 
 type LikeButtonProps = {
   favouriteBar?: () => Promise<void>;
@@ -40,7 +41,7 @@ function LikeButton({
 
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/favourite_${typeOfFavourite}/${id}`,
+          `${URL}/api/favourite_${typeOfFavourite}/${id}`,
           {
             headers: {
               Authorization: `Bearer ${auth.token}`,

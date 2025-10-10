@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import type { Dispatch, ReactNode, SetStateAction } from "react";
-import type { AuthType } from "../types/User";
+import type { AuthType } from "@/types/User";
 
 interface AuthContextType {
   auth: AuthType | null;

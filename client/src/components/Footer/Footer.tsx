@@ -1,4 +1,11 @@
 import "./Footer.css";
+import flickrLogo from "/images/home_images/mini-logo-flickr.png";
+import icoLogo from "/images/home_images/mini-logo-ico.png";
+import rssLogo from "/images/home_images/mini-logo-rss.png";
+import twitterLogo from "/images/home_images/mini-logo-twitter.png";
+import vimeoLogo from "/images/home_images/mini-logo-vimeo.png";
+import fbLogo from "/images/home_images/mini-logo-facebook.png";
+import microImage from "/images/home_images/micro.png";
 
 function Footer() {
   return (
@@ -7,30 +14,12 @@ function Footer() {
         <article className="networks">
           <p className="follow-us">Rejoignez-nous sur les reseaux sociaux :</p>
           <div className="image-social-logo">
-            <img
-              src="/images/home_images/mini-logo-flickr.png"
-              alt="mini-logo-flickr"
-            />
-            <img
-              src="/images/home_images/mini-logo-ico.png"
-              alt="mini-logo-ico"
-            />
-            <img
-              src="/images/home_images/mini-logo-rss.png"
-              alt="mini-logo-rss"
-            />
-            <img
-              src="/images/home_images/mini-logo-twitter.png"
-              alt="mini-logo-twitter"
-            />
-            <img
-              src="/images/home_images/mini-logo-vimeo.png"
-              alt="mini-logo-vimeo"
-            />
-            <img
-              src="/images/home_images/mini-logo-facebook.png"
-              alt="mini-logo-facebook"
-            />
+            <img src={flickrLogo} alt="logo flickr" />
+            <img src={icoLogo} alt="logo ico" />
+            <img src={rssLogo} alt="logo rss" />
+            <img src={twitterLogo} alt="logo twitter" />
+            <img src={vimeoLogo} alt="logo vimeo" />
+            <img src={fbLogo} alt="logo facebook" />
           </div>
 
           <button type="button" className="button-subscribers">
@@ -40,8 +29,8 @@ function Footer() {
         <article className="footer-middle-container">
           <p className="legal-notices">Mentions légales, crédits et C.G.U.</p>
           <img
-            src="/images/home_images/micro.png"
-            alt="micro"
+            src={microImage}
+            alt="logo micro du site"
             width="auto"
             height="100"
           />

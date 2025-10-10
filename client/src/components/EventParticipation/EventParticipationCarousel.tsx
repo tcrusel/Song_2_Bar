@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import type { EventType } from "../../types/Event";
+import { useAuth } from "@/contexts/AuthContext";
+import type { EventType } from "@/types/Event";
 import EventCard from "../EventCard/EventCard";
+import { URL } from "@/config/api";
 
 function EventParticipationCarousel() {
   const [participations, setParticipations] = useState<EventType[]>([]);
@@ -16,15 +17,12 @@ function EventParticipationCarousel() {
       if (!auth) return;
 
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/participate`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${auth.token}`,
-            },
+        const response = await fetch(`${URL}/api/participate`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
           },
-        );
+        });
 
         if (!response.ok) {
           throw new Error("Erreur lors du chargement des participations");
@@ -38,7 +36,7 @@ function EventParticipationCarousel() {
           data.map(async (event: EventType) => {
             try {
               const res = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/${event.id}/participants/count`,
+                `${URL}/api/${event.id}/participants/count`,
               );
               const countData = await res.json();
               counts[event.id] = countData.participantsCount ?? 0;

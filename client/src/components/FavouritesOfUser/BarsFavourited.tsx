@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import type { Bar } from "../../types/bar";
+import { useAuth } from "@/contexts/AuthContext";
+import type { Bar } from "@/types/bar";
 import BarCard from "../BarCard/BarCard";
+import { URL } from "@/config/api";
 
 function BarsFavourited() {
   const [barsFavourited, setBarsFavourited] = useState<Bar[]>([]);
@@ -13,15 +14,12 @@ function BarsFavourited() {
       if (!auth) return;
 
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/favourite_bar`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${auth.token}`,
-            },
+        const response = await fetch(`${URL}/api/favourite_bar`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
           },
-        );
+        });
 
         if (!response.ok) {
           throw new Error("Erreur lors du chargement des bars en favoris");

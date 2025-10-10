@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import type { UserInfo } from "../../types/User";
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
+import type { UserInfo } from "@/types/User";
 import "./UserProfile.css";
-import EventParticipationCarousel from "../../components/EventParticipation/EventParticipationCarousel";
-import BarsFavourited from "../../components/FavouritesOfUser/BarsFavourited";
-import EventsFavourited from "../../components/FavouritesOfUser/EventsFavourited";
-import MusicGroupsFavourited from "../../components/FavouritesOfUser/MusicGroupsFavourited";
-import { useAuth } from "../../contexts/AuthContext";
+import profileIcon from "/icon/profile-icon.svg";
+import EventParticipationCarousel from "@/components/EventParticipation/EventParticipationCarousel";
+import BarsFavourited from "@/components/FavouritesOfUser/BarsFavourited";
+import EventsFavourited from "@/components/FavouritesOfUser/EventsFavourited";
+import MusicGroupsFavourited from "@/components/FavouritesOfUser/MusicGroupsFavourited";
+import { useAuth } from "@/contexts/AuthContext";
+import { URL } from "@/config/api";
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("bars");
@@ -20,9 +22,7 @@ function UserProfile() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
-        );
+        const response = await fetch(`${URL}/api/users/${userId}`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch user profile");
@@ -108,7 +108,7 @@ function UserProfile() {
         <div className="user-info">
           <div className="user-icon">
             <img
-              src="/icon/profile-icon.svg"
+              src={profileIcon}
               alt="User Profile"
               className="user-icon-image"
             />

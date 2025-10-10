@@ -4,6 +4,7 @@ import "./Register.css";
 import type { ChangeEventHandler, FormEventHandler } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import LogoSite2 from "/images/logo-site2.png";
+import { URL } from "@/config/api";
 
 function Register() {
   const [lastname, setLastname] = useState("");
@@ -37,20 +38,17 @@ function Register() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users`,
-        {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            lastname,
-            firstname,
-            email,
-            password,
-            confirmPassword,
-          }),
-        },
-      );
+      const response = await fetch(`${URL}/api/users`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lastname,
+          firstname,
+          email,
+          password,
+          confirmPassword,
+        }),
+      });
 
       if (response.status === 409) {
         toast("Cet e-mail est déjà lié à un compte existant", {

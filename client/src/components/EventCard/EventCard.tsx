@@ -1,6 +1,6 @@
 import "./EventCard.css";
 import { useNavigate } from "react-router";
-import type { EventType } from "../../types/Event";
+import type { EventType } from "@/types/Event";
 
 type EventCardProps = {
   event: EventType;

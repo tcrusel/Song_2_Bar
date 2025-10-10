@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import type { Bar } from "../../types/bar";
+import type { Bar } from "@/types/bar";
 
 type BarCardProps = {
   bar: Bar;

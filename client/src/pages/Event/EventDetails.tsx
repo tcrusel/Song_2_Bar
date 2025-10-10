@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { Link, useNavigate, useParams } from "react-router";
-import Participate from "../../components/Participate/Participate";
-import "../../assets/_variables.css";
+import Participate from "@/components/Participate/Participate";
+import "@/assets/_variables.css";
 import "leaflet/dist/leaflet.css";
 import { ToastContainer, toast } from "react-toastify";
-import LikeButton from "../../components/LikeButton/LikeButton";
-import { useAuth } from "../../contexts/AuthContext";
-import type { EventType } from "../../types/Event";
+import LikeButton from "@/components/LikeButton/LikeButton";
+import { useAuth } from "@/contexts/AuthContext";
+import type { EventType } from "@/types/Event";
 import "./EventDetails.css";
+import { URL } from "@/config/api";
 
 function EventDetails() {
   const { id } = useParams();
@@ -23,9 +24,7 @@ function EventDetails() {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/events/${id}`,
-        );
+        const res = await fetch(`${URL}/api/events/${id}`);
         const event = await res.json();
         setEvent(event);
       } catch (error) {
@@ -38,9 +37,7 @@ function EventDetails() {
 
   useEffect(() => {
     const fetchParticipants = async () => {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/${eventId}/participants/count`,
-      );
+      const res = await fetch(`${URL}/api/${eventId}/participants/count`);
 
       const data = await res.json();
       setParticipantsCount(data.participantsCount || 0);
@@ -59,17 +56,14 @@ function EventDetails() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_event`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
-          body: JSON.stringify({ userId, eventId }),
+      const response = await fetch(`${URL}/api/favourite_event`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
-      );
+        body: JSON.stringify({ userId, eventId }),
+      });
       if (response.ok) {
         toast("Cet évènement est maintenant dans vos favoris", {
           type: "success",
@@ -92,16 +86,13 @@ function EventDetails() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/favourite_event/${eventId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
+      const response = await fetch(`${URL}/api/favourite_event/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
-      );
+      });
       if (response.ok) {
         toast("Cet évènement a été retiré de vos favoris", {
           type: "success",

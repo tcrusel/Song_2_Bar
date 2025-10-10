@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import type { MusicGroupInterface } from "../../types/musicGroup";
+import type { MusicGroupInterface } from "@/types/musicGroup";
 
 type GroupCardProps = {
   group: MusicGroupInterface;

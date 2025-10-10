@@ -1,11 +1,12 @@
-import EventCard from "../../components/EventCard/EventCard";
+import EventCard from "@/components/EventCard/EventCard";
 import "./Events.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import type { EventType } from "../../types/Event";
-import "../../components/HorizontalCalendar/HorizontalCalendar";
+import type { EventType } from "@/types/Event";
+import "@/components/HorizontalCalendar/HorizontalCalendar";
 import DatePicker from "react-datepicker";
-import HorizontalCalendar from "../../components/HorizontalCalendar/HorizontalCalendar";
+import HorizontalCalendar from "@/components/HorizontalCalendar/HorizontalCalendar";
+import { URL } from "@/config/api";
 
 const formatDate = (dateInput: Date | string) => {
   const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
@@ -43,7 +44,7 @@ function Events() {
   useEffect(() => {
     async function fetchEvent() {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/events`);
+        const res = await fetch(`${URL}/api/events`);
         if (!res.ok) {
           setError(true);
           return;
@@ -66,7 +67,7 @@ function Events() {
         allEvents.map(async (event) => {
           try {
             const res = await fetch(
-              `${import.meta.env.VITE_API_URL}/api/${event.id}/participants/count`,
+              `${URL}/api/${event.id}/participants/count`,
             );
             const data = await res.json();
             counts[event.id] = data.participantsCount ?? 0;

@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./CalendarPopUp.css";
 import { fr } from "date-fns/locale";
 import { registerLocale } from "react-datepicker";
-import type { CalendarPopupProps } from "../../types/calendar";
+import type { CalendarPopupProps } from "@/types/calendar";
 
 registerLocale("fr", fr);
 

@@ -13,21 +13,16 @@ services:
       APP_PORT: 3310
       APP_SECRET: 123456789
       DB_HOST: database
-      DB_PORT: 3306
+      DB_PORT: 3308
       DB_USER: user
       DB_PASSWORD: password
-      DB_NAME: js_template_fullstack
+      DB_NAME: song2bar
       VITE_API_URL: "http://localhost:3310"
       SEED_DB: "true"
     command: >
       sh -c '
         npm run db:migrate || echo "pas de script migrate (ok)";
-        if [ "$SEED_DB" = "true" ] && [ ! -f .seeded ]; then
-          echo "Seeding initial...";
-          npm run db:seed && touch .seeded;
-        else
-          echo "Seed ignoré (déjà fait ou SEED_DB!=true)";
-        fi;
+        npm run db:seed;
         npm run dev
       '
     depends_on:
@@ -44,13 +39,14 @@ services:
       start_period: 10s
     volumes:
       - ./database-setup.sh:/docker-entrypoint-initdb.d/setup.sh
-    #      - db-data:/var/lib/mysql
+      #- /tmp/db-data:/var/lib/mysql
     environment:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+      MYSQL_TCP_PORT: 3308
       # Password for root access
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - target: 3306
-        published: 3306
+      - target: 3308
+        published: 3308
         protocol: tcp

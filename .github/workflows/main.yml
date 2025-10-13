@@ -18,3 +18,7 @@ jobs:
         uses: docker/setup-compose-action@v1
         with:
           version: latest
+      - name: Docker build
+        run: | 
+          echo "lancement du docker build"
+          docker compose build

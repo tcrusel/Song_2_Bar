@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   check:
     name: Run checks
@@ -14,6 +19,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install Docker Compose
         uses: docker/setup-compose-action@v1
         with:
@@ -22,3 +35,18 @@ jobs:
         run: | 
           echo "lancement du docker build"
           docker compose build
+
+  # deploy:
+  #   name: Deploiment prod
+  #   needs: [check]
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Check out Git repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Install Docker Compose
+  #       uses: docker/setup-compose-action@v1
+  #       with:
+  #         version: latest

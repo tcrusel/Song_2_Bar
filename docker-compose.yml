@@ -15,7 +15,7 @@ services:
       DB_USER: user
       DB_PASSWORD: password
       DB_NAME: song2bar
-      VITE_API_URL: "http://localhost:3310"
+      VITE_API_URL: "http://song2bar.fr/api"
       SEED_DB: "true"
     command: >
       sh -c '

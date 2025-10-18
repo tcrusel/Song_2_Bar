@@ -46,4 +46,4 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "127.0.0.1:3308:3308/tcp"
-
+      - "172.18.0.2:3308:3308/tcp"

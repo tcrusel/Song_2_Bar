@@ -5,8 +5,8 @@ services:
     #build: .
     image: ghcr.io/tcrusel/song_2_bar:latest
     ports:
-      - "3310:3310"
-      - "3000:3000"
+      - "127.0.0.1:3310:3310/tcp"
+      - "127.0.0.1:3000:3000/tcp"
     environment:
       APP_PORT: 3310
       APP_SECRET: 123456789

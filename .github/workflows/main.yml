@@ -87,6 +87,7 @@ jobs:
             docker compose -f docker-compose.yml up -d --remove-orphans
 
   cleanup:
+    name: Artifact Cleanup
     runs-on: ubuntu-latest
     needs: [deploy]
     steps:

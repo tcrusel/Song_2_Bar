@@ -11,7 +11,7 @@ services:
       APP_PORT: 3310
       APP_SECRET: 123456789
       DB_HOST: database
-      DB_PORT: 3308
+      DB_PORT: 3306
       DB_USER: user
       DB_PASSWORD: password
       DB_NAME: song2bar
@@ -41,10 +41,9 @@ services:
     environment:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-      MYSQL_TCP_PORT: 3308
+      MYSQL_TCP_PORT: 3306
       # Password for root access
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - target: 3308
-        published: 3308
-        protocol: tcp
+      - "127.0.0.1:3308:3306/tcp"
+

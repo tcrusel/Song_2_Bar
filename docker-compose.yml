@@ -16,6 +16,7 @@ services:
       DB_PASSWORD: password
       DB_NAME: song2bar
       #VITE_API_URL: "http://song2bar.fr"
+      PROD: "true"
       VITE_API_URL_PROD: "http://song2bar.fr"
       SEED_DB: "true"
     command: >

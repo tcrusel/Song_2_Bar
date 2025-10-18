@@ -4,49 +4,105 @@ on:
   push:
     branches:
       - main
+      - setup-action
 
 permissions:
   contents: read
   packages: write
 
 jobs:
-  check:
-    name: Run checks
+  build:
+    name: Build and Test
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          
-      - name: Login to GHCR
+      - uses: actions/checkout@v5   # Check out the repository
+
+      - name: Login to GHCR   # Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Docker Buildx # Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Install Docker Compose
         uses: docker/setup-compose-action@v1
         with:
           version: latest
-      - name: Docker build
-        run: | 
-          echo "lancement du docker build"
-          docker compose build
 
-  # deploy:
-  #   name: Deploiment prod
-  #   needs: [check]
-  #   runs-on: ubuntu-latest
+      - name: Generate images metadata  # Generate metadata for Docker images (tags, labels, etc.)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/tcrusel/Song_2_Bar
+          tags: |
+            type=raw,value=main
+            type=raw,value=latest
+            type=raw,value=${{ github.sha }}
 
-  #   steps:
-  #     - name: Check out Git repository
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #     - name: Install Docker Compose
-  #       uses: docker/setup-compose-action@v1
-  #       with:
-  #         version: latest
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          sbom: true
+          provenance: true
+          push: true
+          builder: ${{ steps.buildx.outputs.name }}
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    name: Deploy over SSH
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5   # Check out the repository
+
+      - name: Deploy to production server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.PROD_SSH_HOST }}
+          username: ${{ secrets.PROD_SSH_USERNAME }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          port: ${{ secrets.PROD_SSH_PORT }}
+          source: "docker-compose.yml"
+          target: "projects/Song_2_Bar/"
+      
+      - name: Execute remote SSH commands # SSH into the remote server pull new images and restart the services
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.PROD_SSH_HOST }}
+          username: ${{ secrets.PROD_SSH_USERNAME }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          port: ${{ secrets.PROD_SSH_PORT }}
+          script: |
+            cd projects/Song_2_Bar
+            docker compose -f docker-compose.yml pull
+            docker compose -f docker-compose.yml up -d --remove-orphans
+
+  cleanup:
+    name: Artifact Cleanup
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
+      - name: Delete untagged container versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-type: container
+          package-name: Song_2_Bar
+          delete-only-untagged-versions: "true"
+          min-versions-to-keep: 0
+
+      - name: Delete non main/latest tagged container versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-type: container
+          package-name: Song_2_Bar
+          min-versions-to-keep: 3
+          ignore-versions: "^(latest|main)$"

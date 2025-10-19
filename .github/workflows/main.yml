@@ -4,13 +4,23 @@ on:
   push:
     branches:
       - main
-      - setup-action
+      - fix-secrets
 
 permissions:
   contents: read
   packages: write
 
 jobs:
+  scan:
+      name: Run Gitleaks Scan
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - uses: gitleaks/gitleaks-action@v2
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     name: Build and Test
     runs-on: ubuntu-latest

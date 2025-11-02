@@ -1,9 +1,9 @@
+import { URL } from "@/config/api";
+
 export const barService = {
   async getBarById(id: number) {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/bars/${id}`,
-      );
+      const response = await fetch(`${URL}/api/bars/${id}`);
 
       if (response.status === 404) {
         throw new Error("Bar not found");

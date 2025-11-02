@@ -3,7 +3,8 @@ import { useLocation, useNavigate } from "react-router";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import LogoSite from "/images/logo-site.png";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { URL } from "@/config/api";
 
 export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -51,17 +52,14 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/login`,
-        {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: (emailRef.current as HTMLInputElement).value,
-            password: (passwordRef.current as HTMLInputElement).value,
-          }),
-        },
-      );
+      const response = await fetch(`${URL}/api/login`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: (emailRef.current as HTMLInputElement).value,
+          password: (passwordRef.current as HTMLInputElement).value,
+        }),
+      });
 
       if (response.status === 200) {
         const user = await response.json();

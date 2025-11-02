@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import "./Participate.css";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { URL } from "@/config/api";
 
-function Participate() {
+type ParticipateProps = {
+  eventId: number;
+  onCountDelta?: (delta: number) => void;
+};
+
+function Participate({ eventId, onCountDelta}: ParticipateProps) {
   const [isParticipated, setIsParticipated] = useState(false);
   const { auth } = useAuth();
   const navigate = useNavigate();
-  const { id } = useParams();
   const userId = auth?.user.id;
-  const eventId = Number(id);
 
   useEffect(() => {
     const checkParticipation = async () => {
@@ -59,15 +61,14 @@ function Participate() {
       });
 
       if (response.ok) {
-        toast.success("Vous participez à cet évènement", {
-          type: "success",
-        });
+        toast.success("Vous participez à cet évènement");
+        onCountDelta?.(1);
       } else {
         throw new Error("Erreur serveur");
       }
     } catch (error) {
       console.error("Erreur lors de la participation à cet évènement", error);
-      toast("Erreur lors de l'inscription à l'évènement", { type: "error" });
+      toast.error("Erreur lors de l'inscription à l'évènement");
     }
   };
 
@@ -86,9 +87,8 @@ function Participate() {
       });
 
       if (response.ok) {
-        toast("Vous ne participez plus à cet évènement", {
-          type: "success",
-        });
+        toast.success("Vous ne participez plus à cet évènement");
+        onCountDelta?.(-1);
       } else {
         throw new Error("Erreur lors de la suppression de la participation");
       }
@@ -99,12 +99,6 @@ function Participate() {
 
   return (
     <>
-      <ToastContainer
-        theme="colored"
-        position="top-right"
-        limit={2}
-        autoClose={3000}
-      />
       <button
         className="participate-button"
         type="button"
@@ -114,7 +108,6 @@ function Participate() {
             setIsParticipated(true);
           } else {
             deleteParticipation();
-
             setIsParticipated(false);
           }
         }}

@@ -142,15 +142,6 @@ class favouriteRepository {
 
     return rows;
   }
-
-  async favouriteCount(event_id: number): Promise<number> {
-    const [rows] = await databaseClient.query<RowDataPacket[]>(
-      "SELECT COUNT(*) AS count FROM participate WHERE event_id = ?",
-      [event_id],
-    );
-
-    return rows[0].count;
-  }
 }
 
 export default new favouriteRepository();

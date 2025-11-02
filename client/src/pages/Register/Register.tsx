@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import "./Register.css";
 import type { ChangeEventHandler, FormEventHandler } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import LogoSite2 from "/images/logo-site2.png";
 import { URL } from "@/config/api";
 
@@ -32,7 +32,6 @@ function Register() {
     if (password.length < 8 || password !== confirmPassword) {
       toast("Création de compte invalide !", {
         type: "error",
-        autoClose: 3000,
       });
       return;
     }
@@ -53,7 +52,6 @@ function Register() {
       if (response.status === 409) {
         toast("Cet e-mail est déjà lié à un compte existant", {
           type: "error",
-          autoClose: 3000,
         });
         return;
       }
@@ -65,7 +63,6 @@ function Register() {
       } else {
         toast("Création de compte invalide !", {
           type: "error",
-          autoClose: 3000,
         });
       }
     } catch (err) {
@@ -158,7 +155,6 @@ function Register() {
             </button>
           </h3>
         </article>
-        <ToastContainer theme="colored" position="top-right" limit={2} />
       </section>
     </>
   );

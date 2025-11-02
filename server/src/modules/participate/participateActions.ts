@@ -103,4 +103,24 @@ const remove: RequestHandler = async (req, res, next): Promise<void> => {
   }
 };
 
-export default { add, remove, browseByUserId, readByEventId };
+const countParticipants: RequestHandler = async (req, res, next) => {
+  try {
+    const eventId = Number(req.params.eventId);
+    if (Number.isNaN(eventId)) {
+      res.status(400).json({ message: "eventId invalide" });
+      return;
+    }
+
+    const participantsNumber = await participateRepository.participateCount(eventId);
+
+    if (participantsNumber < 0) {
+      res.status(404).json({ message: "Aucune participation trouvée" });
+    } else {
+      res.status(200).json({ participantsNumber });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { add, remove, browseByUserId, readByEventId, countParticipants };

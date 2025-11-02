@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import Participate from "@/components/Participate/Participate";
 import "@/assets/_variables.css";
 import "leaflet/dist/leaflet.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import LikeButton from "@/components/LikeButton/LikeButton";
 import { useAuth } from "@/contexts/AuthContext";
 import type { EventType } from "@/types/Event";
@@ -37,10 +37,9 @@ function EventDetails() {
 
   useEffect(() => {
     const fetchParticipants = async () => {
-      const res = await fetch(`${URL}/api/${eventId}/participants/count`);
-
+      const res = await fetch(`${URL}/api/participate/${eventId}/count`);
       const data = await res.json();
-      setParticipantsCount(data.participantsCount || 0);
+      setParticipantsCount(data.participantsNumber || 0);
     };
 
     fetchParticipants();
@@ -191,7 +190,12 @@ function EventDetails() {
             </div>
           </div>
           <div className="participate-wrapper">
-            <Participate />
+            <Participate
+              eventId={eventId}
+        onCountDelta={(delta) =>
+          setParticipantsCount((c) => Math.max(0, c + delta))
+        }
+            />
           </div>
         </article>
         <article className="description-content">
@@ -218,12 +222,6 @@ function EventDetails() {
           </MapContainer>
         </article>
       </section>
-      <ToastContainer
-        theme="colored"
-        position="top-right"
-        limit={2}
-        autoClose={3000}
-      />
     </>
   );
 }

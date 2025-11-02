@@ -1,7 +1,7 @@
 import { type FormEventHandler, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router";
 import "./Login.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import LogoSite from "/images/logo-site.png";
 import { useAuth } from "@/contexts/AuthContext";
 import { URL } from "@/config/api";
@@ -73,7 +73,7 @@ export default function Login() {
         console.info(response);
         toast(
           "Connexion impossible ! Votre identifiant ou mot de passe est invalide",
-          { type: "error", autoClose: 3000 },
+          { type: "error" },
         );
       }
     } catch (err) {
@@ -127,12 +127,6 @@ export default function Login() {
             </button>
           </article>
         </section>
-        <ToastContainer
-          theme="colored"
-          position="top-right"
-          limit={1}
-          autoClose={4000}
-        />
       </main>
     </>
   );

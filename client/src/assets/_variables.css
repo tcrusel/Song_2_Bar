@@ -15,6 +15,10 @@
   --text-color: white;
 }
 
+.Toastify {
+  background-color: var(--background-primary-color);
+}
+
 body {
   font-family: "Fredoka", sans-serif;
   background-color: var(--background-body-color);

@@ -1,3 +1,10 @@
+import path from "node:path";
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV ?? "development"}`),
+});
+
 // Get variables from .env file for database connection
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 

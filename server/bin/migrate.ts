@@ -3,15 +3,18 @@ import "dotenv/config";
 
 import fs from "node:fs";
 import path from "node:path";
+import dotenv from 'dotenv';
 
-// Build the path to the schema SQL file
 const schema = path.join(__dirname, "../../server/database/schema.sql");
-
-// Get database connection details from .env file
-const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 // Update the database schema
 import mysql from "mysql2/promise";
+
+dotenv.config({
+  path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV ?? 'development'}`),
+});
+
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 const migrate = async () => {
   try {
@@ -28,19 +31,10 @@ const migrate = async () => {
       charset: "utf8mb4",
     });
 
-    // Drop the existing database if it exists
     await database.query(`drop database if exists ${DB_NAME}`);
-
-    // Create a new database with the specified name
     await database.query(`create database ${DB_NAME}`);
-
-    // Switch to the newly created database
     await database.query(`use ${DB_NAME}`);
-
-    // Execute the SQL statements to update the database schema
     await database.query(sql);
-
-    // Close the database connection
     database.end();
 
     console.info(`${DB_NAME} updated from '${path.normalize(schema)}' 🆙`);
@@ -50,5 +44,4 @@ const migrate = async () => {
   }
 };
 
-// Run the migration function
 migrate();

@@ -1,5 +1,4 @@
 import type { RequestHandler } from "express";
-import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import favouriteRepository from "./favouriteRepository";
 
@@ -405,30 +404,6 @@ const destroyFavouriteMusicGroup: RequestHandler = async (req, res, next) => {
   }
 };
 
-const displayParticipation = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const eventId = Number(req.params.eventId);
-    if (Number.isNaN(eventId)) {
-      res.status(400).json({ message: "eventId invalide" });
-      return;
-    }
-
-    const participantsCount = await favouriteRepository.favouriteCount(eventId);
-
-    if (participantsCount <= 0) {
-      res.status(404).json({ message: "Aucune participation trouvée" });
-    } else {
-      res.status(200).json({ participantsCount });
-    }
-  } catch (err) {
-    next(err);
-  }
-};
-
 export default {
   addFavouriteBar,
   destroyFavouriteBar,
@@ -440,7 +415,6 @@ export default {
   readByBarId,
   readByEventId,
   readByMusicGroupId,
-  displayParticipation,
   browseEventsByUserId,
   browseBarsByUserId,
   browseMusicGroupsByUserId,

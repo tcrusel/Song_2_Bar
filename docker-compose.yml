@@ -21,7 +21,7 @@ services:
       sh -c '
         npm run db:migrate || echo "pas de script migrate (ok)";
         npm run db:seed;
-        npm run build
+        npm run dev
       '
     depends_on:
       database:
@@ -44,4 +44,3 @@ services:
       MYSQL_USER: song2bar
     ports:
       - "127.0.0.1:3308:3306/tcp"
-

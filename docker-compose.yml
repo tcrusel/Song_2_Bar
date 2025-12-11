@@ -42,6 +42,7 @@ services:
       - .secrets.env
     environment:
       MYSQL_USER: song2bar
+    restart: always
     ports:
       - "127.0.0.1:3308:3306/tcp"
 

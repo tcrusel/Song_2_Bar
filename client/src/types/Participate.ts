@@ -1,4 +1,3 @@
 export interface ParticipateProps {
-  eventId: number;
-  userId: number;
+  onParticipationChange?: (participating: boolean) => void;
 }

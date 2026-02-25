@@ -122,14 +122,6 @@ function EventDetails() {
     return `${day}/${month}/${year}`;
   };
 
-  const handleParticipationChange = (participating: boolean) => {
-    setParticipantsCount((prevCount) => {
-      const delta = participating ? 1 : -1;
-      const nextCount = prevCount + delta;
-      return nextCount < 0 ? 0 : nextCount;
-    });
-  };
-
   return (
     <>
       <section>
@@ -199,7 +191,7 @@ function EventDetails() {
             </div>
           </div>
           <div className="participate-wrapper">
-            <Participate onParticipationChange={handleParticipationChange} />
+            <Participate />
           </div>
         </article>
         <article className="description-content">

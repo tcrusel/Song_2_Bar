@@ -101,14 +101,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy]
     steps:
-      - name: Delete untagged container versions
-        uses: actions/delete-package-versions@v5
-        with:
-          package-type: container
-          package-name: Song_2_Bar
-          delete-only-untagged-versions: "true"
-          min-versions-to-keep: 0
-
+      # Note: this build is multi-platform (linux/amd64, linux/arm64), so the
+      # `latest`/`main` tags are manifest lists pointing to per-platform child
+      # images that GHCR reports as "untagged". An unconditional untagged-version
+      # cleanup deletes those children and breaks the manifest list. Only prune
+      # excess *tagged* (per-SHA) versions here; untagged children stay alive as
+      # long as a manifest list references them.
       - name: Delete non main/latest tagged container versions
         uses: actions/delete-package-versions@v5
         with:

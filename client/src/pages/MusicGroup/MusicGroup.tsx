@@ -2,7 +2,7 @@ import "./MusicGroup.css";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify/unstyled";
+import { toast } from "react-toastify";
 import styleIcon from "/images/group_images/music-style-icon.svg";
 import BarCard from "@/components/BarCard/BarCard";
 import LikeButton from "@/components/LikeButton/LikeButton";
@@ -222,12 +222,6 @@ function MusicGroup() {
           )}
         </article>
       </section>
-      <ToastContainer
-        position="top-right"
-        theme="colored"
-        autoClose={3000}
-        limit={2}
-      />
     </>
   );
 }

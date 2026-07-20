@@ -23,10 +23,8 @@ router.get(
   "/api/users/:userId/favourite_groups",
   favouriteActions.getFavouriteGroups,
 );
-router.get(
-  "/api/:eventId/participants/count",
-  favouriteActions.displayParticipation,
-);
+
+router.get("/api/participate/:eventId/count", participateActions.countParticipants);
 
 router.post("/api/users", authActions.hashPassword, userActions.add);
 

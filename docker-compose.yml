@@ -15,7 +15,7 @@ services:
       DB_PORT: 3306
       DB_USER: song2bar
       DB_NAME: song2bar
-      VITE_API_URL: "https://song2bar.fr"
+      VITE_API_URL_PROD: "https://song2bar.fr"
       SEED_DB: "true"
     command: >
       sh -c '
@@ -44,4 +44,3 @@ services:
       MYSQL_USER: song2bar
     ports:
       - "127.0.0.1:3308:3306/tcp"
-

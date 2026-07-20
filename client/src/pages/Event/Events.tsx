@@ -67,10 +67,10 @@ function Events() {
         allEvents.map(async (event) => {
           try {
             const res = await fetch(
-              `${URL}/api/${event.id}/participants/count`,
+              `${URL}/api/participate/${event.id}/count`,
             );
             const data = await res.json();
-            counts[event.id] = data.participantsCount ?? 0;
+            counts[event.id] = data.participantsNumber ?? 0;
           } catch (error) {
             console.error(
               "Erreur lors du fetch participants pour l'événement",

@@ -1,3 +1,4 @@
+import { RowDataPacket } from "mysql2";
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 import type { ParticipateList } from "../../types/participateList";
@@ -47,6 +48,15 @@ class participateRepository {
     );
 
     return rows.length > 0 ? rows[0] : null;
+  }
+
+  async participateCount(event_id: number): Promise<number> {
+    const [rows] = await databaseClient.query<RowDataPacket[]>(
+      "SELECT COUNT(*) AS count FROM participate WHERE event_id = ?",
+      [event_id],
+    );
+
+    return rows[0].count;
   }
 }
 

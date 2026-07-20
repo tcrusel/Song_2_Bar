@@ -4,7 +4,7 @@ import { barService } from "@/services/barService";
 import type { Bar } from "@/types/bar";
 import "@/assets/_variables.css";
 import "./BarPage.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import EventCard from "@/components/EventCard/EventCard";
 import LikeButton from "@/components/LikeButton/LikeButton";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
@@ -172,7 +172,6 @@ function BarPage() {
       if (response.ok) {
         toast("Ce bar est maintenant dans vos favoris", {
           type: "success",
-          autoClose: 3000,
         });
       } else {
         throw new Error("Erreur serveur");
@@ -181,7 +180,6 @@ function BarPage() {
       console.error("Erreur lors de la favorisation du bar", error);
       toast("Impossible d'ajouter le bar dans votre liste de favoris", {
         type: "error",
-        autoClose: 3000,
       });
       throw error;
     }
@@ -204,7 +202,6 @@ function BarPage() {
       if (response.ok) {
         toast("Ce bar a été retiré de vos favoris", {
           type: "success",
-          autoClose: 3000,
         });
       } else {
         throw new Error("Erreur serveur");
@@ -213,7 +210,6 @@ function BarPage() {
       console.error("Erreur lors de la favorisation du bar", error);
       toast("Impossible de retirer le bar de votre liste de favoris", {
         type: "error",
-        autoClose: 3000,
       });
       throw error;
     }
@@ -362,7 +358,6 @@ function BarPage() {
             </div>
           )}
         </article>
-        <ToastContainer theme="colored" position="top-right" limit={2} />
       </section>
     </>
   );
